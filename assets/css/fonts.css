@@ -1,0 +1,30 @@
+@font-face {
+	font-family: 'PT Sans';
+	font-style: normal;
+	font-weight: 400;
+	src: url(../fonts/LKf8nhXsWg5ybwEGXk8UBQ.woff);
+}
+@font-face {
+	font-family: 'PT Sans';
+	font-style: normal;
+	font-weight: 700;
+	src: url(../fonts/0XxGQsSc1g4rdRdjJKZrNBsxEYwM7FgeyaSgU71cLG0.woff);  
+}
+@font-face {
+	font-family: 'PT Sans';
+	font-style: italic;
+	font-weight: 400;
+	src: url(../fonts/PIPMHY90P7jtyjpXuZ2cLD8E0i7KZn-EPnyo3HZu7kw.woff);  
+}
+@font-face {
+	font-family: 'PT Sans Caption';
+	font-style: normal;
+	font-weight: 400;
+	src: url(../fonts/OXYTDOzBcXU8MTNBvBHeSQRW432DtwGNER78eOJ0i0s.woff);  
+}
+@font-face {
+	font-family: 'PT Sans Caption';
+	font-style: normal;
+	font-weight: 700;
+	src: url(../fonts/Q-gJrFokeE7JydPpxASt2w9wu1CdFtjuMIsaFqyYbWg.woff);
+}

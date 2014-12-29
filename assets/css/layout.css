@@ -1,0 +1,621 @@
+*{
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+body
+{
+    visibility: visible;
+    font-family: PT Sans Caption; /*'Open Sans',sans-serif;*/
+}
+
+#menu-container
+{
+    height: 100%;
+    float: left;
+    margin-left: 0px;
+    position: relative;
+    z-index: 10000;    
+}
+@media (max-width: 767px)
+{
+    #menu-container{ width: 100%; height: auto;}    
+}
+#module-container
+{
+    background: url(../images/backg/bck-04.jpg);
+    /*background: url(../images/backg/F2F1ED.png);*/
+    height: 100%;    
+    margin-top: 0px;
+    overflow-y: scroll;
+}
+@media (max-width: 767px)
+{    
+    #module-container{ margin-left:0px;margin-top:129px;}
+}
+#module
+{
+    margin: 68px 35px;
+}
+.template-menu
+{
+    margin: 0 0 0 10px;
+}
+.menu-option-holder
+{
+    position: relative;
+    left: 10px;
+}
+.sub-menu-holder
+{
+    margin-left: 210px;
+}
+.menu-option-sign
+{
+    right: 26px;
+}
+
+/* leftover and rightover */
+.leftover, .rightover
+{
+    display: inline-block;
+    cursor: pointer;
+}
+.leftover-text, .rightover-text
+{
+    position: relative;
+    z-index: 2;
+    padding: 5px 10px;
+    font-family: PT Sans Caption;
+    color: #5e5e5e;
+}
+.leftover-background, .rightover-background
+{
+    position: absolute;
+    z-index: 1;
+    background-color: #d00355;
+}
+.leftover-text a, .rightover-text a
+{
+    text-decoration: none;
+    color: #5e5e5e;
+}
+/* ajax loading */
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .6 ) 
+                url(../images/loaders/loader.gif) 
+                50% 50% 
+                no-repeat;
+    overflow: hidden;
+}
+body.loading {
+    overflow: hidden;   
+}
+body.loading .modal {
+    display: block;
+}
+
+input[type=file]
+{
+    display: inline-block;
+}
+.red-cross
+{
+    background-image: url('../images/red-cross.png');
+    background-position: -19px 0px;
+    background-size: 200%;
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+    cursor: pointer;
+}
+
+.red-cross:hover
+{    
+    background-position: 0px 0px;    
+}
+.cross-sign
+{
+    background-image: url('../images/cross.png');
+    background-position: 24px 0px;
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+}
+.cross-sign:hover
+{
+    background-position: 13px 0px;
+}
+.part
+{
+    margin:3px 0px;
+}
+.end
+{
+    clear: both;
+}
+.field
+{
+    width: 111px;
+    float: left;
+    clear: both;
+    font-size: 13px;
+    margin-top: 7px;
+}
+.value
+{
+    float:right;
+}
+.form-control
+{
+    display: inline-block;
+    width: auto;
+    height: auto;
+    padding: 3px;
+    font-size: 14px;
+}
+.mini-status-after
+{
+    font-size: 11px;
+    text-align: center;
+    margin: 3px;
+    color: #F04C4C;
+    display: none;
+}
+.seperator
+{
+    margin: 7px 5px 0px 5px;
+    float:left;
+    font-size: 13px;    
+}
+.seperator:before
+{
+    content: ':';
+}
+/* Table Sorter */
+/* tables */
+table.tablesorter {
+	font-family:arial;
+	background-color: #CDCDCD;	
+	font-size: 8pt;
+	width: 100%;
+	text-align: left;
+}
+table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+    background-color: #3b5998;
+    font-size: 8pt;
+    padding: 5px;
+    color: #fff;
+}
+table.tablesorter thead tr .header {
+    /*background-image: url(../images/bg.gif);*/
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+    min-width: 30px;
+    padding: 5px;
+}
+table.tablesorter tbody td {	
+	padding: 5px;	
+	vertical-align: top;
+}
+table.tablesorter thead tr .headerSortUp {
+	/*background-image: url(../images/asc.gif);*/
+}
+table.tablesorter thead tr .headerSortDown {
+	/*background-image: url(../images/desc.gif);*/
+}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+    background-color: #8dbdd8;
+}
+table.tablesorter tr.odd td
+{
+    transition: all 300ms;
+    cursor: pointer;
+    background-color:#F0F0F6;
+    color: #000;
+}
+
+table.tablesorter tr.even td
+{
+    transition: all 300ms;
+    cursor: pointer;
+    background: #ffffff;
+    color: #000;
+}
+table.tablesorter tr.unreviewed td
+{    
+    background: #D46592;
+}
+
+table.tablesorter tr.odd:hover td
+{    
+    background: #A3B1CF;
+    color: white;
+}
+table.tablesorter tr.even:hover td
+{    
+    background: #A3B1CF;
+    color: white;
+}
+table.tablesorterz tr:last-child:hover td
+{
+    background: white;
+    color: #222;
+}
+
+/*****tablesorter-passive*****/
+table.tablesorter-passive {
+	font-family:arial;
+	background-color: #CDCDCD;
+	margin:0px 0px 15px;
+	font-size: 8pt;
+	width: 100%;
+	text-align: left;
+}
+table.tablesorter-passive thead tr th, table.tablesorter-passive tfoot tr th {
+    background-color: #3b5998;
+    font-size: 8pt;
+    padding: 5px;
+    color: #fff;
+}
+table.tablesorter-passive thead tr .header {    
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;    
+    padding: 5px;
+}
+table.tablesorter-passive tbody td {	
+	padding: 5px;	
+	vertical-align: middle;
+        background: #fff;
+}
+table.tablesorter-passive thead tr .headerSortUp {
+	/*background-image: url(../images/asc.gif);*/
+}
+table.tablesorter-passive thead tr .headerSortDown {
+	/*background-image: url(../images/desc.gif);*/
+}
+table.tablesorter-passive thead tr .headerSortDown, table.tablesorter-passive thead tr .headerSortUp {
+    background-color: #8dbdd8;
+}
+table.tablesorter-passive tr.odd td
+{
+    transition: all 300ms;
+    cursor: pointer;
+    background-color:#F0F0F6;
+    color: #000;
+}
+
+table.tablesorter-passive tr.even td
+{
+    transition: all 300ms;
+    cursor: pointer;
+    background: #ffffff;
+    color: #000;
+}
+table.tablesorter-passive tr.odd:hover td
+{    
+    background: #A3B1CF;
+    color: white;
+}
+table.tablesorter-passive tr.even:hover td
+{
+    background: #A3B1CF;
+    color: white;
+}
+table.tablesorter-passive tr:last-child:hover td
+{
+    background: white;
+    color: #222;
+}
+
+
+/***************************************STOCK TABLE**********************************/
+#stock_table .date{width: 100px;}
+
+#stock_table{width: 97%;}
+#stock_table .int{width: 30px;}
+#stock_table .decimal{width: 45px;}
+#stock_table .string{width: 60px;}    
+
+@media(min-width: 540px)
+{
+    #stock_table{width: 97%;}
+    #stock_table .int{width: 40px;}
+    #stock_table .decimal{width: 52px;}
+    #stock_table .string{width: 60px;}
+}
+@media(min-width: 768px)
+{
+    #stock_table{width: 97%;}
+    #stock_table .int{width: 40px;}
+    #stock_table .decimal{width: 52px;}
+    #stock_table .string{width: 60px;}    
+}
+@media(min-width: 992px)
+{
+    #stock_table{width: 92%;}
+    #stock_table .int{width: 60px;}
+    #stock_table .decimal{width: 60px;}
+    #stock_table .string{width: 100px;}    
+}
+@media(min-width: 1200px)
+{
+    #stock_table{width: 80%;}
+    #stock_table .int{width: 70px;}
+    #stock_table .decimal{width: 70px;}
+    #stock_table .string{width: 120px;}    
+}
+.popup
+{
+    display:none; /* Hide the DIV */
+    position:fixed;  
+    _position:absolute; /* hack for internet explorer 6 */  
+    height:70%;
+    width:70%;
+    background:#FFFFFF;  
+    left:15%;
+    top:10%;
+    cursor: move;
+    z-index:20000; /* Layering ( on-top of others), if you have lots of layers: I just maximized, you can change it yourself */    
+    
+    /* additional features, can be omitted */
+    border: 2px solid #3b5998;
+    padding:15px;    
+    -moz-box-shadow: 0 0 25px #272727;
+    -webkit-box-shadow: 0 0 25px #272727;
+    box-shadow: 0 0 25px #272727;
+}
+.popup-back {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 118, 118, 118, .6 );
+}
+.popup-close
+{
+    cursor: pointer;
+    right:5px;
+    top:5px;
+    position:absolute;
+}
+
+
+.product-serial
+{
+    float:left;
+}
+.product-name
+{
+    float:left;
+}
+.produt-quantity
+{
+    float:left;
+}
+
+/* select */
+.select-wrap
+{
+	background-image: url('../images/arrow.png');
+	background-color: #fff;
+	background-position: 96% 55%;
+	background-repeat: no-repeat no-repeat;        
+        border-radius: 4px;
+        height: 28px;
+        color: #222;
+}
+.select-wrap select
+{
+	width: 99%;
+        height: 94%;
+	background: transparent;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	text-indent: .01px;
+	text-overflow: "";        
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+}
+
+select::-ms-expand {
+        display: none;
+}
+@media (max-width:480px)
+{
+	.select-wrap{background-position: 98% 50%;}
+}
+
+/*pages*/
+
+
+.table-wrapper
+{
+    height: 444px;
+    overflow-y:auto;
+}
+.sort_by-wrapper
+{
+    margin-bottom: 10px;
+    float: right;
+    width: 150px;
+    font-size: 11px;
+    margin-right: 1px;
+}
+.filter-wrapper
+{
+    margin-top: 10px;
+    float: right;
+    width: 150px;
+    font-size: 11px;
+    margin-right: 1px;
+}
+.slider-wrapper .ui-widget-content
+{
+    background: #d00355;
+}
+.ui-widget-header
+{
+    background: #d00355;
+    border: 1px solid #d00355;
+}
+.slider-wrapper .ui-widget-header
+{
+    background: #fff;
+}
+
+select
+{
+    color: #222;
+}
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br
+{
+    border-bottom-right-radius: 0px;
+}
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr
+{
+    border-top-right-radius: 0px;
+}
+.order-wrapper
+{
+    margin-bottom: 10px;
+    float:left;
+}
+.slider-wrapper
+{
+    margin: 10px 0px;
+    clear: both;    
+}
+#pagination
+{
+    margin-top:50px;
+    padding-bottom: 10px;
+    white-space: nowrap;
+    overflow-y:hidden;
+    overflow-x:scroll;
+}
+.middle
+{
+    position: relative;
+    float: left;
+    clear: both;
+}
+.pages
+{
+    display:inline-block;
+    margin-left: 10px;
+    cursor: pointer;
+    background: #fff;
+    color: #868686;
+    padding: 5px;
+    border-radius: 2px;
+}
+.active
+{
+    background: #d00355;
+    color: #fff;
+}
+.mini-label
+{
+    font-size:14px;
+}
+
+
+
+/*#bill*/
+
+.product-serial
+{
+    
+}
+.product-name
+{
+    
+}
+.product-quantity
+{
+    
+}
+
+
+
+
+
+
+
+
+
+
+.hero-circle{background:#61b2a7;width:100px;height:100px;margin:0 auto;position:relative;border:4px solid #fff;border-radius:50%;-webkit-box-shadow:0 1px 8px rgba(34, 34, 34, 0.3),inset 0 1px 8px rgba(34, 34, 34, 0.3);box-shadow:0 1px 8px rgba(34, 34, 34, 0.3),inset 0 1px 8px rgba(34, 34, 34, 0.3);}
+.hero-face{width:100%;height:100%;}
+.hero-hour{width:0;height:0;position:absolute;top:50%;left:50%;margin:-4px 0 -4px -25%;padding:2px 0 2px 25%;background:#fff;-webkit-transform-origin:100% 50%;-ms-transform-origin:100% 50%;transform-origin:100% 50%;border-radius:4px 0 0 4px;}
+.hero-minute{width:0;height:0;position:absolute;top:50%;left:50%;margin:-40% -3px 0;padding:40% 2px 0;background:#fff;-webkit-transform-origin:50% 100%;-ms-transform-origin:50% 100%;transform-origin:50% 100%;border-radius:3px 3px 0 0;}
+.hero-second{width:0;height:0;position:absolute;top:50%;left:50%;margin:-40% -1px 0 0;padding:40% 1px 0;background:#fff;-webkit-transform-origin:50% 100%;-ms-transform-origin:50% 100%;transform-origin:50% 100%;}
+.hero-face:after
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    background: #fff;
+    border-radius: 6px;
+    content: "";
+    display: block;
+}
+
+.clock
+{
+    margin-top: -34px;
+    margin-bottom: 28px;
+    font-family: digit;
+}
+
+
+.btn
+{
+    padding: 6px 4%;
+}
+.left
+{
+    clear:left;
+    float:left;
+    padding-top:7px;
+}
+.right
+{
+    float:right;
+    font-family: 'verdana';
+    font-size:25px;
+}
+.unit
+{
+    margin-bottom:6px;
+}
+@font-face {
+    font-family: digit;
+    src: url(../fonts/DS-DIGIB.TTF);
+}
+.red
+{
+    color: rgb(252, 118, 118);
+}
+.green
+{
+    color: rgb(14, 156, 14);
+}

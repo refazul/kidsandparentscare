@@ -195,7 +195,8 @@ class Invoices extends CI_Controller {
                     $data['terminals']=array(
                         'knpc01'=>'KNPC - 01',
                         'knpc02'=>'KNPC - 02',
-                        'knpc03'=>'KNPC - 03'
+                        'knpc03'=>'KNPC - 03',
+                        'knpc04'=>'KNPC - 04'
                     );
                     
                     $data['sort_by']=$sort_by;

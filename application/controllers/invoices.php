@@ -60,6 +60,10 @@ class Invoices extends CI_Controller {
                     {
                         $this->db->where('billed_by',8);//ripon
                     }
+                    else if($terminal=='knpc04')
+                    {
+                        $this->db->where('billed_by',12);//rumon
+                    }
                 }
                 $data['total']=$this->db->get('invoices')->num_rows();
 
@@ -79,6 +83,10 @@ class Invoices extends CI_Controller {
                     else if($terminal=='knpc03')
                     {
                         $this->db->where('billed_by',8);//ripon
+                    }
+                    else if($terminal=='knpc04')
+                    {
+                        $this->db->where('billed_by',12);//rumon
                     }
                 }
                 $this->db->order_by($sort_by, $order);
@@ -123,6 +131,10 @@ class Invoices extends CI_Controller {
                     else if($terminal=='knpc03')
                     {
                         $this->db->where('billed_by',8);//ripon
+                    }
+                    else if($terminal=='knpc04')
+                    {
+                        $this->db->where('billed_by',12);//rumon
                     }
                 }
                 if($this->input->post('from'))$this->db->where('bill_time >=',$this->input->post('from'));

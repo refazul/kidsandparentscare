@@ -303,7 +303,7 @@ class Reports extends CI_Controller {
                     if($this->input->post('active_2'))$data['file'].='_Sup_'.preg_replace('/[^a-zA-Z0-9]+/', '_', $data['results'][0]['supplier']);
                     if($this->input->post('include_cost')!=1)$data['file'].='_without_cost';
                     
-                    $doc->saveHTMLFile($tempDir.DIRECTORY_SEPARATOR.$data['file'].'.html');
+                    $doc->saveHTMLFile($tempDir.$data['file'].'.html');
                 }
                 
                 header('Content-type: application/json');

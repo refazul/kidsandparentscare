@@ -71,13 +71,17 @@
                     }
                 }
             });
+            var date=new Date();
+            $("#from").val(date.getFullYear()+'-'+(date.getMonth()+1)+'-'+'1');
+            var date=new moment(new Date(date.getFullYear(),date.getMonth(),1));
+            $("#_from").val(date.format('Do MMM, YYYY'));
             $('#profit-fetch').submit();
         });
     </script>
     <div id="filter_by_time" style="width:auto;margin-right:5px;" class="filter-wrapper">
         <label for='_from'>From</label>
         <input type="text" id="_from" class="form-control">
-        <input type="text" style='display:none;' id="from" name="from" class="form-control">
+        <input type="text" style='display:none;' id="from" value="" name="from" class="form-control">
         
         <label for='_to'>Before</label>
         <input type="text" id="_to" class="form-control">

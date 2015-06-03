@@ -101,13 +101,17 @@ class Reports extends CI_Controller {
                     $data['results'][$key]['total_sale']=number_format((float)$data['results'][$key]['unit_sale']*$data['results'][$key]['base_quantity'], 2, '.', '');
 
                     $data['results'][$key]['stocked_on']=date('jS F, Y @ h:i A', strtotime($data['results'][$key]['stocked_on']));
+                    $data['results'][$key]['name']=$product['name'];
                 }
                 
                 /* Totals */
                 
                 $data['total_total_cost']=0;
                 $data['total_total_price']=0;
-                
+                //echo '<pre>';
+                //print_r($data);
+                //echo '</pre>';
+                //die();
                 
                 //$data['active_1']=$this->input->post('active_1');
                 //$data['active_2']=$this->input->post('active_2');

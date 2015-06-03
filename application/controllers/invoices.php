@@ -110,7 +110,9 @@ class Invoices extends CI_Controller {
                     foreach($orders as $order)
                     {
                         $this->db->where('stid',$order['stid']);
-                        $data['results'][$key]['total_cost']+=$this->db->get('stocks')->row(0,'object')->unit_cost * $order['quantity'];
+                        $stock=$this->db->get('stocks')->row(0,'object');
+                        if($stock)
+                        	$data['results'][$key]['total_cost']+=$stock->unit_cost * $order['quantity'];
                     }
                 }
                 

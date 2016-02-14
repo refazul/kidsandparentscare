@@ -155,31 +155,11 @@ class Buyers extends CI_Controller
       if ($this->input->get_post('intent')) {
          $intent = $this->input->get_post('intent');
          if ($intent == 'create' && user_logged_in()) {
-            if ($this->input->post('buyer_name') && $this->input->post('buyer_code')) {
+            if ($this->input->post('buyer_name')) {
                $data['name'] = $this->input->post('buyer_name');
-               $data['code'] = $this->input->post('buyer_code');
-
-               if (intval($data['code']) < 10000000) {
-                  $json['status'] = 'invalid_code';
-                  echo json_encode($json);
-                  die();
-               }
-               $this->db->where('code', $data['code']);
-               if ($this->db->get('codepool')->num_rows() == 0) {
-                  $json['status'] = 'invalid_code';
-                  echo json_encode($json);
-                  die();
-               }
 
                $this->load->model('buyer');
-               if ($this->buyer->getBy('code', $data['code']) === 0) {
-                  $data['address'] = $this->input->post('buyer_address') ? $this->input->post('buyer_address') : '';
-                  $data['city'] = $this->input->post('buyer_city') ? $this->input->post('buyer_city') : '';
-                  $data['phone'] = $this->input->post('buyer_phone') ? $this->input->post('buyer_phone') : '';
-                  $data['cell'] = $this->input->post('buyer_cell') ? $this->input->post('buyer_cell') : '';
-                  $data['email'] = $this->input->post('buyer_email') ? $this->input->post('buyer_email') : '';
-                  $data['fax'] = $this->input->post('buyer_fax') ? $this->input->post('buyer_fax') : '';
-                  $data['description'] = $this->input->post('buyer_description') ? $this->input->post('buyer_description') : '';
+               if (!$this->buyer->getBy('name', $data['name'])) {
 
                   $buyer_id = $this->buyer->create($data);
                   if ($buyer_id === false) {
@@ -205,11 +185,6 @@ class Buyers extends CI_Controller
                   echo json_encode($json);
                   die();
                }
-               if (!$this->input->post('buyer_code')) {
-                  $json['status'] = 'no_code';
-                  echo json_encode($json);
-                  die();
-               }
             }
          }
          elseif ($intent == 'edit' && user_logged_in()) {
@@ -220,14 +195,6 @@ class Buyers extends CI_Controller
                if ($this->input->post('buyer_name')) {
                   $name = $this->input->post('buyer_name');
                   $data['name'] = $name;
-
-                  $data['address'] = $this->input->post('buyer_address');
-                  $data['city'] = $this->input->post('buyer_city');
-                  $data['phone'] = $this->input->post('buyer_phone');
-                  $data['cell'] = $this->input->post('buyer_cell');
-                  $data['email'] = $this->input->post('buyer_email');
-                  $data['fax'] = $this->input->post('buyer_fax');
-                  $data['description'] = $this->input->post('buyer_description');
 
                   $this->db->where('buyer_id', $buyer_id);
                   $this->db->update('buyers', $data);

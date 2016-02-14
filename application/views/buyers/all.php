@@ -119,9 +119,9 @@
                             for(i=0;i<results.length;i++)
                             {
                                 $('<tr/>',{id:'buyer-'+results[i].buyer_id
-                                    <?php if(user_can('EDIT_buyer')):?>
+                                    <?php //if(user_can('EDIT_buyer')):?>
                                         ,onclick:"loadPopupBox();$('#holder').attr('src','<?php echo site_url();?>buyers/miniedit/"+results[i].buyer_id+"');"
-                                    <?php endif;?>
+                                    <?php //endif;?>
                                 }).appendTo('#buyers-list tbody');
 
                                 $('<td/>',{}).append(document.createTextNode(results[i].buyer_id)).appendTo('#buyer-'+results[i].buyer_id);

@@ -30,7 +30,7 @@
 				</div>
 			</div>
          <?php endif;?>
-         <?php if(user_can('CREATE_SUPPLIER')):?>
+         <?php //if(user_can('CREATE_SUPPLIER')):?>
 			<div class="menu-option-holder">
 				<?php menu_render('SUPPLIERS',base_url().'suppliers/',true);?>
 				<div class="sub-menu-holder">
@@ -38,7 +38,7 @@
 					<?php //submenu_render('LIST ALL',base_url().'suppliers/all');?>
 				</div>
 			</div>
-         <?php endif;?>
+         <?php //endif;?>
          <?php //if(user_can('CREATE_CUSTOMER')):?>
 			<div class="menu-option-holder">
 				<?php menu_render('BUYERS',base_url().'buyers/',true);?>

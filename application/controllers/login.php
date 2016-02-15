@@ -4,7 +4,7 @@ class Login extends CI_Controller {
 
 	public function index(){
       if(user_logged_in()){
-          //redirect(site_url().'invoices/create', 'refresh');
+          redirect(site_url().'buyers', 'refresh');
           die();
       }
       else{

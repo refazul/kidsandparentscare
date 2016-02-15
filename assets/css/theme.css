@@ -1,0 +1,31 @@
+/* -------- THEME COLOR SETUP ---------------------- */
+#menu-hider-background,
+#menu-hider-icon,
+.menu-option-background,
+.menu-option-background-selected,
+.sub-menu-option-background,
+.sub-menu-option-background-selected,
+#module-scrollbar-dragger,
+.draggerH-preview,
+.filter-button.selected,
+.draggerH,
+.tooltip-background,
+.smartphone-option-background,
+.smartphone-option-background-selected {
+  background-color: #458B00; }
+
+.thumb-selected img {
+  border-color: #458B00; }
+
+.active {
+  background: #458B00;
+  color: #fff; }
+
+.slider-wrapper .ui-widget-content {
+  background: #458B00; }
+
+.ui-widget-header {
+  background: #458B00;
+  border: 1px solid #458B00; }
+
+/*# sourceMappingURL=theme.css.map */

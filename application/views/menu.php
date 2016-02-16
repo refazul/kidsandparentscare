@@ -48,6 +48,15 @@
 				</div>
 			</div>
          <?php //endif;?>
+			<?php //if(user_can('CREATE_PROJECT')):?>
+			<div class="menu-option-holder">
+				<?php menu_render('PROJECTS',base_url().'projects/',true);?>
+				<div class="sub-menu-holder">
+					<?php submenu_render('CREATE NEW',base_url().'projects/create');?>
+					<?php //submenu_render('LIST ALL',base_url().'projects/all');?>
+				</div>
+			</div>
+         <?php //endif;?>
 
          <?php if(user_can('CREATE_ROLE') && user_can('EDIT_ROLE') && user_can('REMOVE_ROLE')):?>
 			<div class="menu-option-holder">

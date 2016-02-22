@@ -62,7 +62,7 @@
 
     <div class="filter-wrapper">
         <div class="select-wrap">
-            <select name="filter_by" id="filter_by">
+            <select name="filter_by" id="filter_by" onchange="$('#buyers-fetch').submit();">
                 <?php foreach($search_fields as $key=>$value):?>
                 <option value="<?php echo $key;?>"><?php echo $value;?></option>
                 <?php endforeach;?>
@@ -150,30 +150,19 @@
             });
             $('#buyers-fetch').submit();
 
-            /*
+            new Pattern.pattern_api_delay(1000, '#filter', 'input', function() {
+					// init_callback
 
-            $('#filter').bind("keydown", function(e) {
-                var code = e.keyCode || e.which;
-                if (code  == 13)
-                {
-					$('#page').val(0);
-                    $('#buyers-fetch').submit();
-                }
-            });
+				}, function() {
+					// event_callback
 
-            */
+               console.log($('#filter').val());
 
-            var lastValue = '';
-            setInterval(function(){
-                var presentValue=$('#filter').val();
-                if(presentValue!=lastValue)
-                {
-                    lastValue=presentValue;
-                    $('#page').val(0);
-                    $('#buyers-fetch').submit();
-                }
+				}, function() {
+					// post_callback
 
-            },200);
+					$('#buyers-fetch').submit();
+				});
 
         });
     </script>

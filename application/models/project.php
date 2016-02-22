@@ -36,4 +36,16 @@ class Project extends CI_Model {
 
       return $id;
    }
+   public function process($data){
+      foreach ($data['results'] as $key => $value) {
+         $this->db->select('name');
+         $this->db->where('buyer_id',$data['results'][$key]['buyer_id']);
+         $data['results'][$key]['buyer']=$this->db->get('buyers')->row()->name;
+
+         $this->db->select('name');
+         $this->db->where('supplier_id',$data['results'][$key]['supplier_id']);
+         $data['results'][$key]['supplier']=$this->db->get('suppliers')->row()->name;
+      }
+      return $data;
+   }
 }

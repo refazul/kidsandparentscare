@@ -62,7 +62,7 @@
 
     <div class="filter-wrapper">
         <div class="select-wrap">
-            <select name="filter_by" id="filter_by">
+            <select name="filter_by" id="filter_by" onchange="$('#projects-fetch').submit();">
                 <?php foreach($search_fields as $key=>$value):?>
                 <option value="<?php echo $key;?>"><?php echo $value;?></option>
                 <?php endforeach;?>
@@ -123,8 +123,6 @@
                                         ,onclick:"loadPopupBox();$('#holder').attr('src','<?php echo site_url();?>projects/miniedit/"+results[i].project_id+"');"
                                     <?php //endif;?>
                                 }).appendTo('#projects-list tbody');
-
-                                $('<td/>',{}).append(document.createTextNode(results[i].project_id)).appendTo('#project-'+results[i].project_id);
                                 $('<td/>',{}).append(document.createTextNode(results[i].name)).appendTo('#project-'+results[i].project_id);
                                 $('<td/>',{}).append(document.createTextNode(results[i].buyer)).appendTo('#project-'+results[i].project_id);
                                 $('<td/>',{}).append(document.createTextNode(results[i].supplier)).appendTo('#project-'+results[i].project_id);
@@ -152,31 +150,20 @@
             });
             $('#projects-fetch').submit();
 
-            /*
+            new Pattern.pattern_api_delay(1000, '#filter', 'input', function() {
+					// init_callback
 
-            $('#filter').bind("keydown", function(e) {
-                var code = e.keyCode || e.which;
-                if (code  == 13)
-                {
-					$('#page').val(0);
-                    $('#projects-fetch').submit();
-                }
-            });
+				}, function() {
+					// event_callback
 
-            */
+               console.log($('#filter').val());
 
-            var lastValue = '';
-            setInterval(function(){
-                var presentValue=$('#filter').val();
-                if(presentValue!=lastValue)
-                {
-                    lastValue=presentValue;
-                    $('#page').val(0);
-                    $('#projects-fetch').submit();
-                }
+				}, function() {
+					// post_callback
 
-            },200);
+					$('#projects-fetch').submit();
+				});
 
         });
-    </script>
+   </script>
 </form>

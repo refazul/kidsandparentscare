@@ -89,45 +89,61 @@ class Projects extends CI_Controller
          }
       }
    }
-   public function fetch()
-   {
+   public function fetch(){
+      $this->load->model('project');
       if (user_logged_in()) {
          header('Content-type: application/json');
-         $sort_by = $this->input->get_post('sort_by') ? $this->input->get_post('sort_by') : 'project_id';
+         $sort_by = $this->input->get_post('sort_by') ? $this->input->get_post('sort_by') : 'name';
          $order = $this->input->get_post('order') ? $this->input->get_post('order') : 'asc';
          $limit = $this->input->get_post('limit') ? $this->input->get_post('limit') : 20;
          $page = $this->input->get_post('page') ? $this->input->get_post('page') : 0;
 
-         if (in_array($sort_by, array('project_id', 'name'))) {
-            $data['total'] = $this->db->get('projects')->num_rows();
+         if (in_array($sort_by, array('name', 'buyer', 'supplier'))) {
+            $data['status'] = 'ok';
+            $data['page'] = $page;
+            $data['limit'] = $limit;
 
-               /* search */
-               if (in_array($this->input->get_post('filter_by'), array('project_id', 'name'))) {
-                   if ($this->input->get_post('filter') && strlen($this->input->get_post('filter')) > 0) {
-                       $this->db->order_by($sort_by, $order);
-                       $this->db->like($this->input->get_post('filter_by'), $this->input->get_post('filter'), 'both');
-                       $data['total'] = $this->db->get('projects')->num_rows();
+            if($sort_by=='name')
+               $sort_by='projects.name';
+            else if($sort_by=='buyer')
+               $sort_by='buyers.name';
+            else if($sort_by=='supplier')
+               $sort_by='suppliers.name';
 
-                       $this->db->like($this->input->get_post('filter_by'), $this->input->get_post('filter'), 'both');
-                   }
+            $this->db->select('project_id, projects.name as name, buyers.name as buyer, suppliers.name as supplier');
+            $this->db->from('projects');
+            $this->db->join('buyers','projects.buyer_id=buyers.buyer_id');
+            $this->db->join('suppliers','projects.supplier_id=suppliers.supplier_id');
+            $this->db->order_by($sort_by, $order);
+
+            /* search */
+            if (in_array($this->input->get_post('filter_by'), array('name', 'buyer', 'supplier'))) {
+               if ($this->input->get_post('filter') && strlen($this->input->get_post('filter')) > 0) {
+
+                  $filter_by=$this->input->get_post('filter_by');
+                  if($filter_by=='name')
+                     $filter_by='projects.name';
+                  else if($filter_by=='buyer')
+                     $filter_by='buyers.name';
+                  else if($filter_by=='supplier')
+                     $filter_by='suppliers.name';
+
+                  $this->db->like($filter_by, $this->input->get_post('filter'), 'both');
+                  $results = $this->db->get()->result_array();
+
+                  $data['total'] = count($results);
+                  $data['results'] = array_slice($results,$page,$limit);
+
+                  echo json_encode($data);
+                  die();
                }
-               $this->db->order_by($sort_by, $order);
-               $data['results'] = $this->db->get('projects', $limit, $limit * $page)->result_array();
-               $data['page'] = $page;
-               $data['limit'] = $limit;
-               $data['status'] = 'ok';
+            }
+            $results = $this->db->get()->result_array();
+            $data['total'] = count($results);
+            $data['results'] = array_slice($results,$page,$limit);
 
-               foreach ($data['results'] as $key => $value) {
-                  $this->db->select('name');
-                  $this->db->where('buyer_id',$data['results'][$key]['buyer_id']);
-                  $data['results'][$key]['buyer']=$this->db->get('buyers')->row()->name;
-
-                  $this->db->select('name');
-                  $this->db->where('supplier_id',$data['results'][$key]['supplier_id']);
-                  $data['results'][$key]['supplier']=$this->db->get('suppliers')->row()->name;
-               }
-               echo json_encode($data);
-               die();
+            echo json_encode($data);
+            die();
          }
          else {
             $data['status'] = 'invalid_sort_by';
@@ -143,28 +159,28 @@ class Projects extends CI_Controller
    public function all()
    {
       if (user_logged_in()) {
-         $sort_by = $this->input->get_post('sort_by') ? $this->input->get_post('sort_by') : 'project_id';
+         $sort_by = $this->input->get_post('sort_by') ? $this->input->get_post('sort_by') : 'name';
          $order = $this->input->get_post('order') ? $this->input->get_post('order') : 'asc';
          $limit = $this->input->get_post('limit') ? $this->input->get_post('limit') : 20;
          $page = $this->input->get_post('page') ? $this->input->get_post('page') : 0;
 
          if (in_array($sort_by, $this->db->list_fields('projects'))) {
             $data['fields'] = array(
-               'project_id' => array('Project ID', '10'),
-               'name' => array('Project Name', '20'),
-               'buyer' => array('Buyer', '40'),
-               'supplier' => array('Supplier', '40')
+               'name' => array('Project ID', '10'),
+               'buyer' => array('Buyer', '45'),
+               'supplier' => array('Supplier', '45')
             );
             $data['search_fields'] = array(
-               'name' => 'project Name',
-               'project_id' => 'project ID'
+               'name' => 'Project ID',
+               'buyer' => 'Buyer',
+               'supplier' => 'Supplier'
             );
             $data['orders'] = array(
                'asc' => 'Ascending',
                'desc' => 'Descending',
             );
 
-            $data['sort_by'] = 'project_id';
+            $data['sort_by'] = 'name';
             $data['order'] = $order;
             $data['limit'] = $limit;
             $data['page'] = $page;

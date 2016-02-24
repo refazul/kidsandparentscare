@@ -85,6 +85,7 @@
                 if(data.responseJSON.status=='ok')
                 {
                     $(dest_hook,$(dest_form)).val(data.responseJSON.path);
+                    if(dest_form=='#')$(dest_hook).val(data.responseJSON.path);
                 }
             }
         });

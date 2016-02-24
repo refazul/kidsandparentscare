@@ -151,14 +151,13 @@
         <input type='hidden' name='intent' value='edit'/>
 
         <script type="text/javascript">
-              $(function() {
+            $(function() {
                $( "#s_c_latest_date_of_lc_opening" ).datepicker({
-                 dateFormat: 'yy-mm-dd',
-                 defaultDate: "+0w",
-                 changeMonth: true,
-                 numberOfMonths: 1,
-                 onSelect: function( selectedDate )
-                 {
+                  dateFormat: 'yy-mm-dd',
+                  defaultDate: "+0w",
+                  changeMonth: true,
+                  numberOfMonths: 1,
+                  onSelect: function( selectedDate ){
                      /*
                      var date=new moment(selectedDate);
                      $("#s_c_latest_date_of_lc_opening").val(date.format('Do MMM, YYYY'));
@@ -166,9 +165,9 @@
                      $('#page').val(0);
                      $('#invoices-fetch').submit();
                      */
-                 }
+                  }
                });
-              });
+            });
             $(document).ready(function()
             {
                $('#<?php echo $form['id'];?>').ajaxForm({
@@ -176,7 +175,9 @@
                   dataType:  'json',
 
                   /* reset before submitting */
-                  beforeSend: function() {
+                  beforeSend: function(arr, $form, options){
+                     console.log(arr, $form, options);
+                     return false;
                   },
 
                   /* progress bar call back*/

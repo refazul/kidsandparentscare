@@ -34,16 +34,12 @@ class Project extends CI_Model {
       $this->db->insert($this->_table,array('name'=>$param['name'],
                                             'buyer_id'=>$param['buyer_id'],
                                             'supplier_id'=>$param['supplier_id'],
-                                            's_c_origin'=>$param['s_c_origin'],
-                                            's_c_specification'=>$param['s_c_specification'],
-                                            's_c_quantity'=>$param['s_c_quantity'],
-                                            's_c_price'=>$param['s_c_price'],
-                                            's_c_commission_rate'=>$param['s_c_commission_rate'],
-                                            's_c_commission_point'=>$param['s_c_commission_point'],
-                                            's_c_shipment'=>$param['s_c_shipment'],
-                                            's_c_payment'=>$param['s_c_payment'],
-                                            's_c_latest_date_of_lc_opening'=>$param['s_c_latest_date_of_lc_opening'],
-                                            's_c_path'=>$param['s_c_path']
+                                            'sales_confirmation'=>$param['sales_confirmation'],
+                                            'contract'=>$param['contract'],
+                                            'performa_invoice'=>$param['performa_invoice'],
+                                            'import_permit'=>$param['import_permit'],
+                                            'lc'=>$param['lc'],
+                                            'shipment'=>$param['shipment']
                                          ));
       $id=$this->db->insert_id();
 
@@ -60,5 +56,52 @@ class Project extends CI_Model {
          $data['results'][$key]['supplier']=$this->db->get('suppliers')->row()->name;
       }
       return $data;
+   }
+   public function fetch($project_id){
+      $this->db->select('*');
+      $this->db->from('projects');
+      $this->db->where('project_id',$project_id);
+      $project=$this->db->get()->row_array();
+
+      unset($temp);
+      $buyers=array();
+      $temp=$this->db->get('buyers')->result_array();
+      foreach($temp as $key=>$value)
+          $buyers[$value['buyer_id']]=$value['name'];
+
+      unset($temp);
+      $suppliers=array();
+      $temp=$this->db->get('suppliers')->result_array();
+      foreach($temp as $key=>$value)
+          $suppliers[$value['supplier_id']]=$value['name'];
+
+      $project['domains']=json_decode(file_get_contents(FCPATH.'assets'.DIRECTORY_SEPARATOR.'template.json'));
+      //$project['template']=preg_replace("/[\n\r]/","",file_get_contents(FCPATH.'assets'.DIRECTORY_SEPARATOR.'template.json'));
+
+      $project['domains']->project_id=$project['project_id'];
+      $project['domains']->project->fields->project_name->value=$project['name'];
+
+      $project['domains']->buyer->fields->project_buyer->values=$buyers;
+      $project['domains']->buyer->fields->project_buyer->value=$project['buyer_id'];
+
+      $project['domains']->supplier->fields->project_supplier->values=$suppliers;
+      $project['domains']->supplier->fields->project_supplier->value=$project['supplier_id'];
+
+      if($project['sales_confirmation']!='')
+         $project['domains']->sales_confirmation=json_decode($project['sales_confirmation']);
+      if($project['contract']!='')
+         $project['domains']->sales_confirmation=json_decode($project['contract']);
+      if($project['performa_invoice']!='')
+         $project['domains']->sales_confirmation=json_decode($project['performa_invoice']);
+      if($project['import_permit']!='')
+         $project['domains']->sales_confirmation=json_decode($project['import_permit']);
+      if($project['lc']!='')
+         $project['domains']->sales_confirmation=json_decode($project['lc']);
+      if($project['shipment']!='')
+         $project['domains']->sales_confirmation=json_decode($project['shipment']);
+
+      $project['template']=json_encode($project['domains']);
+
+      return $project;
    }
 }

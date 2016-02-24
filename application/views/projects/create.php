@@ -1,135 +1,56 @@
 <div style="width:550px;clear:both;margin:10px auto 20px;">
 
-    <?php
+   <?php
 
-    $form=array(
-        'id'=>'project_create_form',
-        'value_width'=>300,
-        'value_height'=>28,
-        'action'=>site_url().'projects/ajax'
-    );
+   $form=array(
+      'id'=>'project_create_form',
+      'value_width'=>300,
+      'value_height'=>28,
+      'action'=>site_url().'projects/ajax'
+   );
 
-    $fields=array(
-        'project_name'=>array(
-            'id'=>'project_name',
-            'type'=>'text',
-            'value'=>'',
-            'title'=>'FILE NUMBER'
-        ),
-        'project_buyer'=>array(
-            'id'=>'buyer_id',
-            'type'=>'select',
-            'values'=>$buyers,
-            'title'=>'BUYER NAME'
-        ),
-        'project_suppliers'=>array(
-            'id'=>'supplier_id',
-            'type'=>'select',
-            'values'=>$suppliers,
-            'title'=>'SUPPLIER NAME'
-        ),
+   ?>
+   <script type='text/javascript'>
+      var template=JSON.parse('<?php echo $template;?>');
+   </script>
 
-        'sales_confirmation_origin'=>array(
-            'id'=>'s_c_origin',
-            'type'=>'text',
-            'value'=>'',
-            'title'=>'ORIGIN'
-        ),
-        'sales_confirmation_specification'=>array(
-            'id'=>'s_c_specification',
-            'type'=>'text',
-            'value'=>'',
-            'title'=>'SPECIFICATION'
-        ),
-        'sales_confirmation_quantity'=>array(
-            'id'=>'s_c_quantity',
-            'type'=>'text',
-            'value'=>'',
-            'title'=>'QUANTITY'
-        ),
-        'sales_confirmation_price'=>array(
-            'id'=>'s_c_price',
-            'type'=>'text',
-            'value'=>'',
-            'title'=>'PRICE'
-        ),
-        'sales_confirmation_commission_rate'=>array(
-            'id'=>'s_c_commission_rate',
-            'type'=>'text',
-            'value'=>'',
-            'title'=>'COMMISSION RATE (%)'
-        ),
-        'sales_confirmation_commission_point'=>array(
-            'id'=>'s_c_commission_point',
-            'type'=>'text',
-            'value'=>'',
-            'title'=>'COMMISSION RATE (POINT)'
-        ),
-        'sales_confirmation_shipment'=>array(
-            'id'=>'s_c_shipment',
-            'type'=>'text',
-            'value'=>'',
-            'title'=>'SHIPMENT'
-        ),
-        'sales_confirmation_payment'=>array(
-            'id'=>'s_c_payment',
-            'type'=>'select',
-            'values'=>array('at_sight'=>'AT SIGHT','deferred'=>'DEFERRED','upass'=>'UPASS'),
-            'title'=>'PAYMENT'
-        ),
-        'sales_confirmation_latest_date_of_lc_opening'=>array(
-            'id'=>'s_c_latest_date_of_lc_opening',
-            'type'=>'text',
-            'value'=>'',
-            'title'=>'LATEST DATE OF LC OPENING'
-        ),
-        'sales_confirmation_path'=>array(
-            'id'=>'s_c_path',
-            'type'=>'hidden',
-            'value'=>'',
-            'title'=>''
-        ),
+   <!-- START -->
 
+      <?php foreach($domains as $root=>$domain): if(!isset($domain->fields))continue; $fields=$domain->fields;?>
 
-    );
+         <?php foreach($fields as $field):?>
 
-    ?>
-
-    <form action="<?php echo $form['action'];?>" method="POST" id="<?php echo $form['id'];?>">
-
-        <?php foreach($fields as $key=>$field):?>
-
-            <?php if($field['type']=='text'): ?>
+            <?php if($field->type=='text' || $field->type=='number'): ?>
             <div class="part">
-                <div class="field"><?php echo $field['title'];?></div>
+               <div class="field"><?php echo $field->title;?></div>
+               <div class="seperator"></div>
+               <div class="value" style="width:<?php echo $form['value_width'];?>px;height:<?php echo $form['value_height'];?>px;">
+                  <input type="text" id="<?php echo $field->id;?>" name="<?php echo $field->id;?>" autocomplete="off" class="form-control" value="<?php echo $field->value?$field->value:'';?>"/>
+                  <div class="mini-status-after" id="msgholder-<?php echo $field->id;?>"></div>
+               </div>
+               <div class="end"></div>
+            </div>
+
+            <?php elseif($field->type=='password'): ?>
+            <div class="part">
+                <div class="field"><?php echo $field->title;?></div>
                 <div class="seperator"></div>
                 <div class="value" style="width:<?php echo $form['value_width'];?>px;height:<?php echo $form['value_height'];?>px;">
-                    <input type="text" id="<?php echo $field['id'];?>" name="<?php echo $field['id'];?>" autocomplete="off" class="form-control" value="<?php echo $field['value']?$field['value']:'';?>"/>
-                    <div class="mini-status-after" id="msgholder-<?php echo $field['id'];?>"></div>
+                    <input type="password" id="<?php echo $field->id;?>" name="<?php echo $field->id;?>" autocomplete="off" class="form-control" value="<?php echo $field->value?$field->value:'';?>"/>
+                    <div class="mini-status-after" id="msgholder-<?php echo $field->id;?>"></div>
                 </div>
                 <div class="end"></div>
             </div>
 
-            <?php elseif($field['type']=='password'): ?>
+            <?php elseif($field->type=='select'): ?>
             <div class="part">
-                <div class="field"><?php echo $field['title'];?></div>
+                <div class="field"><?php echo $field->title;?></div>
                 <div class="seperator"></div>
-                <div class="value" style="width:<?php echo $form['value_width'];?>px;height:<?php echo $form['value_height'];?>px;">
-                    <input type="password" id="<?php echo $field['id'];?>" name="<?php echo $field['id'];?>" autocomplete="off" class="form-control" value="<?php echo $field['value']?$field['value']:'';?>"/>
-                    <div class="mini-status-after" id="msgholder-<?php echo $field['id'];?>"></div>
-                </div>
-                <div class="end"></div>
-            </div>
-
-            <?php elseif($field['type']=='select'): ?>
-            <div class="part">
-                <div class="field"><?php echo $field['title'];?></div>
-                <div class="seperator"></div>
-                <div class="value" style="width:<?php echo $form['value_width'];?>px;height:<?php echo $form['value_height'];?>px;">
+                <div class="value" style="width:<?php echo $form['value_width'];?>px;height:<?php echo $form['value_height'];?>px;margin-bottom:3px;">
                     <div class="select-wrap" style="height:100%;">
-                        <select name="<?php echo $field['id'];?>" style="height:100%;">
-                            <?php foreach($field['values'] as $value=>$key):?>
-                            <option value="<?php echo $value;?>"><?php echo $key;?></option>
+                        <select id="<?php echo $field->id;?>" name="<?php echo $field->id;?>" style="height:100%;">
+                            <?php foreach($field->values as $value=>$key):?>
+                            <option <?php if($value==$field->value)echo 'selected="selected"'?> value="<?php echo $value;?>"><?php echo $key;?></option>
                             <?php endforeach;?>
                         </select>
                     </div>
@@ -138,98 +59,107 @@
             </div>
             <?php endif; ?>
 
-        <?php endforeach; ?>
-
-        <?php foreach($fields as $field):?>
-            <?php if($field['type']=='hidden'): ?>
-            <input type='hidden' id='<?php echo $field['id'];?>' name='<?php echo $field['id'];?>' value='<?php echo $field['value']?$field['value']:'';?>'/>
+            <?php if($field->type=='hidden' || $field->type=='date' || $field->type=='file'): ?>
+               <input type='hidden' id='<?php echo $field->id;?>' name='<?php echo $field->id;?>' value='<?php echo $field->value?$field->value:'';?>'/>
             <?php endif; ?>
-        <?php endforeach;?>
 
-        <input type='hidden' name='intent' value='create'/>
+            <?php if($field->type=='date'): ?>
+            <div class="part">
+               <div class="field"><?php echo $field->title;?></div>
+               <div class="seperator"></div>
+               <div class="value" style="width:<?php echo $form['value_width'];?>px;height:<?php echo $form['value_height'];?>px;">
+                  <input data-target='<?php echo $field->id;?>' type="text" autocomplete="off" class="form-control date" value="<?php echo $field->value?$field->value:'';?>"/>
+                  <div class="mini-status-after" id="msgholder-<?php echo $field->id;?>"></div>
+               </div>
+               <div class="end"></div>
+            </div>
+            <?php endif; ?>
 
-        <script type="text/javascript">
-              $(function() {
-                $( "#s_c_latest_date_of_lc_opening" ).datepicker({
-                 dateFormat: 'yy-mm-dd',
-                 defaultDate: "+0w",
-                 changeMonth: true,
-                 numberOfMonths: 1,
-                 onSelect: function( selectedDate )
-                 {
-                     /*
-                      var date=new moment(selectedDate);
-                      $("#s_c_latest_date_of_lc_opening").val(date.format('Do MMM, YYYY'));
-                      $("#from").val(selectedDate);
-                      $('#page').val(0);
-                      $('#invoices-fetch').submit();
-                      */
-                 }
-                });
-              });
-            $(document).ready(function()
-            {
-                $('#<?php echo $form['id'];?>').ajaxForm({
+            <?php if($field->type=='file'): ?>
+               <div style="clear:both;margin:10px auto 20px;">
 
-                    /* set data type json */
-                    dataType:  'json',
+                  <?php
 
-                    /* reset before submitting */
-                    beforeSend: function() {
-                    },
+                     $upload_form =  uniqid().'_'.time();
 
-                    /* progress bar call back*/
-                    uploadProgress: function(event, position, total, percentComplete) {
-                    },
+                     $this->load->vars(
+                     array(
+                        'form_id'=>$upload_form,
+                        '_scope'=>$root,
+                        '_name'=>uniqid().'_'.time(),
+                        'destination_form_id'=>NULL,
+                        'destination_hook_id'=>$field->id,
+                        'DEFAULT_IMG'=>asset_url().'images/alt.png',
+                        'IMG'=>NULL,
+                        'LABEL'=>$field->title
+                     ));
+                     $this->load->view('general/upload');
+                  ?>
 
-                    /* complete call back */
-                    complete: function(data) {
-                        console.log(data);
+               </div>
+            <?php endif; ?>
 
-                        if(data.responseJSON.status=='ok')
-                            window.location='<?php echo site_url();?>projects/edit/'+data.responseJSON.project_id;
-                        else
-                        {
-                            $('.mini-status-after').each(function(){
-                                $(this).slideUp();
-                            });
-                            if(data.responseJSON.status=='no_name')
-                            {
-                                $('#msgholder-project_name').parent().css('height','auto');
-                                $('#msgholder-project_name').html('').html('Please give a name!').slideDown();
-                            }
-                        }
-                    }
-                });
+         <?php endforeach; ?>
+      <?php endforeach; ?>
 
-               $('#project_create').unbind('click');
-               $('#project_create').click(function(){
-                  $('#project_create_form').submit();
-               });
+      <script type="text/javascript">
+         $(function() {
+            $( ".date" ).each(function(){
+               var selectedDate=$(this).val();
+               if(selectedDate=='')return;
+
+               var date=new moment(selectedDate);
+               $(this).val(date.format('Do MMM, YYYY'));
             });
-        </script>
-        <div style="clear:both;"></div>
-    </form>
-    <div style="clear:both;margin:10px auto 20px;">
+            $( ".date" ).datepicker({
+               dateFormat: 'yy-mm-dd',
+               defaultDate: "+0w",
+               changeMonth: true,
+               numberOfMonths: 1,
+               onSelect: function( selectedDate )
+               {
+                  $('#'+$(this).attr('data-target')).val(selectedDate);
+                  var date=new moment(selectedDate);
+                  $(this).val(date.format('Do MMM, YYYY'));
+               }
+            });
+         });
+         function project_create_form_submit(){
+            var final_string='';
+            for(var domain in template){
+               if(!template[domain].fields)
+                  continue;
+               for(var field in template[domain].fields){
+                  template[domain].fields[field].value=$('#'+template[domain].fields[field].id).val();
+               }
+               final_string+='&'+domain+'='+encodeURIComponent(JSON.stringify(template[domain]));
+            }
+            if(template.project_id)
+               final_string='intent=edit'+final_string;
+            else
+               final_string='intent=create'+final_string;
+            final_string+='&project_name='+encodeURIComponent($('#project_name').val());
+            final_string+='&buyer_id='+encodeURIComponent($('#buyer_id').val());
+            final_string+='&supplier_id='+encodeURIComponent($('#supplier_id').val());
+            $.ajax({
+               url: "<?php echo site_url().'projects/ajax';?>",
+               method: 'POST',
+               data: final_string,
+               success: function(response){
+                  if(response.status=='ok')
+                     window.location='<?php echo site_url();?>projects/edit/'+response.project_id;
+               }
+            });
+         }
+         $(document).ready(function(){
+            $('#project_create').unbind('click');
+            $('#project_create').click(function(){
+               project_create_form_submit();
+            });
+         });
+      </script>
+      <div style="clear:both;"></div>
 
-        <?php
-
-        $upload_form =  uniqid().'_'.time();
-
-        $this->load->vars(
-                        array(
-                            'form_id'=>$upload_form,
-                            '_scope'=>'sales_confirmation',
-                            '_name'=>uniqid().'_'.time(),
-                            'destination_form_id'=>'project_create_form',
-                            'destination_hook_id'=>'s_c_path',
-                            'DEFAULT_IMG'=>asset_url().'images/alt.png',
-                            'IMG'=>NULL,
-                            'LABEL'=>'UPLOAD SALES CONFIRMATION'
-                        ));
-        $this->load->view('general/upload');
-        ?>
-
-    </div>
-    <button style="float:right;margin-top:10px;" id="project_create" class="btn btn-default">Continue</button>
+   <!-- END -->
+   <button style="float:right;margin-top:10px;" id="project_create" class="btn btn-default">Continue</button>
 </div>

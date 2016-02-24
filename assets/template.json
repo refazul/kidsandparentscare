@@ -1,0 +1,181 @@
+{
+   "project":{
+      "fields":{
+         "project_name":{
+            "id":"project_name",
+            "type":"text",
+            "value":"",
+            "title":"FILE NUMBER"
+         }
+      }
+   },
+   "buyer":{
+      "fields":{
+         "project_buyer":{
+            "id":"buyer_id",
+            "type":"select",
+            "title":"BUYER NAME",
+            "value":""
+         }
+      }
+   },
+   "supplier":{
+      "fields":{
+         "project_supplier":{
+            "id":"supplier_id",
+            "type":"select",
+            "title":"SUPPLIER NAME",
+            "value":""
+         }
+      }
+   },
+   "sales_confirmation":{
+      "fields":{
+         "origin":{
+            "id":"s_c_origin",
+            "type":"text",
+            "value":"",
+            "title":"ORIGIN"
+         },
+         "specification":{
+            "id":"s_c_specification",
+            "type":"text",
+            "value":"",
+            "title":"SPECIFICATION"
+         },
+         "quantity":{
+            "id":"s_c_quantity",
+            "type":"number",
+            "value":"",
+            "title":"QUANTITY"
+         },
+         "price":{
+            "id":"s_c_price",
+            "type":"number",
+            "value":"",
+            "title":"PRICE"
+         },
+         "commission_rate":{
+            "id":"s_c_commission_rate",
+            "type":"number",
+            "value":"",
+            "title":"COMMISSION RATE (%)"
+         },
+         "commission_point":{
+            "id":"s_c_commission_point",
+            "type":"number",
+            "value":"",
+            "title":"COMMISSION RATE (POINT)"
+         },
+         "shipment":{
+            "id":"s_c_shipment",
+            "type":"text",
+            "value":"",
+            "title":"SHIPMENT"
+         },
+         "payment":{
+            "id":"s_c_payment",
+            "type":"select",
+            "values":{
+               "at_sight":"AT SIGHT",
+               "deferred":"DEFERRED",
+               "upass":"UPASS"
+            },
+            "value":"",
+            "title":"PAYMENT"
+         },
+         "latest_date_of_lc_opening":{
+            "id":"s_c_latest_date_of_lc_opening",
+            "type":"date",
+            "value":"",
+            "title":"LATEST DATE OF LC OPENING"
+         },
+         "copy":{
+            "id":"s_c_copy",
+            "type":"file",
+            "value":"",
+            "title":"UPLOAD SALES CONFIRMATION"
+         }
+      }
+   },
+   "contract":{
+      "fields":{
+         "contract_number":{
+            "id":"contract_number",
+            "type":"text",
+            "value":"",
+            "title":"CONTRACT NUMBER"
+         },
+         "contract_date":{
+            "id":"contract_date",
+            "type":"date",
+            "value":"",
+            "title":"CONTRACT DATE"
+         },
+         "contract_shipment":{
+            "id":"contract_shipment",
+            "type":"text",
+            "value":"",
+            "title":"SHIPMENT"
+         },
+         "contract_latest_date_of_lc_opening":{
+            "id":"contract_latest_date_of_lc_opening",
+            "type":"text",
+            "value":"",
+            "title":"LATEST DATE OF LC OPENING"
+         },
+         "contract_copy":{
+            "id":"contract_copy",
+            "type":"text",
+            "value":"",
+            "title":"UPLOAD CONTRACT COPY"
+         }
+      }
+   },
+   "performa_invoice":{
+      "fields":{
+         "p_i_number":{
+            "id":"p_i_number",
+            "type":"text",
+            "value":"",
+            "title":"PI NUMBER"
+         },
+         "p_i_date":{
+            "id":"p_i_date",
+            "type":"text",
+            "value":"",
+            "title":"PI DATE"
+         },
+         "p_i_origin":{
+            "id":"p_i_origin",
+            "type":"text",
+            "value":"",
+            "title":"ORIGIN"
+         },
+         "p_i_specification":{
+            "id":"p_i_specification",
+            "type":"text",
+            "value":"",
+            "title":"SPECIFICATION"
+         },
+         "p_i_quantity":{
+            "id":"p_i_quantity",
+            "type":"number",
+            "value":"",
+            "title":"QUANTITY"
+         },
+         "p_i_price":{
+            "id":"p_i_price",
+            "type":"number",
+            "value":"",
+            "title":"PRICE"
+         },
+         "p_i_copy":{
+            "id":"p_i_copy",
+            "type":"file",
+            "value":"",
+            "title":"UPLOAD PI COPY"
+         }
+      }
+   }
+}

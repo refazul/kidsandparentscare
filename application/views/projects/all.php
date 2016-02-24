@@ -126,6 +126,16 @@
                                 $('<td/>',{}).append(document.createTextNode(results[i].name)).appendTo('#project-'+results[i].project_id);
                                 $('<td/>',{}).append(document.createTextNode(results[i].buyer)).appendTo('#project-'+results[i].project_id);
                                 $('<td/>',{}).append(document.createTextNode(results[i].supplier)).appendTo('#project-'+results[i].project_id);
+                                $('<td/>',{}).append(document.createTextNode(results[i].s_c_origin)).appendTo('#project-'+results[i].project_id);
+                                $('<td/>',{}).append(document.createTextNode(results[i].s_c_specification)).appendTo('#project-'+results[i].project_id);
+                                $('<td/>',{}).append(document.createTextNode(results[i].s_c_quantity)).appendTo('#project-'+results[i].project_id);
+                                $('<td/>',{}).append(document.createTextNode(results[i].s_c_price)).appendTo('#project-'+results[i].project_id);
+                                $('<td/>',{}).append(document.createTextNode(results[i].s_c_commission_rate)).appendTo('#project-'+results[i].project_id);
+                                $('<td/>',{}).append(document.createTextNode(results[i].s_c_commission_point)).appendTo('#project-'+results[i].project_id);
+                                $('<td/>',{}).append(document.createTextNode(results[i].s_c_shipment)).appendTo('#project-'+results[i].project_id);
+                                $('<td/>',{}).append(document.createTextNode(results[i].s_c_payment)).appendTo('#project-'+results[i].project_id);
+                                $('<td/>',{}).append(document.createTextNode(results[i].s_c_latest_date_of_lc_opening)).appendTo('#project-'+results[i].project_id);
+                                $('<td/>',{}).append(document.createTextNode(results[i].s_c_path)).appendTo('#project-'+results[i].project_id);
                             }
                             $("#projects-list").tablesorter({widgets: ['zebra']});
 

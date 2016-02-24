@@ -1,10 +1,10 @@
-<div style="width:303px;clear:both;margin:10px auto 20px;">
+<div style="width:550px;clear:both;margin:10px auto 20px;">
 
     <?php
 
     $form=array(
         'id'=>'project_create_form',
-        'value_width'=>178,
+        'value_width'=>300,
         'value_height'=>28,
         'action'=>site_url().'projects/ajax'
     );
@@ -14,20 +14,83 @@
             'id'=>'project_name',
             'type'=>'text',
             'value'=>'',
-            'title'=>'Name'
+            'title'=>'FILE NUMBER'
         ),
         'project_buyer'=>array(
             'id'=>'buyer_id',
             'type'=>'select',
             'values'=>$buyers,
-            'title'=>'Buyer'
+            'title'=>'BUYER NAME'
         ),
         'project_suppliers'=>array(
             'id'=>'supplier_id',
             'type'=>'select',
             'values'=>$suppliers,
-            'title'=>'Supplier'
+            'title'=>'SUPPLIER NAME'
         ),
+
+        'sales_confirmation_origin'=>array(
+            'id'=>'s_c_origin',
+            'type'=>'text',
+            'value'=>'',
+            'title'=>'ORIGIN'
+        ),
+        'sales_confirmation_specification'=>array(
+            'id'=>'s_c_specification',
+            'type'=>'text',
+            'value'=>'',
+            'title'=>'SPECIFICATION'
+        ),
+        'sales_confirmation_quantity'=>array(
+            'id'=>'s_c_quantity',
+            'type'=>'text',
+            'value'=>'',
+            'title'=>'QUANTITY'
+        ),
+        'sales_confirmation_price'=>array(
+            'id'=>'s_c_price',
+            'type'=>'text',
+            'value'=>'',
+            'title'=>'PRICE'
+        ),
+        'sales_confirmation_commission_rate'=>array(
+            'id'=>'s_c_commission_rate',
+            'type'=>'text',
+            'value'=>'',
+            'title'=>'COMMISSION RATE (%)'
+        ),
+        'sales_confirmation_commission_point'=>array(
+            'id'=>'s_c_commission_point',
+            'type'=>'text',
+            'value'=>'',
+            'title'=>'COMMISSION RATE (POINT)'
+        ),
+        'sales_confirmation_shipment'=>array(
+            'id'=>'s_c_shipment',
+            'type'=>'text',
+            'value'=>'',
+            'title'=>'SHIPMENT'
+        ),
+        'sales_confirmation_payment'=>array(
+            'id'=>'s_c_payment',
+            'type'=>'select',
+            'values'=>array('at_sight'=>'AT SIGHT','deferred'=>'DEFERRED','upass'=>'UPASS'),
+            'title'=>'PAYMENT'
+        ),
+        'sales_confirmation_latest_date_of_lc_opening'=>array(
+            'id'=>'s_c_latest_date_of_lc_opening',
+            'type'=>'text',
+            'value'=>'',
+            'title'=>'LATEST DATE OF LC OPENING'
+        ),
+        'sales_confirmation_path'=>array(
+            'id'=>'s_c_path',
+            'type'=>'hidden',
+            'value'=>'',
+            'title'=>''
+        ),
+
+
     );
 
     ?>
@@ -85,9 +148,25 @@
 
         <input type='hidden' name='intent' value='create'/>
 
-        <button style="float:right;margin-top:10px;" id="project_create" class="btn btn-default">Continue</button>
-
         <script type="text/javascript">
+              $(function() {
+                $( "#s_c_latest_date_of_lc_opening" ).datepicker({
+                 dateFormat: 'yy-mm-dd',
+                 defaultDate: "+0w",
+                 changeMonth: true,
+                 numberOfMonths: 1,
+                 onSelect: function( selectedDate )
+                 {
+                     /*
+                      var date=new moment(selectedDate);
+                      $("#s_c_latest_date_of_lc_opening").val(date.format('Do MMM, YYYY'));
+                      $("#from").val(selectedDate);
+                      $('#page').val(0);
+                      $('#invoices-fetch').submit();
+                      */
+                 }
+                });
+              });
             $(document).ready(function()
             {
                 $('#<?php echo $form['id'];?>').ajaxForm({
@@ -119,31 +198,38 @@
                                 $('#msgholder-project_name').parent().css('height','auto');
                                 $('#msgholder-project_name').html('').html('Please give a name!').slideDown();
                             }
-                            else if(data.responseJSON.status=='no_code')
-                            {
-                                $('#msgholder-project_code').parent().css('height','auto');
-                                $('#msgholder-project_code').html('').html('Please give a code!').slideDown();
-                            }
-                            else if(data.responseJSON.status=='invalid_code')
-                            {
-                                $('#msgholder-project_code').parent().css('height','auto');
-                                $('#msgholder-project_code').html('').html('Invalid code!').slideDown();
-                            }
-                            else if(data.responseJSON.status=='already_exists')
-                            {
-                                $('#msgholder-project_code').parent().css('height','auto');
-                                $('#msgholder-project_code').html('').html('project with this code already exists!').slideDown();
-                            }
-                            else if(data.responseJSON.status=='unknown_error')
-                            {
-                                $('#msgholder-project_code').parent().css('height','auto');
-                                $('#msgholder-project_code').html('').html('An unknown error occured! Please contact technical support').slideDown();
-                            }
                         }
                     }
                 });
+
+               $('#project_create').unbind('click');
+               $('#project_create').click(function(){
+                  $('#project_create_form').submit();
+               });
             });
         </script>
         <div style="clear:both;"></div>
     </form>
+    <div style="clear:both;margin:10px auto 20px;">
+
+        <?php
+
+        $upload_form =  uniqid().'_'.time();
+
+        $this->load->vars(
+                        array(
+                            'form_id'=>$upload_form,
+                            '_scope'=>'sales_confirmation',
+                            '_name'=>uniqid().'_'.time(),
+                            'destination_form_id'=>'project_create_form',
+                            'destination_hook_id'=>'s_c_path',
+                            'DEFAULT_IMG'=>asset_url().'images/alt.png',
+                            'IMG'=>NULL,
+                            'LABEL'=>'UPLOAD SALES CONFIRMATION'
+                        ));
+        $this->load->view('general/upload');
+        ?>
+
+    </div>
+    <button style="float:right;margin-top:10px;" id="project_create" class="btn btn-default">Continue</button>
 </div>

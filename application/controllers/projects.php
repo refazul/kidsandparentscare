@@ -98,7 +98,7 @@ class Projects extends CI_Controller
          $limit = $this->input->get_post('limit') ? $this->input->get_post('limit') : 20;
          $page = $this->input->get_post('page') ? $this->input->get_post('page') : 0;
 
-         if (in_array($sort_by, array('name', 'buyer', 'supplier'))) {
+         if (in_array($sort_by, array('name', 'buyer', 'supplier', 's_c_origin', 's_c_specification', 's_c_quantity', 's_c_price', 's_c_commission_rate', 's_c_commission_point', 's_c_shipment', 's_c_payment', 's_c_latest_date_of_lc_opening', 's_c_path'))) {
             $data['status'] = 'ok';
             $data['page'] = $page;
             $data['limit'] = $limit;
@@ -110,14 +110,14 @@ class Projects extends CI_Controller
             else if($sort_by=='supplier')
                $sort_by='suppliers.name';
 
-            $this->db->select('project_id, projects.name as name, buyers.name as buyer, suppliers.name as supplier');
+            $this->db->select('project_id, projects.name as name, buyers.name as buyer, suppliers.name as supplier, s_c_origin, s_c_specification, s_c_quantity, s_c_price, s_c_commission_rate, s_c_commission_point, s_c_shipment, s_c_payment, s_c_latest_date_of_lc_opening, s_c_path');
             $this->db->from('projects');
             $this->db->join('buyers','projects.buyer_id=buyers.buyer_id');
             $this->db->join('suppliers','projects.supplier_id=suppliers.supplier_id');
             $this->db->order_by($sort_by, $order);
 
             /* search */
-            if (in_array($this->input->get_post('filter_by'), array('name', 'buyer', 'supplier'))) {
+            if (in_array($this->input->get_post('filter_by'), array('name', 'buyer', 'supplier', 's_c_origin', 's_c_specification', 's_c_quantity', 's_c_price', 's_c_commission_rate', 's_c_commission_point', 's_c_shipment', 's_c_payment', 's_c_latest_date_of_lc_opening', 's_c_path'))) {
                if ($this->input->get_post('filter') && strlen($this->input->get_post('filter')) > 0) {
 
                   $filter_by=$this->input->get_post('filter_by');
@@ -166,14 +166,33 @@ class Projects extends CI_Controller
 
          if (in_array($sort_by, $this->db->list_fields('projects'))) {
             $data['fields'] = array(
-               'name' => array('Project ID', '10'),
-               'buyer' => array('Buyer', '45'),
-               'supplier' => array('Supplier', '45')
+               'name' => array('Project ID', '5'),
+               'buyer' => array('Buyer', '20'),
+               'supplier' => array('Supplier', '20'),
+               's_c_origin' => array('ORIGIN', 5),
+               's_c_specification' => array('SPECIFICATION', 5),
+               's_c_quantity' => array('QUANTITY', 5),
+               's_c_price' => array('PRICE', 5),
+               's_c_commission_rate' => array('COMMISSION RATE', 5),
+               's_c_commission_point' => array('COMMISSION POINT', 5),
+               's_c_shipment' => array('SHIPMENT', 5),
+               's_c_payment' => array('PAYMENT', 5),
+               's_c_latest_date_of_lc_opening' => array('LATEST DATE OF LC OPENING', 5),
+               's_c_path' => array('FILE', 5),
             );
             $data['search_fields'] = array(
                'name' => 'Project ID',
                'buyer' => 'Buyer',
-               'supplier' => 'Supplier'
+               'supplier' => 'Supplier',
+               's_c_origin' => 'ORIGIN',
+               's_c_specification' => 'SPECIFICATION',
+               's_c_quantity' => 'QUANTITY',
+               's_c_price' => 'PRICE',
+               's_c_commission_rate' => 'COMMISSION RATE',
+               's_c_commission_point' => 'COMMISSION POINT',
+               's_c_shipment' => 'SHIPMENT',
+               's_c_payment' => 'PAYMENT',
+               's_c_latest_date_of_lc_opening' => 'LATEST DATE OF LC OPENING',
             );
             $data['orders'] = array(
                'asc' => 'Ascending',
@@ -223,6 +242,16 @@ class Projects extends CI_Controller
 
                   $data['buyer_id']=$this->input->post('buyer_id');
                   $data['supplier_id']=$this->input->post('supplier_id');
+                  $data['s_c_origin']=$this->input->post('s_c_origin');
+                  $data['s_c_specification']=$this->input->post('s_c_specification');
+                  $data['s_c_quantity']=$this->input->post('s_c_quantity');
+                  $data['s_c_price']=$this->input->post('s_c_price');
+                  $data['s_c_commission_rate']=$this->input->post('s_c_commission_rate');
+                  $data['s_c_commission_point']=$this->input->post('s_c_commission_point');
+                  $data['s_c_shipment']=$this->input->post('s_c_shipment');
+                  $data['s_c_payment']=$this->input->post('s_c_payment');
+                  $data['s_c_latest_date_of_lc_opening']=$this->input->post('s_c_latest_date_of_lc_opening');
+                  $data['s_c_path']=$this->input->post('s_c_path');
 
                   $project_id = $this->project->create($data);
                   if ($project_id === false) {
@@ -260,6 +289,16 @@ class Projects extends CI_Controller
                   $data['name'] = $name;
                   $data['buyer_id']=$this->input->post('buyer_id');
                   $data['supplier_id']=$this->input->post('supplier_id');
+                  $data['s_c_origin']=$this->input->post('s_c_origin');
+                  $data['s_c_specification']=$this->input->post('s_c_specification');
+                  $data['s_c_quantity']=$this->input->post('s_c_quantity');
+                  $data['s_c_price']=$this->input->post('s_c_price');
+                  $data['s_c_commission_rate']=$this->input->post('s_c_commission_rate');
+                  $data['s_c_commission_point']=$this->input->post('s_c_commission_point');
+                  $data['s_c_shipment']=$this->input->post('s_c_shipment');
+                  $data['s_c_payment']=$this->input->post('s_c_payment');
+                  $data['s_c_latest_date_of_lc_opening']=$this->input->post('s_c_latest_date_of_lc_opening');
+                  $data['s_c_path']=$this->input->post('s_c_path');
 
                   $this->db->where('project_id', $project_id);
                   $this->db->update('projects', $data);

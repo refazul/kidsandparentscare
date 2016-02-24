@@ -31,7 +31,20 @@ class Project extends CI_Model {
    }
    public function create($param)
    {
-      $this->db->insert($this->_table,array('name'=>$param['name'],'buyer_id'=>$param['buyer_id'],'supplier_id'=>$param['supplier_id']));
+      $this->db->insert($this->_table,array('name'=>$param['name'],
+                                            'buyer_id'=>$param['buyer_id'],
+                                            'supplier_id'=>$param['supplier_id'],
+                                            's_c_origin'=>$param['s_c_origin'],
+                                            's_c_specification'=>$param['s_c_specification'],
+                                            's_c_quantity'=>$param['s_c_quantity'],
+                                            's_c_price'=>$param['s_c_price'],
+                                            's_c_commission_rate'=>$param['s_c_commission_rate'],
+                                            's_c_commission_point'=>$param['s_c_commission_point'],
+                                            's_c_shipment'=>$param['s_c_shipment'],
+                                            's_c_payment'=>$param['s_c_payment'],
+                                            's_c_latest_date_of_lc_opening'=>$param['s_c_latest_date_of_lc_opening'],
+                                            's_c_path'=>$param['s_c_path']
+                                         ));
       $id=$this->db->insert_id();
 
       return $id;

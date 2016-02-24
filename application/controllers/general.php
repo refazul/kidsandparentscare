@@ -7,12 +7,12 @@ class General extends CI_Controller
         header('Content-type: application/json');
 
         $scope=$this->input->post('_scope') ? $this->input->post('_scope') : 'general';
-        $name=$this->input->post('_name') ? $this->input->post('_name') : 'file';            
+        $name=$this->input->post('_name') ? $this->input->post('_name') : 'file';
 
-        $valid_exts = array('jpeg','jpg','png','gif');                                          // valid extensions
+        $valid_exts = array('jpeg','jpg','png','gif', 'pdf');                                          // valid extensions
         $max_size = 10*1024*1024;                                                               // max file size (10MB)
         $rel_path = $scope . DIRECTORY_SEPARATOR;
-        $abs_path = FCPATH . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $rel_path; // upload directory
+        $abs_path = FCPATH . 'uploads' . DIRECTORY_SEPARATOR . $rel_path; // upload directory
 
         if($_SERVER['REQUEST_METHOD']==='POST')
         {
@@ -22,13 +22,13 @@ class General extends CI_Controller
 
                 if(in_array($ext,$valid_exts) AND $_FILES[$name]['size'] < $max_size)           // looking for format and size validity
                 {
-                    $file = uniqid() . '.' . $ext;                    
+                    $file = uniqid() . '.' . $ext;
 
                     if(move_uploaded_file($_FILES[$name]['tmp_name'], $abs_path . $file))       // move uploaded file from temp to uploads directory
                     {
                         $status = 'ok';
                         $path = $rel_path . $file;
-                        $msg = 'Image Successfully Uploaded!';
+                        $msg = 'File Successfully Uploaded!';
                     }
                     else
                     {
@@ -53,7 +53,7 @@ class General extends CI_Controller
             $status = 'error';
             $msg = 'Bad Request!';
         }
-                
+
         echo json_encode(array('path'=>$path,'status' => $status,'msg'=>$msg));
     }
 }

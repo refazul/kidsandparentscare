@@ -14,33 +14,40 @@
 
 ?>
 <form action="<?php echo site_url();?>general/upload" method="post" enctype="multipart/form-data" id="<?php echo $form_id;?>">
-    <input type="hidden" name="_scope" value="<?php echo $_scope;?>"/>
-    <input type="hidden" name="_name" value="<?php echo $_name;?>"/>
+   <input type="hidden" name="_scope" value="<?php echo $_scope;?>"/>
+   <input type="hidden" name="_name" value="<?php echo $_name;?>"/>
 
-    <div class="image-holder" style="width:210px;margin:auto;">
-        <div title="Remove" class="cross-sign product_image_unset" style="cursor:pointer;display:none;position: absolute;z-index: 100;right: 8px;top: 8px;"></div>
-        <div style="width:95%;padding:5px;background:#fff;height:125px;">
+   <div class="part">
+      <div class="field"><?php echo $LABEL?></div>
+      <div class="seperator"></div>
+
+      <div class="image-holder" style="width:300px;float:right;">
+         <div title="Remove" class="cross-sign product_image_unset" style="cursor:pointer;display:none;position: absolute;z-index: 100;right: 7px;top: 5px;zoom: 2;"></div>
+         <div style="width:96.5%;padding:5px;background:#fff;height:125px;">
             <input type="file" id="<?php echo $_name;?>" name="<?php echo $_name;?>" style="width: 100%;height: 100%;position: relative;top: 0%;left: 0px;opacity: 0;cursor:pointer">
             <img class="preview-image" width="100%" height="100%" src="<?php if($IMG==NULL) echo $DEFAULT_IMG;else echo base_url().'uploads/'.$IMG;?>" style="position: relative; z-index: -10;top:-100%;"/>
-        </div>                        
-        <!--<input type="submit" value="Upload File to Server">-->                        
-        <div class="progress" style="display: none;width:100%;margin-bottom:0px;border-radius: 0px;">
+         </div>
+         <!--<input type="submit" value="Upload File to Server">-->
+         <div class="progress" style="display: none;width:100%;margin-bottom:0px;border-radius: 0px;">
             <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
                 <div class="percent">0%</div>
             </div>
-        </div>                        
-        <div class="status" style="display:none;font-size: 11px;text-align: center;width: 100%;margin-top:3px;">Ready</div>
-    </div>
+         </div>
+         <div class="status" style="display:none;font-size: 11px;text-align: center;width: 100%;margin-top:3px;">Ready</div>
+      </div>
+
+      <div class="end"></div>
+   </div>
 </form>
 
 <script type="text/javascript">
     $(document).ready(function()
-    {   
+    {
         var form = '#<?php echo $form_id;?>';
         var hook = '#<?php echo $_name;?>';
         var dest_form = '#<?php echo $destination_form_id;?>';
         var dest_hook = '#<?php echo $destination_hook_id;?>';
-        
+
         default_img='<?php echo $DEFAULT_IMG;?>';
         has_image=<?php if($IMG==NULL)echo 'false';else echo 'true';?>;
 
@@ -59,7 +66,7 @@
             beforeSend: function() {
                 $(progress,$(form)).fadeIn();
                 $(bar,$(form)).width('0%');
-                $(percent,$(form)).html('0%');                                        
+                $(percent,$(form)).html('0%');
             },
 
             /* progress bar call back*/
@@ -77,7 +84,7 @@
                 $(status,$(form)).html(data.responseJSON.msg).fadeIn();
                 if(data.responseJSON.status=='ok')
                 {
-                    $(dest_hook,$(dest_form)).val(data.responseJSON.path);                                            
+                    $(dest_hook,$(dest_form)).val(data.responseJSON.path);
                 }
             }
         });
@@ -100,7 +107,7 @@
         });
 
         $(hook).change(function()
-        {                                    
+        {
             if (this.files && this.files[0])
             {
                 var file = this.files[0];
@@ -110,7 +117,7 @@
                 /* validation */
 
 
-                var reader = new FileReader();            
+                var reader = new FileReader();
                 reader.onload = function (e) {
                     $(preview,$(form)).attr('src', e.target.result);
                 }

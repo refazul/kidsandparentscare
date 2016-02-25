@@ -177,5 +177,122 @@
             "title":"UPLOAD PI COPY"
          }
       }
+   },
+   "import_permit":{
+      "fields":{
+         "i_p_number":{
+            "id":"i_p_number",
+            "type":"text",
+            "value":"",
+            "title":"IP NUMBER"
+         },
+         "i_p_date":{
+            "id":"i_p_date",
+            "type":"date",
+            "value":"",
+            "title":"IP DATE"
+         },
+         "i_p_expiry_date":{
+            "id":"i_p_expiry_date",
+            "type":"date",
+            "value":"",
+            "title":"IP EXPIRY DATE"
+         },
+         "i_p_sro_date":{
+            "id":"i_p_sro_date",
+            "type":"date",
+            "value":"",
+            "title":"SRO DATE"
+         },
+         "i_p_copy":{
+            "id":"i_p_copy",
+            "type":"file",
+            "value":"",
+            "title":"UPLOAD IP COPY"
+         },
+         "i_p_sro_copy":{
+            "id":"i_p_sro_copy",
+            "type":"file",
+            "value":"",
+            "title":"UPLOAD SRO COPY"
+         }
+      }
+   },
+   "lc":{
+      "fields":{
+         "lc_number":{
+            "id":"lc_number",
+            "type":"text",
+            "value":"",
+            "title":"LC NUMBER"
+         },
+         "lc_date_of_issue":{
+            "id":"lc_date_of_issue",
+            "type":"date",
+            "value":"",
+            "title":"DATE OF ISSUE"
+         },
+         "lc_date_of_expiry":{
+            "id":"lc_date_of_expiry",
+            "type":"date",
+            "value":"",
+            "title":"DATE OF EXPIRY"
+         },
+         "lc_type":{
+            "id":"lc_type",
+            "type":"select",
+            "values":{
+               "at_sight":"AT SIGHT",
+               "deferred":"DEFERRED",
+               "upass":"UPASS"
+            },
+            "value":"",
+            "title":"LC TYPE"
+         },
+         "lc_opening_bank":{
+            "id":"lc_opening_bank",
+            "type":"text",
+            "value":"",
+            "title":"OPENING BANK"
+         },
+         "lc_receiver_bank":{
+            "id":"lc_receiver_bank",
+            "type":"text",
+            "value":"",
+            "title":"RECEIVER BANK"
+         },
+         "lc_partial_shipments":{
+            "id":"lc_partial_shipments",
+            "type":"select",
+            "values":{
+               "allow":"ALLOW",
+               "not_allow":"NOT ALLOW"
+            },
+            "value":"",
+            "title":"PARTIAL SHIPMENTS"
+         },
+         "lc_transhipment":{
+            "id":"lc_transhipment",
+            "type":"select",
+            "values":{
+               "allow":"ALLOW",
+               "not_allow":"NOT ALLOW"
+            },
+            "value":"",
+            "title":"TRANSSHIPMENT"
+         },
+         "lc_port_of_loading":{
+            "id":"lc_port_of_loading",
+            "type":"text",
+            "value":"",
+            "title":"PORT OF LOADING"
+         },
+         "lc_lates_date_of_shipment":{
+            "id":"lc_lates_date_of_shipment",
+            "type":"date",
+            "value":"",
+            "title":"LATEST DATE OF SHIPMENT"
+         }
+      }
    }
 }

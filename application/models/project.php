@@ -87,20 +87,26 @@ class Project extends CI_Model {
       $project['domains']->supplier->fields->project_supplier->values=$suppliers;
       $project['domains']->supplier->fields->project_supplier->value=$project['supplier_id'];
 
-      if($project['sales_confirmation']!='')
+      if($project['sales_confirmation']!='' && $project['sales_confirmation']!='0')
          $project['domains']->sales_confirmation=json_decode($project['sales_confirmation']);
-      if($project['contract']!='')
-         $project['domains']->sales_confirmation=json_decode($project['contract']);
-      if($project['performa_invoice']!='')
-         $project['domains']->sales_confirmation=json_decode($project['performa_invoice']);
-      if($project['import_permit']!='')
-         $project['domains']->sales_confirmation=json_decode($project['import_permit']);
-      if($project['lc']!='')
-         $project['domains']->sales_confirmation=json_decode($project['lc']);
-      if($project['shipment']!='')
-         $project['domains']->sales_confirmation=json_decode($project['shipment']);
+
+      if($project['contract']!='' && $project['contract']!='0')
+         $project['domains']->contract=json_decode($project['contract']);
+
+      if($project['performa_invoice']!='' && $project['performa_invoice']!='0')
+         $project['domains']->performa_invoice=json_decode($project['performa_invoice']);
+
+      if($project['import_permit']!='' && $project['import_permit']!='0')
+         $project['domains']->import_permit=json_decode($project['import_permit']);
+
+      if($project['lc']!='' && $project['lc']!='0')
+         $project['domains']->lc=json_decode($project['lc']);
+
+      if($project['shipment']!='' && $project['shipment']!='0')
+         $project['domains']->shipment=json_decode($project['shipment']);
 
       $project['template']=json_encode($project['domains']);
+      //echo '<pre>';print_r($project);die();
 
       return $project;
    }

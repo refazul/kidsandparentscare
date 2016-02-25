@@ -126,7 +126,7 @@
          },
          "contract_copy":{
             "id":"contract_copy",
-            "type":"text",
+            "type":"file",
             "value":"",
             "title":"UPLOAD CONTRACT COPY"
          }

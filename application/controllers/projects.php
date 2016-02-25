@@ -56,6 +56,8 @@ class Projects extends CI_Controller
             $this->load->model('project');
             $project = $this->project->fetch($project_id);
 
+            //echo '<pre>';print_r($project);die();
+
             $this->load->view('header');
             $this->load->view('menu');
             $this->load->view('wrap_begin');
@@ -217,6 +219,11 @@ class Projects extends CI_Controller
                   $data['buyer_id']=$this->input->post('buyer_id');
                   $data['supplier_id']=$this->input->post('supplier_id');
                   $data['sales_confirmation']=$this->input->post('sales_confirmation');
+                  $data['contract']=$this->input->post('contract');
+                  $data['performa_invoice']=$this->input->post('performa_invoice');
+                  $data['import_permit']=$this->input->post('import_permit');
+                  $data['lc']=$this->input->post('lc');
+                  $data['shipment']=$this->input->post('shipment');
 
                   $project_id = $this->project->create($data);
                   if ($project_id === false) {
@@ -255,6 +262,11 @@ class Projects extends CI_Controller
                   $data['buyer_id']=$this->input->post('buyer_id');
                   $data['supplier_id']=$this->input->post('supplier_id');
                   $data['sales_confirmation']=$this->input->post('sales_confirmation');
+                  $data['contract']=$this->input->post('contract');
+                  $data['performa_invoice']=$this->input->post('performa_invoice');
+                  $data['import_permit']=$this->input->post('import_permit');
+                  $data['lc']=$this->input->post('lc');
+                  $data['shipment']=$this->input->post('shipment');
 
                   $this->db->where('project_id', $project_id);
                   $this->db->update('projects', $data);

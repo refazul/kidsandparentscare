@@ -77,6 +77,10 @@
 
 
     <script type="text/javascript">
+    function OpenInNewTab(url) {
+        var win = window.open(url, '_blank');
+        win.focus();
+      }
 
         $(document).ready(function()
         {
@@ -120,7 +124,8 @@
                             {
                                 $('<tr/>',{id:'project-'+results[i].project_id
                                     <?php //if(user_can('EDIT_project')):?>
-                                        ,onclick:"loadPopupBox();$('#holder').attr('src','<?php echo site_url();?>projects/miniedit/"+results[i].project_id+"');"
+                                        //,onclick:"loadPopupBox();$('#holder').attr('src','<?php echo site_url();?>projects/miniedit/"+results[i].project_id+"');"
+                                        ,onclick:"OpenInNewTab('<?php echo site_url();?>projects/edit/"+results[i].project_id+"');"
                                     <?php //endif;?>
                                 }).appendTo('#projects-list tbody');
                                 $('<td/>',{}).append(document.createTextNode(results[i].name)).appendTo('#project-'+results[i].project_id);

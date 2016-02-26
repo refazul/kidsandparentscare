@@ -120,7 +120,7 @@
          },
          "contract_latest_date_of_lc_opening":{
             "id":"contract_latest_date_of_lc_opening",
-            "type":"text",
+            "type":"date",
             "value":"",
             "title":"LATEST DATE OF LC OPENING"
          },
@@ -142,7 +142,7 @@
          },
          "p_i_date":{
             "id":"p_i_date",
-            "type":"text",
+            "type":"date",
             "value":"",
             "title":"PI DATE"
          },
@@ -287,11 +287,40 @@
             "value":"",
             "title":"PORT OF LOADING"
          },
-         "lc_lates_date_of_shipment":{
-            "id":"lc_lates_date_of_shipment",
+         "lc_port_of_discharge":{
+            "id":"lc_port_of_discharge",
+            "type":"select",
+            "values":{
+               "port_of_chittagong":"PORT OF CHITTAGONG",
+               "port_of_mongla":"PORT OF MONGLA",
+               "port_of_benapol":"PORT OF BENAPOL"
+            },
+            "value":"",
+            "title":"PORT OF DISCHARGE"
+         },
+         "lc_latest_date_of_shipment":{
+            "id":"lc_latest_date_of_shipment",
             "type":"date",
             "value":"",
             "title":"LATEST DATE OF SHIPMENT"
+         },
+         "lc_amendment_date":{
+            "id":"lc_amendment_date",
+            "type":"date",
+            "value":"",
+            "title":"LC AMENDMENT DATE"
+         },
+         "lc_copy":{
+            "id":"lc_copy",
+            "type":"file",
+            "value":"",
+            "title":"UPLOAD LC COPY"
+         },
+         "lc_amendment_copy":{
+            "id":"lc_amendment_copy",
+            "type":"file",
+            "value":"",
+            "title":"UPLOAD AMENDMENT COPY"
          }
       }
    },
@@ -557,6 +586,60 @@
             "type":"file",
             "value":"",
             "title":"UPLOAD ACCEPTANCE COPY"
+         }
+      }
+   },
+   "controller":{
+      "fields":{
+         "controller_name":{
+            "id":"controller_name",
+            "type":"text",
+            "value":"",
+            "title":"CONTROLLER NAME"
+         },
+         "controller_weight_finalization_area":{
+            "id":"controller_weight_finalization_area",
+            "type":"select",
+            "values":{
+               "port":"PORT",
+               "mill":"MILL"
+            },
+            "value":"",
+            "title":"WEIGHT FINALIZATION AREA"
+         },
+         "controller_weight_type":{
+            "id":"controller_weight_type",
+            "type":"select",
+            "values":{
+               "bales_by_bales":"BALES BY BALES",
+               "bridge":"BRIDGE"
+            },
+            "value":"",
+            "title":"WEIGHT TYPE"
+         },
+         "controller_invoice_weight":{
+            "id":"controller_invoice_weight",
+            "type":"number",
+            "value":"",
+            "title":"INVOICE WEIGHT"
+         },
+         "controller_landing_weight":{
+            "id":"controller_landing_weight",
+            "type":"number",
+            "value":"",
+            "title":"LANDING WEIGHT"
+         },
+         "controller_short_gain_weight":{
+            "id":"controller_short_gain_weight",
+            "type":"number",
+            "value":"",
+            "title":"SHORT/GAIN WEIGHT"
+         },
+         "controller_documents":{
+            "id":"controller_documents",
+            "type":"file",
+            "value":"",
+            "title":"UPLOAD CONTROLLER DOCUMENTS"
          }
       }
    }

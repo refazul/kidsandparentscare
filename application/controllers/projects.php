@@ -226,6 +226,7 @@ class Projects extends CI_Controller
                   $data['shipment']=$this->input->post('shipment');
                   $data['nn_documents']=$this->input->post('nn_documents');
                   $data['payment']=$this->input->post('payment');
+                  $data['controller']=$this->input->post('controller');
 
                   $project_id = $this->project->create($data);
                   if ($project_id === false) {
@@ -271,6 +272,7 @@ class Projects extends CI_Controller
                   $data['shipment']=$this->input->post('shipment');
                   $data['nn_documents']=$this->input->post('nn_documents');
                   $data['payment']=$this->input->post('payment');
+                  $data['controller']=$this->input->post('controller');
 
                   $this->db->where('project_id', $project_id);
                   $this->db->update('projects', $data);

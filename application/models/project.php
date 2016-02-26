@@ -87,29 +87,113 @@ class Project extends CI_Model {
       $project['domains']->supplier->fields->project_supplier->values=$suppliers;
       $project['domains']->supplier->fields->project_supplier->value=$project['supplier_id'];
 
-      if($project['sales_confirmation']!='' && $project['sales_confirmation']!='0')
+      if($project['sales_confirmation']!='' && $project['sales_confirmation']!='0'){
+         $merged=array();
+         $existing=json_decode($project['sales_confirmation']);
+         foreach($project['domains']->sales_confirmation->fields as $key=>$value){
+            if(isset($existing->fields->$key))
+               $merged[$key]=$existing->fields->$key;
+            else
+               $merged[$key]=$value;
+         }
          $project['domains']->sales_confirmation=json_decode($project['sales_confirmation']);
+      }
 
-      if($project['contract']!='' && $project['contract']!='0')
+      if($project['contract']!='' && $project['contract']!='0'){
+         $merged=array();
+         $existing=json_decode($project['contract']);
+         foreach($project['domains']->contract->fields as $key=>$value){
+            if(isset($existing->fields->$key))
+               $merged[$key]=$existing->fields->$key;
+            else
+               $merged[$key]=$value;
+         }
          $project['domains']->contract=json_decode($project['contract']);
+      }
 
-      if($project['performa_invoice']!='' && $project['performa_invoice']!='0')
+      if($project['performa_invoice']!='' && $project['performa_invoice']!='0'){
+         $merged=array();
+         $existing=json_decode($project['performa_invoice']);
+         foreach($project['domains']->performa_invoice->fields as $key=>$value){
+            if(isset($existing->fields->$key))
+               $merged[$key]=$existing->fields->$key;
+            else
+               $merged[$key]=$value;
+         }
          $project['domains']->performa_invoice=json_decode($project['performa_invoice']);
+      }
 
-      if($project['import_permit']!='' && $project['import_permit']!='0')
+      if($project['import_permit']!='' && $project['import_permit']!='0'){
+         $merged=array();
+         $existing=json_decode($project['import_permit']);
+         foreach($project['domains']->import_permit->fields as $key=>$value){
+            if(isset($existing->fields->$key))
+               $merged[$key]=$existing->fields->$key;
+            else
+               $merged[$key]=$value;
+         }
          $project['domains']->import_permit=json_decode($project['import_permit']);
+      }
 
-      if($project['lc']!='' && $project['lc']!='0')
-         $project['domains']->lc=json_decode($project['lc']);
+      if($project['lc']!='' && $project['lc']!='0'){
+         $merged=array();
+         $existing=json_decode($project['lc']);
+         foreach($project['domains']->lc->fields as $key=>$value){
+            if(isset($existing->fields->$key))
+               $merged[$key]=$existing->fields->$key;
+            else
+               $merged[$key]=$value;
+         }
+         $project['domains']->lc->fields=$merged;
+      }
 
-      if($project['shipment']!='' && $project['shipment']!='0')
+      if($project['shipment']!='' && $project['shipment']!='0'){
+         $merged=array();
+         $existing=json_decode($project['shipment']);
+         foreach($project['domains']->shipment->fields as $key=>$value){
+            if(isset($existing->fields->$key))
+               $merged[$key]=$existing->fields->$key;
+            else
+               $merged[$key]=$value;
+         }
          $project['domains']->shipment=json_decode($project['shipment']);
+      }
 
-      if($project['nn_documents']!='' && $project['nn_documents']!='0')
+      if($project['nn_documents']!='' && $project['nn_documents']!='0'){
+         $merged=array();
+         $existing=json_decode($project['nn_documents']);
+         foreach($project['domains']->nn_documents->fields as $key=>$value){
+            if(isset($existing->fields->$key))
+               $merged[$key]=$existing->fields->$key;
+            else
+               $merged[$key]=$value;
+         }
          $project['domains']->nn_documents=json_decode($project['nn_documents']);
+      }
 
-      if($project['payment']!='' && $project['payment']!='0')
+      if($project['payment']!='' && $project['payment']!='0'){
+         $merged=array();
+         $existing=json_decode($project['payment']);
+         foreach($project['domains']->payment->fields as $key=>$value){
+            if(isset($existing->fields->$key))
+               $merged[$key]=$existing->fields->$key;
+            else
+               $merged[$key]=$value;
+         }
          $project['domains']->payment=json_decode($project['payment']);
+      }
+
+      if($project['controller']!='' && $project['controller']!='0'){
+         $merged=array();
+         $existing=json_decode($project['controller']);
+         foreach($project['domains']->controller->fields as $key=>$value){
+            if(isset($existing->fields->$key))
+               $merged[$key]=$existing->fields->$key;
+            else
+               $merged[$key]=$value;
+         }
+         $project['domains']->controller=json_decode($project['controller']);
+      }
 
       $project['template']=json_encode($project['domains']);
       //echo '<pre>';print_r($project);die();

@@ -642,5 +642,63 @@
             "title":"UPLOAD CONTROLLER DOCUMENTS"
          }
       }
+   },
+   "short_gain_weight_claim":{
+      "fields":{
+         "s_g_w_c_short_gain_weight_claim_date":{
+            "id":"s_g_w_c_short_gain_weight_claim_date",
+            "type":"date",
+            "value":"",
+            "title":"SHORT/GAIN WEIGHT CLAIM DATE"
+         },
+         "s_g_w_c_short_gain_weight_claim_qty":{
+            "id":"s_g_w_c_short_gain_weight_claim_qty",
+            "type":"number",
+            "value":"",
+            "title":"SHORT/GAIN WEIGHT CLAIM QTY."
+         },
+         "s_g_w_c_short_gain_weight_claim_amount":{
+            "id":"s_g_w_c_short_gain_weight_claim_amount",
+            "type":"number",
+            "value":"",
+            "title":"SHORT/GAIN WEIGHT CLAIM AMOUNT"
+         },
+         "s_g_w_c_amount_received_date":{
+            "id":"s_g_w_c_amount_received_date",
+            "type":"date",
+            "value":"",
+            "title":"AMOUNT RECEIVED DATE"
+         },
+         "s_g_w_c_received_account_number":{
+            "id":"s_g_w_c_received_account_number",
+            "type":"text",
+            "value":"",
+            "title":"RECEIVED ACCOUNT NUMBER"
+         },
+         "s_g_w_c_payment_mode":{
+            "id":"s_g_w_c_payment_mode",
+            "type":"text",
+            "value":"",
+            "title":"PAYMENT MODE"
+         },
+         "s_g_w_c_remarks":{
+            "id":"s_g_w_c_remarks",
+            "type":"text",
+            "value":"",
+            "title":"REMARKS"
+         },
+         "s_g_w_c_claim_letter":{
+            "id":"s_g_w_c_claim_letter",
+            "type":"file",
+            "value":"",
+            "title":"UPLOAD CLAIM LETTER"
+         },
+         "s_g_w_c_payment_copy":{
+            "id":"s_g_w_c_payment_copy",
+            "type":"file",
+            "value":"",
+            "title":"UPLOAD PAYMENT COPY"
+         }
+      }
    }
 }

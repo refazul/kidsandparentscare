@@ -227,6 +227,7 @@ class Projects extends CI_Controller
                   $data['nn_documents']=$this->input->post('nn_documents');
                   $data['payment']=$this->input->post('payment');
                   $data['controller']=$this->input->post('controller');
+                  $data['short_gain_weight_claim']=$this->input->post('short_gain_weight_claim');
 
                   $project_id = $this->project->create($data);
                   if ($project_id === false) {
@@ -273,6 +274,7 @@ class Projects extends CI_Controller
                   $data['nn_documents']=$this->input->post('nn_documents');
                   $data['payment']=$this->input->post('payment');
                   $data['controller']=$this->input->post('controller');
+                  $data['short_gain_weight_claim']=$this->input->post('short_gain_weight_claim');
 
                   $this->db->where('project_id', $project_id);
                   $this->db->update('projects', $data);

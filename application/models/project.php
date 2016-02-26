@@ -39,7 +39,10 @@ class Project extends CI_Model {
                                             'performa_invoice'=>$param['performa_invoice'],
                                             'import_permit'=>$param['import_permit'],
                                             'lc'=>$param['lc'],
-                                            'shipment'=>$param['shipment']
+                                            'nn_documents'=>$param['nn_documents'],
+                                            'payment'=>$param['payment'],
+                                            'controller'=>$param['controller'],
+                                            'short_gain_weight_claim'=>$param['short_gain_weight_claim'],
                                          ));
       $id=$this->db->insert_id();
 

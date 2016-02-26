@@ -17,7 +17,8 @@
    <!-- START -->
 
       <?php foreach($domains as $root=>$domain): if(!isset($domain->fields))continue; $fields=$domain->fields;?>
-
+      <div style='border: 2px dashed #ccc; padding: 10px;margin-bottom: 10px;'>
+         <div style=''><?php echo $root; ?></div>
          <?php foreach($fields as $field):?>
 
             <?php if($field->type=='text' || $field->type=='number'): ?>
@@ -115,6 +116,7 @@
             <?php endif; ?>
 
          <?php endforeach; ?>
+      </div>
       <?php endforeach; ?>
 
       <script type="text/javascript">

@@ -99,7 +99,7 @@ class Project extends CI_Model {
             else
                $merged[$key]=$value;
          }
-         $project['domains']->sales_confirmation=$merged;
+         $project['domains']->sales_confirmation->fields=$merged;
       }
 
       if($project['contract']!='' && $project['contract']!='0'){
@@ -111,7 +111,7 @@ class Project extends CI_Model {
             else
                $merged[$key]=$value;
          }
-         $project['domains']->contract=$merged;
+         $project['domains']->contract->fields=$merged;
       }
 
       if($project['performa_invoice']!='' && $project['performa_invoice']!='0'){
@@ -123,7 +123,7 @@ class Project extends CI_Model {
             else
                $merged[$key]=$value;
          }
-         $project['domains']->performa_invoice=$merged;
+         $project['domains']->performa_invoice->fields=$merged;
       }
 
       if($project['import_permit']!='' && $project['import_permit']!='0'){
@@ -135,7 +135,7 @@ class Project extends CI_Model {
             else
                $merged[$key]=$value;
          }
-         $project['domains']->import_permit=$merged;
+         $project['domains']->import_permit->fields=$merged;
       }
 
       if($project['lc']!='' && $project['lc']!='0'){
@@ -159,7 +159,7 @@ class Project extends CI_Model {
             else
                $merged[$key]=$value;
          }
-         $project['domains']->shipment=$merged;
+         $project['domains']->shipment->fields=$merged;
       }
 
       if($project['nn_documents']!='' && $project['nn_documents']!='0'){
@@ -171,7 +171,7 @@ class Project extends CI_Model {
             else
                $merged[$key]=$value;
          }
-         $project['domains']->nn_documents=$merged;
+         $project['domains']->nn_documents->fields=$merged;
       }
 
       if($project['payment']!='' && $project['payment']!='0'){
@@ -183,7 +183,7 @@ class Project extends CI_Model {
             else
                $merged[$key]=$value;
          }
-         $project['domains']->payment=$merged;
+         $project['domains']->payment->fields=$merged;
       }
 
       if($project['controller']!='' && $project['controller']!='0'){
@@ -195,7 +195,7 @@ class Project extends CI_Model {
             else
                $merged[$key]=$value;
          }
-         $project['domains']->controller=$merged;
+         $project['domains']->controller->fields=$merged;
       }
 
       if($project['short_gain_weight_claim']!='' && $project['short_gain_weight_claim']!='0'){
@@ -207,7 +207,7 @@ class Project extends CI_Model {
             else
                $merged[$key]=$value;
          }
-         $project['domains']->short_gain_weight_claim=$merged;
+         $project['domains']->short_gain_weight_claim->fields=$merged;
       }
 
       $project['template']=json_encode($project['domains']);

@@ -43,6 +43,10 @@ class Project extends CI_Model {
                                             'payment'=>$param['payment'],
                                             'controller'=>$param['controller'],
                                             'short_gain_weight_claim'=>$param['short_gain_weight_claim'],
+                                            'weight_claim'=>$param['weight_claim'],
+                                            'debit_note'=>$param['debit_note'],
+                                            'carrying_charge'=>$param['carrying_charge'],
+                                            'lc_amendment_charge'=>$param['lc_amendment_charge']
                                          ));
       $id=$this->db->insert_id();
 

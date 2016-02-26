@@ -294,5 +294,134 @@
             "title":"LATEST DATE OF SHIPMENT"
          }
       }
+   },
+   "shipment":{
+      "fields":{
+         "shipment_actual_shipment_date":{
+            "id":"shipment_actual_shipment_date",
+            "type":"date",
+            "value":"",
+            "title":"ACTUAL SHIPMENT DATE"
+         },
+         "shipment_type":{
+            "id":"shipment_type",
+            "type":"select",
+            "values":{
+               "sea":"SEA",
+               "road":"ROAD"
+            },
+            "value":"",
+            "title":"SHIPMENT TYPE"
+         },
+         "shipment_shipping_line":{
+            "id":"shipment_shipping_line",
+            "type":"text",
+            "value":"",
+            "conditional":{
+               "shipment_type":"sea"
+            },
+            "title":"SHIPPING LINE"
+         },
+         "shipment_vessel_name":{
+            "id":"shipment_vessel_name",
+            "type":"text",
+            "value":"",
+            "conditional":{
+               "shipment_type":"sea"
+            },
+            "title":"VESSEL NAME"
+         },
+         "shipment_bill_of_lading":{
+            "id":"shipment_bill_of_lading",
+            "type":"text",
+            "value":"",
+            "conditional":{
+               "shipment_type":"sea"
+            },
+            "title":"BILL OF LADING"
+         },
+         "shipment_truck_challan_no":{
+            "id":"shipment_truck_challan_no",
+            "type":"text",
+            "value":"",
+            "conditional":{
+               "shipment_type":"road"
+            },
+            "title":"TRUCK CHALLAN NO."
+         },
+         "shipment_no_of_containers":{
+            "id":"shipment_no_of_containers",
+            "type":"number",
+            "value":"",
+            "conditional":{
+               "shipment_type":"sea"
+            },
+            "title":"NO. OF CONTAINERS"
+         },
+         "shipment_no_of_trucks":{
+            "id":"shipment_no_of_trucks",
+            "type":"number",
+            "value":"",
+            "conditional":{
+               "shipment_type":"road"
+            },
+            "title":"NO. OF TRUCKS"
+         },
+         "shipment_no_of_bales":{
+            "id":"shipment_no_of_bales",
+            "type":"number",
+            "value":"",
+            "title":"NO. OF BALES"
+         },
+         "shipment_port_of_loading":{
+            "id":"shipment_port_of_loading",
+            "type":"text",
+            "value":"",
+            "title":"PORT OF LOADING"
+         },
+         "shipment_port_of_discharge":{
+            "id":"shipment_port_of_discharge",
+            "type":"select",
+            "values":{
+               "port_of_chittagong":"PORT OF CHITTAGONG",
+               "port_of_mongla":"PORT OF MONGLA",
+               "port_of_benapol":"PORT OF BENAPOL"
+            },
+            "value":"",
+            "title":"PORT OF DISCHARGE"
+         },
+         "shipment_transshipment_date":{
+            "id":"shipment_transshipment_date",
+            "type":"date",
+            "value":"",
+            "conditional":{
+               "shipment_type":"sea"
+            },
+            "title":"TRANSSHIPMENT DATE"
+         },
+         "shipment_transshipment_port":{
+            "id":"shipment_transshipment_port",
+            "type":"select",
+            "values":{
+               "port_of_colombo":"PORT OF COLOMBO",
+               "port_of_singapore":"PORT OF SINGAPORE",
+               "port_of_klang":"PORT OF KLANG"
+            },
+            "value":"",
+            "conditional":{
+               "shipment_type":"sea"
+            },
+            "title":"TRANSSHIPMENT PORT"
+         },
+         "shipment_etd_date":{
+            "id":"shipment_etd_date",
+            "type":"date",
+            "value":"",
+            "conditional":{
+               "shipment_type":"sea"
+            },
+            "title":"ETD DATE"
+         }
+      }
    }
 }

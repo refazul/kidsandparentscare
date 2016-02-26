@@ -21,7 +21,7 @@
          <?php foreach($fields as $field):?>
 
             <?php if($field->type=='text' || $field->type=='number'): ?>
-            <div class="part">
+            <div class="part" id="<?php echo $field->id;?>-wrapper">
                <div class="field"><?php echo $field->title;?></div>
                <div class="seperator"></div>
                <div class="value" style="width:<?php echo $form['value_width'];?>px;height:<?php echo $form['value_height'];?>px;">
@@ -32,7 +32,7 @@
             </div>
 
             <?php elseif($field->type=='password'): ?>
-            <div class="part">
+            <div class="part" id="<?php echo $field->id;?>-wrapper">
                 <div class="field"><?php echo $field->title;?></div>
                 <div class="seperator"></div>
                 <div class="value" style="width:<?php echo $form['value_width'];?>px;height:<?php echo $form['value_height'];?>px;">
@@ -43,7 +43,7 @@
             </div>
 
             <?php elseif($field->type=='select'): ?>
-            <div class="part">
+            <div class="part" id="<?php echo $field->id;?>-wrapper">
                 <div class="field"><?php echo $field->title;?></div>
                 <div class="seperator"></div>
                 <div class="value" style="width:<?php echo $form['value_width'];?>px;height:<?php echo $form['value_height'];?>px;margin-bottom:3px;">
@@ -64,7 +64,7 @@
             <?php endif; ?>
 
             <?php if($field->type=='date'): ?>
-            <div class="part">
+            <div class="part" id="<?php echo $field->id;?>-wrapper">
                <div class="field"><?php echo $field->title;?></div>
                <div class="seperator"></div>
                <div class="value" style="width:<?php echo $form['value_width'];?>px;height:<?php echo $form['value_height'];?>px;">
@@ -76,27 +76,42 @@
             <?php endif; ?>
 
             <?php if($field->type=='file'): ?>
-               <div style="clear:both;margin:10px auto 20px;">
+            <div style="clear:both;margin:10px auto 20px;" id="<?php echo $field->id;?>-wrapper">
 
-                  <?php
+               <?php
 
-                     $upload_form =  uniqid().'_'.time();
+                  $upload_form =  uniqid().'_'.time();
 
-                     $this->load->vars(
-                     array(
-                        'form_id'=>$upload_form,
-                        '_scope'=>$root,
-                        '_name'=>uniqid().'_'.time(),
-                        'destination_form_id'=>NULL,
-                        'destination_hook_id'=>$field->id,
-                        'DEFAULT_IMG'=>asset_url().'images/alt.png',
-                        'IMG'=>NULL,
-                        'LABEL'=>$field->title
-                     ));
-                     $this->load->view('general/upload');
-                  ?>
+                  $this->load->vars(
+                  array(
+                     'form_id'=>$upload_form,
+                     '_scope'=>$root,
+                     '_name'=>uniqid().'_'.time(),
+                     'destination_form_id'=>NULL,
+                     'destination_hook_id'=>$field->id,
+                     'DEFAULT_IMG'=>asset_url().'images/alt.png',
+                     'IMG'=>NULL,
+                     'LABEL'=>$field->title
+                  ));
+                  $this->load->view('general/upload');
+               ?>
 
-               </div>
+            </div>
+            <?php endif; ?>
+
+            <?php if(isset($field->conditional)):?>
+               <?php foreach($field->conditional as $condition=>$value): ?>
+                  <script type='text/javascript'>
+                     $('#'+'<?php echo $condition;?>').change(function(){
+                        console.log($(this).val());
+                        if($(this).val()=='<?php echo $value;?>')
+                           $('#'+'<?php echo $field->id; ?>'+'-wrapper').removeClass('hidden');
+                        else
+                           $('#'+'<?php echo $field->id; ?>'+'-wrapper').addClass('hidden');
+                     });
+                     $('#'+'<?php echo $condition;?>').change();
+                  </script>
+               <?php endforeach; ?>
             <?php endif; ?>
 
          <?php endforeach; ?>

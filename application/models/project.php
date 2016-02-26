@@ -210,6 +210,54 @@ class Project extends CI_Model {
          $project['domains']->short_gain_weight_claim->fields=$merged;
       }
 
+      if($project['quality_claim']!='' && $project['quality_claim']!='0'){
+         $merged=array();
+         $existing=json_decode($project['quality_claim']);
+         foreach($project['domains']->quality_claim->fields as $key=>$value){
+            if(isset($existing->fields->$key))
+               $merged[$key]=$existing->fields->$key;
+            else
+               $merged[$key]=$value;
+         }
+         $project['domains']->quality_claim->fields=$merged;
+      }
+
+      if($project['debit_note']!='' && $project['debit_note']!='0'){
+         $merged=array();
+         $existing=json_decode($project['debit_note']);
+         foreach($project['domains']->debit_note->fields as $key=>$value){
+            if(isset($existing->fields->$key))
+               $merged[$key]=$existing->fields->$key;
+            else
+               $merged[$key]=$value;
+         }
+         $project['domains']->debit_note->fields=$merged;
+      }
+
+      if($project['carrying_charge']!='' && $project['carrying_charge']!='0'){
+         $merged=array();
+         $existing=json_decode($project['carrying_charge']);
+         foreach($project['domains']->carrying_charge->fields as $key=>$value){
+            if(isset($existing->fields->$key))
+               $merged[$key]=$existing->fields->$key;
+            else
+               $merged[$key]=$value;
+         }
+         $project['domains']->carrying_charge->fields=$merged;
+      }
+
+      if($project['lc_amendment_charge']!='' && $project['lc_amendment_charge']!='0'){
+         $merged=array();
+         $existing=json_decode($project['lc_amendment_charge']);
+         foreach($project['domains']->lc_amendment_charge->fields as $key=>$value){
+            if(isset($existing->fields->$key))
+               $merged[$key]=$existing->fields->$key;
+            else
+               $merged[$key]=$value;
+         }
+         $project['domains']->lc_amendment_charge->fields=$merged;
+      }
+
       $project['template']=json_encode($project['domains']);
       //echo '<pre>';print_r($project);die();
 

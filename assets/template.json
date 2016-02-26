@@ -700,5 +700,171 @@
             "title":"UPLOAD PAYMENT COPY"
          }
       }
+   },
+   "quality_claim":{
+      "fields":{
+         "q_c_quality_claim_date":{
+            "id":"q_c_quality_claim_date",
+            "type":"date",
+            "value":"",
+            "title":"QUALITY CLAIM DATE"
+         },
+         "q_c_quality_claim_amount":{
+            "id":"q_c_quality_claim_amount",
+            "type":"number",
+            "value":"",
+            "title":"QUALITY CLAIM AMOUNT"
+         },
+         "q_c_approved_claim_amount":{
+            "id":"q_c_approved_claim_amount",
+            "type":"number",
+            "value":"",
+            "title":"APPROVED CLAIM AMOUNT"
+         },
+         "q_c_amount_received_date":{
+            "id":"q_c_amount_received_date",
+            "type":"date",
+            "value":"",
+            "title":"AMOUNT RECEIVED DATE"
+         },
+         "q_c_received_account_number":{
+            "id":"q_c_received_account_number",
+            "type":"text",
+            "value":"",
+            "title":"RECEIVED ACCOUNT NUMBER"
+         },
+         "q_c_payment_mode":{
+            "id":"q_c_payment_mode",
+            "type":"text",
+            "value":"",
+            "title":"PAYMENT MODE"
+         },
+         "q_c_claim_letter":{
+            "id":"q_c_claim_letter",
+            "type":"file",
+            "value":"",
+            "title":"UPLOAD CLAIM LETTER"
+         },
+         "q_c_payment_copy":{
+            "id":"q_c_payment_copy",
+            "type":"file",
+            "value":"",
+            "title":"UPLOAD PAYMENT COPY"
+         }
+      }
+   },
+   "debit_note":{
+      "fields":{
+         "debit_note_date":{
+            "id":"debit_note_date",
+            "type":"date",
+            "value":"",
+            "title":"DEBIT NOTE DATE"
+         },
+         "debit_note_amount":{
+            "id":"debit_note_amount",
+            "type":"number",
+            "value":"",
+            "title":"DEBIT NOTE AMOUNT"
+         },
+         "debit_note_received_amount":{
+            "id":"debit_note_received_amount",
+            "type":"number",
+            "value":"",
+            "title":"RECEIVED AMOUNT"
+         },
+         "debit_note_amount_received_date":{
+            "id":"debit_note_amount_received_date",
+            "type":"date",
+            "value":"",
+            "title":"AMOUNT RECEIVED DATE"
+         },
+         "debit_note_received_account_number":{
+            "id":"debit_note_received_account_number",
+            "type":"text",
+            "value":"",
+            "title":"RECEIVED ACCOUNT NUMBER"
+         },
+         "debit_note_payment_mode":{
+            "id":"debit_note_payment_mode",
+            "type":"text",
+            "value":"",
+            "title":"PAYMENT MODE"
+         },
+         "debit_note_letter":{
+            "id":"debit_note_letter",
+            "type":"file",
+            "value":"",
+            "title":"UPLOAD LETTER"
+         },
+         "debit_note_payment_copy":{
+            "id":"debit_note_payment_copy",
+            "type":"file",
+            "value":"",
+            "title":"UPLOAD PAYMENT COPY"
+         }
+      }
+   },
+   "carrying_charge":{
+      "fields":{
+         "cc_lc_opening_date":{
+            "id":"cc_lc_opening_date",
+            "type":"date",
+            "value":"",
+            "title":"LC OPENING DATE"
+         },
+         "cc_actual_lc_opening_date":{
+            "id":"cc_actual_lc_opening_date",
+            "type":"date",
+            "value":"",
+            "title":"ACTUAL LC OPENING DATE"
+         },
+         "cc_no_of_days_late":{
+            "id":"cc_no_of_days_late",
+            "type":"number",
+            "value":"",
+            "title":"NO. OF DAYS LATE"
+         },
+         "cc_amount":{
+            "id":"cc_amount",
+            "type":"number",
+            "value":"",
+            "title":"AMOUNT"
+         },
+         "cc_payment_mode":{
+            "id":"cc_payment_mode",
+            "type":"text",
+            "value":"",
+            "title":"PAYMENT MODE"
+         },
+         "cc_remarks":{
+            "id":"cc_remarks",
+            "type":"text",
+            "value":"",
+            "title":"REMARKS"
+         },
+         "cc_carrying_copy":{
+            "id":"cc_carrying_copy",
+            "type":"file",
+            "value":"",
+            "title":"UPLOAD CARRYING COPY"
+         }
+      }
+   },
+   "lc_amendment_charge":{
+      "fields":{
+         "lc_amendment_charge_amount":{
+            "id":"lc_amendment_charge_amount",
+            "type":"number",
+            "value":"",
+            "title":"LC AMENDMENT CHARGE AMOUNT"
+         },
+         "lc_amendment_charge_payment_mode":{
+            "id":"lc_amendment_charge_payment_mode",
+            "type":"text",
+            "value":"",
+            "title":"PAYMENT MODE"
+         }
+      }
    }
 }

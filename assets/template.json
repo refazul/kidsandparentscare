@@ -423,5 +423,107 @@
             "title":"ETD DATE"
          }
       }
+   },
+   "nn_documents":{
+      "fields":{
+         "nn_commercial_invoice_no":{
+            "id":"nn_commercial_invoice_no",
+            "type":"text",
+            "value":"",
+            "title":"COMMERCIAL INVOICE NO."
+         },
+         "nn_packing_list":{
+            "id":"nn_packing_list",
+            "type":"select",
+            "values":{
+               "yes":"YES",
+               "no":"NO"
+            },
+            "value":"",
+            "title":"PACKING LIST"
+         },
+         "nn_shipment_advice":{
+            "id":"nn_shipment_advice",
+            "type":"select",
+            "values":{
+               "yes":"YES",
+               "no":"NO"
+            },
+            "value":"",
+            "title":"SHIPMENT ADVICE"
+         },
+         "nn_fax_advice":{
+            "id":"nn_fax_advice",
+            "type":"select",
+            "values":{
+               "yes":"YES",
+               "no":"NO"
+            },
+            "value":"",
+            "title":"FAX ADVICE"
+         },
+         "nn_co":{
+            "id":"nn_co",
+            "type":"select",
+            "values":{
+               "yes":"YES",
+               "no":"NO"
+            },
+            "value":"",
+            "title":"CERTIFICATE OF ORIGIN (CO)"
+         },
+         "nn_phytosanitary_certificate":{
+            "id":"nn_phytosanitary_certificate",
+            "type":"select",
+            "values":{
+               "yes":"YES",
+               "no":"NO"
+            },
+            "value":"",
+            "title":"PHYTOSANITARY CERTIFICATE"
+         },
+         "nn_bill_of_lading":{
+            "id":"nn_bill_of_lading",
+            "type":"select",
+            "values":{
+               "yes":"YES",
+               "no":"NO"
+            },
+            "value":"",
+            "title":"BILL OF LADING"
+         },
+         "nn_beneficiary_certificate":{
+            "id":"nn_beneficiary_certificate",
+            "type":"select",
+            "values":{
+               "yes":"YES",
+               "no":"NO"
+            },
+            "value":"",
+            "title":"BENEFICIARYS CERTIFICATE"
+         },
+         "nn_fumigation_certificate":{
+            "id":"nn_fumigation_certificate",
+            "type":"select",
+            "values":{
+               "yes":"YES",
+               "no":"NO"
+            },
+            "value":"",
+            "title":"FUMIGATION CERTIFICATE"
+         },
+         "nn_dhl_courier_number":{
+            "id":"nn_dhl_courier_number",
+            "type":"text",
+            "value":"",
+            "title":"DHL COURIER NUMBER"
+         },
+         "nn_documents_copy":{
+            "id":"nn_documents_copy",
+            "type":"file",
+            "value":"",
+            "title":"UPLOAD NN DOCUMENTS"
+         }
+      }
    }
 }

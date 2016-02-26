@@ -224,6 +224,7 @@ class Projects extends CI_Controller
                   $data['import_permit']=$this->input->post('import_permit');
                   $data['lc']=$this->input->post('lc');
                   $data['shipment']=$this->input->post('shipment');
+                  $data['nn_documents']=$this->input->post('nn_documents');
 
                   $project_id = $this->project->create($data);
                   if ($project_id === false) {
@@ -267,6 +268,7 @@ class Projects extends CI_Controller
                   $data['import_permit']=$this->input->post('import_permit');
                   $data['lc']=$this->input->post('lc');
                   $data['shipment']=$this->input->post('shipment');
+                  $data['nn_documents']=$this->input->post('nn_documents');
 
                   $this->db->where('project_id', $project_id);
                   $this->db->update('projects', $data);

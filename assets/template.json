@@ -525,5 +525,39 @@
             "title":"UPLOAD NN DOCUMENTS"
          }
       }
+   },
+   "payment":{
+      "fields":{
+         "payment_invoice_payment_date":{
+            "id":"payment_invoice_payment_date",
+            "type":"date",
+            "value":"",
+            "title":"INVOICE PAYMENT DATE"
+         },
+         "payment_acceptance_date":{
+            "id":"payment_acceptance_date",
+            "type":"date",
+            "value":"",
+            "title":"PAYMENT ACCEPTANCE DATE"
+         },
+         "payment_maturity_due_date":{
+            "id":"payment_maturity_due_date",
+            "type":"date",
+            "value":"",
+            "title":"MATURITY DUE DATE"
+         },
+         "payment_copy":{
+            "id":"payment_copy",
+            "type":"file",
+            "value":"",
+            "title":"UPLOAD PAYMENT COPY"
+         },
+         "payment_acceptance_copy":{
+            "id":"payment_acceptance_copy",
+            "type":"file",
+            "value":"",
+            "title":"UPLOAD ACCEPTANCE COPY"
+         }
+      }
    }
 }

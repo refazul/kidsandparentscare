@@ -108,6 +108,9 @@ class Project extends CI_Model {
       if($project['nn_documents']!='' && $project['nn_documents']!='0')
          $project['domains']->nn_documents=json_decode($project['nn_documents']);
 
+      if($project['payment']!='' && $project['payment']!='0')
+         $project['domains']->payment=json_decode($project['payment']);
+
       $project['template']=json_encode($project['domains']);
       //echo '<pre>';print_r($project);die();
 

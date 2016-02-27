@@ -28,6 +28,7 @@
 
         <link rel="stylesheet" media="all" href="<?php echo asset_url();?>css/style.css" />
 	<link rel="stylesheet" media="all" href="<?php echo asset_url();?>css/layout.css" />
+	<link rel="stylesheet" media="all" href="<?php echo asset_url();?>css/doc.css" />
 	<link rel="stylesheet" media="all" href="<?php echo asset_url();?>css/fonts.css" />
 	<link rel="stylesheet" media="all" href="<?php echo asset_url();?>css/theme.css" />
 

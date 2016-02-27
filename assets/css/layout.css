@@ -124,14 +124,14 @@ input[type=file]
 .cross-sign
 {
     background-image: url('../images/cross.png');
-    background-position: 24px 0px;
+    background-position: 0px 0px;
     width: 10px;
     height: 10px;
     cursor: pointer;
 }
 .cross-sign:hover
 {
-    background-position: 13px 0px;
+    background-position: -13px 0px;
 }
 .part
 {

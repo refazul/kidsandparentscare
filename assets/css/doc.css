@@ -1,0 +1,48 @@
+.doc-icons{
+	zoom: 0.6;
+}
+.docs-container{
+   float: left;
+   margin-left: 12px;
+}
+.docs-container .cross-sign{
+   position: absolute;
+   top: 0px;
+   right: 0px;
+}
+.doc-links{
+	margin-left: -20px;
+}
+.doc-links{
+	display: block;
+	width: 80px;
+	overflow: hidden;
+	font-size: 10px;
+	text-align: center;
+}
+.doc-icons{
+	background-image:url('images/doc-icons.png');
+	background-repeat: no-repeat;
+	width: 70px;
+	height: 83px;
+	cursor: pointer;
+	display: block;
+}
+.doc-icons.css{
+	background-position: -423px -143px;
+}
+.doc-icons.html{
+	background-position: -181px -143px;
+}
+.doc-icons.pdf{
+	background-position: -181px -250px;
+}
+.doc-icons.ppt{
+	background-position: -302px -250px;
+}
+.doc-icons.xls{
+	background-position: -423px -250px;
+}
+.doc-icons.doc,.doc-icons.docx{
+	background-position: -60px -250px;
+}

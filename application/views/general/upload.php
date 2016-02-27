@@ -21,6 +21,15 @@
       <div class="field"><?php echo $LABEL?></div>
       <div class="seperator"></div>
 
+      <?php $files=array_filter(explode(',',$VALUE)); ?>
+      <?php foreach($files as $file): ?>
+         <div class="docs-container" id="" data-file='<?php echo $file; ?>'>
+            <div class='cross-sign'></div>
+            <div class="doc-icons pdf"></div>
+            <a class="doc-links" href="<?php echo site_url();?>uploads/<?php echo $file;?>" target="_blank"><?php echo $file;?></a>
+         </div>
+      <?php endforeach; ?>
+
       <div class="image-holder" style="width:300px;float:right;">
          <div title="Remove" class="cross-sign product_image_unset" style="cursor:pointer;display:none;position: absolute;z-index: 100;right: 7px;top: 5px;zoom: 2;"></div>
          <div style="width:96.5%;padding:5px;background:#fff;height:125px;">
@@ -41,90 +50,102 @@
 </form>
 
 <script type="text/javascript">
-    $(document).ready(function()
-    {
-        var form = '#<?php echo $form_id;?>';
-        var hook = '#<?php echo $_name;?>';
-        var dest_form = '#<?php echo $destination_form_id;?>';
-        var dest_hook = '#<?php echo $destination_hook_id;?>';
+   $(document).ready(function(){
+      var form = '#<?php echo $form_id;?>';
+      var hook = '#<?php echo $_name;?>';
+      var dest_form = '#<?php echo $destination_form_id;?>';
+      var dest_hook = '#<?php echo $destination_hook_id;?>';
 
-        default_img='<?php echo $DEFAULT_IMG;?>';
-        has_image=<?php if($IMG==NULL)echo 'false';else echo 'true';?>;
+      $('.docs-container .cross-sign').click(function(){
+         var file=$(this).parent().attr('data-file');
+         var existing_files=$(dest_hook).val().split(';');
+         var new_files=[];
+         for(var i=0;i<existing_files.length;i++){
+            if(file==existing_files[i])
+               continue;
+            new_files.push(existing_files[i]);
+         }
+         $(dest_hook).val(new_files.join(';'));
+         $(this).parent().remove();
+      });
 
-        var progress = '.progress';
-        var preview = '.preview-image';
-        var status = '.status';
-        var bar = '.progress-bar';
-        var percent = '.percent';
+      default_img='<?php echo $DEFAULT_IMG;?>';
+      has_image=<?php if($IMG==NULL)echo 'false';else echo 'true';?>;
 
-        $(form).ajaxForm({
+      var progress = '.progress';
+      var preview = '.preview-image';
+      var status = '.status';
+      var bar = '.progress-bar';
+      var percent = '.percent';
 
-            /* set data type json */
-            dataType:  'json',
+      $(form).ajaxForm({
 
-            /* reset before submitting */
-            beforeSend: function() {
-                $(progress,$(form)).fadeIn();
-                $(bar,$(form)).width('0%');
-                $(percent,$(form)).html('0%');
-            },
+         /* set data type json */
+         dataType:  'json',
 
-            /* progress bar call back*/
-            uploadProgress: function(event, position, total, percentComplete) {
-                var pVel = percentComplete + '%';
-                $(bar,$(form)).width(pVel);
-                $(percent,$(form)).html(pVel);
-                $(status,$(form)).html('Uploading...Please Wait').fadeIn();
-            },
+         /* reset before submitting */
+         beforeSend: function() {
+            $(progress,$(form)).fadeIn();
+            $(bar,$(form)).width('0%');
+            $(percent,$(form)).html('0%');
+         },
 
-            /* complete call back */
-            complete: function(data) {
-                console.log(data);
-                has_image=true;
-                $(status,$(form)).html(data.responseJSON.msg).fadeIn();
-                if(data.responseJSON.status=='ok')
-                {
-                    $(dest_hook,$(dest_form)).val(data.responseJSON.path);
-                    if(dest_form=='#')$(dest_hook).val(data.responseJSON.path);
-                }
-            }
-        });
+         /* progress bar call back*/
+         uploadProgress: function(event, position, total, percentComplete) {
+            var pVel = percentComplete + '%';
+            $(bar,$(form)).width(pVel);
+            $(percent,$(form)).html(pVel);
+            $(status,$(form)).html('Uploading...Please Wait').fadeIn();
+         },
 
-        $('.image-holder',$(form)).on('mouseenter',function(){
-            if(has_image==true) $('.product_image_unset',$(form)).show();
-        });
-        $('.image-holder',$(form)).on('mouseleave',function(){
-            $('.product_image_unset',$(form)).hide();
-        });
-
-        $('.product_image_unset',$(form)).click(function(){
-            has_image=false;
-            $('.product_image_unset',(form)).hide();
-            $(dest_hook).val('');
-            $(preview,$(form)).attr('src',default_img);
-            $(hook).replaceWith($(hook).val('').clone(true));
-            $(progress,$(form)).slideUp(100);
-            $(status,$(form)).slideUp(100);
-        });
-
-        $(hook).change(function()
-        {
-            if (this.files && this.files[0])
+         /* complete call back */
+         complete: function(data) {
+            console.log(data);
+            has_image=true;
+            $(status,$(form)).html(data.responseJSON.msg).fadeIn();
+            if(data.responseJSON.status=='ok')
             {
-                var file = this.files[0];
-                var name = file.name;
-                var size = file.size;
-                var type = file.type;
-                /* validation */
-
-
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $(preview,$(form)).attr('src', e.target.result);
-                }
-                reader.readAsDataURL(file);
-                $(form).submit();
+              $(dest_hook,$(dest_form)).val(data.responseJSON.path);
+              if(dest_form=='#')$(dest_hook).val(data.responseJSON.path);
             }
-        });
-    });
+         }
+      });
+
+      $('.image-holder',$(form)).on('mouseenter',function(){
+         if(has_image==true) $('.product_image_unset',$(form)).show();
+      });
+      $('.image-holder',$(form)).on('mouseleave',function(){
+         $('.product_image_unset',$(form)).hide();
+      });
+
+      $('.product_image_unset',$(form)).click(function(){
+         has_image=false;
+         $('.product_image_unset',(form)).hide();
+         $(dest_hook).val('');
+         $(preview,$(form)).attr('src',default_img);
+         $(hook).replaceWith($(hook).val('').clone(true));
+         $(progress,$(form)).slideUp(100);
+         $(status,$(form)).slideUp(100);
+      });
+
+      $(hook).change(function()
+      {
+         if (this.files && this.files[0])
+         {
+            var file = this.files[0];
+            var name = file.name;
+            var size = file.size;
+            var type = file.type;
+            /* validation */
+
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              $(preview,$(form)).attr('src', e.target.result);
+            }
+            reader.readAsDataURL(file);
+            $(form).submit();
+         }
+      });
+   });
 </script>

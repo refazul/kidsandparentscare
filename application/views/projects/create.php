@@ -114,6 +114,7 @@
                      'destination_hook_id'=>$field->id,
                      'DEFAULT_IMG'=>asset_url().'images/alt.png',
                      'IMG'=>NULL,
+                     'VALUE'=>$field->value,
                      'LABEL'=>$field->title
                   ));
                   $this->load->view('general/upload');

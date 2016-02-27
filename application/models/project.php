@@ -102,7 +102,7 @@ class Project extends CI_Model {
                foreach($existing as $e){
                   $parts=explode('=',$e);
                   if($value->id==$parts[0]){
-                     $value->value=$parts[1];
+                     $value->value=urldecode($parts[1]);
                   }
                }
             }

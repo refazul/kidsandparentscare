@@ -94,172 +94,19 @@ class Project extends CI_Model {
       $project['domains']->supplier->fields->project_supplier->values=$suppliers;
       $project['domains']->supplier->fields->project_supplier->value=$project['supplier_id'];
 
-      if($project['sales_confirmation']!='' && $project['sales_confirmation']!='0'){
-         $merged=array();
-         $existing=json_decode($project['sales_confirmation']);
-         foreach($project['domains']->sales_confirmation->fields as $key=>$value){
-            if(isset($existing->fields->$key))
-               $merged[$key]=$existing->fields->$key;
-            else
-               $merged[$key]=$value;
+      $fields=array('sales_confirmation','contract','performa_invoice','import_permit','lc','shipment','nn_documents','payment','controller','short_gain_weight_claim','quality_claim','debit_note','carrying_charge','lc_amendment_charge');
+      foreach($fields as $field){
+         if($project[$field]!='' && $project[$field]!='0'){
+            $existing=explode('&',$project[$field]);
+            foreach($project['domains']->$field->fields as $key=>$value){
+               foreach($existing as $e){
+                  $parts=explode('=',$e);
+                  if($value->id==$parts[0]){
+                     $value->value=$parts[1];
+                  }
+               }
+            }
          }
-         $project['domains']->sales_confirmation->fields=$merged;
-      }
-
-      if($project['contract']!='' && $project['contract']!='0'){
-         $merged=array();
-         $existing=json_decode($project['contract']);
-         foreach($project['domains']->contract->fields as $key=>$value){
-            if(isset($existing->fields->$key))
-               $merged[$key]=$existing->fields->$key;
-            else
-               $merged[$key]=$value;
-         }
-         $project['domains']->contract->fields=$merged;
-      }
-
-      if($project['performa_invoice']!='' && $project['performa_invoice']!='0'){
-         $merged=array();
-         $existing=json_decode($project['performa_invoice']);
-         foreach($project['domains']->performa_invoice->fields as $key=>$value){
-            if(isset($existing->fields->$key))
-               $merged[$key]=$existing->fields->$key;
-            else
-               $merged[$key]=$value;
-         }
-         $project['domains']->performa_invoice->fields=$merged;
-      }
-
-      if($project['import_permit']!='' && $project['import_permit']!='0'){
-         $merged=array();
-         $existing=json_decode($project['import_permit']);
-         foreach($project['domains']->import_permit->fields as $key=>$value){
-            if(isset($existing->fields->$key))
-               $merged[$key]=$existing->fields->$key;
-            else
-               $merged[$key]=$value;
-         }
-         $project['domains']->import_permit->fields=$merged;
-      }
-
-      if($project['lc']!='' && $project['lc']!='0'){
-         $merged=array();
-         $existing=json_decode($project['lc']);
-         foreach($project['domains']->lc->fields as $key=>$value){
-            if(isset($existing->fields->$key))
-               $merged[$key]=$existing->fields->$key;
-            else
-               $merged[$key]=$value;
-         }
-         $project['domains']->lc->fields=$merged;
-      }
-
-      if($project['shipment']!='' && $project['shipment']!='0'){
-         $merged=array();
-         $existing=json_decode($project['shipment']);
-         foreach($project['domains']->shipment->fields as $key=>$value){
-            if(isset($existing->fields->$key))
-               $merged[$key]=$existing->fields->$key;
-            else
-               $merged[$key]=$value;
-         }
-         $project['domains']->shipment->fields=$merged;
-      }
-
-      if($project['nn_documents']!='' && $project['nn_documents']!='0'){
-         $merged=array();
-         $existing=json_decode($project['nn_documents']);
-         foreach($project['domains']->nn_documents->fields as $key=>$value){
-            if(isset($existing->fields->$key))
-               $merged[$key]=$existing->fields->$key;
-            else
-               $merged[$key]=$value;
-         }
-         $project['domains']->nn_documents->fields=$merged;
-      }
-
-      if($project['payment']!='' && $project['payment']!='0'){
-         $merged=array();
-         $existing=json_decode($project['payment']);
-         foreach($project['domains']->payment->fields as $key=>$value){
-            if(isset($existing->fields->$key))
-               $merged[$key]=$existing->fields->$key;
-            else
-               $merged[$key]=$value;
-         }
-         $project['domains']->payment->fields=$merged;
-      }
-
-      if($project['controller']!='' && $project['controller']!='0'){
-         $merged=array();
-         $existing=json_decode($project['controller']);
-         foreach($project['domains']->controller->fields as $key=>$value){
-            if(isset($existing->fields->$key))
-               $merged[$key]=$existing->fields->$key;
-            else
-               $merged[$key]=$value;
-         }
-         $project['domains']->controller->fields=$merged;
-      }
-
-      if($project['short_gain_weight_claim']!='' && $project['short_gain_weight_claim']!='0'){
-         $merged=array();
-         $existing=json_decode($project['short_gain_weight_claim']);
-         foreach($project['domains']->short_gain_weight_claim->fields as $key=>$value){
-            if(isset($existing->fields->$key))
-               $merged[$key]=$existing->fields->$key;
-            else
-               $merged[$key]=$value;
-         }
-         $project['domains']->short_gain_weight_claim->fields=$merged;
-      }
-
-      if($project['quality_claim']!='' && $project['quality_claim']!='0'){
-         $merged=array();
-         $existing=json_decode($project['quality_claim']);
-         foreach($project['domains']->quality_claim->fields as $key=>$value){
-            if(isset($existing->fields->$key))
-               $merged[$key]=$existing->fields->$key;
-            else
-               $merged[$key]=$value;
-         }
-         $project['domains']->quality_claim->fields=$merged;
-      }
-
-      if($project['debit_note']!='' && $project['debit_note']!='0'){
-         $merged=array();
-         $existing=json_decode($project['debit_note']);
-         foreach($project['domains']->debit_note->fields as $key=>$value){
-            if(isset($existing->fields->$key))
-               $merged[$key]=$existing->fields->$key;
-            else
-               $merged[$key]=$value;
-         }
-         $project['domains']->debit_note->fields=$merged;
-      }
-
-      if($project['carrying_charge']!='' && $project['carrying_charge']!='0'){
-         $merged=array();
-         $existing=json_decode($project['carrying_charge']);
-         foreach($project['domains']->carrying_charge->fields as $key=>$value){
-            if(isset($existing->fields->$key))
-               $merged[$key]=$existing->fields->$key;
-            else
-               $merged[$key]=$value;
-         }
-         $project['domains']->carrying_charge->fields=$merged;
-      }
-
-      if($project['lc_amendment_charge']!='' && $project['lc_amendment_charge']!='0'){
-         $merged=array();
-         $existing=json_decode($project['lc_amendment_charge']);
-         foreach($project['domains']->lc_amendment_charge->fields as $key=>$value){
-            if(isset($existing->fields->$key))
-               $merged[$key]=$existing->fields->$key;
-            else
-               $merged[$key]=$value;
-         }
-         $project['domains']->lc_amendment_charge->fields=$merged;
       }
 
       $project['template']=json_encode($project['domains']);

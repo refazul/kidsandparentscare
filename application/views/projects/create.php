@@ -146,10 +146,16 @@
             for(var domain in template){
                if(!template[domain].fields)
                   continue;
+
+               var temp_string='';
                for(var field in template[domain].fields){
                   template[domain].fields[field].value=$('#'+template[domain].fields[field].id).val();
+                  temp_string+='&'+template[domain].fields[field].id+'='+encodeURIComponent($('#'+template[domain].fields[field].id).val());
                }
-               final_string+='&'+domain+'='+encodeURIComponent(JSON.stringify(template[domain]));
+
+               temp_string=temp_string.substring(1);
+               temp_string='&'+domain+'='+encodeURIComponent(temp_string);
+               final_string+=temp_string;
             }
             if(template.project_id)
                final_string='intent=edit'+final_string;

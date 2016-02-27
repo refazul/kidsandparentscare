@@ -15,6 +15,7 @@
         <script type="text/javascript" src="<?php echo asset_url();?>js/jquery.mousewheel.min.js"></script>
         <script type="text/javascript" src="<?php echo asset_url();?>js/md5.js"></script>
         <script type="text/javascript" src="<?php echo asset_url();?>js/moment.min.js"></script>
+        <script type="text/javascript" src="<?php echo asset_url();?>js/utility.js"></script>
         <script type="text/javascript" src="<?php echo asset_url();?>js/patterns.js"></script>
 
 

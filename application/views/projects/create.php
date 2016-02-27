@@ -31,7 +31,21 @@
                      <script type='text/javascript'>
                         $('#'+'<?php echo $field->id;?>').on('input',function(){
                            var new_value=$(this).val().replace(/\D/g,'');
+                           var focus=$(this).getCursorPosition();
                            $(this).val(new_value);
+                           $(this).focus();
+                           $(this).selectRange(focus);
+                        });
+                     </script>
+                  <?php endif; ?>
+                  <?php if($field->type=='text'): ?>
+                     <script type='text/javascript'>
+                        $('#'+'<?php echo $field->id;?>').on('input',function(){
+                           var new_value=$(this).val().toUpperCase();
+                           var focus=$(this).getCursorPosition();
+                           $(this).val(new_value);
+                           $(this).focus();
+                           $(this).selectRange(focus);
                         });
                      </script>
                   <?php endif; ?>

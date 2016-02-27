@@ -27,6 +27,14 @@
                <div class="seperator"></div>
                <div class="value" style="width:<?php echo $form['value_width'];?>px;height:<?php echo $form['value_height'];?>px;">
                   <input type="text" id="<?php echo $field->id;?>" name="<?php echo $field->id;?>" autocomplete="off" class="form-control" value="<?php echo $field->value?$field->value:'';?>"/>
+                  <?php if($field->type=='number'): ?>
+                     <script type='text/javascript'>
+                        $('#'+'<?php echo $field->id;?>').on('input',function(){
+                           var new_value=$(this).val().replace(/\D/g,'');
+                           $(this).val(new_value);
+                        });
+                     </script>
+                  <?php endif; ?>
                   <div class="mini-status-after" id="msgholder-<?php echo $field->id;?>"></div>
                </div>
                <div class="end"></div>

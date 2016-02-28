@@ -23,3 +23,6 @@
    background-color: #aaa;
    color: #fff;
 }
+.image-holder{
+   -webkit-transform: translate3d(0, 0, 0);
+}

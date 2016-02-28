@@ -21,31 +21,32 @@
       <div class="field"><?php echo $LABEL?></div>
       <div class="seperator"></div>
 
-      <?php $files=array_filter(explode(',',$VALUE)); ?>
-      <?php foreach($files as $file): $uniqid=uniqid(); ?>
-         <div class="docs-container" id="" data-file='<?php echo $file; ?>'>
-            <div class='cross-sign'></div>
-            <div class="doc-icons pdf" id="file-<?php echo $uniqid;?>"></div>
-            <script type="text/javascript">
-               $('#'+'file-<?php echo $uniqid;?>').click(function(){
-                  var file='<?php echo site_url();?>uploads/'+$(this).parent().attr('data-file');
-                  $('body').append('<iframe class="tempviewer" src="http://docs.google.com/gview?url='+file+'&embedded=true" style="margin:5%;width:90%; height:90%;position:fixed;z-index:100000;" frameborder="0"></iframe>');
+      <div class='files'>
+         <?php $files=array_filter(explode(';',$VALUE)); ?>
+         <?php foreach($files as $file): $uniqid=uniqid(); ?>
+            <div class="docs-container" id="" data-file='<?php echo $file; ?>'>
+               <div class='cross-sign'></div>
+               <div class="doc-icons pdf" id="file-<?php echo $uniqid;?>"></div>
+               <script type="text/javascript">
+                  $('#'+'file-<?php echo $uniqid;?>').click(function(){
+                     var file='<?php echo site_url();?>uploads/'+$(this).parent().attr('data-file');
+                     $('body').append('<iframe class="tempviewer" src="http://docs.google.com/gview?url='+file+'&embedded=true" style="margin:5%;width:90%; height:90%;position:fixed;z-index:100000;" frameborder="0"></iframe>');
 
-                  $('.global-overlay').show();
-                  $('.global-overlay').unbind('click');
-                  $('.global-overlay').click(function(){
-                     $(this).hide();
-                     $('.tempviewer').remove();
+                     $('.global-overlay').show();
+                     $('.global-overlay').unbind('click');
+                     $('.global-overlay').click(function(){
+                        $(this).hide();
+                        $('.tempviewer').remove();
+                     });
                   });
-               });
-            </script>
-            <a class="doc-links" href="<?php echo site_url();?>uploads/<?php echo $file;?>" target="_blank"><?php echo $file;?></a>
-         </div>
-      <?php endforeach; ?>
+               </script>
+               <a class="doc-links" href="<?php echo site_url();?>uploads/<?php echo $file;?>" target="_blank"><?php echo $file;?></a>
+            </div>
+         <?php endforeach; ?>
+      </div>
 
       <div class="image-holder" style="width:300px;float:right;">
-         <div title="Remove" class="cross-sign product_image_unset" style="cursor:pointer;display:none;position: absolute;z-index: 100;right: 7px;top: 5px;zoom: 2;"></div>
-         <div style="width:96.5%;padding:5px;background:#fff;height:125px;">
+         <div style="width:96.5%;padding:5px;background:#fff;height:125px;margin-top:10px;">
             <input type="file" id="<?php echo $_name;?>" name="<?php echo $_name;?>" style="width: 100%;height: 100%;position: relative;top: 0%;left: 0px;opacity: 0;cursor:pointer">
             <img class="preview-image" width="100%" height="100%" src="<?php if($IMG==NULL) echo $DEFAULT_IMG;else echo base_url().'uploads/'.$IMG;?>" style="position: relative; z-index: -10;top:-100%;"/>
          </div>
@@ -118,27 +119,60 @@
             $(status,$(form)).html(data.responseJSON.msg).fadeIn();
             if(data.responseJSON.status=='ok')
             {
-              $(dest_hook,$(dest_form)).val(data.responseJSON.path);
-              if(dest_form=='#')$(dest_hook).val(data.responseJSON.path);
+               var _existing_files=$(dest_hook).val().split(';');
+               var _new_files=[];
+               for(var i=0;i<_existing_files.length;i++){
+                  _new_files.push(_existing_files[i]);
+               }
+               _new_files.push(data.responseJSON.path);
+               if(dest_form=='#')$(dest_hook).val(_new_files.join(';'));
+
+               var container=$('<div>',{class:'docs-container'}).attr('data-file',data.responseJSON.path);
+               var cross_sign=$('<div>',{class:'cross-sign'});
+               var docs_icon=$('<div>',{class:'doc-icons'});
+               var docs_link=$('<a>',{class:'doc-links'});
+
+               $(cross_sign).unbind('click');
+               $(cross_sign).click(function(){
+                  var file=$(this).parent().attr('data-file');
+                  var existing_files=$(dest_hook).val().split(';');
+                  var new_files=[];
+                  for(var i=0;i<existing_files.length;i++){
+                     if(file==existing_files[i])
+                        continue;
+                     new_files.push(existing_files[i]);
+                  }
+                  $(dest_hook).val(new_files.join(';'));
+                  $(this).parent().remove();
+               });
+
+               $(docs_icon).unbind('click');
+               $(docs_icon).click(function(){
+                  var file='<?php echo site_url();?>uploads/'+$(this).parent().attr('data-file');
+                  $('body').append('<iframe class="tempviewer" src="http://docs.google.com/gview?url='+file+'&embedded=true" style="margin:5%;width:90%; height:90%;position:fixed;z-index:100000;" frameborder="0"></iframe>');
+
+                  $('.global-overlay').show();
+                  $('.global-overlay').unbind('click');
+                  $('.global-overlay').click(function(){
+                     $(this).hide();
+                     $('.tempviewer').remove();
+                  });
+               });
+
+               $(docs_link).attr('href',"<?php echo site_url();?>uploads/"+data.responseJSON.path).attr('target',"_blank").text(data.responseJSON.path);
+
+               $(container).append(cross_sign);
+               $(container).append(docs_icon);
+               $(container).append(docs_link);
+
+               $('#<?php echo $form_id;?> .files').append(container);
+
+               var extension=data.responseJSON.path.split('.').pop();
+               $(docs_icon).addClass(extension);
             }
+
+            $(hook).val('');
          }
-      });
-
-      $('.image-holder',$(form)).on('mouseenter',function(){
-         if(has_image==true) $('.product_image_unset',$(form)).show();
-      });
-      $('.image-holder',$(form)).on('mouseleave',function(){
-         $('.product_image_unset',$(form)).hide();
-      });
-
-      $('.product_image_unset',$(form)).click(function(){
-         has_image=false;
-         $('.product_image_unset',(form)).hide();
-         $(dest_hook).val('');
-         $(preview,$(form)).attr('src',default_img);
-         $(hook).replaceWith($(hook).val('').clone(true));
-         $(progress,$(form)).slideUp(100);
-         $(status,$(form)).slideUp(100);
       });
 
       $(hook).change(function()
@@ -152,11 +186,11 @@
             /* validation */
 
 
-            var reader = new FileReader();
-            reader.onload = function (e) {
-              $(preview,$(form)).attr('src', e.target.result);
-            }
-            reader.readAsDataURL(file);
+            //var reader = new FileReader();
+            //reader.onload = function (e) {
+            //  $(preview,$(form)).attr('src', e.target.result);
+            //}
+            //reader.readAsDataURL(file);
             $(form).submit();
          }
       });

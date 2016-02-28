@@ -3,7 +3,8 @@
 }
 .docs-container{
    float: left;
-   margin-left: 12px;
+   margin-left: 33px;
+	margin-top: 5px;
 }
 .docs-container .cross-sign{
    position: absolute;
@@ -27,6 +28,7 @@
 	height: 83px;
 	cursor: pointer;
 	display: block;
+	background-position: -60px -250px;
 }
 .doc-icons.css{
 	background-position: -423px -143px;
@@ -45,4 +47,10 @@
 }
 .doc-icons.doc,.doc-icons.docx{
 	background-position: -60px -250px;
+}
+
+.files{
+	width: 300px;
+	float: right;
+	margin-right: 12px;
 }

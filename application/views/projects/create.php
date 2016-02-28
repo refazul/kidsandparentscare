@@ -1,4 +1,11 @@
-<div style="width:550px;clear:both;margin:10px auto 20px;">
+<div class='navigation'>
+<?php foreach($domains as $root=>$domain): if(!isset($domain->fields))continue;?>
+   <div class='anchor' data-target='<?php echo $root?>' title='<?php echo $domain->title;?>'>
+      <?php echo $domain->title;?>
+   </div>
+<?php endforeach; ?>
+</div>
+<div class='project' style="width:550px;clear:both;margin:10px auto 20px;">
 
    <?php
 
@@ -16,9 +23,9 @@
 
    <!-- START -->
 
-      <?php foreach($domains as $root=>$domain): if(!isset($domain->fields))continue; $fields=$domain->fields;?>
-      <div style='border: 2px dashed #ccc; padding: 10px;margin-bottom: 10px;'>
-         <div style=''><?php echo $root; ?></div>
+      <?php foreach($domains as $root=>$domain): if(!isset($domain->fields))continue; $fields=$domain->fields; $title=$domain->title;?>
+      <div id='<?php echo $root;?>' style='border: 2px dashed #ccc; padding: 10px;margin-bottom: 10px;'>
+         <div class='title'><?php echo $title; ?></div>
          <?php foreach($fields as $field):?>
 
             <?php if($field->type=='text' || $field->type=='number'): ?>
@@ -201,6 +208,12 @@
             $('#project_create').unbind('click');
             $('#project_create').click(function(){
                project_create_form_submit();
+            });
+
+            $('.anchor').unbind('click');
+            $('.anchor').click(function(){
+               var target=$(this).attr('data-target');
+               location.hash='#'+target;
             });
          });
       </script>

@@ -5,6 +5,7 @@
    float: left;
    margin-left: 33px;
 	margin-top: 5px;
+	position: relative;
 }
 .docs-container .cross-sign{
    position: absolute;

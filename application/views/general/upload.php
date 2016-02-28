@@ -22,10 +22,23 @@
       <div class="seperator"></div>
 
       <?php $files=array_filter(explode(',',$VALUE)); ?>
-      <?php foreach($files as $file): ?>
+      <?php foreach($files as $file): $uniqid=uniqid(); ?>
          <div class="docs-container" id="" data-file='<?php echo $file; ?>'>
             <div class='cross-sign'></div>
-            <div class="doc-icons pdf"></div>
+            <div class="doc-icons pdf" id="file-<?php echo $uniqid;?>"></div>
+            <script type="text/javascript">
+               $('#'+'file-<?php echo $uniqid;?>').click(function(){
+                  var file='<?php echo site_url();?>uploads/'+$(this).parent().attr('data-file');
+                  $('body').append('<iframe class="tempviewer" src="http://docs.google.com/gview?url='+file+'&embedded=true" style="margin:5%;width:90%; height:90%;position:fixed;z-index:100000;" frameborder="0"></iframe>');
+
+                  $('.global-overlay').show();
+                  $('.global-overlay').unbind('click');
+                  $('.global-overlay').click(function(){
+                     $(this).hide();
+                     $('.tempviewer').remove();
+                  });
+               });
+            </script>
             <a class="doc-links" href="<?php echo site_url();?>uploads/<?php echo $file;?>" target="_blank"><?php echo $file;?></a>
          </div>
       <?php endforeach; ?>

@@ -1,21 +1,21 @@
         </div><!-- end #template-wrapper"-->
-        
-        <div class="popup">            
+
+        <div class="popup">
             <iframe id='holder' frameborder="0" scrolling="no" width="100%" height="100%"></iframe>
-            <a class="popup-close"><div class="cross-sign"></div></a>    
+            <a class="popup-close"><div class="cross-sign"></div></a>
         </div>
         <script type="text/javascript">
-            $(document).ready(function(){                
+            $(document).ready(function(){
                 $('.popup').resizable().draggable();
             });
         </script>
-        
+
         <div class="popup-back"></div>
         <div class="modal"><!-- Place at bottom of page --></div>
         <script type="text/javascript">
             popup_loaded=false;
 
-            $(document).ready(function(){        
+            $(document).ready(function(){
 
                 $('.popup-close').click(function(){
                     unloadPopupBox();
@@ -45,16 +45,16 @@
             $body = $("body");
             $(document).on({
                 ajaxStart: function(){
-                    $body.addClass("loading");                    
+                    $body.addClass("loading");
                 },
                 ajaxStop: function(){
                     $body.removeClass("loading");
                     $('.middle').each(function(){
                         var sum=0;
                         $(this).children().each( function(){ sum += $(this).width()+parseInt($(this).css('margin-left').replace('px',''),10)+parseInt($(this).css('padding-left').replace('px',''),10)+parseInt($(this).css('padding-right').replace('px',''),10); });
-                        
+
                         console.log(sum);
-                        
+
                         if(sum<700)
                             $(this).css('left','50%').css('margin-left',-sum/2).css('overflow-x','hidden');
                         else
@@ -75,5 +75,6 @@
         <script type="text/javascript" src="<?php echo asset_url();?>js/greensock/minified/TweenMax.min.js"></script>
         <script type="text/javascript" src="<?php echo asset_url();?>js/menu.js"></script>
         <script type="text/javascript" src="<?php echo asset_url();?>js/style.js"></script>
+        <div class='global-overlay'></div>
     </body>
 </html>

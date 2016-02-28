@@ -46,7 +46,7 @@
       </div>
 
       <div class="image-holder" style="width:300px;float:right;">
-         <div style="width:96.5%;padding:5px;background:#fff;height:125px;margin-top:10px;">
+         <div style="width:45%;padding:5px;height:125px;margin:auto;margin-top:10px;">
             <input type="file" id="<?php echo $_name;?>" name="<?php echo $_name;?>" style="width: 100%;height: 100%;position: relative;top: 0%;left: 0px;opacity: 0;cursor:pointer">
             <img class="preview-image" width="100%" height="100%" src="<?php if($IMG==NULL) echo $DEFAULT_IMG;else echo base_url().'uploads/'.$IMG;?>" style="position: relative; z-index: -10;top:-100%;"/>
          </div>

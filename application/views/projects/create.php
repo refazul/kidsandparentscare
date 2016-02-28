@@ -112,7 +112,7 @@
                      '_name'=>uniqid().'_'.time(),
                      'destination_form_id'=>NULL,
                      'destination_hook_id'=>$field->id,
-                     'DEFAULT_IMG'=>asset_url().'images/alt.png',
+                     'DEFAULT_IMG'=>asset_url().'images/file-upload-2.png',
                      'IMG'=>NULL,
                      'VALUE'=>$field->value,
                      'LABEL'=>$field->title

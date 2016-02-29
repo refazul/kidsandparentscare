@@ -135,6 +135,23 @@ class Project extends CI_Model {
          $controller_landing_weight=$this->extract('controller_landing_weight',$project);
          $controller_landing_weight_unit=$this->extract('controller_landing_weight_unit',$project);
 
+         if($controller_invoice_weight_unit=='mt'){
+            $controller_invoice_weight=$controller_invoice_weight * 2204.60;
+         }
+         else if($controller_invoice_weight_unit=='kg'){
+            $controller_invoice_weight=$controller_invoice_weight/1000 * 2204.60;
+         }
+
+         if($controller_landing_weight_unit=='mt'){
+            $controller_landing_weight=$controller_landing_weight * 2204.60;
+         }
+         else if($controller_landing_weight_unit=='kg'){
+            $controller_landing_weight=$controller_landing_weight/1000 * 2204.60;
+         }
+
+         $controller_invoice_weight_unit='lbs';
+         $controller_landing_weight_unit='lbs';
+
          if($controller_invoice_weight_unit==$controller_landing_weight_unit)
             return ($controller_invoice_weight - $controller_landing_weight) . ' ' . $controller_invoice_weight_unit;
          return 0;
@@ -146,6 +163,23 @@ class Project extends CI_Model {
 
          $controller_landing_weight=$this->extract('controller_landing_weight',$project);
          $controller_landing_weight_unit=$this->extract('controller_landing_weight_unit',$project);
+
+         if($controller_invoice_weight_unit=='mt'){
+            $controller_invoice_weight=$controller_invoice_weight * 2204.60;
+         }
+         else if($controller_invoice_weight_unit=='kg'){
+            $controller_invoice_weight=$controller_invoice_weight/1000 * 2204.60;
+         }
+
+         if($controller_landing_weight_unit=='mt'){
+            $controller_landing_weight=$controller_landing_weight * 2204.60;
+         }
+         else if($controller_landing_weight_unit=='kg'){
+            $controller_landing_weight=$controller_landing_weight/1000 * 2204.60;
+         }
+
+         $controller_invoice_weight_unit='lbs';
+         $controller_landing_weight_unit='lbs';
 
          if($controller_invoice_weight_unit==$controller_landing_weight_unit)
             return ($controller_invoice_weight - $controller_landing_weight) . ' ' . $controller_invoice_weight_unit;

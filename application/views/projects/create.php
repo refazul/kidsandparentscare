@@ -33,7 +33,7 @@
                <div class="field"><?php echo $field->title;?></div>
                <div class="seperator"></div>
                <div class="value" style="width:<?php echo $form['value_width'];?>px;height:<?php echo $form['value_height'];?>px;">
-                  <input type="text" id="<?php echo $field->id;?>" name="<?php echo $field->id;?>" autocomplete="off" class="form-control" value="<?php echo $field->value?$field->value:'';?>"/>
+                  <input type="text" <?php if(isset($field->genre) && $field->genre=='calculative')echo 'disabled'?> id="<?php echo $field->id;?>" name="<?php echo $field->id;?>" autocomplete="off" class="form-control" value="<?php echo $field->value?$field->value:'';?>"/>
                   <?php if($field->type=='number'): ?>
                      <script type='text/javascript'>
                         $('#'+'<?php echo $field->id;?>').on('input',function(){
@@ -108,7 +108,7 @@
                <div class="field"><?php echo $field->title;?></div>
                <div class="seperator"></div>
                <div class="value" style="width:<?php echo $form['value_width'];?>px;height:<?php echo $form['value_height'];?>px;">
-                  <input data-target='<?php echo $field->id;?>' type="text" autocomplete="off" class="form-control date" value="<?php echo $field->value?$field->value:'';?>"/>
+                  <input data-target='<?php echo $field->id;?>' type="text" autocomplete="off" <?php if(isset($field->genre) && $field->genre=='calculative')echo 'disabled'?> class="form-control date <?php if(isset($field->genre) && $field->genre=='calculative')echo 'disabled'?>" value="<?php echo $field->value?$field->value:'';?>"/>
                   <div class="mini-status-after" id="msgholder-<?php echo $field->id;?>"></div>
                </div>
                <div class="end"></div>
@@ -168,7 +168,7 @@
                var date=new moment(selectedDate);
                $(this).val(date.format('Do MMM, YYYY'));
             });
-            $( ".date" ).datepicker({
+            $( ".date" ).not('.disabled').datepicker({
                dateFormat: 'yy-mm-dd',
                defaultDate: "+0w",
                changeMonth: true,

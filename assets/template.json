@@ -717,6 +717,7 @@
          "payment_maturity_due_date":{
             "id":"payment_maturity_due_date",
             "type":"date",
+            "genre":"calculative",
             "value":"",
             "title":"MATURITY DUE DATE"
          },
@@ -794,6 +795,7 @@
          "controller_short_gain_weight":{
             "id":"controller_short_gain_weight",
             "type":"number",
+            "genre":"calculative",
             "value":"",
             "title":"SHORT/GAIN WEIGHT"
          },
@@ -817,12 +819,14 @@
          "s_g_w_c_short_gain_weight_claim_qty":{
             "id":"s_g_w_c_short_gain_weight_claim_qty",
             "type":"number",
+            "genre":"calculative",
             "value":"",
             "title":"SHORT/GAIN WEIGHT CLAIM QTY."
          },
          "s_g_w_c_short_gain_weight_claim_amount":{
             "id":"s_g_w_c_short_gain_weight_claim_amount",
             "type":"number",
+            "genre":"calculative",
             "value":"",
             "title":"SHORT/GAIN WEIGHT CLAIM AMOUNT"
          },
@@ -953,6 +957,7 @@
          "debit_note_amount":{
             "id":"debit_note_amount",
             "type":"number",
+            "genre":"calculative",
             "value":"",
             "title":"DEBIT NOTE AMOUNT"
          },

@@ -74,9 +74,10 @@
             "type":"number",
             "unit":{
                "values":{
-                  "inch_per_mm":"Inch/mm"
+                  "inch":"INCH",
+                  "mm":"MM"
                },
-               "value":"inch_per_mm"
+               "value":"inch"
             },
             "value":"",
             "title":"STAPLE"
@@ -253,9 +254,10 @@
             "type":"number",
             "unit":{
                "values":{
-                  "inch_per_mm":"Inch/mm"
+                  "inch":"INCH",
+                  "mm":"MM"
                },
-               "value":"inch_per_mm"
+               "value":"inch"
             },
             "value":"",
             "title":"STAPLE"

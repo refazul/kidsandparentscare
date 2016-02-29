@@ -227,9 +227,9 @@ class Project extends CI_Model {
       // Conversion
       $p_i_quantity=$this->convert_to_lbs($p_i_quantity_unit,$p_i_quantity);
       $p_i_quantity_unit='lbs';
-      if($p_i_price_unit=='usd'){
+      if($p_i_price_unit=='usc'){
          $p_i_price=$p_i_price/100;
-         $p_i_price_unit='usc';
+         $p_i_price_unit='usd';
       }
       if($s_c_commission_rate=='')$s_c_commission_rate=0;
 

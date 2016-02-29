@@ -128,26 +128,19 @@ class Project extends CI_Model {
          return date('Y-m-d', strtotime($shipment_actual_shipment_date. ' + 180 days'));;
       }
       else if($field=='controller_short_gain_weight'){
-         //Controller_Invoice.Weight - Controller_Landing.Weight
+         // Controller.Invoice_Weight - Controller.Landing_Weight
+
+         // Controller.Invoice_Weight
          $controller_invoice_weight=$this->extract('controller_invoice_weight',$project);
          $controller_invoice_weight_unit=$this->extract('controller_invoice_weight_unit',$project);
 
+         // Controller.Landing_Weight
          $controller_landing_weight=$this->extract('controller_landing_weight',$project);
          $controller_landing_weight_unit=$this->extract('controller_landing_weight_unit',$project);
 
-         if($controller_invoice_weight_unit=='mt'){
-            $controller_invoice_weight=$controller_invoice_weight * 2204.60;
-         }
-         else if($controller_invoice_weight_unit=='kg'){
-            $controller_invoice_weight=$controller_invoice_weight/1000 * 2204.60;
-         }
-
-         if($controller_landing_weight_unit=='mt'){
-            $controller_landing_weight=$controller_landing_weight * 2204.60;
-         }
-         else if($controller_landing_weight_unit=='kg'){
-            $controller_landing_weight=$controller_landing_weight/1000 * 2204.60;
-         }
+         // Conversion
+         $controller_invoice_weight=$this->convert_to_lbs($controller_invoice_weight_unit,$controller_invoice_weight);
+         $controller_landing_weight=$this->convert_to_lbs($controller_landing_weight_unit,$controller_landing_weight);
 
          $controller_invoice_weight_unit='lbs';
          $controller_landing_weight_unit='lbs';
@@ -157,26 +150,19 @@ class Project extends CI_Model {
          return 0;
       }
       else if($field=='s_g_w_c_short_gain_weight_claim_qty'){
-         //Controller_Invoice.Weight - Controller_Landing.Weight
+         // Controller.Invoice_Weight - Controller.Landing_Weight
+
+         // Controller.Invoice_Weight
          $controller_invoice_weight=$this->extract('controller_invoice_weight',$project);
          $controller_invoice_weight_unit=$this->extract('controller_invoice_weight_unit',$project);
 
+         // Controller.Landing_Weight
          $controller_landing_weight=$this->extract('controller_landing_weight',$project);
          $controller_landing_weight_unit=$this->extract('controller_landing_weight_unit',$project);
 
-         if($controller_invoice_weight_unit=='mt'){
-            $controller_invoice_weight=$controller_invoice_weight * 2204.60;
-         }
-         else if($controller_invoice_weight_unit=='kg'){
-            $controller_invoice_weight=$controller_invoice_weight/1000 * 2204.60;
-         }
-
-         if($controller_landing_weight_unit=='mt'){
-            $controller_landing_weight=$controller_landing_weight * 2204.60;
-         }
-         else if($controller_landing_weight_unit=='kg'){
-            $controller_landing_weight=$controller_landing_weight/1000 * 2204.60;
-         }
+         // Conversion
+         $controller_invoice_weight=$this->convert_to_lbs($controller_invoice_weight_unit,$controller_invoice_weight);
+         $controller_landing_weight=$this->convert_to_lbs($controller_landing_weight_unit,$controller_landing_weight);
 
          $controller_invoice_weight_unit='lbs';
          $controller_landing_weight_unit='lbs';
@@ -198,5 +184,13 @@ class Project extends CI_Model {
             }
          }
       }
+   }
+   public function convert_to_lbs($base_unit,$base_value){
+      if($base_unit=='mt')
+         return $base_value * 2204.60;
+      else if($base_unit=='kg')
+         return $base_value/1000 * 2204.60;
+      else if($base_unit=='lbs')
+         return $base_value;
    }
 }

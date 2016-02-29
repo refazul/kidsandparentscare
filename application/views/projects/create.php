@@ -56,6 +56,16 @@
                         });
                      </script>
                   <?php endif; ?>
+
+                  <?php if(isset($field->unit)): ?>
+                  <div class="select-wrap select-wrap-unit" style="height:100%;">
+                     <select id="<?php echo $field->id;?>_unit" name="<?php echo $field->id;?>_unit" style="height:100%;">
+                         <?php foreach($field->unit->values as $value=>$key):?>
+                         <option <?php if($value==$field->unit->value)echo 'selected="selected"'?> value="<?php echo $value;?>"><?php echo $key;?></option>
+                         <?php endforeach;?>
+                     </select>
+                  </div>
+                  <?php endif ?>
                   <div class="mini-status-after" id="msgholder-<?php echo $field->id;?>"></div>
                </div>
                <div class="end"></div>
@@ -181,6 +191,9 @@
                for(var field in template[domain].fields){
                   template[domain].fields[field].value=$('#'+template[domain].fields[field].id).val();
                   temp_string+='&'+template[domain].fields[field].id+'='+encodeURIComponent($('#'+template[domain].fields[field].id).val());
+                  if(template[domain].fields[field].unit){
+                     temp_string+='&'+template[domain].fields[field].id+'_unit='+encodeURIComponent($('#'+template[domain].fields[field].id+'_unit').val());
+                  }
                }
 
                temp_string=temp_string.substring(1);

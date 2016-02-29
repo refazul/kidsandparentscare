@@ -7,6 +7,16 @@
             "type":"text",
             "value":"",
             "title":"FILE NUMBER"
+         },
+         "project_file_status":{
+            "id":"project_file_status",
+            "type":"select",
+            "values":{
+               "running":"RUNNING",
+               "close":"CLOSE"
+            },
+            "value":"",
+            "title":"FILE STATUS"
          }
       }
    },
@@ -35,49 +45,111 @@
    "sales_confirmation":{
       "title":"Sales Confirmation",
       "fields":{
-         "origin":{
+         "s_c_origin":{
             "id":"s_c_origin",
             "type":"text",
             "value":"",
             "title":"ORIGIN"
          },
-         "specification":{
-            "id":"s_c_specification",
+         "s_c_crop_year":{
+            "id":"s_c_crop_year",
             "type":"text",
             "value":"",
-            "title":"SPECIFICATION"
+            "title":"CROP YEAR"
          },
-         "quantity":{
+         "s_c_type":{
+            "id":"s_c_type",
+            "type":"text",
+            "value":"",
+            "title":"TYPE"
+         },
+         "s_c_color_grade":{
+            "id":"s_c_color_grade",
+            "type":"text",
+            "value":"",
+            "title":"COLOR GRADE"
+         },
+         "s_c_staple":{
+            "id":"s_c_staple",
+            "type":"number",
+            "unit":{
+               "values":{
+                  "inch_per_mm":"Inch/mm"
+               },
+               "value":"inch_per_mm"
+            },
+            "value":"",
+            "title":"STAPLE"
+         },
+         "s_c_mic":{
+            "id":"s_c_mic",
+            "type":"number",
+            "unit":{
+               "values":{
+                  "ncl":"NCL"
+               },
+               "value":"ncl"
+            },
+            "value":"",
+            "title":"MIC"
+         },
+         "s_c_strength":{
+            "id":"s_c_strength",
+            "type":"number",
+            "unit":{
+               "values":{
+                  "gpt":"GPT"
+               },
+               "value":"gpt"
+            },
+            "value":"",
+            "title":"Strength"
+         },
+         "s_c_quantity":{
             "id":"s_c_quantity",
             "type":"number",
+            "unit":{
+               "values":{
+                  "lbs":"LBS",
+                  "mt":"MT"
+               },
+               "value":"lbs"
+            },
             "value":"",
             "title":"QUANTITY"
          },
-         "price":{
+         "s_c_price":{
             "id":"s_c_price",
             "type":"number",
+            "unit":{
+               "values":{
+                  "usc":"USC",
+                  "usd":"USD"
+               },
+               "value":"usc"
+            },
             "value":"",
             "title":"PRICE"
          },
-         "commission_rate":{
+         "s_c_commission_rate":{
             "id":"s_c_commission_rate",
             "type":"number",
             "value":"",
             "title":"COMMISSION RATE (%)"
          },
-         "commission_point":{
+         "s_c_commission_point":{
             "id":"s_c_commission_point",
             "type":"number",
             "value":"",
             "title":"COMMISSION RATE (POINT)"
          },
-         "shipment":{
+         "s_c_shipment":{
             "id":"s_c_shipment",
             "type":"text",
             "value":"",
             "title":"SHIPMENT"
          },
-         "payment":{
+         "s_c_payment":{
             "id":"s_c_payment",
             "type":"select",
             "values":{
@@ -90,11 +162,11 @@
          },
          "latest_date_of_lc_opening":{
             "id":"s_c_latest_date_of_lc_opening",
-            "type":"date",
+            "type":"text",
             "value":"",
             "title":"LATEST DATE OF LC OPENING"
          },
-         "copy":{
+         "s_c_copy":{
             "id":"s_c_copy",
             "type":"file",
             "value":"",
@@ -125,7 +197,7 @@
          },
          "contract_latest_date_of_lc_opening":{
             "id":"contract_latest_date_of_lc_opening",
-            "type":"date",
+            "type":"text",
             "value":"",
             "title":"LATEST DATE OF LC OPENING"
          },
@@ -138,7 +210,7 @@
       }
    },
    "performa_invoice":{
-      "title":"Performa Invoice",
+      "title":"Proforma Invoice",
       "fields":{
          "p_i_number":{
             "id":"p_i_number",
@@ -158,21 +230,83 @@
             "value":"",
             "title":"ORIGIN"
          },
-         "p_i_specification":{
+         "p_i_crop_year":{
+            "id":"p_i_crop_year",
+            "type":"text",
+            "value":"",
+            "title":"CROP YEAR"
+         },
+         "p_i_type":{
             "id":"p_i_specification",
             "type":"text",
             "value":"",
-            "title":"SPECIFICATION"
+            "title":"TYPE"
+         },
+         "p_i_color_grade":{
+            "id":"p_i_specification",
+            "type":"text",
+            "value":"",
+            "title":"COLOR GRADE"
+         },
+         "p_i_staple":{
+            "id":"p_i_staple",
+            "type":"number",
+            "unit":{
+               "values":{
+                  "inch_per_mm":"Inch/mm"
+               },
+               "value":"inch_per_mm"
+            },
+            "value":"",
+            "title":"STAPLE"
+         },
+         "p_i_mic":{
+            "id":"p_i_mic",
+            "type":"number",
+            "unit":{
+               "values":{
+                  "ncl":"NCL"
+               },
+               "value":"ncl"
+            },
+            "value":"",
+            "title":"MIC"
+         },
+         "p_i_strength":{
+            "id":"p_i_strength",
+            "type":"number",
+            "unit":{
+               "values":{
+                  "gpt":"GPT"
+               },
+               "value":"gpt"
+            },
+            "value":"",
+            "title":"STRENGTH"
          },
          "p_i_quantity":{
             "id":"p_i_quantity",
             "type":"number",
+            "unit":{
+               "values":{
+                  "lbs":"LBS",
+                  "mt":"MT"
+               },
+               "value":"lbs"
+            },
             "value":"",
             "title":"QUANTITY"
          },
          "p_i_price":{
             "id":"p_i_price",
             "type":"number",
+            "unit":{
+               "values":{
+                  "usc":"USC",
+                  "usd":"USD"
+               },
+               "value":"usc"
+            },
             "value":"",
             "title":"PRICE"
          },
@@ -632,12 +766,28 @@
          "controller_invoice_weight":{
             "id":"controller_invoice_weight",
             "type":"number",
+            "unit":{
+               "values":{
+                  "lbs":"LBS",
+                  "kg":"KG",
+                  "mt":"MT"
+               },
+               "value":"lbs"
+            },
             "value":"",
             "title":"INVOICE WEIGHT"
          },
          "controller_landing_weight":{
             "id":"controller_landing_weight",
             "type":"number",
+            "unit":{
+               "values":{
+                  "lbs":"LBS",
+                  "kg":"KG",
+                  "mt":"MT"
+               },
+               "value":"lbs"
+            },
             "value":"",
             "title":"LANDING WEIGHT"
          },
@@ -726,8 +876,26 @@
          "q_c_quality_claim_amount":{
             "id":"q_c_quality_claim_amount",
             "type":"number",
+            "unit":{
+               "values":{
+                  "usd":"USD"
+               },
+               "value":"usd"
+            },
             "value":"",
             "title":"QUALITY CLAIM AMOUNT"
+         },
+         "q_c_quality_received_amount":{
+            "id":"q_c_quality_received_amount",
+            "type":"number",
+            "unit":{
+               "values":{
+                  "usd":"USD"
+               },
+               "value":"usd"
+            },
+            "value":"",
+            "title":"RECEIVED AMOUNT"
          },
          "q_c_approved_claim_amount":{
             "id":"q_c_approved_claim_amount",
@@ -770,6 +938,12 @@
    "debit_note":{
       "title":"Debit Note",
       "fields":{
+         "debit_note_number":{
+            "id":"debit_note_number",
+            "type":"text",
+            "value":"",
+            "title":"DEBIT NOTE NUMBER"
+         },
          "debit_note_date":{
             "id":"debit_note_date",
             "type":"date",
@@ -785,6 +959,12 @@
          "debit_note_received_amount":{
             "id":"debit_note_received_amount",
             "type":"number",
+            "unit":{
+               "values":{
+                  "usd":"USD"
+               },
+               "value":"usd"
+            },
             "value":"",
             "title":"RECEIVED AMOUNT"
          },
@@ -811,6 +991,12 @@
             "type":"file",
             "value":"",
             "title":"UPLOAD LETTER"
+         },
+         "debit_note_remarks":{
+            "id":"debit_note_remarks",
+            "type":"text",
+            "value":"",
+            "title":"REMARKS"
          },
          "debit_note_payment_copy":{
             "id":"debit_note_payment_copy",
@@ -844,6 +1030,12 @@
          "cc_amount":{
             "id":"cc_amount",
             "type":"number",
+            "unit":{
+               "values":{
+                  "usd":"USD"
+               },
+               "value":"usd"
+            },
             "value":"",
             "title":"AMOUNT"
          },
@@ -873,6 +1065,12 @@
          "lc_amendment_charge_amount":{
             "id":"lc_amendment_charge_amount",
             "type":"number",
+            "unit":{
+               "values":{
+                  "usd":"USD"
+               },
+               "value":"usd"
+            },
             "value":"",
             "title":"LC AMENDMENT CHARGE AMOUNT"
          },

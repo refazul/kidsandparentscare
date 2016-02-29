@@ -417,6 +417,10 @@ table.tablesorter-passive tr:last-child:hover td
         height: 28px;
         color: #222;
 }
+.select-wrap-unit{
+   min-width: 100px;
+   display: inline-block;
+}
 .select-wrap select
 {
 	width: 100%;

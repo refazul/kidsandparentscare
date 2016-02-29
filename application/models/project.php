@@ -104,6 +104,9 @@ class Project extends CI_Model {
                   if($value->id==$parts[0]){
                      $value->value=urldecode($parts[1]);
                   }
+                  if(isset($value->unit) && $value->id.'_unit'==$parts[0]){
+                     $value->unit->value=urldecode($parts[1]);
+                  }
                }
             }
          }

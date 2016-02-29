@@ -1,4 +1,4 @@
-<div style="width:303px;clear:both;margin:10px auto 20px;">
+<div style="width:4003px;clear:both;margin:10px auto 20px;">
 
     <?php
 

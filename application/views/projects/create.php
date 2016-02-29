@@ -238,5 +238,5 @@
       <div style="clear:both;"></div>
 
    <!-- END -->
-   <button style="float:right;margin-top:10px;" id="project_create" class="btn btn-default">Continue</button>
+   <button style="position:fixed;z-index:100;bottom: 0px;right: 20px;padding: 10px 30px;" id="project_create" class="btn btn-default">Continue</button>
 </div>

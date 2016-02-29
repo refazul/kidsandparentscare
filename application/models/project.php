@@ -130,46 +130,22 @@ class Project extends CI_Model {
       else if($field=='controller_short_gain_weight'){
          // Controller.Invoice_Weight - Controller.Landing_Weight
 
-         // Controller.Invoice_Weight
-         $controller_invoice_weight=$this->extract('controller_invoice_weight',$project);
-         $controller_invoice_weight_unit=$this->extract('controller_invoice_weight_unit',$project);
-
-         // Controller.Landing_Weight
-         $controller_landing_weight=$this->extract('controller_landing_weight',$project);
-         $controller_landing_weight_unit=$this->extract('controller_landing_weight_unit',$project);
-
-         // Conversion
-         $controller_invoice_weight=$this->convert_to_lbs($controller_invoice_weight_unit,$controller_invoice_weight);
-         $controller_landing_weight=$this->convert_to_lbs($controller_landing_weight_unit,$controller_landing_weight);
-
-         $controller_invoice_weight_unit='lbs';
-         $controller_landing_weight_unit='lbs';
-
-         if($controller_invoice_weight_unit==$controller_landing_weight_unit)
-            return ($controller_invoice_weight - $controller_landing_weight) . ' ' . $controller_invoice_weight_unit;
-         return 0;
+         return $this->calculate_short_gain_weight_claim_qty_lbs($project).' LBS';
       }
       else if($field=='s_g_w_c_short_gain_weight_claim_qty'){
          // Controller.Invoice_Weight - Controller.Landing_Weight
 
-         // Controller.Invoice_Weight
-         $controller_invoice_weight=$this->extract('controller_invoice_weight',$project);
-         $controller_invoice_weight_unit=$this->extract('controller_invoice_weight_unit',$project);
+         return $this->calculate_short_gain_weight_claim_qty_lbs($project).' LBS';
+      }
+      else if($field=='s_g_w_c_short_gain_weight_claim_amount'){
+         // (Controller.Invoice_Weight - Controller.Landing_Weight) * Proforma_Invoice.price
 
-         // Controller.Landing_Weight
-         $controller_landing_weight=$this->extract('controller_landing_weight',$project);
-         $controller_landing_weight_unit=$this->extract('controller_landing_weight_unit',$project);
+         return $this->calculate_short_gain_weight_claim_amount_usd($project).' USD';
+      }
+      else if($field=='debit_note_amount'){
 
-         // Conversion
-         $controller_invoice_weight=$this->convert_to_lbs($controller_invoice_weight_unit,$controller_invoice_weight);
-         $controller_landing_weight=$this->convert_to_lbs($controller_landing_weight_unit,$controller_landing_weight);
 
-         $controller_invoice_weight_unit='lbs';
-         $controller_landing_weight_unit='lbs';
-
-         if($controller_invoice_weight_unit==$controller_landing_weight_unit)
-            return ($controller_invoice_weight - $controller_landing_weight) . ' ' . $controller_invoice_weight_unit;
-         return 0;
+         return $this->calculate_short_gain_weight_claim_amount_usd($project).' USD';
       }
    }
    public function extract($f,$project){
@@ -192,5 +168,40 @@ class Project extends CI_Model {
          return $base_value/1000 * 2204.60;
       else if($base_unit=='lbs')
          return $base_value;
+   }
+   public function calculate_short_gain_weight_claim_qty_lbs($project){
+      // Controller.Invoice_Weight - Controller.Landing_Weight
+
+      // Controller.Invoice_Weight
+      $controller_invoice_weight=$this->extract('controller_invoice_weight',$project);
+      $controller_invoice_weight_unit=$this->extract('controller_invoice_weight_unit',$project);
+
+      // Controller.Landing_Weight
+      $controller_landing_weight=$this->extract('controller_landing_weight',$project);
+      $controller_landing_weight_unit=$this->extract('controller_landing_weight_unit',$project);
+
+      // Conversion
+      $controller_invoice_weight=$this->convert_to_lbs($controller_invoice_weight_unit,$controller_invoice_weight);
+      $controller_landing_weight=$this->convert_to_lbs($controller_landing_weight_unit,$controller_landing_weight);
+
+      // Return in lbs
+      return ($controller_invoice_weight - $controller_landing_weight);
+   }
+   public function calculate_short_gain_weight_claim_amount_usd($project){
+      // (Controller.Invoice_Weight - Controller.Landing_Weight) * Proforma_Invoice.Price
+
+      $s_g_w_c_short_gain_weight_claim_qty=$this->calculate_short_gain_weight_claim_qty_lbs($project);
+
+      $p_i_price=$this->extract('p_i_price',$project);
+      if($p_i_price=='')$p_i_price=0;
+
+      $p_i_price_unit=$this->extract('p_i_price_unit',$project);
+      if($p_i_price_unit=='usc')
+         return $s_g_w_c_short_gain_weight_claim_qty * $p_i_price/100;
+      if($p_i_price_unit=='usd')
+         return $s_g_w_c_short_gain_weight_claim_qty * $p_i_price;
+   }
+   public function calculate_point_value($project){
+      
    }
 }

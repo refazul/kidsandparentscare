@@ -144,8 +144,7 @@ class Project extends CI_Model {
       }
       else if($field=='debit_note_amount'){
 
-
-         return $this->calculate_short_gain_weight_claim_amount_usd($project).' USD';
+         return $this->calculate_debit_amount_usd($project).' USD';
       }
    }
    public function extract($f,$project){
@@ -202,6 +201,39 @@ class Project extends CI_Model {
          return $s_g_w_c_short_gain_weight_claim_qty * $p_i_price;
    }
    public function calculate_point_value($project){
-      
+
+      // Extract
+      $p_i_quantity=$this->extract('p_i_quantity',$project);
+      $p_i_quantity_unit=$this->extract('p_i_quantity_unit',$project);
+      $s_c_commission_point=$this->extract('s_c_commission_point',$project);
+
+      // Conversion
+      $p_i_quantity=$this->convert_to_lbs($p_i_quantity_unit,$p_i_quantity);
+      $p_i_quantity_unit='lbs';
+      if($s_c_commission_point=='')$s_c_commission_point=0;
+
+      // Return
+      return ($p_i_quantity * $s_c_commission_point) / 10000;
+   }
+   public function calculate_debit_amount_usd($project){
+
+      // Extract
+      $p_i_price=$this->extract('p_i_price',$project);
+      $p_i_price_unit=$this->extract('p_i_price_unit',$project);
+      $p_i_quantity=$this->extract('p_i_quantity',$project);
+      $p_i_quantity_unit=$this->extract('p_i_quantity_unit',$project);
+      $s_c_commission_rate=$this->extract('s_c_commission_rate',$project);
+
+      // Conversion
+      $p_i_quantity=$this->convert_to_lbs($p_i_quantity_unit,$p_i_quantity);
+      $p_i_quantity_unit='lbs';
+      if($p_i_price_unit=='usd'){
+         $p_i_price=$p_i_price/100;
+         $p_i_price_unit='usc';
+      }
+      if($s_c_commission_rate=='')$s_c_commission_rate=0;
+
+      // Return
+      return ($p_i_quantity * $p_i_price * $s_c_commission_rate/100) + $this->calculate_point_value($project);
    }
 }

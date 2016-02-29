@@ -189,7 +189,12 @@
 
                var temp_string='';
                for(var field in template[domain].fields){
-                  template[domain].fields[field].value=$('#'+template[domain].fields[field].id).val();
+                  if(template[domain].fields.genre && template[domain].fields.genre=='calculative'){
+                     template[domain].fields[field].value='';
+                  }
+                  else{
+                     template[domain].fields[field].value=$('#'+template[domain].fields[field].id).val();
+                  }
                   temp_string+='&'+template[domain].fields[field].id+'='+encodeURIComponent($('#'+template[domain].fields[field].id).val());
                   if(template[domain].fields[field].unit){
                      temp_string+='&'+template[domain].fields[field].id+'_unit='+encodeURIComponent($('#'+template[domain].fields[field].id+'_unit').val());

@@ -102,7 +102,11 @@ class Project extends CI_Model {
                foreach($existing as $e){
                   $parts=explode('=',$e);
                   if($value->id==$parts[0]){
-                     $value->value=urldecode($parts[1]);
+                     if(isset($value->genre) && $value->genre=='calculative'){
+                        $value->value=$this->calculate($value->id,$project);
+                     }
+                     else
+                        $value->value=urldecode($parts[1]);
                   }
                   if(isset($value->unit) && $value->id.'_unit'==$parts[0]){
                      $value->unit->value=urldecode($parts[1]);
@@ -116,5 +120,26 @@ class Project extends CI_Model {
       //echo '<pre>';print_r($project);die();
 
       return $project;
+   }
+   public function calculate($field,$project){
+      date_default_timezone_set('UTC');
+      if($field=='payment_maturity_due_date'){
+         $shipment_actual_shipment_date=$this->extract('shipment_actual_shipment_date',$project);
+         return date('Y-m-d', strtotime($shipment_actual_shipment_date. ' + 180 days'));;
+      }
+      else if($field=='debit_note_amount'){
+         
+      }
+   }
+   public function extract($f,$project){
+      $fields=array('sales_confirmation','contract','performa_invoice','import_permit','lc','shipment','nn_documents','payment','controller','short_gain_weight_claim','quality_claim','debit_note','carrying_charge','lc_amendment_charge');
+      foreach($fields as $field){
+         if($project[$field]!='' && $project[$field]!='0'){
+            foreach($project['domains']->$field->fields as $key=>$value){
+               if($value->id==$f)
+                  return $value->value;
+            }
+         }
+      }
    }
 }

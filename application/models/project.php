@@ -127,8 +127,29 @@ class Project extends CI_Model {
          $shipment_actual_shipment_date=$this->extract('shipment_actual_shipment_date',$project);
          return date('Y-m-d', strtotime($shipment_actual_shipment_date. ' + 180 days'));;
       }
-      else if($field=='debit_note_amount'){
-         
+      else if($field=='controller_short_gain_weight'){
+         //Controller_Invoice.Weight - Controller_Landing.Weight
+         $controller_invoice_weight=$this->extract('controller_invoice_weight',$project);
+         $controller_invoice_weight_unit=$this->extract('controller_invoice_weight_unit',$project);
+
+         $controller_landing_weight=$this->extract('controller_landing_weight',$project);
+         $controller_landing_weight_unit=$this->extract('controller_landing_weight_unit',$project);
+
+         if($controller_invoice_weight_unit==$controller_landing_weight_unit)
+            return ($controller_invoice_weight - $controller_landing_weight) . ' ' . $controller_invoice_weight_unit;
+         return 0;
+      }
+      else if($field=='s_g_w_c_short_gain_weight_claim_qty'){
+         //Controller_Invoice.Weight - Controller_Landing.Weight
+         $controller_invoice_weight=$this->extract('controller_invoice_weight',$project);
+         $controller_invoice_weight_unit=$this->extract('controller_invoice_weight_unit',$project);
+
+         $controller_landing_weight=$this->extract('controller_landing_weight',$project);
+         $controller_landing_weight_unit=$this->extract('controller_landing_weight_unit',$project);
+
+         if($controller_invoice_weight_unit==$controller_landing_weight_unit)
+            return ($controller_invoice_weight - $controller_landing_weight) . ' ' . $controller_invoice_weight_unit;
+         return 0;
       }
    }
    public function extract($f,$project){
@@ -138,6 +159,8 @@ class Project extends CI_Model {
             foreach($project['domains']->$field->fields as $key=>$value){
                if($value->id==$f)
                   return $value->value;
+               if(isset($value->unit) && $value->id.'_unit'==$f)
+                  return $value->unit->value;
             }
          }
       }

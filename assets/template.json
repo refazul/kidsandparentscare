@@ -47,7 +47,47 @@
       "fields":{
          "s_c_origin":{
             "id":"s_c_origin",
-            "type":"text",
+            "type":"select",
+            "values":{
+               "1":"AUSTRALIA",
+               "2":"ARGENTINA",
+               "3":"BENIN",
+               "4":"BRAZIL",
+               "5":"BURKINA FASO",
+               "6":"CAMEROON",
+               "7":"CHAD",
+               "8":"CHINA",
+               "9":"EGYPT",
+               "10":"GHANA",
+               "11":"GREAT BRITAIN",
+               "12":"GREECE",
+               "13":"GUINEA",
+               "14":"HOLLAND",
+               "15":"INDIA",
+               "16":"IRAQ",
+               "17":"IVORY COAST",
+               "18":"KAZAKISTAN",
+               "19":"MADAGASCAR",
+               "20":"MALAWI",
+               "21":"MALI",
+               "22":"MOZAMBIQUE",
+               "23":"NIGERIA",
+               "24":"PAKISTAN",
+               "25":"SENEGAL",
+               "26":"SOUTH AFRICA",
+               "27":"SPAIN",
+               "28":"SUDAN",
+               "29":"TAJIKISTAN",
+               "30":"TANZANIA",
+               "31":"TOGO",
+               "32":"TURKMENISTAN",
+               "33":"TURKY",
+               "34":"UGANDA",
+               "35":"USA",
+               "36":"UZBEKISTAN",
+               "37":"ZAMBIA",
+               "38":"ZIMBABWE"
+            },
             "value":"",
             "title":"ORIGIN"
          },
@@ -165,7 +205,7 @@
             "id":"s_c_latest_date_of_lc_opening",
             "type":"text",
             "value":"",
-            "title":"LATEST DATE OF LC OPENING"
+            "title":"LC OPENING"
          },
          "s_c_copy":{
             "id":"s_c_copy",
@@ -190,18 +230,6 @@
             "value":"",
             "title":"CONTRACT DATE"
          },
-         "contract_shipment":{
-            "id":"contract_shipment",
-            "type":"text",
-            "value":"",
-            "title":"SHIPMENT"
-         },
-         "contract_latest_date_of_lc_opening":{
-            "id":"contract_latest_date_of_lc_opening",
-            "type":"text",
-            "value":"",
-            "title":"LATEST DATE OF LC OPENING"
-         },
          "contract_copy":{
             "id":"contract_copy",
             "type":"file",
@@ -225,92 +253,17 @@
             "value":"",
             "title":"PI DATE"
          },
-         "p_i_origin":{
-            "id":"p_i_origin",
-            "type":"text",
+         "p_i_latest_date_of_lc_opening":{
+            "id":"p_i_latest_date_of_lc_opening",
+            "type":"date",
             "value":"",
-            "title":"ORIGIN"
+            "title":"LATEST DATE OF LC OPENING"
          },
-         "p_i_crop_year":{
-            "id":"p_i_crop_year",
-            "type":"text",
+         "p_i_latest_date_of_shipment":{
+            "id":"p_i_latest_date_of_shipment",
+            "type":"date",
             "value":"",
-            "title":"CROP YEAR"
-         },
-         "p_i_type":{
-            "id":"p_i_specification",
-            "type":"text",
-            "value":"",
-            "title":"TYPE"
-         },
-         "p_i_color_grade":{
-            "id":"p_i_specification",
-            "type":"text",
-            "value":"",
-            "title":"COLOR GRADE"
-         },
-         "p_i_staple":{
-            "id":"p_i_staple",
-            "type":"number",
-            "unit":{
-               "values":{
-                  "inch":"INCH",
-                  "mm":"MM"
-               },
-               "value":"inch"
-            },
-            "value":"",
-            "title":"STAPLE"
-         },
-         "p_i_mic":{
-            "id":"p_i_mic",
-            "type":"number",
-            "unit":{
-               "values":{
-                  "ncl":"NCL"
-               },
-               "value":"ncl"
-            },
-            "value":"",
-            "title":"MIC"
-         },
-         "p_i_strength":{
-            "id":"p_i_strength",
-            "type":"number",
-            "unit":{
-               "values":{
-                  "gpt":"GPT"
-               },
-               "value":"gpt"
-            },
-            "value":"",
-            "title":"STRENGTH"
-         },
-         "p_i_quantity":{
-            "id":"p_i_quantity",
-            "type":"number",
-            "unit":{
-               "values":{
-                  "lbs":"LBS",
-                  "mt":"MT"
-               },
-               "value":"lbs"
-            },
-            "value":"",
-            "title":"QUANTITY"
-         },
-         "p_i_price":{
-            "id":"p_i_price",
-            "type":"number",
-            "unit":{
-               "values":{
-                  "usc":"USC",
-                  "usd":"USD"
-               },
-               "value":"usc"
-            },
-            "value":"",
-            "title":"PRICE"
+            "title":"LATEST DATE OF SHIPMENT"
          },
          "p_i_copy":{
             "id":"p_i_copy",
@@ -427,7 +380,43 @@
          },
          "lc_port_of_loading":{
             "id":"lc_port_of_loading",
-            "type":"text",
+            "type":"select",
+            "values":{
+               "1":"BRISBANE, AUSTRALIA",
+               "2":"MELBOURNE, AUSTRALIA",
+               "3":"SYDNEY, AUSTRALIA",
+               "4":"SANTOS, BRAZIL",
+               "5":"DOUALA, CAMEROON",
+               "6":"JEBEL ALI, DUBAI",
+               "7":"ALEXANDRIA, EGYPT",
+               "8":"POTI, GEORGIA",
+               "9":"CHENNAI, INDIA",
+               "10":"JAWAHARLAL NEHRU/NSICT, INDIA",
+               "11":"KANDLA, INDIA",
+               "12":"MUNDRA, INDIA",
+               "13":"NHAVA SHEVA, INDIA",
+               "14":"PIPAVAV, INDIA",
+               "15":"ABIDJAN, IVORY COAST",
+               "16":"RIGA. LATIVA",
+               "17":"PORT KELANG, MALAYSIA",
+               "18":"TANJUNG PELEPAS, MALAYSIA",
+               "19":"BEIRA, MOZAMBIQUE",
+               "20":"KARACHI, PAKISTAN",
+               "21":"DAKAR, SENEGAL",
+               "22":"SINGAPORE, SINGAPORE",
+               "23":"DURBAN, SOUTH AFRICA",
+               "24":"ALGECIRAS, SPAIN",
+               "25":"COLOMBO, SRILANKA",
+               "26":"GENEVA, SWITZERLAND",
+               "27":"LAUSANNE, SWITZERLAND",
+               "28":"LOME, TOGO",
+               "29":"ISTANBUL, TURKEY",
+               "30":"MERSIN, TURKEY",
+               "31":"ILYCHEVSK, UKRAINE",
+               "32":"SAN PEDRO, USA",
+               "33":"SAVANNAH, USA",
+               "34":"BANDAR ABBAS, IRAN"
+            },
             "value":"",
             "title":"PORT OF LOADING"
          },
@@ -475,7 +464,7 @@
             "id":"shipment_actual_shipment_date",
             "type":"date",
             "value":"",
-            "title":"ACTUAL SHIPMENT DATE"
+            "title":"SHIPMENT DATE"
          },
          "shipment_type":{
             "id":"shipment_type",
@@ -549,20 +538,45 @@
          },
          "shipment_port_of_loading":{
             "id":"shipment_port_of_loading",
-            "type":"text",
-            "value":"",
-            "title":"PORT OF LOADING"
-         },
-         "shipment_port_of_discharge":{
-            "id":"shipment_port_of_discharge",
             "type":"select",
             "values":{
-               "port_of_chittagong":"PORT OF CHITTAGONG",
-               "port_of_mongla":"PORT OF MONGLA",
-               "port_of_benapol":"PORT OF BENAPOL"
+               "1":"BRISBANE, AUSTRALIA",
+               "2":"MELBOURNE, AUSTRALIA",
+               "3":"SYDNEY, AUSTRALIA",
+               "4":"SANTOS, BRAZIL",
+               "5":"DOUALA, CAMEROON",
+               "6":"JEBEL ALI, DUBAI",
+               "7":"ALEXANDRIA, EGYPT",
+               "8":"POTI, GEORGIA",
+               "9":"CHENNAI, INDIA",
+               "10":"JAWAHARLAL NEHRU/NSICT, INDIA",
+               "11":"KANDLA, INDIA",
+               "12":"MUNDRA, INDIA",
+               "13":"NHAVA SHEVA, INDIA",
+               "14":"PIPAVAV, INDIA",
+               "15":"ABIDJAN, IVORY COAST",
+               "16":"RIGA. LATIVA",
+               "17":"PORT KELANG, MALAYSIA",
+               "18":"TANJUNG PELEPAS, MALAYSIA",
+               "19":"BEIRA, MOZAMBIQUE",
+               "20":"KARACHI, PAKISTAN",
+               "21":"DAKAR, SENEGAL",
+               "22":"SINGAPORE, SINGAPORE",
+               "23":"DURBAN, SOUTH AFRICA",
+               "24":"ALGECIRAS, SPAIN",
+               "25":"COLOMBO, SRILANKA",
+               "26":"GENEVA, SWITZERLAND",
+               "27":"LAUSANNE, SWITZERLAND",
+               "28":"LOME, TOGO",
+               "29":"ISTANBUL, TURKEY",
+               "30":"MERSIN, TURKEY",
+               "31":"ILYCHEVSK, UKRAINE",
+               "32":"SAN PEDRO, USA",
+               "33":"SAVANNAH, USA",
+               "34":"BANDAR ABBAS, IRAN"
             },
             "value":"",
-            "title":"PORT OF DISCHARGE"
+            "title":"PORT OF LOADING"
          },
          "shipment_transshipment_date":{
             "id":"shipment_transshipment_date",
@@ -587,14 +601,25 @@
             },
             "title":"TRANSSHIPMENT PORT"
          },
-         "shipment_etd_date":{
-            "id":"shipment_etd_date",
+         "shipment_port_of_discharge":{
+            "id":"shipment_port_of_discharge",
+            "type":"select",
+            "values":{
+               "port_of_chittagong":"PORT OF CHITTAGONG",
+               "port_of_mongla":"PORT OF MONGLA",
+               "port_of_benapol":"PORT OF BENAPOL"
+            },
+            "value":"",
+            "title":"PORT OF DISCHARGE"
+         },
+         "shipment_eta_date":{
+            "id":"shipment_eta_date",
             "type":"date",
             "value":"",
             "conditional":{
                "shipment_type":"sea"
             },
-            "title":"ETD DATE"
+            "title":"ETA DATE"
          }
       }
    },
@@ -687,11 +712,17 @@
             "value":"",
             "title":"FUMIGATION CERTIFICATE"
          },
-         "nn_dhl_courier_number":{
-            "id":"nn_dhl_courier_number",
+         "nn_dhl_courier_date":{
+            "id":"nn_dhl_courier_date",
+            "type":"date",
+            "value":"",
+            "title":"COURIER DATE"
+         },
+         "nn_dhl_courier_details":{
+            "id":"nn_dhl_courier_details",
             "type":"text",
             "value":"",
-            "title":"DHL COURIER NUMBER"
+            "title":"COURIER DETAILS"
          },
          "nn_documents_copy":{
             "id":"nn_documents_copy",
@@ -765,6 +796,20 @@
             },
             "value":"",
             "title":"WEIGHT TYPE"
+         },
+         "controller_tear_weight":{
+            "id":"controller_tear_weight",
+            "type":"number",
+            "unit":{
+               "values":{
+                  "lbs":"LBS",
+                  "kg":"KG",
+                  "mt":"MT"
+               },
+               "value":"lbs"
+            },
+            "value":"",
+            "title":"TEAR WEIGHT"
          },
          "controller_invoice_weight":{
             "id":"controller_invoice_weight",
@@ -842,7 +887,7 @@
             "id":"s_g_w_c_received_account_number",
             "type":"text",
             "value":"",
-            "title":"RECEIVED ACCOUNT NUMBER"
+            "title":"RECEIVED ACCOUNT NAME"
          },
          "s_g_w_c_payment_mode":{
             "id":"s_g_w_c_payment_mode",
@@ -919,7 +964,7 @@
             "id":"q_c_received_account_number",
             "type":"text",
             "value":"",
-            "title":"RECEIVED ACCOUNT NUMBER"
+            "title":"RECEIVED ACCOUNT NAME"
          },
          "q_c_payment_mode":{
             "id":"q_c_payment_mode",
@@ -985,7 +1030,7 @@
             "id":"debit_note_received_account_number",
             "type":"text",
             "value":"",
-            "title":"RECEIVED ACCOUNT NUMBER"
+            "title":"RECEIVED ACCOUNT NAME"
          },
          "debit_note_payment_mode":{
             "id":"debit_note_payment_mode",

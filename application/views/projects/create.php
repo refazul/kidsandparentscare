@@ -37,7 +37,7 @@
                   <?php if($field->type=='number'): ?>
                      <script type='text/javascript'>
                         $('#'+'<?php echo $field->id;?>').on('input',function(){
-                           var new_value=$(this).val().replace(/[^0-9.]/g,'');
+                           var new_value=$(this).val().replace(/[^0-9. ,\-\/]/g,'');
                            var focus=$(this).getCursorPosition();
                            $(this).val(new_value);
                            $(this).focus();

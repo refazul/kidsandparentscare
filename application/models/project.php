@@ -39,11 +39,12 @@ class Project extends CI_Model {
                                             'performa_invoice'=>$param['performa_invoice'],
                                             'import_permit'=>$param['import_permit'],
                                             'lc'=>$param['lc'],
+                                            'shipment'=>$param['shipment'],
                                             'nn_documents'=>$param['nn_documents'],
                                             'payment'=>$param['payment'],
                                             'controller'=>$param['controller'],
                                             'short_gain_weight_claim'=>$param['short_gain_weight_claim'],
-                                            'weight_claim'=>$param['weight_claim'],
+                                            'quality_claim'=>$param['quality_claim'],
                                             'debit_note'=>$param['debit_note'],
                                             'carrying_charge'=>$param['carrying_charge'],
                                             'lc_amendment_charge'=>$param['lc_amendment_charge']
@@ -191,49 +192,49 @@ class Project extends CI_Model {
 
       $s_g_w_c_short_gain_weight_claim_qty=$this->calculate_short_gain_weight_claim_qty_lbs($project);
 
-      $p_i_price=$this->extract('p_i_price',$project);
-      if($p_i_price=='')$p_i_price=0;
+      $s_c_price=$this->extract('s_c_price',$project);
+      if($s_c_price=='')$s_c_price=0;
 
-      $p_i_price_unit=$this->extract('p_i_price_unit',$project);
-      if($p_i_price_unit=='usc')
-         return $s_g_w_c_short_gain_weight_claim_qty * $p_i_price/100;
-      if($p_i_price_unit=='usd')
-         return $s_g_w_c_short_gain_weight_claim_qty * $p_i_price;
+      $s_c_price_unit=$this->extract('s_c_price_unit',$project);
+      if($s_c_price_unit=='usc')
+         return $s_g_w_c_short_gain_weight_claim_qty * $s_c_price/100;
+      if($s_c_price_unit=='usd')
+         return $s_g_w_c_short_gain_weight_claim_qty * $s_c_price;
    }
    public function calculate_point_value($project){
 
       // Extract
-      $p_i_quantity=$this->extract('p_i_quantity',$project);
-      $p_i_quantity_unit=$this->extract('p_i_quantity_unit',$project);
+      $s_c_quantity=$this->extract('s_c_quantity',$project);
+      $s_c_quantity_unit=$this->extract('s_c_quantity_unit',$project);
       $s_c_commission_point=$this->extract('s_c_commission_point',$project);
 
       // Conversion
-      $p_i_quantity=$this->convert_to_lbs($p_i_quantity_unit,$p_i_quantity);
-      $p_i_quantity_unit='lbs';
+      $s_c_quantity=$this->convert_to_lbs($s_c_quantity_unit,$s_c_quantity);
+      $s_c_quantity_unit='lbs';
       if($s_c_commission_point=='')$s_c_commission_point=0;
 
       // Return
-      return ($p_i_quantity * $s_c_commission_point) / 10000;
+      return ($s_c_quantity * $s_c_commission_point) / 10000;
    }
    public function calculate_debit_amount_usd($project){
 
       // Extract
-      $p_i_price=$this->extract('p_i_price',$project);
-      $p_i_price_unit=$this->extract('p_i_price_unit',$project);
-      $p_i_quantity=$this->extract('p_i_quantity',$project);
-      $p_i_quantity_unit=$this->extract('p_i_quantity_unit',$project);
+      $s_c_price=$this->extract('s_c_price',$project);
+      $s_c_price_unit=$this->extract('s_c_price_unit',$project);
+      $s_c_quantity=$this->extract('s_c_quantity',$project);
+      $s_c_quantity_unit=$this->extract('s_c_quantity_unit',$project);
       $s_c_commission_rate=$this->extract('s_c_commission_rate',$project);
 
       // Conversion
-      $p_i_quantity=$this->convert_to_lbs($p_i_quantity_unit,$p_i_quantity);
-      $p_i_quantity_unit='lbs';
-      if($p_i_price_unit=='usc'){
-         $p_i_price=$p_i_price/100;
-         $p_i_price_unit='usd';
+      $s_c_quantity=$this->convert_to_lbs($s_c_quantity_unit,$s_c_quantity);
+      $s_c_quantity_unit='lbs';
+      if($s_c_price_unit=='usc'){
+         $s_c_price=$s_c_price/100;
+         $s_c_price_unit='usd';
       }
       if($s_c_commission_rate=='')$s_c_commission_rate=0;
 
       // Return
-      return ($p_i_quantity * $p_i_price * $s_c_commission_rate/100) + $this->calculate_point_value($project);
+      return ($s_c_quantity * $s_c_price * $s_c_commission_rate/100) + $this->calculate_point_value($project);
    }
 }

@@ -107,10 +107,10 @@ class Project extends CI_Model {
                         $value->value=$this->calculate($value->id,$project);
                      }
                      else
-                        $value->value=urldecode($parts[1]);
+                        $value->value=urlencode($parts[1]);
                   }
                   if(isset($value->unit) && $value->id.'_unit'==$parts[0]){
-                     $value->unit->value=urldecode($parts[1]);
+                     $value->unit->value=urlencode($parts[1]);
                   }
                }
             }

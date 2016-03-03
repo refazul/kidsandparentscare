@@ -11,7 +11,7 @@
 
    $form=array(
       'id'=>'project_create_form',
-      'value_width'=>300,
+      'value_width'=>280,
       'value_height'=>28,
       'action'=>site_url().'projects/ajax'
    );
@@ -33,7 +33,7 @@
                <div class="field"><?php echo $field->title;?></div>
                <div class="seperator"></div>
                <div class="value" style="width:<?php echo $form['value_width'];?>px;height:<?php echo $form['value_height'];?>px;">
-                  <input type="text" <?php if(isset($field->genre) && $field->genre=='calculative')echo 'disabled'?> id="<?php echo $field->id;?>" name="<?php echo $field->id;?>" autocomplete="off" class="form-control" value="<?php echo $field->value?$field->value:'';?>"/>
+                  <input type="text" <?php if(isset($field->genre) && $field->genre=='calculative')echo 'disabled'?> id="<?php echo $field->id;?>" name="<?php echo $field->id;?>" autocomplete="off" class="form-control <?php if($field->type=='text')echo 'text-box';?>" value="<?php echo $field->value?$field->value:'';?>"/>
                   <?php if($field->type=='number'): ?>
                      <script type='text/javascript'>
                         $('#'+'<?php echo $field->id;?>').on('input',function(){

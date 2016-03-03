@@ -151,7 +151,10 @@ input[type=file]
 }
 .value
 {
-    float:right;
+    float:left;
+}
+.text-box{
+   width: 274px !important;
 }
 .form-control
 {
@@ -420,6 +423,7 @@ table.tablesorter-passive tr:last-child:hover td
 .select-wrap-unit{
    min-width: 100px;
    display: inline-block;
+   float: right;
 }
 .select-wrap select
 {

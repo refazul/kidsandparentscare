@@ -33,7 +33,7 @@
                <div class="field"><?php echo $field->title;?></div>
                <div class="seperator"></div>
                <div class="value" style="width:<?php echo $form['value_width'];?>px;height:<?php echo $form['value_height'];?>px;">
-                  <input type="text" <?php if(isset($field->genre) && $field->genre=='calculative')echo 'disabled'?> id="<?php echo $field->id;?>" name="<?php echo $field->id;?>" autocomplete="off" class="form-control" value="<?php echo $field->value?urldecode($field->value):'';?>"/>
+                  <input type="text" <?php if(isset($field->genre) && $field->genre=='calculative')echo 'disabled'?> id="<?php echo $field->id;?>" name="<?php echo $field->id;?>" autocomplete="off" class="form-control" value="<?php echo $field->value?$field->value:'';?>"/>
                   <?php if($field->type=='number'): ?>
                      <script type='text/javascript'>
                         $('#'+'<?php echo $field->id;?>').on('input',function(){
@@ -54,6 +54,7 @@
                            $(this).focus();
                            $(this).selectRange(focus);
                         });
+                        $('#'+'<?php echo $field->id;?>').val(decodeURIComponent(decodeURIComponent($('#'+'<?php echo $field->id;?>').val())));
                      </script>
                   <?php endif; ?>
 

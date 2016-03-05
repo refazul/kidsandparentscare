@@ -128,6 +128,10 @@ class Project extends CI_Model {
          $shipment_actual_shipment_date=$this->extract('shipment_actual_shipment_date',$project);
          return date('Y-m-d', strtotime($shipment_actual_shipment_date. ' + 180 days'));;
       }
+      else if($field=='i_p_expiry_date'){
+         $i_p_date=$this->extract('i_p_date',$project);
+         return date('Y-m-d', strtotime($i_p_date. ' + 90 days'));;
+      }
       else if($field=='controller_short_gain_weight'){
          // Controller.Invoice_Weight - Controller.Landing_Weight
 

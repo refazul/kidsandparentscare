@@ -152,10 +152,10 @@
             "type":"number",
             "unit":{
                "values":{
-                  "lbs":"LBS",
-                  "mt":"MT"
+                  "mt":"MT",
+                  "lbs":"LBS"
                },
-               "value":"lbs"
+               "value":"mt"
             },
             "value":"",
             "title":"QUANTITY"
@@ -254,10 +254,10 @@
             "type":"number",
             "unit":{
                "values":{
-                  "lbs":"LBS",
-                  "mt":"MT"
+                  "mt":"MT",
+                  "lbs":"LBS"
                },
-               "value":"lbs"
+               "value":"mt"
             },
             "value":"",
             "title":"QUANTITY"
@@ -306,6 +306,7 @@
          "i_p_expiry_date":{
             "id":"i_p_expiry_date",
             "type":"date",
+            "genre":"calculative",
             "value":"",
             "title":"IP EXPIRY DATE"
          },

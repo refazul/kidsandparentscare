@@ -11,7 +11,7 @@
 
    $form=array(
       'id'=>'project_create_form',
-      'value_width'=>300,
+      'value_width'=>280,
       'value_height'=>28,
       'action'=>site_url().'projects/ajax'
    );
@@ -28,33 +28,43 @@
          <div class='title'><?php echo $title; ?></div>
          <?php foreach($fields as $field):?>
 
-            <?php if($field->type=='text' || $field->type=='number'): ?>
+            <?php if($field->type=='text' || $field->type=='number' || $field->type=='textbox'): ?>
             <div class="part" id="<?php echo $field->id;?>-wrapper">
                <div class="field"><?php echo $field->title;?></div>
                <div class="seperator"></div>
-               <div class="value" style="width:<?php echo $form['value_width'];?>px;height:<?php echo $form['value_height'];?>px;">
-                  <input type="text" <?php if(isset($field->genre) && $field->genre=='calculative')echo 'disabled'?> id="<?php echo $field->id;?>" name="<?php echo $field->id;?>" autocomplete="off" class="form-control" value="<?php echo $field->value?$field->value:'';?>"/>
-                  <?php if($field->type=='number'): ?>
-                     <script type='text/javascript'>
-                        $('#'+'<?php echo $field->id;?>').on('input',function(){
-                           var new_value=$(this).val().replace(/[^0-9. ,\-\/]/g,'');
-                           var focus=$(this).getCursorPosition();
-                           $(this).val(new_value);
-                           $(this).focus();
-                           $(this).selectRange(focus);
-                        });
-                     </script>
+
+                  <?php if($field->type=='text' || $field->type=='number'): ?>
+                  <div class="value" style="width:<?php echo $form['value_width'];?>px;height:<?php echo $form['value_height'];?>px;">
+                     <input type="text" <?php if(isset($field->genre) && $field->genre=='calculative')echo 'disabled'?> id="<?php echo $field->id;?>" name="<?php echo $field->id;?>" autocomplete="off" class="form-control <?php if($field->type=='text')echo 'text-box';?>" value="<?php echo $field->value?$field->value:'';?>"/>
+
+                  <?php elseif($field->type=='textbox'): ?>
+                  <div class="value" style="width:<?php echo $form['value_width'];?>px;">
+                     <textarea id="<?php echo $field->id;?>" name="<?php echo $field->id;?>" autocomplete="off" class="form-control"><?php echo $field->value?$field->value:'';?></textarea>
+
                   <?php endif; ?>
-                  <?php if($field->type=='text'): ?>
-                     <script type='text/javascript'>
-                        $('#'+'<?php echo $field->id;?>').on('input',function(){
-                           var new_value=$(this).val().toUpperCase();
-                           var focus=$(this).getCursorPosition();
-                           $(this).val(new_value);
-                           $(this).focus();
-                           $(this).selectRange(focus);
-                        });
-                     </script>
+
+                  <?php if($field->type=='number'): ?>
+                  <script type='text/javascript'>
+                     $('#'+'<?php echo $field->id;?>').on('input',function(){
+                        var new_value=$(this).val().replace(/[^0-9. ,\-\/]/g,'');
+                        var focus=$(this).getCursorPosition();
+                        $(this).val(new_value);
+                        $(this).focus();
+                        $(this).selectRange(focus);
+                     });
+                  </script>
+                  <?php endif; ?>
+
+                  <?php if($field->type=='text' || $field->type=='textbox'): ?>
+                  <script type='text/javascript'>
+                     $('#'+'<?php echo $field->id;?>').on('input',function(){
+                        var new_value=$(this).val().toUpperCase();
+                        var focus=$(this).getCursorPosition();
+                        $(this).val(new_value);
+                        $(this).focus();
+                        $(this).selectRange(focus);
+                     });
+                  </script>
                   <?php endif; ?>
 
                   <?php if(isset($field->unit)): ?>
@@ -66,8 +76,9 @@
                      </select>
                   </div>
                   <?php endif ?>
+
                   <div class="mini-status-after" id="msgholder-<?php echo $field->id;?>"></div>
-               </div>
+                  </div>
                <div class="end"></div>
             </div>
 

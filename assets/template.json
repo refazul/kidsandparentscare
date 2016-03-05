@@ -49,6 +49,7 @@
             "id":"s_c_origin",
             "type":"select",
             "values":{
+               "-1":"-SELECT-",
                "1":"AUSTRALIA",
                "2":"ARGENTINA",
                "3":"BENIN",
@@ -186,7 +187,7 @@
          },
          "s_c_shipment":{
             "id":"s_c_shipment",
-            "type":"text",
+            "type":"textbox",
             "value":"",
             "title":"SHIPMENT"
          },
@@ -194,6 +195,7 @@
             "id":"s_c_payment",
             "type":"select",
             "values":{
+               "-1":"-SELECT-",
                "at_sight":"AT SIGHT",
                "deferred":"DEFERRED",
                "upass":"UPASS"
@@ -246,6 +248,19 @@
             "type":"text",
             "value":"",
             "title":"PI NUMBER"
+         },
+         "p_i_quantity":{
+            "id":"p_i_quantity",
+            "type":"number",
+            "unit":{
+               "values":{
+                  "lbs":"LBS",
+                  "mt":"MT"
+               },
+               "value":"lbs"
+            },
+            "value":"",
+            "title":"QUANTITY"
          },
          "p_i_date":{
             "id":"p_i_date",
@@ -339,6 +354,7 @@
             "id":"lc_type",
             "type":"select",
             "values":{
+               "-1":"-SELECT-",
                "at_sight":"AT SIGHT",
                "deferred":"DEFERRED",
                "upass":"UPASS"
@@ -348,13 +364,13 @@
          },
          "lc_opening_bank":{
             "id":"lc_opening_bank",
-            "type":"text",
+            "type":"textbox",
             "value":"",
             "title":"OPENING BANK"
          },
          "lc_receiver_bank":{
             "id":"lc_receiver_bank",
-            "type":"text",
+            "type":"textbox",
             "value":"",
             "title":"RECEIVER BANK"
          },
@@ -362,8 +378,9 @@
             "id":"lc_partial_shipments",
             "type":"select",
             "values":{
-               "allow":"ALLOW",
-               "not_allow":"NOT ALLOW"
+               "-1":"-SELECT-",
+               "allow":"ALLOWED",
+               "not_allow":"NOT ALLOWED"
             },
             "value":"",
             "title":"PARTIAL SHIPMENTS"
@@ -372,8 +389,9 @@
             "id":"lc_transhipment",
             "type":"select",
             "values":{
-               "allow":"ALLOW",
-               "not_allow":"NOT ALLOW"
+               "-1":"-SELECT-",
+               "allow":"ALLOWED",
+               "not_allow":"NOT ALLOWED"
             },
             "value":"",
             "title":"TRANSSHIPMENT"
@@ -382,12 +400,13 @@
             "id":"lc_port_of_loading",
             "type":"select",
             "values":{
+               "-1":"-SELECT-",
                "1":"BRISBANE, AUSTRALIA",
                "2":"MELBOURNE, AUSTRALIA",
                "3":"SYDNEY, AUSTRALIA",
                "4":"SANTOS, BRAZIL",
                "5":"DOUALA, CAMEROON",
-               "6":"JEBEL ALI, DUBAI",
+               "6":"JEBEL ALI, UAE",
                "7":"ALEXANDRIA, EGYPT",
                "8":"POTI, GEORGIA",
                "9":"CHENNAI, INDIA",
@@ -415,7 +434,8 @@
                "31":"ILYCHEVSK, UKRAINE",
                "32":"SAN PEDRO, USA",
                "33":"SAVANNAH, USA",
-               "34":"BANDAR ABBAS, IRAN"
+               "34":"BANDAR ABBAS, IRAN",
+               "35":"PETRAPOLE, INDIA"
             },
             "value":"",
             "title":"PORT OF LOADING"
@@ -424,9 +444,10 @@
             "id":"lc_port_of_discharge",
             "type":"select",
             "values":{
+               "-1":"-SELECT-",
                "port_of_chittagong":"PORT OF CHITTAGONG",
                "port_of_mongla":"PORT OF MONGLA",
-               "port_of_benapol":"PORT OF BENAPOL"
+               "port_of_benapol":"PORT OF BENAPOLE"
             },
             "value":"",
             "title":"PORT OF DISCHARGE"
@@ -470,8 +491,8 @@
             "id":"shipment_type",
             "type":"select",
             "values":{
-               "sea":"SEA",
-               "road":"ROAD"
+               "sea":"BY SEA",
+               "road":"BY ROAD"
             },
             "value":"",
             "title":"SHIPMENT TYPE"
@@ -501,7 +522,7 @@
             "conditional":{
                "shipment_type":"sea"
             },
-            "title":"BILL OF LADING"
+            "title":"BILL OF LADING NO."
          },
          "shipment_truck_challan_no":{
             "id":"shipment_truck_challan_no",
@@ -540,12 +561,13 @@
             "id":"shipment_port_of_loading",
             "type":"select",
             "values":{
+               "-1":"-SELECT-",
                "1":"BRISBANE, AUSTRALIA",
                "2":"MELBOURNE, AUSTRALIA",
                "3":"SYDNEY, AUSTRALIA",
                "4":"SANTOS, BRAZIL",
                "5":"DOUALA, CAMEROON",
-               "6":"JEBEL ALI, DUBAI",
+               "6":"JEBEL ALI, UAE",
                "7":"ALEXANDRIA, EGYPT",
                "8":"POTI, GEORGIA",
                "9":"CHENNAI, INDIA",
@@ -573,7 +595,8 @@
                "31":"ILYCHEVSK, UKRAINE",
                "32":"SAN PEDRO, USA",
                "33":"SAVANNAH, USA",
-               "34":"BANDAR ABBAS, IRAN"
+               "34":"BANDAR ABBAS, IRAN",
+               "35":"PETRAPOLE, INDIA"
             },
             "value":"",
             "title":"PORT OF LOADING"
@@ -591,6 +614,7 @@
             "id":"shipment_transshipment_port",
             "type":"select",
             "values":{
+               "-1":"-SELECT-",
                "port_of_colombo":"PORT OF COLOMBO",
                "port_of_singapore":"PORT OF SINGAPORE",
                "port_of_klang":"PORT OF KLANG"
@@ -605,9 +629,10 @@
             "id":"shipment_port_of_discharge",
             "type":"select",
             "values":{
+               "-1":"-SELECT-",
                "port_of_chittagong":"PORT OF CHITTAGONG",
                "port_of_mongla":"PORT OF MONGLA",
-               "port_of_benapol":"PORT OF BENAPOL"
+               "port_of_benapol":"PORT OF BENAPOLE"
             },
             "value":"",
             "title":"PORT OF DISCHARGE"
@@ -636,6 +661,7 @@
             "id":"nn_packing_list",
             "type":"select",
             "values":{
+               "-1":"-SELECT-",
                "yes":"YES",
                "no":"NO"
             },
@@ -646,6 +672,7 @@
             "id":"nn_shipment_advice",
             "type":"select",
             "values":{
+               "-1":"-SELECT-",
                "yes":"YES",
                "no":"NO"
             },
@@ -656,6 +683,7 @@
             "id":"nn_fax_advice",
             "type":"select",
             "values":{
+               "-1":"-SELECT-",
                "yes":"YES",
                "no":"NO"
             },
@@ -666,6 +694,7 @@
             "id":"nn_co",
             "type":"select",
             "values":{
+               "-1":"-SELECT-",
                "yes":"YES",
                "no":"NO"
             },
@@ -676,6 +705,7 @@
             "id":"nn_phytosanitary_certificate",
             "type":"select",
             "values":{
+               "-1":"-SELECT-",
                "yes":"YES",
                "no":"NO"
             },
@@ -686,6 +716,7 @@
             "id":"nn_bill_of_lading",
             "type":"select",
             "values":{
+               "-1":"-SELECT-",
                "yes":"YES",
                "no":"NO"
             },
@@ -696,6 +727,7 @@
             "id":"nn_beneficiary_certificate",
             "type":"select",
             "values":{
+               "-1":"-SELECT-",
                "yes":"YES",
                "no":"NO"
             },
@@ -706,6 +738,7 @@
             "id":"nn_fumigation_certificate",
             "type":"select",
             "values":{
+               "-1":"-SELECT-",
                "yes":"YES",
                "no":"NO"
             },
@@ -718,11 +751,17 @@
             "value":"",
             "title":"COURIER DATE"
          },
+         "nn_dhl_courier_name":{
+            "id":"nn_dhl_courier_name",
+            "type":"text",
+            "value":"",
+            "title":"COURIER NAME"
+         },
          "nn_dhl_courier_details":{
             "id":"nn_dhl_courier_details",
             "type":"text",
             "value":"",
-            "title":"COURIER DETAILS"
+            "title":"COURIER NO."
          },
          "nn_documents_copy":{
             "id":"nn_documents_copy",
@@ -781,6 +820,7 @@
             "id":"controller_weight_finalization_area",
             "type":"select",
             "values":{
+               "-1":"-SELECT-",
                "port":"PORT",
                "mill":"MILL"
             },
@@ -791,8 +831,9 @@
             "id":"controller_weight_type",
             "type":"select",
             "values":{
+               "-1":"-SELECT-",
                "bales_by_bales":"BALES BY BALES",
-               "bridge":"BRIDGE"
+               "bridge":"WEIGHT BRIDGE"
             },
             "value":"",
             "title":"WEIGHT TYPE"

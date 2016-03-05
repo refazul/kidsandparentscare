@@ -151,7 +151,15 @@ input[type=file]
 }
 .value
 {
-    float:right;
+    float:left;
+}
+.text-box{
+   width: 274px !important;
+}
+textarea.form-control{
+   width: 100%;
+   max-width: 100%;
+   padding: 0px;
 }
 .form-control
 {
@@ -420,6 +428,7 @@ table.tablesorter-passive tr:last-child:hover td
 .select-wrap-unit{
    min-width: 100px;
    display: inline-block;
+   float: right;
 }
 .select-wrap select
 {

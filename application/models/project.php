@@ -221,13 +221,13 @@ class Project extends CI_Model {
       // Extract
       $s_c_price=$this->extract('s_c_price',$project);
       $s_c_price_unit=$this->extract('s_c_price_unit',$project);
-      $s_c_quantity=$this->extract('s_c_quantity',$project);
-      $s_c_quantity_unit=$this->extract('s_c_quantity_unit',$project);
+      $p_i_quantity=$this->extract('p_i_quantity',$project);
+      $p_i_quantity_unit=$this->extract('p_i_quantity_unit',$project);
       $s_c_commission_rate=$this->extract('s_c_commission_rate',$project);
 
       // Conversion
-      $s_c_quantity=$this->convert_to_lbs($s_c_quantity_unit,$s_c_quantity);
-      $s_c_quantity_unit='lbs';
+      $p_i_quantity=$this->convert_to_lbs($p_i_quantity_unit,$p_i_quantity);
+      $p_i_quantity_unit='lbs';
       if($s_c_price_unit=='usc'){
          $s_c_price=$s_c_price/100;
          $s_c_price_unit='usd';
@@ -235,6 +235,6 @@ class Project extends CI_Model {
       if($s_c_commission_rate=='')$s_c_commission_rate=0;
 
       // Return
-      return ($s_c_quantity * $s_c_price * $s_c_commission_rate/100) + $this->calculate_point_value($project);
+      return ($p_i_quantity * $s_c_price * $s_c_commission_rate/100) + $this->calculate_point_value($project);
    }
 }

@@ -2,8 +2,10 @@
     <div class="sort_by-wrapper">
         <div class="select-wrap">
             <select name="sort_by" id="sort_by" onchange="$('#projects-fetch').submit();">
-                <?php foreach($fields as $key=>$value):?>
-                <option <?php if($key==$sort_by)echo 'selected="selected"'?> value="<?php echo $key;?>"><?php echo $value[0];?></option>
+                <?php foreach ($fields as $key => $value):?>
+                <option <?php if ($key == $sort_by) {
+    echo 'selected="selected"';
+}?> value="<?php echo $key;?>"><?php echo $value[0];?></option>
                 <?php endforeach;?>
             </select>
         </div>
@@ -12,9 +14,11 @@
 
     <div style="float:left;margin:2px 10px 0px 0px;font-weight:bold;">Order :</div>
     <div class="order-wrapper">
-        <?php foreach($orders as $key=>$value):?>
+        <?php foreach ($orders as $key => $value):?>
         <div style="margin-right: 20px;float:left;">
-        <input type="radio" name="order" style="float:left;" id='order-<?php echo $key;?>' <?php if($key==$order)echo 'checked'?> value="<?php echo $key;?>"/>
+        <input type="radio" name="order" style="float:left;" id='order-<?php echo $key;?>' <?php if ($key == $order) {
+    echo 'checked';
+}?> value="<?php echo $key;?>"/>
         <label for="order-<?php echo $key;?>" style='float:left;font-size: 13px;margin-top:4px;padding-left:3px;'><?php echo $value;?></label>
         <div style="height:100%;"></div>
         </div>
@@ -63,7 +67,7 @@
     <div class="filter-wrapper">
         <div class="select-wrap">
             <select name="filter_by" id="filter_by" onchange="$('#projects-fetch').submit();">
-                <?php foreach($search_fields as $key=>$value):?>
+                <?php foreach ($search_fields as $key => $value):?>
                 <option value="<?php echo $key;?>"><?php echo $value;?></option>
                 <?php endforeach;?>
             </select>
@@ -113,8 +117,12 @@
                             $('<thead/>',{}).appendTo('#projects-list');
                             $('<tr/>',{}).appendTo('#projects-list thead');
 
-                            <?php foreach($fields as $key=>$value):?>
-                            $('<th/>',{style:'width:<?php echo $value[1];?>%;text-align:<?php if(isset($value[2]))echo $value[2];else echo 'left'?>;'}).append(document.createTextNode("<?php echo $value[0];?>")).appendTo('#projects-list thead tr');
+                            <?php foreach ($fields as $key => $value):?>
+                            $('<th/>',{style:'width:<?php echo $value[1];?>%;text-align:<?php if (isset($value[2])) {
+    echo $value[2];
+} else {
+    echo 'left';
+}?>;'}).append(document.createTextNode("<?php echo $value[0];?>")).appendTo('#projects-list thead tr');
                             <?php endforeach;?>
 
                             results=data.responseJSON.results;
@@ -131,6 +139,9 @@
                                 $('<td/>',{}).append(document.createTextNode(results[i].name)).appendTo('#project-'+results[i].project_id);
                                 $('<td/>',{}).append(document.createTextNode(results[i].buyer)).appendTo('#project-'+results[i].project_id);
                                 $('<td/>',{}).append(document.createTextNode(results[i].supplier)).appendTo('#project-'+results[i].project_id);
+                                $('<td/>',{}).append(document.createTextNode(results[i].contract_number)).appendTo('#project-'+results[i].project_id);
+                                //$('<td/>',{}).append(document.createTextNode(results[i].s_c_origin)).appendTo('#project-'+results[i].project_id);
+                                //$('<td/>',{}).append(document.createTextNode(results[i].p_i_quantity)).appendTo('#project-'+results[i].project_id);
                                 //$('<td/>',{}).append(document.createTextNode(results[i].sales_confirmation)).appendTo('#project-'+results[i].project_id);
                             }
                             $("#projects-list").tablesorter({widgets: ['zebra']});

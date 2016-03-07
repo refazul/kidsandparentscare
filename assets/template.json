@@ -1,1179 +1,1190 @@
 {
-   "project":{
-      "title":"Project",
-      "fields":{
-         "project_name":{
-            "id":"project_name",
-            "type":"text",
-            "value":"",
-            "title":"FILE NUMBER"
-         },
-         "project_file_status":{
-            "id":"project_file_status",
-            "type":"select",
-            "values":{
-               "running":"RUNNING",
-               "close":"CLOSE"
-            },
-            "value":"",
-            "title":"FILE STATUS"
-         }
-      }
-   },
-   "buyer":{
-      "title":"Buyer",
-      "fields":{
-         "project_buyer":{
-            "id":"buyer_id",
-            "type":"select",
-            "title":"BUYER NAME",
-            "value":""
-         }
-      }
-   },
-   "supplier":{
-      "title":"Supplier",
-      "fields":{
-         "project_supplier":{
-            "id":"supplier_id",
-            "type":"select",
-            "title":"SUPPLIER NAME",
-            "value":""
-         }
-      }
-   },
-   "sales_confirmation":{
-      "title":"Sales Confirmation",
-      "fields":{
-         "s_c_origin":{
-            "id":"s_c_origin",
-            "type":"select",
-            "values":{
-               "-1":"-SELECT-",
-               "1":"AUSTRALIA",
-               "2":"ARGENTINA",
-               "3":"BENIN",
-               "4":"BRAZIL",
-               "5":"BURKINA FASO",
-               "6":"CAMEROON",
-               "7":"CHAD",
-               "8":"CHINA",
-               "9":"EGYPT",
-               "10":"GHANA",
-               "11":"GREAT BRITAIN",
-               "12":"GREECE",
-               "13":"GUINEA",
-               "14":"HOLLAND",
-               "15":"INDIA",
-               "16":"IRAQ",
-               "17":"IVORY COAST",
-               "18":"KAZAKISTAN",
-               "19":"MADAGASCAR",
-               "20":"MALAWI",
-               "21":"MALI",
-               "22":"MOZAMBIQUE",
-               "23":"NIGERIA",
-               "24":"PAKISTAN",
-               "25":"SENEGAL",
-               "26":"SOUTH AFRICA",
-               "27":"SPAIN",
-               "28":"SUDAN",
-               "29":"TAJIKISTAN",
-               "30":"TANZANIA",
-               "31":"TOGO",
-               "32":"TURKMENISTAN",
-               "33":"TURKY",
-               "34":"UGANDA",
-               "35":"USA",
-               "36":"UZBEKISTAN",
-               "37":"ZAMBIA",
-               "38":"ZIMBABWE"
-            },
-            "value":"",
-            "title":"ORIGIN"
-         },
-         "s_c_crop_year":{
-            "id":"s_c_crop_year",
-            "type":"text",
-            "value":"",
-            "title":"CROP YEAR"
-         },
-         "s_c_type":{
-            "id":"s_c_type",
-            "type":"text",
-            "value":"",
-            "title":"TYPE"
-         },
-         "s_c_color_grade":{
-            "id":"s_c_color_grade",
-            "type":"text",
-            "value":"",
-            "title":"COLOR GRADE"
-         },
-         "s_c_staple":{
-            "id":"s_c_staple",
-            "type":"number",
-            "unit":{
-               "values":{
-                  "inch":"INCH",
-                  "mm":"MM"
-               },
-               "value":"inch"
-            },
-            "value":"",
-            "title":"STAPLE"
-         },
-         "s_c_mic":{
-            "id":"s_c_mic",
-            "type":"number",
-            "unit":{
-               "values":{
-                  "ncl":"NCL"
-               },
-               "value":"ncl"
-            },
-            "value":"",
-            "title":"MIC"
-         },
-         "s_c_strength":{
-            "id":"s_c_strength",
-            "type":"number",
-            "unit":{
-               "values":{
-                  "gpt":"GPT"
-               },
-               "value":"gpt"
-            },
-            "value":"",
-            "title":"Strength"
-         },
-         "s_c_quantity":{
-            "id":"s_c_quantity",
-            "type":"number",
-            "unit":{
-               "values":{
-                  "mt":"MT",
-                  "lbs":"LBS"
-               },
-               "value":"mt"
-            },
-            "value":"",
-            "title":"QUANTITY"
-         },
-         "s_c_price":{
-            "id":"s_c_price",
-            "type":"number",
-            "unit":{
-               "values":{
-                  "usc":"USC",
-                  "usd":"USD"
-               },
-               "value":"usc"
-            },
-            "value":"",
-            "title":"PRICE"
-         },
-         "s_c_commission_rate":{
-            "id":"s_c_commission_rate",
-            "type":"number",
-            "value":"",
-            "title":"COMMISSION RATE (%)"
-         },
-         "s_c_commission_point":{
-            "id":"s_c_commission_point",
-            "type":"number",
-            "value":"",
-            "title":"COMMISSION RATE (POINT)"
-         },
-         "s_c_shipment":{
-            "id":"s_c_shipment",
-            "type":"textbox",
-            "value":"",
-            "title":"SHIPMENT"
-         },
-         "s_c_payment":{
-            "id":"s_c_payment",
-            "type":"select",
-            "values":{
-               "-1":"-SELECT-",
-               "at_sight":"AT SIGHT",
-               "deferred":"DEFERRED",
-               "upass":"UPASS"
-            },
-            "value":"",
-            "title":"PAYMENT"
-         },
-         "latest_date_of_lc_opening":{
-            "id":"s_c_latest_date_of_lc_opening",
-            "type":"text",
-            "value":"",
-            "title":"LC OPENING"
-         },
-         "s_c_copy":{
-            "id":"s_c_copy",
-            "type":"file",
-            "value":"",
-            "title":"UPLOAD SALES CONFIRMATION"
-         }
-      }
-   },
-   "contract":{
-      "title":"Contract",
-      "fields":{
-         "contract_number":{
-            "id":"contract_number",
-            "type":"text",
-            "value":"",
-            "title":"CONTRACT NUMBER"
-         },
-         "contract_date":{
-            "id":"contract_date",
-            "type":"date",
-            "value":"",
-            "title":"CONTRACT DATE"
-         },
-         "contract_copy":{
-            "id":"contract_copy",
-            "type":"file",
-            "value":"",
-            "title":"UPLOAD CONTRACT COPY"
-         }
-      }
-   },
-   "performa_invoice":{
-      "title":"Proforma Invoice",
-      "fields":{
-         "p_i_number":{
-            "id":"p_i_number",
-            "type":"text",
-            "value":"",
-            "title":"PI NUMBER"
-         },
-         "p_i_quantity":{
-            "id":"p_i_quantity",
-            "type":"number",
-            "unit":{
-               "values":{
-                  "mt":"MT",
-                  "lbs":"LBS"
-               },
-               "value":"mt"
-            },
-            "value":"",
-            "title":"QUANTITY"
-         },
-         "p_i_date":{
-            "id":"p_i_date",
-            "type":"date",
-            "value":"",
-            "title":"PI DATE"
-         },
-         "p_i_latest_date_of_lc_opening":{
-            "id":"p_i_latest_date_of_lc_opening",
-            "type":"date",
-            "value":"",
-            "title":"LATEST DATE OF LC OPENING"
-         },
-         "p_i_latest_date_of_shipment":{
-            "id":"p_i_latest_date_of_shipment",
-            "type":"date",
-            "value":"",
-            "title":"LATEST DATE OF SHIPMENT"
-         },
-         "p_i_copy":{
-            "id":"p_i_copy",
-            "type":"file",
-            "value":"",
-            "title":"UPLOAD PI COPY"
-         }
-      }
-   },
-   "import_permit":{
-      "title":"Import Permit",
-      "fields":{
-         "i_p_number":{
-            "id":"i_p_number",
-            "type":"text",
-            "value":"",
-            "title":"IP NUMBER"
-         },
-         "i_p_date":{
-            "id":"i_p_date",
-            "type":"date",
-            "value":"",
-            "title":"IP DATE"
-         },
-         "i_p_expiry_date":{
-            "id":"i_p_expiry_date",
-            "type":"date",
-            "genre":"calculative",
-            "value":"",
-            "title":"IP EXPIRY DATE"
-         },
-         "i_p_sro_date":{
-            "id":"i_p_sro_date",
-            "type":"date",
-            "value":"",
-            "title":"SRO DATE"
-         },
-         "i_p_copy":{
-            "id":"i_p_copy",
-            "type":"file",
-            "value":"",
-            "title":"UPLOAD IP COPY"
-         },
-         "i_p_sro_copy":{
-            "id":"i_p_sro_copy",
-            "type":"file",
-            "value":"",
-            "title":"UPLOAD SRO COPY"
-         }
-      }
-   },
-   "lc":{
-      "title":"LC",
-      "fields":{
-         "lc_number":{
-            "id":"lc_number",
-            "type":"text",
-            "value":"",
-            "title":"LC NUMBER"
-         },
-         "lc_date_of_issue":{
-            "id":"lc_date_of_issue",
-            "type":"date",
-            "value":"",
-            "title":"DATE OF ISSUE"
-         },
-         "lc_date_of_expiry":{
-            "id":"lc_date_of_expiry",
-            "type":"date",
-            "value":"",
-            "title":"DATE OF EXPIRY"
-         },
-         "lc_type":{
-            "id":"lc_type",
-            "type":"select",
-            "values":{
-               "-1":"-SELECT-",
-               "at_sight":"AT SIGHT",
-               "deferred":"DEFERRED",
-               "upass":"UPASS"
-            },
-            "value":"",
-            "title":"LC TYPE"
-         },
-         "lc_opening_bank":{
-            "id":"lc_opening_bank",
-            "type":"textbox",
-            "value":"",
-            "title":"OPENING BANK"
-         },
-         "lc_receiver_bank":{
-            "id":"lc_receiver_bank",
-            "type":"textbox",
-            "value":"",
-            "title":"RECEIVER BANK"
-         },
-         "lc_partial_shipments":{
-            "id":"lc_partial_shipments",
-            "type":"select",
-            "values":{
-               "-1":"-SELECT-",
-               "allow":"ALLOWED",
-               "not_allow":"NOT ALLOWED"
-            },
-            "value":"",
-            "title":"PARTIAL SHIPMENTS"
-         },
-         "lc_transhipment":{
-            "id":"lc_transhipment",
-            "type":"select",
-            "values":{
-               "-1":"-SELECT-",
-               "allow":"ALLOWED",
-               "not_allow":"NOT ALLOWED"
-            },
-            "value":"",
-            "title":"TRANSSHIPMENT"
-         },
-         "lc_port_of_loading":{
-            "id":"lc_port_of_loading",
-            "type":"select",
-            "values":{
-               "-1":"-SELECT-",
-               "1":"BRISBANE, AUSTRALIA",
-               "2":"MELBOURNE, AUSTRALIA",
-               "3":"SYDNEY, AUSTRALIA",
-               "4":"SANTOS, BRAZIL",
-               "5":"DOUALA, CAMEROON",
-               "6":"JEBEL ALI, UAE",
-               "7":"ALEXANDRIA, EGYPT",
-               "8":"POTI, GEORGIA",
-               "9":"CHENNAI, INDIA",
-               "10":"JAWAHARLAL NEHRU/NSICT, INDIA",
-               "11":"KANDLA, INDIA",
-               "12":"MUNDRA, INDIA",
-               "13":"NHAVA SHEVA, INDIA",
-               "14":"PIPAVAV, INDIA",
-               "15":"ABIDJAN, IVORY COAST",
-               "16":"RIGA. LATIVA",
-               "17":"PORT KELANG, MALAYSIA",
-               "18":"TANJUNG PELEPAS, MALAYSIA",
-               "19":"BEIRA, MOZAMBIQUE",
-               "20":"KARACHI, PAKISTAN",
-               "21":"DAKAR, SENEGAL",
-               "22":"SINGAPORE, SINGAPORE",
-               "23":"DURBAN, SOUTH AFRICA",
-               "24":"ALGECIRAS, SPAIN",
-               "25":"COLOMBO, SRILANKA",
-               "26":"GENEVA, SWITZERLAND",
-               "27":"LAUSANNE, SWITZERLAND",
-               "28":"LOME, TOGO",
-               "29":"ISTANBUL, TURKEY",
-               "30":"MERSIN, TURKEY",
-               "31":"ILYCHEVSK, UKRAINE",
-               "32":"SAN PEDRO, USA",
-               "33":"SAVANNAH, USA",
-               "34":"BANDAR ABBAS, IRAN",
-               "35":"PETRAPOLE, INDIA"
-            },
-            "value":"",
-            "title":"PORT OF LOADING"
-         },
-         "lc_port_of_discharge":{
-            "id":"lc_port_of_discharge",
-            "type":"select",
-            "values":{
-               "-1":"-SELECT-",
-               "port_of_chittagong":"PORT OF CHITTAGONG",
-               "port_of_mongla":"PORT OF MONGLA",
-               "port_of_benapol":"PORT OF BENAPOLE"
-            },
-            "value":"",
-            "title":"PORT OF DISCHARGE"
-         },
-         "lc_latest_date_of_shipment":{
-            "id":"lc_latest_date_of_shipment",
-            "type":"date",
-            "value":"",
-            "title":"LATEST DATE OF SHIPMENT"
-         },
-         "lc_amendment_date":{
-            "id":"lc_amendment_date",
-            "type":"date",
-            "value":"",
-            "title":"LC AMENDMENT DATE"
-         },
-         "lc_copy":{
-            "id":"lc_copy",
-            "type":"file",
-            "value":"",
-            "title":"UPLOAD LC COPY"
-         },
-         "lc_amendment_copy":{
-            "id":"lc_amendment_copy",
-            "type":"file",
-            "value":"",
-            "title":"UPLOAD AMENDMENT COPY"
-         }
-      }
-   },
-   "shipment":{
-      "title":"Shipment",
-      "fields":{
-         "shipment_actual_shipment_date":{
-            "id":"shipment_actual_shipment_date",
-            "type":"date",
-            "value":"",
-            "title":"SHIPMENT DATE"
-         },
-         "shipment_type":{
-            "id":"shipment_type",
-            "type":"select",
-            "values":{
-               "sea":"BY SEA",
-               "road":"BY ROAD"
-            },
-            "value":"",
-            "title":"SHIPMENT TYPE"
-         },
-         "shipment_shipping_line":{
-            "id":"shipment_shipping_line",
-            "type":"text",
-            "value":"",
-            "conditional":{
-               "shipment_type":"sea"
-            },
-            "title":"SHIPPING LINE"
-         },
-         "shipment_vessel_name":{
-            "id":"shipment_vessel_name",
-            "type":"text",
-            "value":"",
-            "conditional":{
-               "shipment_type":"sea"
-            },
-            "title":"VESSEL NAME"
-         },
-         "shipment_bill_of_lading":{
-            "id":"shipment_bill_of_lading",
-            "type":"text",
-            "value":"",
-            "conditional":{
-               "shipment_type":"sea"
-            },
-            "title":"BILL OF LADING NO."
-         },
-         "shipment_truck_challan_no":{
-            "id":"shipment_truck_challan_no",
-            "type":"text",
-            "value":"",
-            "conditional":{
-               "shipment_type":"road"
-            },
-            "title":"TRUCK CHALLAN NO."
-         },
-         "shipment_no_of_containers":{
-            "id":"shipment_no_of_containers",
-            "type":"number",
-            "value":"",
-            "conditional":{
-               "shipment_type":"sea"
-            },
-            "title":"NO. OF CONTAINERS"
-         },
-         "shipment_no_of_trucks":{
-            "id":"shipment_no_of_trucks",
-            "type":"number",
-            "value":"",
-            "conditional":{
-               "shipment_type":"road"
-            },
-            "title":"NO. OF TRUCKS"
-         },
-         "shipment_no_of_bales":{
-            "id":"shipment_no_of_bales",
-            "type":"number",
-            "value":"",
-            "title":"NO. OF BALES"
-         },
-         "shipment_port_of_loading":{
-            "id":"shipment_port_of_loading",
-            "type":"select",
-            "values":{
-               "-1":"-SELECT-",
-               "1":"BRISBANE, AUSTRALIA",
-               "2":"MELBOURNE, AUSTRALIA",
-               "3":"SYDNEY, AUSTRALIA",
-               "4":"SANTOS, BRAZIL",
-               "5":"DOUALA, CAMEROON",
-               "6":"JEBEL ALI, UAE",
-               "7":"ALEXANDRIA, EGYPT",
-               "8":"POTI, GEORGIA",
-               "9":"CHENNAI, INDIA",
-               "10":"JAWAHARLAL NEHRU/NSICT, INDIA",
-               "11":"KANDLA, INDIA",
-               "12":"MUNDRA, INDIA",
-               "13":"NHAVA SHEVA, INDIA",
-               "14":"PIPAVAV, INDIA",
-               "15":"ABIDJAN, IVORY COAST",
-               "16":"RIGA. LATIVA",
-               "17":"PORT KELANG, MALAYSIA",
-               "18":"TANJUNG PELEPAS, MALAYSIA",
-               "19":"BEIRA, MOZAMBIQUE",
-               "20":"KARACHI, PAKISTAN",
-               "21":"DAKAR, SENEGAL",
-               "22":"SINGAPORE, SINGAPORE",
-               "23":"DURBAN, SOUTH AFRICA",
-               "24":"ALGECIRAS, SPAIN",
-               "25":"COLOMBO, SRILANKA",
-               "26":"GENEVA, SWITZERLAND",
-               "27":"LAUSANNE, SWITZERLAND",
-               "28":"LOME, TOGO",
-               "29":"ISTANBUL, TURKEY",
-               "30":"MERSIN, TURKEY",
-               "31":"ILYCHEVSK, UKRAINE",
-               "32":"SAN PEDRO, USA",
-               "33":"SAVANNAH, USA",
-               "34":"BANDAR ABBAS, IRAN",
-               "35":"PETRAPOLE, INDIA"
-            },
-            "value":"",
-            "title":"PORT OF LOADING"
-         },
-         "shipment_transshipment_date":{
-            "id":"shipment_transshipment_date",
-            "type":"date",
-            "value":"",
-            "conditional":{
-               "shipment_type":"sea"
-            },
-            "title":"TRANSSHIPMENT DATE"
-         },
-         "shipment_transshipment_port":{
-            "id":"shipment_transshipment_port",
-            "type":"select",
-            "values":{
-               "-1":"-SELECT-",
-               "port_of_colombo":"PORT OF COLOMBO",
-               "port_of_singapore":"PORT OF SINGAPORE",
-               "port_of_klang":"PORT OF KLANG"
-            },
-            "value":"",
-            "conditional":{
-               "shipment_type":"sea"
-            },
-            "title":"TRANSSHIPMENT PORT"
-         },
-         "shipment_port_of_discharge":{
-            "id":"shipment_port_of_discharge",
-            "type":"select",
-            "values":{
-               "-1":"-SELECT-",
-               "port_of_chittagong":"PORT OF CHITTAGONG",
-               "port_of_mongla":"PORT OF MONGLA",
-               "port_of_benapol":"PORT OF BENAPOLE"
-            },
-            "value":"",
-            "title":"PORT OF DISCHARGE"
-         },
-         "shipment_eta_date":{
-            "id":"shipment_eta_date",
-            "type":"date",
-            "value":"",
-            "conditional":{
-               "shipment_type":"sea"
-            },
-            "title":"ETA DATE"
-         }
-      }
-   },
-   "nn_documents":{
-      "title":"NN Documents",
-      "fields":{
-         "nn_commercial_invoice_no":{
-            "id":"nn_commercial_invoice_no",
-            "type":"text",
-            "value":"",
-            "title":"COMMERCIAL INVOICE NO."
-         },
-         "nn_packing_list":{
-            "id":"nn_packing_list",
-            "type":"select",
-            "values":{
-               "-1":"-SELECT-",
-               "yes":"YES",
-               "no":"NO"
-            },
-            "value":"",
-            "title":"PACKING LIST"
-         },
-         "nn_shipment_advice":{
-            "id":"nn_shipment_advice",
-            "type":"select",
-            "values":{
-               "-1":"-SELECT-",
-               "yes":"YES",
-               "no":"NO"
-            },
-            "value":"",
-            "title":"SHIPMENT ADVICE"
-         },
-         "nn_fax_advice":{
-            "id":"nn_fax_advice",
-            "type":"select",
-            "values":{
-               "-1":"-SELECT-",
-               "yes":"YES",
-               "no":"NO"
-            },
-            "value":"",
-            "title":"FAX ADVICE"
-         },
-         "nn_co":{
-            "id":"nn_co",
-            "type":"select",
-            "values":{
-               "-1":"-SELECT-",
-               "yes":"YES",
-               "no":"NO"
-            },
-            "value":"",
-            "title":"CERTIFICATE OF ORIGIN (CO)"
-         },
-         "nn_phytosanitary_certificate":{
-            "id":"nn_phytosanitary_certificate",
-            "type":"select",
-            "values":{
-               "-1":"-SELECT-",
-               "yes":"YES",
-               "no":"NO"
-            },
-            "value":"",
-            "title":"PHYTOSANITARY CERTIFICATE"
-         },
-         "nn_bill_of_lading":{
-            "id":"nn_bill_of_lading",
-            "type":"select",
-            "values":{
-               "-1":"-SELECT-",
-               "yes":"YES",
-               "no":"NO"
-            },
-            "value":"",
-            "title":"BILL OF LADING"
-         },
-         "nn_beneficiary_certificate":{
-            "id":"nn_beneficiary_certificate",
-            "type":"select",
-            "values":{
-               "-1":"-SELECT-",
-               "yes":"YES",
-               "no":"NO"
-            },
-            "value":"",
-            "title":"BENEFICIARYS CERTIFICATE"
-         },
-         "nn_fumigation_certificate":{
-            "id":"nn_fumigation_certificate",
-            "type":"select",
-            "values":{
-               "-1":"-SELECT-",
-               "yes":"YES",
-               "no":"NO"
-            },
-            "value":"",
-            "title":"FUMIGATION CERTIFICATE"
-         },
-         "nn_dhl_courier_date":{
-            "id":"nn_dhl_courier_date",
-            "type":"date",
-            "value":"",
-            "title":"COURIER DATE"
-         },
-         "nn_dhl_courier_name":{
-            "id":"nn_dhl_courier_name",
-            "type":"text",
-            "value":"",
-            "title":"COURIER NAME"
-         },
-         "nn_dhl_courier_details":{
-            "id":"nn_dhl_courier_details",
-            "type":"text",
-            "value":"",
-            "title":"COURIER NO."
-         },
-         "nn_documents_copy":{
-            "id":"nn_documents_copy",
-            "type":"file",
-            "value":"",
-            "title":"UPLOAD NN DOCUMENTS"
-         }
-      }
-   },
-   "payment":{
-      "title":"Payment",
-      "fields":{
-         "payment_invoice_payment_date":{
-            "id":"payment_invoice_payment_date",
-            "type":"date",
-            "value":"",
-            "title":"INVOICE PAYMENT DATE"
-         },
-         "payment_acceptance_date":{
-            "id":"payment_acceptance_date",
-            "type":"date",
-            "value":"",
-            "title":"PAYMENT ACCEPTANCE DATE"
-         },
-         "payment_maturity_due_date":{
-            "id":"payment_maturity_due_date",
-            "type":"date",
-            "genre":"calculative",
-            "value":"",
-            "title":"MATURITY DUE DATE"
-         },
-         "payment_copy":{
-            "id":"payment_copy",
-            "type":"file",
-            "value":"",
-            "title":"UPLOAD PAYMENT COPY"
-         },
-         "payment_acceptance_copy":{
-            "id":"payment_acceptance_copy",
-            "type":"file",
-            "value":"",
-            "title":"UPLOAD ACCEPTANCE COPY"
-         }
-      }
-   },
-   "controller":{
-      "title":"Controller",
-      "fields":{
-         "controller_name":{
-            "id":"controller_name",
-            "type":"text",
-            "value":"",
-            "title":"CONTROLLER NAME"
-         },
-         "controller_weight_finalization_area":{
-            "id":"controller_weight_finalization_area",
-            "type":"select",
-            "values":{
-               "-1":"-SELECT-",
-               "port":"PORT",
-               "mill":"MILL"
-            },
-            "value":"",
-            "title":"WEIGHT FINALIZATION AREA"
-         },
-         "controller_weight_type":{
-            "id":"controller_weight_type",
-            "type":"select",
-            "values":{
-               "-1":"-SELECT-",
-               "bales_by_bales":"BALES BY BALES",
-               "bridge":"WEIGHT BRIDGE"
-            },
-            "value":"",
-            "title":"WEIGHT TYPE"
-         },
-         "controller_tear_weight":{
-            "id":"controller_tear_weight",
-            "type":"number",
-            "unit":{
-               "values":{
-                  "lbs":"LBS",
-                  "kg":"KG",
-                  "mt":"MT"
-               },
-               "value":"lbs"
-            },
-            "value":"",
-            "title":"TEAR WEIGHT"
-         },
-         "controller_invoice_weight":{
-            "id":"controller_invoice_weight",
-            "type":"number",
-            "unit":{
-               "values":{
-                  "lbs":"LBS",
-                  "kg":"KG",
-                  "mt":"MT"
-               },
-               "value":"lbs"
-            },
-            "value":"",
-            "title":"INVOICE WEIGHT"
-         },
-         "controller_landing_weight":{
-            "id":"controller_landing_weight",
-            "type":"number",
-            "unit":{
-               "values":{
-                  "lbs":"LBS",
-                  "kg":"KG",
-                  "mt":"MT"
-               },
-               "value":"lbs"
-            },
-            "value":"",
-            "title":"LANDING WEIGHT"
-         },
-         "controller_short_gain_weight":{
-            "id":"controller_short_gain_weight",
-            "type":"number",
-            "genre":"calculative",
-            "value":"",
-            "title":"SHORT/GAIN WEIGHT"
-         },
-         "controller_documents":{
-            "id":"controller_documents",
-            "type":"file",
-            "value":"",
-            "title":"UPLOAD CONTROLLER DOCUMENTS"
-         }
-      }
-   },
-   "short_gain_weight_claim":{
-      "title":"Short/Gain Weight Claim",
-      "fields":{
-         "s_g_w_c_short_gain_weight_claim_date":{
-            "id":"s_g_w_c_short_gain_weight_claim_date",
-            "type":"date",
-            "value":"",
-            "title":"SHORT/GAIN WEIGHT CLAIM DATE"
-         },
-         "s_g_w_c_short_gain_weight_claim_qty":{
-            "id":"s_g_w_c_short_gain_weight_claim_qty",
-            "type":"number",
-            "genre":"calculative",
-            "value":"",
-            "title":"SHORT/GAIN WEIGHT CLAIM QTY."
-         },
-         "s_g_w_c_short_gain_weight_claim_amount":{
-            "id":"s_g_w_c_short_gain_weight_claim_amount",
-            "type":"number",
-            "genre":"calculative",
-            "value":"",
-            "title":"SHORT/GAIN WEIGHT CLAIM AMOUNT"
-         },
-         "s_g_w_c_amount_received_date":{
-            "id":"s_g_w_c_amount_received_date",
-            "type":"date",
-            "value":"",
-            "title":"AMOUNT RECEIVED DATE"
-         },
-         "s_g_w_c_received_account_number":{
-            "id":"s_g_w_c_received_account_number",
-            "type":"text",
-            "value":"",
-            "title":"RECEIVED ACCOUNT NAME"
-         },
-         "s_g_w_c_payment_mode":{
-            "id":"s_g_w_c_payment_mode",
-            "type":"text",
-            "value":"",
-            "title":"PAYMENT MODE"
-         },
-         "s_g_w_c_remarks":{
-            "id":"s_g_w_c_remarks",
-            "type":"text",
-            "value":"",
-            "title":"REMARKS"
-         },
-         "s_g_w_c_claim_letter":{
-            "id":"s_g_w_c_claim_letter",
-            "type":"file",
-            "value":"",
-            "title":"UPLOAD CLAIM LETTER"
-         },
-         "s_g_w_c_payment_copy":{
-            "id":"s_g_w_c_payment_copy",
-            "type":"file",
-            "value":"",
-            "title":"UPLOAD PAYMENT COPY"
-         }
-      }
-   },
-   "quality_claim":{
-      "title":"Quality Claim",
-      "fields":{
-         "q_c_quality_claim_date":{
-            "id":"q_c_quality_claim_date",
-            "type":"date",
-            "value":"",
-            "title":"QUALITY CLAIM DATE"
-         },
-         "q_c_quality_claim_amount":{
-            "id":"q_c_quality_claim_amount",
-            "type":"number",
-            "unit":{
-               "values":{
-                  "usd":"USD"
-               },
-               "value":"usd"
-            },
-            "value":"",
-            "title":"QUALITY CLAIM AMOUNT"
-         },
-         "q_c_quality_received_amount":{
-            "id":"q_c_quality_received_amount",
-            "type":"number",
-            "unit":{
-               "values":{
-                  "usd":"USD"
-               },
-               "value":"usd"
-            },
-            "value":"",
-            "title":"RECEIVED AMOUNT"
-         },
-         "q_c_approved_claim_amount":{
-            "id":"q_c_approved_claim_amount",
-            "type":"number",
-            "value":"",
-            "title":"APPROVED CLAIM AMOUNT"
-         },
-         "q_c_amount_received_date":{
-            "id":"q_c_amount_received_date",
-            "type":"date",
-            "value":"",
-            "title":"AMOUNT RECEIVED DATE"
-         },
-         "q_c_received_account_number":{
-            "id":"q_c_received_account_number",
-            "type":"text",
-            "value":"",
-            "title":"RECEIVED ACCOUNT NAME"
-         },
-         "q_c_payment_mode":{
-            "id":"q_c_payment_mode",
-            "type":"text",
-            "value":"",
-            "title":"PAYMENT MODE"
-         },
-         "q_c_claim_letter":{
-            "id":"q_c_claim_letter",
-            "type":"file",
-            "value":"",
-            "title":"UPLOAD CLAIM LETTER"
-         },
-         "q_c_payment_copy":{
-            "id":"q_c_payment_copy",
-            "type":"file",
-            "value":"",
-            "title":"UPLOAD PAYMENT COPY"
-         }
-      }
-   },
-   "debit_note":{
-      "title":"Debit Note",
-      "fields":{
-         "debit_note_number":{
-            "id":"debit_note_number",
-            "type":"text",
-            "value":"",
-            "title":"DEBIT NOTE NUMBER"
-         },
-         "debit_note_date":{
-            "id":"debit_note_date",
-            "type":"date",
-            "value":"",
-            "title":"DEBIT NOTE DATE"
-         },
-         "debit_note_amount":{
-            "id":"debit_note_amount",
-            "type":"number",
-            "genre":"calculative",
-            "value":"",
-            "title":"DEBIT NOTE AMOUNT"
-         },
-         "debit_note_received_amount":{
-            "id":"debit_note_received_amount",
-            "type":"number",
-            "unit":{
-               "values":{
-                  "usd":"USD"
-               },
-               "value":"usd"
-            },
-            "value":"",
-            "title":"RECEIVED AMOUNT"
-         },
-         "debit_note_amount_received_date":{
-            "id":"debit_note_amount_received_date",
-            "type":"date",
-            "value":"",
-            "title":"AMOUNT RECEIVED DATE"
-         },
-         "debit_note_received_account_number":{
-            "id":"debit_note_received_account_number",
-            "type":"text",
-            "value":"",
-            "title":"RECEIVED ACCOUNT NAME"
-         },
-         "debit_note_payment_mode":{
-            "id":"debit_note_payment_mode",
-            "type":"text",
-            "value":"",
-            "title":"PAYMENT MODE"
-         },
-         "debit_note_letter":{
-            "id":"debit_note_letter",
-            "type":"file",
-            "value":"",
-            "title":"UPLOAD LETTER"
-         },
-         "debit_note_remarks":{
-            "id":"debit_note_remarks",
-            "type":"text",
-            "value":"",
-            "title":"REMARKS"
-         },
-         "debit_note_payment_copy":{
-            "id":"debit_note_payment_copy",
-            "type":"file",
-            "value":"",
-            "title":"UPLOAD PAYMENT COPY"
-         }
-      }
-   },
-   "carrying_charge":{
-      "title":"Carrying Charge",
-      "fields":{
-         "cc_lc_opening_date":{
-            "id":"cc_lc_opening_date",
-            "type":"date",
-            "value":"",
-            "title":"LC OPENING DATE"
-         },
-         "cc_actual_lc_opening_date":{
-            "id":"cc_actual_lc_opening_date",
-            "type":"date",
-            "value":"",
-            "title":"ACTUAL LC OPENING DATE"
-         },
-         "cc_no_of_days_late":{
-            "id":"cc_no_of_days_late",
-            "type":"number",
-            "value":"",
-            "title":"NO. OF DAYS LATE"
-         },
-         "cc_amount":{
-            "id":"cc_amount",
-            "type":"number",
-            "unit":{
-               "values":{
-                  "usd":"USD"
-               },
-               "value":"usd"
-            },
-            "value":"",
-            "title":"AMOUNT"
-         },
-         "cc_payment_mode":{
-            "id":"cc_payment_mode",
-            "type":"text",
-            "value":"",
-            "title":"PAYMENT MODE"
-         },
-         "cc_remarks":{
-            "id":"cc_remarks",
-            "type":"text",
-            "value":"",
-            "title":"REMARKS"
-         },
-         "cc_carrying_copy":{
-            "id":"cc_carrying_copy",
-            "type":"file",
-            "value":"",
-            "title":"UPLOAD CARRYING COPY"
-         }
-      }
-   },
-   "lc_amendment_charge":{
-      "title":"LC Amendment Charge",
-      "fields":{
-         "lc_amendment_charge_amount":{
-            "id":"lc_amendment_charge_amount",
-            "type":"number",
-            "unit":{
-               "values":{
-                  "usd":"USD"
-               },
-               "value":"usd"
-            },
-            "value":"",
-            "title":"LC AMENDMENT CHARGE AMOUNT"
-         },
-         "lc_amendment_charge_payment_mode":{
-            "id":"lc_amendment_charge_payment_mode",
-            "type":"text",
-            "value":"",
-            "title":"PAYMENT MODE"
-         }
-      }
-   }
+	"project": {
+		"title": "Project",
+		"fields": {
+			"project_name": {
+				"id": "project_name",
+				"type": "text",
+				"value": "",
+				"title": "FILE NUMBER"
+			},
+			"project_file_status": {
+				"id": "project_file_status",
+				"type": "select",
+				"values": {
+					"running": "RUNNING",
+					"close": "CLOSE"
+				},
+				"value": "",
+				"title": "FILE STATUS"
+			}
+		}
+	},
+	"buyer": {
+		"title": "Buyer",
+		"fields": {
+			"project_buyer": {
+				"id": "buyer_id",
+				"type": "select",
+				"title": "BUYER NAME",
+				"value": ""
+			}
+		}
+	},
+	"supplier": {
+		"title": "Supplier",
+		"fields": {
+			"project_supplier": {
+				"id": "supplier_id",
+				"type": "select",
+				"title": "SUPPLIER NAME",
+				"value": ""
+			}
+		}
+	},
+	"sales_confirmation": {
+		"title": "Sales Confirmation",
+		"fields": {
+			"s_c_origin": {
+				"id": "s_c_origin",
+				"type": "select",
+				"values": {
+					"-1": "-SELECT-",
+					"1": "AUSTRALIA",
+					"2": "ARGENTINA",
+					"3": "BENIN",
+					"4": "BRAZIL",
+					"5": "BURKINA FASO",
+					"6": "CAMEROON",
+					"7": "CHAD",
+					"8": "CHINA",
+					"9": "EGYPT",
+					"10": "GHANA",
+					"11": "GREAT BRITAIN",
+					"12": "GREECE",
+					"13": "GUINEA",
+					"14": "HOLLAND",
+					"15": "INDIA",
+					"16": "IRAQ",
+					"17": "IVORY COAST",
+					"18": "KAZAKISTAN",
+					"19": "MADAGASCAR",
+					"20": "MALAWI",
+					"21": "MALI",
+					"22": "MOZAMBIQUE",
+					"23": "NIGERIA",
+					"24": "PAKISTAN",
+					"25": "SENEGAL",
+					"26": "SOUTH AFRICA",
+					"27": "SPAIN",
+					"28": "SUDAN",
+					"29": "TAJIKISTAN",
+					"30": "TANZANIA",
+					"31": "TOGO",
+					"32": "TURKMENISTAN",
+					"33": "TURKY",
+					"34": "UGANDA",
+					"35": "USA",
+					"36": "UZBEKISTAN",
+					"37": "ZAMBIA",
+					"38": "ZIMBABWE"
+				},
+				"value": "",
+				"title": "ORIGIN"
+			},
+			"s_c_crop_year": {
+				"id": "s_c_crop_year",
+				"type": "text",
+				"value": "",
+				"title": "CROP YEAR"
+			},
+			"s_c_type": {
+				"id": "s_c_type",
+				"type": "text",
+				"value": "",
+				"title": "TYPE"
+			},
+			"s_c_color_grade": {
+				"id": "s_c_color_grade",
+				"type": "text",
+				"value": "",
+				"title": "COLOR GRADE"
+			},
+			"s_c_staple": {
+				"id": "s_c_staple",
+				"type": "number",
+				"unit": {
+					"values": {
+						"inch": "INCH",
+						"mm": "MM"
+					},
+					"value": "inch"
+				},
+				"value": "",
+				"title": "STAPLE"
+			},
+			"s_c_mic": {
+				"id": "s_c_mic",
+				"type": "number",
+				"unit": {
+					"values": {
+						"ncl": "NCL"
+					},
+					"value": "ncl"
+				},
+				"value": "",
+				"title": "MIC"
+			},
+			"s_c_strength": {
+				"id": "s_c_strength",
+				"type": "number",
+				"unit": {
+					"values": {
+						"gpt": "GPT"
+					},
+					"value": "gpt"
+				},
+				"value": "",
+				"title": "Strength"
+			},
+			"s_c_quantity": {
+				"id": "s_c_quantity",
+				"type": "number",
+				"unit": {
+					"values": {
+						"mt": "MT",
+						"lbs": "LBS"
+					},
+					"value": "mt"
+				},
+				"value": "",
+				"title": "QUANTITY"
+			},
+			"s_c_price": {
+				"id": "s_c_price",
+				"type": "number",
+				"unit": {
+					"values": {
+						"usc": "USC",
+						"usd": "USD"
+					},
+					"value": "usc"
+				},
+				"value": "",
+				"title": "PRICE"
+			},
+			"s_c_commission_rate": {
+				"id": "s_c_commission_rate",
+				"type": "number",
+				"value": "",
+				"title": "COMMISSION RATE (%)"
+			},
+			"s_c_commission_point": {
+				"id": "s_c_commission_point",
+				"type": "number",
+				"value": "",
+				"title": "COMMISSION RATE (POINT)"
+			},
+			"s_c_shipment": {
+				"id": "s_c_shipment",
+				"type": "textbox",
+				"value": "",
+				"title": "SHIPMENT"
+			},
+			"s_c_payment": {
+				"id": "s_c_payment",
+				"type": "select",
+				"values": {
+					"-1": "-SELECT-",
+					"at_sight": "AT SIGHT",
+					"deferred": "DEFERRED",
+					"upass": "UPASS"
+				},
+				"value": "",
+				"title": "PAYMENT"
+			},
+			"latest_date_of_lc_opening": {
+				"id": "s_c_latest_date_of_lc_opening",
+				"type": "text",
+				"value": "",
+				"title": "LC OPENING"
+			},
+			"s_c_copy": {
+				"id": "s_c_copy",
+				"type": "file",
+				"value": "",
+				"title": "UPLOAD SALES CONFIRMATION"
+			}
+		}
+	},
+	"contract": {
+		"title": "Contract",
+		"fields": {
+			"contract_number": {
+				"id": "contract_number",
+				"type": "text",
+				"value": "",
+				"title": "CONTRACT NUMBER"
+			},
+			"contract_date": {
+				"id": "contract_date",
+				"type": "date",
+				"value": "",
+				"title": "CONTRACT DATE"
+			},
+			"contract_copy": {
+				"id": "contract_copy",
+				"type": "file",
+				"value": "",
+				"title": "UPLOAD CONTRACT COPY"
+			}
+		}
+	},
+	"performa_invoice": {
+		"title": "Proforma Invoice",
+		"fields": {
+			"p_i_number": {
+				"id": "p_i_number",
+				"type": "text",
+				"value": "",
+				"title": "PI NUMBER"
+			},
+			"p_i_quantity": {
+				"id": "p_i_quantity",
+				"type": "number",
+				"unit": {
+					"values": {
+						"mt": "MT",
+						"lbs": "LBS"
+					},
+					"value": "mt"
+				},
+				"value": "",
+				"title": "QUANTITY"
+			},
+			"p_i_date": {
+				"id": "p_i_date",
+				"type": "date",
+				"value": "",
+				"title": "PI DATE"
+			},
+			"p_i_latest_date_of_lc_opening": {
+				"id": "p_i_latest_date_of_lc_opening",
+				"type": "date",
+				"value": "",
+				"title": "LATEST DATE OF LC OPENING"
+			},
+			"p_i_latest_date_of_shipment": {
+				"id": "p_i_latest_date_of_shipment",
+				"type": "date",
+				"value": "",
+				"title": "LATEST DATE OF SHIPMENT"
+			},
+			"p_i_copy": {
+				"id": "p_i_copy",
+				"type": "file",
+				"value": "",
+				"title": "UPLOAD PI COPY"
+			}
+		}
+	},
+	"import_permit": {
+		"title": "Import Permit",
+		"fields": {
+			"i_p_number": {
+				"id": "i_p_number",
+				"type": "text",
+				"value": "",
+				"title": "IP NUMBER"
+			},
+			"i_p_date": {
+				"id": "i_p_date",
+				"type": "date",
+				"value": "",
+				"title": "IP DATE"
+			},
+			"i_p_expiry_date": {
+				"id": "i_p_expiry_date",
+				"type": "date",
+				"genre": "calculative",
+				"value": "",
+				"title": "IP EXPIRY DATE"
+			},
+			"i_p_sro_date": {
+				"id": "i_p_sro_date",
+				"type": "date",
+				"value": "",
+				"title": "SRO DATE"
+			},
+			"i_p_copy": {
+				"id": "i_p_copy",
+				"type": "file",
+				"value": "",
+				"title": "UPLOAD IP COPY"
+			},
+			"i_p_sro_copy": {
+				"id": "i_p_sro_copy",
+				"type": "file",
+				"value": "",
+				"title": "UPLOAD SRO COPY"
+			}
+		}
+	},
+	"lc": {
+		"title": "LC",
+		"fields": {
+			"lc_number": {
+				"id": "lc_number",
+				"type": "text",
+				"value": "",
+				"title": "LC NUMBER"
+			},
+			"lc_date_of_issue": {
+				"id": "lc_date_of_issue",
+				"type": "date",
+				"value": "",
+				"title": "DATE OF ISSUE"
+			},
+			"lc_date_of_expiry": {
+				"id": "lc_date_of_expiry",
+				"type": "date",
+				"value": "",
+				"title": "DATE OF EXPIRY"
+			},
+			"lc_type": {
+				"id": "lc_type",
+				"type": "select",
+				"values": {
+					"-1": "-SELECT-",
+					"at_sight": "AT SIGHT",
+					"deferred": "DEFERRED",
+					"upass": "UPASS"
+				},
+				"value": "",
+				"title": "LC TYPE"
+			},
+			"lc_opening_bank": {
+				"id": "lc_opening_bank",
+				"type": "textbox",
+				"value": "",
+				"title": "OPENING BANK"
+			},
+			"lc_receiver_bank": {
+				"id": "lc_receiver_bank",
+				"type": "textbox",
+				"value": "",
+				"title": "RECEIVER BANK"
+			},
+			"lc_partial_shipments": {
+				"id": "lc_partial_shipments",
+				"type": "select",
+				"values": {
+					"-1": "-SELECT-",
+					"allow": "ALLOWED",
+					"not_allow": "NOT ALLOWED"
+				},
+				"value": "",
+				"title": "PARTIAL SHIPMENTS"
+			},
+			"lc_transhipment": {
+				"id": "lc_transhipment",
+				"type": "select",
+				"values": {
+					"-1": "-SELECT-",
+					"allow": "ALLOWED",
+					"not_allow": "NOT ALLOWED"
+				},
+				"value": "",
+				"title": "TRANSSHIPMENT"
+			},
+			"lc_port_of_loading": {
+				"id": "lc_port_of_loading",
+				"type": "select",
+				"values": {
+					"-1": "-SELECT-",
+					"1": "BRISBANE, AUSTRALIA",
+					"2": "MELBOURNE, AUSTRALIA",
+					"3": "SYDNEY, AUSTRALIA",
+					"4": "SANTOS, BRAZIL",
+					"5": "DOUALA, CAMEROON",
+					"6": "JEBEL ALI, UAE",
+					"7": "ALEXANDRIA, EGYPT",
+					"8": "POTI, GEORGIA",
+					"9": "CHENNAI, INDIA",
+					"10": "JAWAHARLAL NEHRU/NSICT, INDIA",
+					"11": "KANDLA, INDIA",
+					"12": "MUNDRA, INDIA",
+					"13": "NHAVA SHEVA, INDIA",
+					"14": "PIPAVAV, INDIA",
+					"15": "ABIDJAN, IVORY COAST",
+					"16": "RIGA. LATIVA",
+					"17": "PORT KELANG, MALAYSIA",
+					"18": "TANJUNG PELEPAS, MALAYSIA",
+					"19": "BEIRA, MOZAMBIQUE",
+					"20": "KARACHI, PAKISTAN",
+					"21": "DAKAR, SENEGAL",
+					"22": "SINGAPORE, SINGAPORE",
+					"23": "DURBAN, SOUTH AFRICA",
+					"24": "ALGECIRAS, SPAIN",
+					"25": "COLOMBO, SRILANKA",
+					"26": "GENEVA, SWITZERLAND",
+					"27": "LAUSANNE, SWITZERLAND",
+					"28": "LOME, TOGO",
+					"29": "ISTANBUL, TURKEY",
+					"30": "MERSIN, TURKEY",
+					"31": "ILYCHEVSK, UKRAINE",
+					"32": "SAN PEDRO, USA",
+					"33": "SAVANNAH, USA",
+					"34": "BANDAR ABBAS, IRAN",
+					"35": "PETRAPOLE, INDIA",
+                    "36": "ANY PORT OF ASIA",
+                    "37": "ANY PORT OF AFRICA"
+				},
+				"value": "",
+				"title": "PORT OF LOADING"
+			},
+			"lc_port_of_discharge": {
+				"id": "lc_port_of_discharge",
+				"type": "select",
+				"values": {
+					"-1": "-SELECT-",
+					"port_of_chittagong": "PORT OF CHITTAGONG",
+					"port_of_mongla": "PORT OF MONGLA",
+					"port_of_benapol": "PORT OF BENAPOLE"
+				},
+				"value": "",
+				"title": "PORT OF DISCHARGE"
+			},
+			"lc_latest_date_of_shipment": {
+				"id": "lc_latest_date_of_shipment",
+				"type": "date",
+				"value": "",
+				"title": "LATEST DATE OF SHIPMENT"
+			},
+			"lc_amendment_date": {
+				"id": "lc_amendment_date",
+				"type": "date",
+				"value": "",
+				"title": "LC AMENDMENT DATE"
+			},
+			"lc_copy": {
+				"id": "lc_copy",
+				"type": "file",
+				"value": "",
+				"title": "UPLOAD LC COPY"
+			},
+			"lc_amendment_copy": {
+				"id": "lc_amendment_copy",
+				"type": "file",
+				"value": "",
+				"title": "UPLOAD AMENDMENT COPY"
+			}
+		}
+	},
+	"shipment": {
+		"title": "Shipment",
+		"fields": {
+			"shipment_actual_shipment_date": {
+				"id": "shipment_actual_shipment_date",
+				"type": "date",
+				"value": "",
+				"title": "SHIPMENT DATE"
+			},
+			"shipment_type": {
+				"id": "shipment_type",
+				"type": "select",
+				"values": {
+					"sea": "BY SEA",
+					"road": "BY ROAD"
+				},
+				"value": "",
+				"title": "SHIPMENT TYPE"
+			},
+			"shipment_shipping_line": {
+				"id": "shipment_shipping_line",
+				"type": "text",
+				"value": "",
+				"conditional": {
+					"shipment_type": "sea"
+				},
+				"title": "SHIPPING LINE"
+			},
+			"shipment_vessel_name": {
+				"id": "shipment_vessel_name",
+				"type": "text",
+				"value": "",
+				"conditional": {
+					"shipment_type": "sea"
+				},
+				"title": "VESSEL NAME"
+			},
+			"shipment_bill_of_lading": {
+				"id": "shipment_bill_of_lading",
+				"type": "text",
+				"value": "",
+				"conditional": {
+					"shipment_type": "sea"
+				},
+				"title": "BILL OF LADING NO."
+			},
+			"shipment_truck_challan_no": {
+				"id": "shipment_truck_challan_no",
+				"type": "text",
+				"value": "",
+				"conditional": {
+					"shipment_type": "road"
+				},
+				"title": "TRUCK CHALLAN NO."
+			},
+			"shipment_no_of_containers": {
+				"id": "shipment_no_of_containers",
+				"type": "number",
+				"value": "",
+				"conditional": {
+					"shipment_type": "sea"
+				},
+				"title": "NO. OF CONTAINERS"
+			},
+			"shipment_no_of_trucks": {
+				"id": "shipment_no_of_trucks",
+				"type": "number",
+				"value": "",
+				"conditional": {
+					"shipment_type": "road"
+				},
+				"title": "NO. OF TRUCKS"
+			},
+			"shipment_no_of_bales": {
+				"id": "shipment_no_of_bales",
+				"type": "number",
+				"value": "",
+				"title": "NO. OF BALES"
+			},
+			"shipment_port_of_loading": {
+				"id": "shipment_port_of_loading",
+				"type": "select",
+				"values": {
+					"-1": "-SELECT-",
+					"1": "BRISBANE, AUSTRALIA",
+					"2": "MELBOURNE, AUSTRALIA",
+					"3": "SYDNEY, AUSTRALIA",
+					"4": "SANTOS, BRAZIL",
+					"5": "DOUALA, CAMEROON",
+					"6": "JEBEL ALI, UAE",
+					"7": "ALEXANDRIA, EGYPT",
+					"8": "POTI, GEORGIA",
+					"9": "CHENNAI, INDIA",
+					"10": "JAWAHARLAL NEHRU/NSICT, INDIA",
+					"11": "KANDLA, INDIA",
+					"12": "MUNDRA, INDIA",
+					"13": "NHAVA SHEVA, INDIA",
+					"14": "PIPAVAV, INDIA",
+					"15": "ABIDJAN, IVORY COAST",
+					"16": "RIGA. LATIVA",
+					"17": "PORT KELANG, MALAYSIA",
+					"18": "TANJUNG PELEPAS, MALAYSIA",
+					"19": "BEIRA, MOZAMBIQUE",
+					"20": "KARACHI, PAKISTAN",
+					"21": "DAKAR, SENEGAL",
+					"22": "SINGAPORE, SINGAPORE",
+					"23": "DURBAN, SOUTH AFRICA",
+					"24": "ALGECIRAS, SPAIN",
+					"25": "COLOMBO, SRILANKA",
+					"26": "GENEVA, SWITZERLAND",
+					"27": "LAUSANNE, SWITZERLAND",
+					"28": "LOME, TOGO",
+					"29": "ISTANBUL, TURKEY",
+					"30": "MERSIN, TURKEY",
+					"31": "ILYCHEVSK, UKRAINE",
+					"32": "SAN PEDRO, USA",
+					"33": "SAVANNAH, USA",
+					"34": "BANDAR ABBAS, IRAN",
+					"35": "PETRAPOLE, INDIA",
+                    "36": "ANY PORT OF ASIA",
+                    "37": "ANY PORT OF AFRICA"
+				},
+				"value": "",
+				"title": "PORT OF LOADING"
+			},
+			"shipment_transshipment_date": {
+				"id": "shipment_transshipment_date",
+				"type": "date",
+				"value": "",
+				"conditional": {
+					"shipment_type": "sea"
+				},
+				"title": "TRANSSHIPMENT DATE"
+			},
+			"shipment_transshipment_port": {
+				"id": "shipment_transshipment_port",
+				"type": "select",
+				"values": {
+					"-1": "-SELECT-",
+					"port_of_colombo": "PORT OF COLOMBO",
+					"port_of_singapore": "PORT OF SINGAPORE",
+					"port_of_klang": "PORT OF KLANG",
+                    "port_of_tanjung_pelepas": "PORT OF TANJUNG PELEPAS"
+				},
+				"value": "",
+				"conditional": {
+					"shipment_type": "sea"
+				},
+				"title": "TRANSSHIPMENT PORT"
+			},
+			"shipment_port_of_discharge": {
+				"id": "shipment_port_of_discharge",
+				"type": "select",
+				"values": {
+					"-1": "-SELECT-",
+					"port_of_chittagong": "PORT OF CHITTAGONG",
+					"port_of_mongla": "PORT OF MONGLA",
+					"port_of_benapol": "PORT OF BENAPOLE"
+				},
+				"value": "",
+				"title": "PORT OF DISCHARGE"
+			},
+			"shipment_eta_date": {
+				"id": "shipment_eta_date",
+				"type": "date",
+				"value": "",
+				"conditional": {
+					"shipment_type": "sea"
+				},
+				"title": "ETA DATE"
+			},
+            "shipment_advice": {
+				"id": "shipment_advice",
+				"type": "file",
+				"value": "",
+				"title": "SHIPMENT ADVICE"
+			}
+		}
+	},
+	"nn_documents": {
+		"title": "NN Documents",
+		"fields": {
+			"nn_commercial_invoice_no": {
+				"id": "nn_commercial_invoice_no",
+				"type": "text",
+				"value": "",
+				"title": "COMMERCIAL INVOICE NO."
+			},
+			"nn_packing_list": {
+				"id": "nn_packing_list",
+				"type": "select",
+				"values": {
+					"-1": "-SELECT-",
+					"yes": "YES",
+					"no": "NO"
+				},
+				"value": "",
+				"title": "PACKING LIST"
+			},
+			"nn_shipment_advice": {
+				"id": "nn_shipment_advice",
+				"type": "select",
+				"values": {
+					"-1": "-SELECT-",
+					"yes": "YES",
+					"no": "NO"
+				},
+				"value": "",
+				"title": "SHIPMENT ADVICE"
+			},
+			"nn_fax_advice": {
+				"id": "nn_fax_advice",
+				"type": "select",
+				"values": {
+					"-1": "-SELECT-",
+					"yes": "YES",
+					"no": "NO"
+				},
+				"value": "",
+				"title": "FAX ADVICE"
+			},
+			"nn_co": {
+				"id": "nn_co",
+				"type": "select",
+				"values": {
+					"-1": "-SELECT-",
+					"yes": "YES",
+					"no": "NO"
+				},
+				"value": "",
+				"title": "CERTIFICATE OF ORIGIN (CO)"
+			},
+			"nn_phytosanitary_certificate": {
+				"id": "nn_phytosanitary_certificate",
+				"type": "select",
+				"values": {
+					"-1": "-SELECT-",
+					"yes": "YES",
+					"no": "NO"
+				},
+				"value": "",
+				"title": "PHYTOSANITARY CERTIFICATE"
+			},
+			"nn_bill_of_lading": {
+				"id": "nn_bill_of_lading",
+				"type": "select",
+				"values": {
+					"-1": "-SELECT-",
+					"yes": "YES",
+					"no": "NO"
+				},
+				"value": "",
+				"title": "BILL OF LADING"
+			},
+			"nn_beneficiary_certificate": {
+				"id": "nn_beneficiary_certificate",
+				"type": "select",
+				"values": {
+					"-1": "-SELECT-",
+					"yes": "YES",
+					"no": "NO"
+				},
+				"value": "",
+				"title": "BENEFICIARYS CERTIFICATE"
+			},
+			"nn_fumigation_certificate": {
+				"id": "nn_fumigation_certificate",
+				"type": "select",
+				"values": {
+					"-1": "-SELECT-",
+					"yes": "YES",
+					"no": "NO"
+				},
+				"value": "",
+				"title": "FUMIGATION CERTIFICATE"
+			},
+			"nn_dhl_courier_date": {
+				"id": "nn_dhl_courier_date",
+				"type": "date",
+				"value": "",
+				"title": "COURIER DATE"
+			},
+			"nn_dhl_courier_name": {
+				"id": "nn_dhl_courier_name",
+				"type": "text",
+				"value": "",
+				"title": "COURIER NAME"
+			},
+			"nn_dhl_courier_details": {
+				"id": "nn_dhl_courier_details",
+				"type": "text",
+				"value": "",
+				"title": "COURIER NO."
+			},
+			"nn_documents_copy": {
+				"id": "nn_documents_copy",
+				"type": "file",
+				"value": "",
+				"title": "UPLOAD NN DOCUMENTS"
+			}
+		}
+	},
+	"payment": {
+		"title": "Payment",
+		"fields": {
+			"payment_invoice_payment_date": {
+				"id": "payment_invoice_payment_date",
+				"type": "date",
+				"value": "",
+				"title": "INVOICE PAYMENT DATE"
+			},
+			"payment_acceptance_date": {
+				"id": "payment_acceptance_date",
+				"type": "date",
+				"value": "",
+				"title": "PAYMENT ACCEPTANCE DATE"
+			},
+			"payment_maturity_due_date": {
+				"id": "payment_maturity_due_date",
+				"type": "date",
+				"genre": "calculative",
+				"value": "",
+				"title": "MATURITY DUE DATE"
+			},
+			"payment_copy": {
+				"id": "payment_copy",
+				"type": "file",
+				"value": "",
+				"title": "UPLOAD PAYMENT COPY"
+			},
+			"payment_acceptance_copy": {
+				"id": "payment_acceptance_copy",
+				"type": "file",
+				"value": "",
+				"title": "UPLOAD ACCEPTANCE COPY"
+			}
+		}
+	},
+	"controller": {
+		"title": "Controller",
+		"fields": {
+			"controller_name": {
+				"id": "controller_name",
+				"type": "text",
+				"value": "",
+				"title": "CONTROLLER NAME"
+			},
+			"controller_weight_finalization_area": {
+				"id": "controller_weight_finalization_area",
+				"type": "select",
+				"values": {
+					"-1": "-SELECT-",
+					"port": "PORT",
+					"mill": "MILL"
+				},
+				"value": "",
+				"title": "WEIGHT FINALIZATION AREA"
+			},
+			"controller_weight_type": {
+				"id": "controller_weight_type",
+				"type": "select",
+				"values": {
+					"-1": "-SELECT-",
+					"bales_by_bales": "BALES BY BALES",
+					"bridge": "WEIGHBRIDGE"
+				},
+				"value": "",
+				"title": "WEIGHT TYPE"
+			},
+			"controller_tear_weight": {
+				"id": "controller_tear_weight",
+				"type": "number",
+				"unit": {
+					"values": {
+						"lbs": "LBS",
+						"kg": "KG",
+						"mt": "MT"
+					},
+					"value": "lbs"
+				},
+				"value": "",
+				"title": "TEAR WEIGHT"
+			},
+			"controller_invoice_weight": {
+				"id": "controller_invoice_weight",
+				"type": "number",
+				"unit": {
+					"values": {
+						"lbs": "LBS",
+						"kg": "KG",
+						"mt": "MT"
+					},
+					"value": "lbs"
+				},
+				"value": "",
+				"title": "INVOICE WEIGHT"
+			},
+			"controller_landing_weight": {
+				"id": "controller_landing_weight",
+				"type": "number",
+				"unit": {
+					"values": {
+						"lbs": "LBS",
+						"kg": "KG",
+						"mt": "MT"
+					},
+					"value": "lbs"
+				},
+				"value": "",
+				"title": "LANDING WEIGHT"
+			},
+			"controller_short_gain_weight": {
+				"id": "controller_short_gain_weight",
+				"type": "number",
+				"genre": "calculative",
+				"value": "",
+				"title": "SHORT/GAIN WEIGHT"
+			},
+			"controller_documents": {
+				"id": "controller_documents",
+				"type": "file",
+				"value": "",
+				"title": "UPLOAD CONTROLLER DOCUMENTS"
+			}
+		}
+	},
+	"short_gain_weight_claim": {
+		"title": "Short/Gain Weight Claim",
+		"fields": {
+			"s_g_w_c_short_gain_weight_claim_date": {
+				"id": "s_g_w_c_short_gain_weight_claim_date",
+				"type": "date",
+				"value": "",
+				"title": "SHORT/GAIN WEIGHT CLAIM DATE"
+			},
+			"s_g_w_c_short_gain_weight_claim_qty": {
+				"id": "s_g_w_c_short_gain_weight_claim_qty",
+				"type": "number",
+				"genre": "calculative",
+				"value": "",
+				"title": "SHORT/GAIN WEIGHT CLAIM QTY."
+			},
+			"s_g_w_c_short_gain_weight_claim_amount": {
+				"id": "s_g_w_c_short_gain_weight_claim_amount",
+				"type": "number",
+				"genre": "calculative",
+				"value": "",
+				"title": "SHORT/GAIN WEIGHT CLAIM AMOUNT"
+			},
+			"s_g_w_c_amount_received_date": {
+				"id": "s_g_w_c_amount_received_date",
+				"type": "date",
+				"value": "",
+				"title": "AMOUNT RECEIVED DATE"
+			},
+			"s_g_w_c_received_account_number": {
+				"id": "s_g_w_c_received_account_number",
+				"type": "text",
+				"value": "",
+				"title": "RECEIVED ACCOUNT NAME"
+			},
+			"s_g_w_c_payment_mode": {
+				"id": "s_g_w_c_payment_mode",
+				"type": "text",
+				"value": "",
+				"title": "PAYMENT MODE"
+			},
+			"s_g_w_c_remarks": {
+				"id": "s_g_w_c_remarks",
+				"type": "text",
+				"value": "",
+				"title": "REMARKS"
+			},
+			"s_g_w_c_claim_letter": {
+				"id": "s_g_w_c_claim_letter",
+				"type": "file",
+				"value": "",
+				"title": "UPLOAD CLAIM LETTER"
+			},
+			"s_g_w_c_payment_copy": {
+				"id": "s_g_w_c_payment_copy",
+				"type": "file",
+				"value": "",
+				"title": "UPLOAD PAYMENT COPY"
+			}
+		}
+	},
+	"quality_claim": {
+		"title": "Quality Claim",
+		"fields": {
+			"q_c_quality_claim_date": {
+				"id": "q_c_quality_claim_date",
+				"type": "date",
+				"value": "",
+				"title": "QUALITY CLAIM DATE"
+			},
+			"q_c_quality_claim_amount": {
+				"id": "q_c_quality_claim_amount",
+				"type": "number",
+				"unit": {
+					"values": {
+						"usd": "USD"
+					},
+					"value": "usd"
+				},
+				"value": "",
+				"title": "QUALITY CLAIM AMOUNT"
+			},
+			"q_c_quality_received_amount": {
+				"id": "q_c_quality_received_amount",
+				"type": "number",
+				"unit": {
+					"values": {
+						"usd": "USD"
+					},
+					"value": "usd"
+				},
+				"value": "",
+				"title": "RECEIVED AMOUNT"
+			},
+			"q_c_approved_claim_amount": {
+				"id": "q_c_approved_claim_amount",
+				"type": "number",
+				"value": "",
+				"title": "APPROVED CLAIM AMOUNT"
+			},
+			"q_c_amount_received_date": {
+				"id": "q_c_amount_received_date",
+				"type": "date",
+				"value": "",
+				"title": "AMOUNT RECEIVED DATE"
+			},
+			"q_c_received_account_number": {
+				"id": "q_c_received_account_number",
+				"type": "text",
+				"value": "",
+				"title": "RECEIVED ACCOUNT NAME"
+			},
+			"q_c_payment_mode": {
+				"id": "q_c_payment_mode",
+				"type": "text",
+				"value": "",
+				"title": "PAYMENT MODE"
+			},
+			"q_c_claim_letter": {
+				"id": "q_c_claim_letter",
+				"type": "file",
+				"value": "",
+				"title": "UPLOAD CLAIM LETTER"
+			},
+			"q_c_payment_copy": {
+				"id": "q_c_payment_copy",
+				"type": "file",
+				"value": "",
+				"title": "UPLOAD PAYMENT COPY"
+			}
+		}
+	},
+	"debit_note": {
+		"title": "Debit Note",
+		"fields": {
+			"debit_note_number": {
+				"id": "debit_note_number",
+				"type": "text",
+				"value": "",
+				"title": "DEBIT NOTE NUMBER"
+			},
+			"debit_note_date": {
+				"id": "debit_note_date",
+				"type": "date",
+				"value": "",
+				"title": "DEBIT NOTE DATE"
+			},
+			"debit_note_amount": {
+				"id": "debit_note_amount",
+				"type": "number",
+				"genre": "calculative",
+				"value": "",
+				"title": "DEBIT NOTE AMOUNT"
+			},
+			"debit_note_received_amount": {
+				"id": "debit_note_received_amount",
+				"type": "number",
+				"unit": {
+					"values": {
+						"usd": "USD"
+					},
+					"value": "usd"
+				},
+				"value": "",
+				"title": "RECEIVED AMOUNT"
+			},
+			"debit_note_amount_received_date": {
+				"id": "debit_note_amount_received_date",
+				"type": "date",
+				"value": "",
+				"title": "AMOUNT RECEIVED DATE"
+			},
+			"debit_note_received_account_number": {
+				"id": "debit_note_received_account_number",
+				"type": "text",
+				"value": "",
+				"title": "RECEIVED ACCOUNT NAME"
+			},
+			"debit_note_payment_mode": {
+				"id": "debit_note_payment_mode",
+				"type": "text",
+				"value": "",
+				"title": "PAYMENT MODE"
+			},
+			"debit_note_letter": {
+				"id": "debit_note_letter",
+				"type": "file",
+				"value": "",
+				"title": "UPLOAD LETTER"
+			},
+			"debit_note_remarks": {
+				"id": "debit_note_remarks",
+				"type": "text",
+				"value": "",
+				"title": "REMARKS"
+			},
+			"debit_note_payment_copy": {
+				"id": "debit_note_payment_copy",
+				"type": "file",
+				"value": "",
+				"title": "UPLOAD PAYMENT COPY"
+			}
+		}
+	},
+	"carrying_charge": {
+		"title": "Carrying Charge",
+		"fields": {
+			"cc_lc_opening_date": {
+				"id": "cc_lc_opening_date",
+				"type": "date",
+				"value": "",
+				"title": "LC OPENING DATE"
+			},
+			"cc_actual_lc_opening_date": {
+				"id": "cc_actual_lc_opening_date",
+				"type": "date",
+				"value": "",
+				"title": "ACTUAL LC OPENING DATE"
+			},
+			"cc_no_of_days_late": {
+				"id": "cc_no_of_days_late",
+				"type": "number",
+				"value": "",
+				"title": "NO. OF DAYS LATE"
+			},
+			"cc_amount": {
+				"id": "cc_amount",
+				"type": "number",
+				"unit": {
+					"values": {
+						"usd": "USD"
+					},
+					"value": "usd"
+				},
+				"value": "",
+				"title": "AMOUNT"
+			},
+			"cc_payment_mode": {
+				"id": "cc_payment_mode",
+				"type": "text",
+				"value": "",
+				"title": "PAYMENT MODE"
+			},
+			"cc_remarks": {
+				"id": "cc_remarks",
+				"type": "text",
+				"value": "",
+				"title": "REMARKS"
+			},
+			"cc_carrying_copy": {
+				"id": "cc_carrying_copy",
+				"type": "file",
+				"value": "",
+				"title": "UPLOAD CARRYING COPY"
+			}
+		}
+	},
+	"lc_amendment_charge": {
+		"title": "LC Amendment Charge",
+		"fields": {
+			"lc_amendment_charge_amount": {
+				"id": "lc_amendment_charge_amount",
+				"type": "number",
+				"unit": {
+					"values": {
+						"usd": "USD"
+					},
+					"value": "usd"
+				},
+				"value": "",
+				"title": "LC AMENDMENT CHARGE AMOUNT"
+			},
+			"lc_amendment_charge_payment_mode": {
+				"id": "lc_amendment_charge_payment_mode",
+				"type": "text",
+				"value": "",
+				"title": "PAYMENT MODE"
+			}
+		}
+	}
 }

@@ -3,98 +3,98 @@
 		<div class="menu-background"></div>
 		<div id="template-logo" class="template-logo"></div>
 		<div id="template-menu" class="template-menu">
-			<?php if(user_can('CREATE_PRODUCT')):?>
+			<?php if (user_can('CREATE_PRODUCT')):?>
 			<div class="menu-option-holder">
-				<?php menu_render('PRODUCTS',base_url().'products/',true);?>
+				<?php menu_render('PRODUCTS', base_url().'products/', true);?>
 				<div class="sub-menu-holder">
-					<?php submenu_render('CREATE NEW',base_url().'products/create');?>
+					<?php submenu_render('CREATE NEW', base_url().'products/create');?>
 					<?php //submenu_render('LIST ALL',base_url().'products/all');?>
 				</div>
 			</div>
          <?php endif;?>
-         <?php if(user_can('CREATE_DEPARTMENT')):?>
+         <?php if (user_can('CREATE_DEPARTMENT')):?>
 			<div class="menu-option-holder">
-				<?php menu_render('DEPARTMENTS',base_url().'departments/',true);?>
+				<?php menu_render('DEPARTMENTS', base_url().'departments/', true);?>
 				<div class="sub-menu-holder">
-					<?php submenu_render('CREATE NEW',base_url().'departments/create');?>
+					<?php submenu_render('CREATE NEW', base_url().'departments/create');?>
 					<?php //submenu_render('LIST ALL',base_url().'departments/all');?>
 				</div>
 			</div>
          <?php endif;?>
-         <?php if(user_can('CREATE_CATEGORY')):?>
+         <?php if (user_can('CREATE_CATEGORY')):?>
 			<div class="menu-option-holder">
-				<?php menu_render('CATEGORIES',base_url().'categories/',true);?>
+				<?php menu_render('CATEGORIES', base_url().'categories/', true);?>
 				<div class="sub-menu-holder">
-					<?php submenu_render('CREATE NEW',base_url().'categories/create');?>
+					<?php submenu_render('CREATE NEW', base_url().'categories/create');?>
 					<?php //submenu_render('LIST ALL',base_url().'departments/all');?>
 				</div>
 			</div>
          <?php endif;?>
          <?php //if(user_can('CREATE_SUPPLIER')):?>
 			<div class="menu-option-holder">
-				<?php menu_render('SUPPLIERS',base_url().'suppliers/',true);?>
+				<?php menu_render('SUPPLIERS', base_url().'suppliers/', true);?>
 				<div class="sub-menu-holder">
-					<?php submenu_render('CREATE NEW',base_url().'suppliers/create');?>
+					<?php submenu_render('CREATE NEW', base_url().'suppliers/create');?>
 					<?php //submenu_render('LIST ALL',base_url().'suppliers/all');?>
 				</div>
 			</div>
          <?php //endif;?>
          <?php //if(user_can('CREATE_CUSTOMER')):?>
 			<div class="menu-option-holder">
-				<?php menu_render('BUYERS',base_url().'buyers/',true);?>
+				<?php menu_render('BUYERS', base_url().'buyers/', true);?>
 				<div class="sub-menu-holder">
-					<?php submenu_render('CREATE NEW',base_url().'buyers/create');?>
+					<?php submenu_render('CREATE NEW', base_url().'buyers/create');?>
 					<?php //submenu_render('LIST ALL',base_url().'buyers/all');?>
 				</div>
 			</div>
          <?php //endif;?>
 			<?php //if(user_can('CREATE_PROJECT')):?>
 			<div class="menu-option-holder">
-				<?php menu_render('PROJECTS',base_url().'projects/',true);?>
+				<?php menu_render('PROJECTS', base_url().'projects/', true);?>
 				<div class="sub-menu-holder">
-					<?php submenu_render('CREATE NEW',base_url().'projects/create');?>
+					<?php submenu_render('CREATE NEW', base_url().'projects/create');?>
 					<?php //submenu_render('LIST ALL',base_url().'projects/all');?>
 				</div>
 			</div>
          <?php //endif;?>
 
-         <?php if(user_can('CREATE_ROLE') && user_can('EDIT_ROLE') && user_can('REMOVE_ROLE')):?>
+         <?php if (user_can('CREATE_ROLE') && user_can('EDIT_ROLE') && user_can('REMOVE_ROLE')):?>
 			<div class="menu-option-holder">
-				<?php menu_render('ROLES',base_url().'roles/',true);?>
+				<?php menu_render('ROLES', base_url().'roles/', true);?>
                                 <div class="sub-menu-holder">
-					<?php submenu_render('CREATE NEW',base_url().'roles/create');?>
+					<?php submenu_render('CREATE NEW', base_url().'roles/create');?>
 					<?php //submenu_render('LIST ALL',base_url().'roles/all');?>
 				</div>
 			</div>
          <?php endif; ?>
-         <?php if(user_can('CREATE_USER')):?>
+         <?php if (user_can('CREATE_USER')):?>
 			<div class="menu-option-holder">
-				<?php menu_render('USERS',base_url().'users/',true);?>
+				<?php menu_render('USERS', base_url().'users/', true);?>
 				<div class="sub-menu-holder">
-					<?php submenu_render('CREATE NEW',base_url().'users/create');?>
+					<?php submenu_render('CREATE NEW', base_url().'users/create');?>
 					<?php //submenu_render('LIST ALL',base_url().'users/all');?>
 				</div>
 			</div>
          <?php endif; ?>
-         <?php if(user_can('CREATE_INVOICE')):?>
+         <?php if (user_can('CREATE_INVOICE')):?>
 			<div class="menu-option-holder">
-				<?php menu_render('INVOICES',base_url().'invoices/create',true);?>
-				<?php if(user_can('EDIT_INVOICE')):?>
+				<?php menu_render('INVOICES', base_url().'invoices/create', true);?>
+				<?php if (user_can('EDIT_INVOICE')):?>
 				<div class="sub-menu-holder">
-					<?php submenu_render('LIST ALL',base_url().'invoices/all');?>
+					<?php submenu_render('LIST ALL', base_url().'invoices/all');?>
 					<?php //submenu_render('LIST ALL',base_url().'orders/all');?>
 				</div>
 				<?php endif;?>
 			</div>
          <?php endif;?>
-         <?php if(user_can('GENERATE_REPORT')):?>
+         <?php if (user_can('GENERATE_REPORT')):?>
 			<div class="menu-option-holder">
-				<?php menu_render('REPORTS',base_url().'reports/',true);?>
+				<?php menu_render('REPORTS', base_url().'reports/', true);?>
                                 <div class="sub-menu-holder">
-					<?php submenu_render('STOCK ENTRY',base_url().'reports/stockentry');?>
-					<?php submenu_render('SELL INFO',base_url().'reports/sellinfo');?>
-					<?php submenu_render('PROFIT',base_url().'reports/profit');?>
-					<?php submenu_render('CURRENT STOCK',base_url().'reports/currentstock');?>
+					<?php submenu_render('STOCK ENTRY', base_url().'reports/stockentry');?>
+					<?php submenu_render('SELL INFO', base_url().'reports/sellinfo');?>
+					<?php submenu_render('PROFIT', base_url().'reports/profit');?>
+					<?php submenu_render('CURRENT STOCK', base_url().'reports/currentstock');?>
 					<?php //submenu_render('LIST ALL',base_url().'orders/all');?>
 				</div>
 			</div>

@@ -41,6 +41,7 @@
             beforeSubmit: function(formData) {
                 formData[1].value = CryptoJS.MD5(formData[1].value).toString();
                 //console.log(formData);
+                //return false;
             },
 
             /* progress bar call back*/

@@ -226,19 +226,19 @@ class Project extends CI_Model
     {
 
         // Extract
-        $s_c_quantity = $this->extract('s_c_quantity', $project);
-        $s_c_quantity_unit = $this->extract('s_c_quantity_unit', $project);
+        $p_i_quantity = $this->extract('p_i_quantity', $project);
+        $p_i_quantity_unit = $this->extract('p_i_quantity_unit', $project);
         $s_c_commission_point = $this->extract('s_c_commission_point', $project);
 
         // Conversion
-        $s_c_quantity = $this->convert_to_lbs($s_c_quantity_unit, $s_c_quantity);
-        $s_c_quantity_unit = 'lbs';
+        $p_i_quantity = $this->convert_to_lbs($p_i_quantity_unit, $p_i_quantity);
+        $p_i_quantity_unit = 'lbs';
         if ($s_c_commission_point == '') {
             $s_c_commission_point = 0;
         }
 
         // Return
-        return ($s_c_quantity * $s_c_commission_point) / 10000;
+        return ($p_i_quantity * $s_c_commission_point) / 10000;
     }
     public function calculate_debit_amount_usd($project)
     {

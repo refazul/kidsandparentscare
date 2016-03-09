@@ -153,7 +153,8 @@
 				"unit": {
 					"values": {
 						"mt": "MT",
-						"lbs": "LBS"
+						"lbs": "LBS",
+						"bale": "BALES"
 					},
 					"value": "mt"
 				},
@@ -437,8 +438,10 @@
 					"33": "SAVANNAH, USA",
 					"34": "BANDAR ABBAS, IRAN",
 					"35": "PETRAPOLE, INDIA",
+					"39": "BONGAON, INDIA",
                     "36": "ANY PORT OF ASIA",
-                    "37": "ANY PORT OF AFRICA"
+                    "37": "ANY PORT OF AFRICA",
+					"38": "ANY PORT OF INDIA"
 				},
 				"value": "",
 				"title": "PORT OF LOADING"
@@ -600,8 +603,10 @@
 					"33": "SAVANNAH, USA",
 					"34": "BANDAR ABBAS, IRAN",
 					"35": "PETRAPOLE, INDIA",
+					"39": "BONGAON, INDIA",
                     "36": "ANY PORT OF ASIA",
-                    "37": "ANY PORT OF AFRICA"
+                    "37": "ANY PORT OF AFRICA",
+					"38": "ANY PORT OF INDIA"
 				},
 				"value": "",
 				"title": "PORT OF LOADING"
@@ -669,93 +674,11 @@
 				"value": "",
 				"title": "COMMERCIAL INVOICE NO."
 			},
-			"nn_packing_list": {
-				"id": "nn_packing_list",
-				"type": "select",
-				"values": {
-					"-1": "-SELECT-",
-					"yes": "YES",
-					"no": "NO"
-				},
+			"nn_commercial_invoice_date": {
+				"id": "nn_commercial_invoice_date",
+				"type": "date",
 				"value": "",
-				"title": "PACKING LIST"
-			},
-			"nn_shipment_advice": {
-				"id": "nn_shipment_advice",
-				"type": "select",
-				"values": {
-					"-1": "-SELECT-",
-					"yes": "YES",
-					"no": "NO"
-				},
-				"value": "",
-				"title": "SHIPMENT ADVICE"
-			},
-			"nn_fax_advice": {
-				"id": "nn_fax_advice",
-				"type": "select",
-				"values": {
-					"-1": "-SELECT-",
-					"yes": "YES",
-					"no": "NO"
-				},
-				"value": "",
-				"title": "FAX ADVICE"
-			},
-			"nn_co": {
-				"id": "nn_co",
-				"type": "select",
-				"values": {
-					"-1": "-SELECT-",
-					"yes": "YES",
-					"no": "NO"
-				},
-				"value": "",
-				"title": "CERTIFICATE OF ORIGIN (CO)"
-			},
-			"nn_phytosanitary_certificate": {
-				"id": "nn_phytosanitary_certificate",
-				"type": "select",
-				"values": {
-					"-1": "-SELECT-",
-					"yes": "YES",
-					"no": "NO"
-				},
-				"value": "",
-				"title": "PHYTOSANITARY CERTIFICATE"
-			},
-			"nn_bill_of_lading": {
-				"id": "nn_bill_of_lading",
-				"type": "select",
-				"values": {
-					"-1": "-SELECT-",
-					"yes": "YES",
-					"no": "NO"
-				},
-				"value": "",
-				"title": "BILL OF LADING"
-			},
-			"nn_beneficiary_certificate": {
-				"id": "nn_beneficiary_certificate",
-				"type": "select",
-				"values": {
-					"-1": "-SELECT-",
-					"yes": "YES",
-					"no": "NO"
-				},
-				"value": "",
-				"title": "BENEFICIARYS CERTIFICATE"
-			},
-			"nn_fumigation_certificate": {
-				"id": "nn_fumigation_certificate",
-				"type": "select",
-				"values": {
-					"-1": "-SELECT-",
-					"yes": "YES",
-					"no": "NO"
-				},
-				"value": "",
-				"title": "FUMIGATION CERTIFICATE"
+				"title": "COMMERCIAL INVOICE DATE"
 			},
 			"nn_dhl_courier_date": {
 				"id": "nn_dhl_courier_date",

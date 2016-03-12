@@ -109,6 +109,8 @@ class Projects extends CI_Controller
                     $sort_by = 'suppliers.name';
                 }
 
+                $template = json_decode(file_get_contents(FCPATH.'assets'.DIRECTORY_SEPARATOR.'template.json'));
+
                 $this->db->select('project_id, projects.name as name, buyers.name as buyer, suppliers.name as supplier, sales_confirmation, contract, performa_invoice');
                 $this->db->from('projects');
                 $this->db->join('buyers', 'projects.buyer_id=buyers.buyer_id');
@@ -116,7 +118,7 @@ class Projects extends CI_Controller
                 $this->db->order_by($sort_by, $order);
 
                 /* search */
-                if (in_array($this->input->get_post('filter_by'), array('name', 'buyer', 'supplier'))) {
+                if (in_array($this->input->get_post('filter_by'), array('name', 'buyer', 'supplier', 'contract_number', 's_c_origin', 'p_i_quantity'))) {
                     if ($this->input->get_post('filter') && strlen($this->input->get_post('filter')) > 0) {
                         $filter_by = $this->input->get_post('filter_by');
                         if ($filter_by == 'name') {
@@ -127,7 +129,9 @@ class Projects extends CI_Controller
                             $filter_by = 'suppliers.name';
                         }
 
-                        $this->db->like($filter_by, $this->input->get_post('filter'), 'both');
+                        if (in_array($this->input->get_post('filter_by'), array('name', 'buyer', 'supplier'))) {
+                            $this->db->like($filter_by, $this->input->get_post('filter'), 'both');
+                        }
                         $results = $this->db->get()->result_array();
                         foreach ($results as &$result) {
                             $result['contract_number'] = '';
@@ -139,13 +143,18 @@ class Projects extends CI_Controller
                                 }
                             }
 
-                            /*
-                            $result['origin'] = '';
+                            $result['s_c_origin'] = '';
                             $c = explode('&', $result['sales_confirmation']);
                             foreach ($c as $c_item) {
                                 $d = explode('=', $c_item);
                                 if ($d[0] == 's_c_origin') {
-                                    $result['origin'] = $d[1];
+                                    $e = '-SELECT-';
+                                    foreach ($template->sales_confirmation->fields->s_c_origin->values as $key => $value) {
+                                        if ($key == $d[1]) {
+                                            $e = $value;
+                                        }
+                                    }
+                                    $result['s_c_origin'] = $e;
                                 }
                             }
 
@@ -157,10 +166,15 @@ class Projects extends CI_Controller
                                     $result['p_i_quantity'] = $d[1];
                                 }
                                 if ($d[0] == 'p_i_quantity_unit') {
-                                    $result['p_i_quantity'] = $result['p_i_quantity'].' '.$d[1];
+                                    $e = 'MT';
+                                    foreach ($template->performa_invoice->fields->p_i_quantity->unit->values as $key => $value) {
+                                        if ($key == $d[1]) {
+                                            $e = $value;
+                                        }
+                                    }
+                                    $result['p_i_quantity'] = $result['p_i_quantity'].' '.$e;
                                 }
                             }
-                            */
                         }
 
                         $data['total'] = count($results);
@@ -180,14 +194,19 @@ class Projects extends CI_Controller
                             $result['contract_number'] = $d[1];
                         }
                     }
-                    /*
 
-                    $result['origin'] = '';
+                    $result['s_c_origin'] = '';
                     $c = explode('&', $result['sales_confirmation']);
                     foreach ($c as $c_item) {
                         $d = explode('=', $c_item);
                         if ($d[0] == 's_c_origin') {
-                            $result['origin'] = $d[1];
+                            $e = '-SELECT-';
+                            foreach ($template->sales_confirmation->fields->s_c_origin->values as $key => $value) {
+                                if ($key == $d[1]) {
+                                    $e = $value;
+                                }
+                            }
+                            $result['s_c_origin'] = $e;
                         }
                     }
 
@@ -199,10 +218,15 @@ class Projects extends CI_Controller
                             $result['p_i_quantity'] = $d[1];
                         }
                         if ($d[0] == 'p_i_quantity_unit') {
-                            $result['p_i_quantity'] = $result['p_i_quantity'].' '.$d[1];
+                            $e = 'MT';
+                            foreach ($template->performa_invoice->fields->p_i_quantity->unit->values as $key => $value) {
+                                if ($key == $d[1]) {
+                                    $e = $value;
+                                }
+                            }
+                            $result['p_i_quantity'] = $result['p_i_quantity'].' '.$e;
                         }
                     }
-                    */
                 }
                 $data['total'] = count($results);
                 $data['results'] = array_slice($results, $page, $limit);
@@ -233,12 +257,14 @@ class Projects extends CI_Controller
                     'buyer' => array('Buyer', '20'),
                     'supplier' => array('Supplier', '20'),
                     'contract_number' => array('Contract Number', '10'),
-                    //'sales_confirmation' => array('Sales Confirmation', 5),
+                    's_c_origin' => array('Origin', 5),
+                    'p_i_quantity' => array('Quantity', 5),
                 );
                 $data['search_fields'] = array(
                     'name' => 'Project ID',
                     'buyer' => 'Buyer',
                     'supplier' => 'Supplier',
+                    //'s_c_origin' => 'Origin',
                 );
                 $data['orders'] = array(
                     'asc' => 'Ascending',

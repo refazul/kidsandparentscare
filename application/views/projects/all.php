@@ -140,8 +140,8 @@
                                 $('<td/>',{}).append(document.createTextNode(results[i].buyer)).appendTo('#project-'+results[i].project_id);
                                 $('<td/>',{}).append(document.createTextNode(results[i].supplier)).appendTo('#project-'+results[i].project_id);
                                 $('<td/>',{}).append(document.createTextNode(decodeURIComponent(results[i].contract_number))).appendTo('#project-'+results[i].project_id);
-                                //$('<td/>',{}).append(document.createTextNode(results[i].s_c_origin)).appendTo('#project-'+results[i].project_id);
-                                //$('<td/>',{}).append(document.createTextNode(results[i].p_i_quantity)).appendTo('#project-'+results[i].project_id);
+                                $('<td/>',{}).append(document.createTextNode(results[i].s_c_origin)).appendTo('#project-'+results[i].project_id);
+                                $('<td/>',{}).append(document.createTextNode(results[i].p_i_quantity)).appendTo('#project-'+results[i].project_id);
                                 //$('<td/>',{}).append(document.createTextNode(results[i].sales_confirmation)).appendTo('#project-'+results[i].project_id);
                             }
                             $("#projects-list").tablesorter({widgets: ['zebra']});

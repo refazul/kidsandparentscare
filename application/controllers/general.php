@@ -13,7 +13,7 @@ class General extends CI_Controller
         $scope = $this->input->post('_scope') ? $this->input->post('_scope') : 'general';
         $name = $this->input->post('_name') ? $this->input->post('_name') : 'file';
 
-        $valid_exts = array('jpeg', 'jpg', 'png', 'gif', 'pdf', 'zip', 'doc', 'docx', 'xls');                                          // valid extensions
+        $valid_exts = array('jpeg', 'jpg', 'png', 'gif', 'pdf', 'zip', 'doc', 'docx', 'xls', 'xlsx');                                          // valid extensions
         $max_size = 10 * 1024 * 1024;                                                               // max file size (10MB)
         $rel_path = $scope.DIRECTORY_SEPARATOR;
         $abs_path = FCPATH.'uploads'.DIRECTORY_SEPARATOR.$rel_path; // upload directory

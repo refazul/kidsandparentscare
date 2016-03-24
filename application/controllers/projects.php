@@ -96,7 +96,7 @@ class Projects extends CI_Controller
             $limit = $this->input->get_post('limit') ? $this->input->get_post('limit') : 20;
             $page = $this->input->get_post('page') ? $this->input->get_post('page') : 0;
 
-            if (in_array($sort_by, array('name', 'buyer', 'supplier'))) {
+            if (in_array($sort_by, array('name', 'buyer', 'supplier', 'project_id'))) {
                 $data['status'] = 'ok';
                 $data['page'] = $page;
                 $data['limit'] = $limit;
@@ -111,14 +111,14 @@ class Projects extends CI_Controller
 
                 $template = json_decode(file_get_contents(FCPATH.'assets'.DIRECTORY_SEPARATOR.'template.json'));
 
-                $this->db->select('project_id, projects.name as name, buyers.name as buyer, suppliers.name as supplier, sales_confirmation, contract, performa_invoice');
+                $this->db->select('project_id, projects.name as name, buyers.name as buyer, suppliers.name as supplier, sales_confirmation, contract, performa_invoice, lc');
                 $this->db->from('projects');
                 $this->db->join('buyers', 'projects.buyer_id=buyers.buyer_id');
                 $this->db->join('suppliers', 'projects.supplier_id=suppliers.supplier_id');
                 $this->db->order_by($sort_by, $order);
 
                 /* search */
-                if (in_array($this->input->get_post('filter_by'), array('name', 'buyer', 'supplier', 'contract_number', 's_c_origin', 'p_i_quantity'))) {
+                if (in_array($this->input->get_post('filter_by'), array('name', 'buyer', 'supplier', 'contract_number', 's_c_origin', 'p_i_quantity', 'lc_number'))) {
                     if ($this->input->get_post('filter') && strlen($this->input->get_post('filter')) > 0) {
                         $filter_by = $this->input->get_post('filter_by');
                         if ($filter_by == 'name') {
@@ -140,6 +140,15 @@ class Projects extends CI_Controller
                                 $d = explode('=', $c_item);
                                 if ($d[0] == 'contract_number') {
                                     $result['contract_number'] = $d[1];
+                                }
+                            }
+
+                            $result['lc_number'] = '';
+                            $c = explode('&', $result['lc']);
+                            foreach ($c as $c_item) {
+                                $d = explode('=', $c_item);
+                                if ($d[0] == 'lc_number') {
+                                    $result['lc_number'] = $d[1];
                                 }
                             }
 
@@ -176,6 +185,25 @@ class Projects extends CI_Controller
                                 }
                             }
                         }
+                        if (in_array($this->input->get_post('filter_by'), array('contract_number', 's_c_origin', 'p_i_quantity', 'lc_number'))) {
+                            $search_results = array();
+                            foreach ($results as $item) {
+                                if ($item[$this->input->get_post('filter_by')] === '') {
+                                    continue;
+                                }
+                                if ($this->input->get_post('filter') === '') {
+                                    continue;
+                                }
+                                if (strpos(strtolower($item[$this->input->get_post('filter_by')]), strtolower($this->input->get_post('filter'))) !== false) {
+                                    $search_results[] = $item;
+                                }
+                            }
+                            $data['total'] = count($search_results);
+                            $data['results'] = array_slice($search_results, $page, $limit);
+
+                            echo json_encode($data);
+                            die();
+                        }
 
                         $data['total'] = count($results);
                         $data['results'] = array_slice($results, $page, $limit);
@@ -192,6 +220,15 @@ class Projects extends CI_Controller
                         $d = explode('=', $c_item);
                         if ($d[0] == 'contract_number') {
                             $result['contract_number'] = $d[1];
+                        }
+                    }
+
+                    $result['lc_number'] = '';
+                    $c = explode('&', $result['lc']);
+                    foreach ($c as $c_item) {
+                        $d = explode('=', $c_item);
+                        if ($d[0] == 'lc_number') {
+                            $result['lc_number'] = $d[1];
                         }
                     }
 
@@ -246,17 +283,19 @@ class Projects extends CI_Controller
     public function all()
     {
         if (user_logged_in()) {
-            $sort_by = $this->input->get_post('sort_by') ? $this->input->get_post('sort_by') : 'name';
-            $order = $this->input->get_post('order') ? $this->input->get_post('order') : 'asc';
+            $sort_by = $this->input->get_post('sort_by') ? $this->input->get_post('sort_by') : 'project_id';
+            $order = $this->input->get_post('order') ? $this->input->get_post('order') : 'desc';
             $limit = $this->input->get_post('limit') ? $this->input->get_post('limit') : 20;
             $page = $this->input->get_post('page') ? $this->input->get_post('page') : 0;
 
             if (in_array($sort_by, $this->db->list_fields('projects'))) {
                 $data['fields'] = array(
+                    'project_id' => array('ID', 0),
                     'name' => array('Project ID', '5'),
-                    'buyer' => array('Buyer', '20'),
-                    'supplier' => array('Supplier', '20'),
+                    'buyer' => array('Buyer', '10'),
+                    'supplier' => array('Supplier', '10'),
                     'contract_number' => array('Contract Number', '10'),
+                    'lc_number' => array('LC Number', '10'),
                     's_c_origin' => array('Origin', 5),
                     'p_i_quantity' => array('Quantity', 5),
                 );
@@ -264,14 +303,17 @@ class Projects extends CI_Controller
                     'name' => 'Project ID',
                     'buyer' => 'Buyer',
                     'supplier' => 'Supplier',
-                    //'s_c_origin' => 'Origin',
+                    'lc_number' => 'LC Number',
+                    'contract_number' => 'Contract Number',
+                    's_c_origin' => 'Origin',
+                    'p_i_quantity' => 'Quantity',
                 );
                 $data['orders'] = array(
                     'asc' => 'Ascending',
                     'desc' => 'Descending',
                 );
 
-                $data['sort_by'] = 'name';
+                $data['sort_by'] = $sort_by;
                 $data['order'] = $order;
                 $data['limit'] = $limit;
                 $data['page'] = $page;

@@ -1,49 +1,57 @@
 <div class='navigation'>
-<?php foreach($domains as $root=>$domain): if(!isset($domain->fields))continue;?>
-   <div class='anchor' data-target='<?php echo $root?>' title='<?php echo $domain->title;?>'>
-      <?php echo $domain->title;?>
-   </div>
+<?php foreach ($domains as $root => $domain): if (!isset($domain->fields)) {
+     continue;
+ }?>
+    <div class='anchor' data-target='<?php echo $root?>' title='<?php echo $domain->title;?>'>
+        <?php echo $domain->title;?>
+    </div>
 <?php endforeach; ?>
 </div>
 <div class='project' style="width:550px;clear:both;margin:10px auto 20px;">
 
-   <?php
+    <?php
 
-   $form=array(
-      'id'=>'project_create_form',
-      'value_width'=>280,
-      'value_height'=>28,
-      'action'=>site_url().'projects/ajax'
-   );
+    $form = array(
+      'id' => 'project_create_form',
+      'value_width' => 280,
+      'value_height' => 28,
+      'action' => site_url().'projects/ajax',
+    );
 
-   ?>
-   <script type='text/javascript'>
+    ?>
+    <script type='text/javascript'>
       var template=JSON.parse('<?php echo $template;?>');
-   </script>
+    </script>
 
-   <!-- START -->
+    <!-- START -->
 
-      <?php foreach($domains as $root=>$domain): if(!isset($domain->fields))continue; $fields=$domain->fields; $title=$domain->title;?>
+      <?php foreach ($domains as $root => $domain): if (!isset($domain->fields)) {
+     continue;
+ } $fields = $domain->fields; $title = $domain->title;?>
       <div id='<?php echo $root;?>' style='border: 2px dashed #ccc; padding: 10px;margin-bottom: 10px;'>
          <div class='title'><?php echo $title; ?></div>
-         <?php foreach($fields as $field):?>
+         <?php foreach ($fields as $field):?>
 
-            <?php if($field->type=='text' || $field->type=='number' || $field->type=='textbox'): ?>
+            <?php if ($field->type == 'text' || $field->type == 'number' || $field->type == 'textbox'): ?>
             <div class="part" id="<?php echo $field->id;?>-wrapper">
                <div class="field"><?php echo $field->title;?></div>
                <div class="seperator"></div>
 
-                  <?php if($field->type=='text' || $field->type=='number'): ?>
+                  <?php if ($field->type == 'text' || $field->type == 'number'): ?>
                   <div class="value" style="width:<?php echo $form['value_width'];?>px;height:<?php echo $form['value_height'];?>px;">
-                     <input type="text" <?php if(isset($field->genre) && $field->genre=='calculative')echo 'disabled'?> id="<?php echo $field->id;?>" name="<?php echo $field->id;?>" autocomplete="off" class="form-control <?php if($field->type=='text')echo 'text-box';?>" value="<?php echo $field->value?$field->value:'';?>"/>
+                     <input type="text" <?php if (isset($field->genre) && $field->genre == 'calculative') {
+    echo 'disabled';
+}?> id="<?php echo $field->id;?>" name="<?php echo $field->id;?>" autocomplete="off" class="form-control <?php if ($field->type == 'text') {
+    echo 'text-box';
+}?>" value="<?php echo $field->value ? $field->value : '';?>"/>
 
-                  <?php elseif($field->type=='textbox'): ?>
+                  <?php elseif ($field->type == 'textbox'): ?>
                   <div class="value" style="width:<?php echo $form['value_width'];?>px;">
-                     <textarea id="<?php echo $field->id;?>" name="<?php echo $field->id;?>" autocomplete="off" class="form-control"><?php echo $field->value?$field->value:'';?></textarea>
+                     <textarea id="<?php echo $field->id;?>" name="<?php echo $field->id;?>" autocomplete="off" class="form-control"><?php echo $field->value ? $field->value : '';?></textarea>
 
                   <?php endif; ?>
 
-                  <?php if($field->type=='number'): ?>
+                  <?php if ($field->type == 'number'): ?>
                   <script type='text/javascript'>
                      $('#'+'<?php echo $field->id;?>').on('input',function(){
                         var new_value=$(this).val().replace(/[^0-9. ,\-\/]/g,'');
@@ -55,10 +63,10 @@
                   </script>
                   <?php endif; ?>
 
-                  <?php if($field->type=='text' || $field->type=='textbox'): ?>
+                  <?php if ($field->type == 'text' || $field->type == 'textbox'): ?>
                   <script type='text/javascript'>
                      $('#'+'<?php echo $field->id;?>').on('input',function(){
-                        var new_value=$(this).val().toUpperCase();
+                        var new_value=$(this).val().toUpperCase().replace("'","’");
                         var focus=$(this).getCursorPosition();
                         $(this).val(new_value);
                         $(this).focus();
@@ -67,11 +75,13 @@
                   </script>
                   <?php endif; ?>
 
-                  <?php if(isset($field->unit)): ?>
+                  <?php if (isset($field->unit)): ?>
                   <div class="select-wrap select-wrap-unit" style="height:100%;">
                      <select id="<?php echo $field->id;?>_unit" name="<?php echo $field->id;?>_unit" style="height:100%;">
-                         <?php foreach($field->unit->values as $value=>$key):?>
-                         <option <?php if($value==$field->unit->value)echo 'selected="selected"'?> value="<?php echo $value;?>"><?php echo $key;?></option>
+                         <?php foreach ($field->unit->values as $value => $key):?>
+                         <option <?php if ($value == $field->unit->value) {
+    echo 'selected="selected"';
+}?> value="<?php echo $value;?>"><?php echo $key;?></option>
                          <?php endforeach;?>
                      </select>
                   </div>
@@ -82,26 +92,28 @@
                <div class="end"></div>
             </div>
 
-            <?php elseif($field->type=='password'): ?>
+            <?php elseif ($field->type == 'password'): ?>
             <div class="part" id="<?php echo $field->id;?>-wrapper">
                 <div class="field"><?php echo $field->title;?></div>
                 <div class="seperator"></div>
                 <div class="value" style="width:<?php echo $form['value_width'];?>px;height:<?php echo $form['value_height'];?>px;">
-                    <input type="password" id="<?php echo $field->id;?>" name="<?php echo $field->id;?>" autocomplete="off" class="form-control" value="<?php echo $field->value?$field->value:'';?>"/>
+                    <input type="password" id="<?php echo $field->id;?>" name="<?php echo $field->id;?>" autocomplete="off" class="form-control" value="<?php echo $field->value ? $field->value : '';?>"/>
                     <div class="mini-status-after" id="msgholder-<?php echo $field->id;?>"></div>
                 </div>
                 <div class="end"></div>
             </div>
 
-            <?php elseif($field->type=='select'): ?>
+            <?php elseif ($field->type == 'select'): ?>
             <div class="part" id="<?php echo $field->id;?>-wrapper">
                 <div class="field"><?php echo $field->title;?></div>
                 <div class="seperator"></div>
                 <div class="value" style="width:<?php echo $form['value_width'];?>px;height:<?php echo $form['value_height'];?>px;margin-bottom:3px;">
                     <div class="select-wrap" style="height:100%;">
                         <select id="<?php echo $field->id;?>" name="<?php echo $field->id;?>" style="height:100%;">
-                            <?php foreach($field->values as $value=>$key):?>
-                            <option <?php if($value==$field->value)echo 'selected="selected"'?> value="<?php echo $value;?>"><?php echo $key;?></option>
+                            <?php foreach ($field->values as $value => $key):?>
+                            <option <?php if ($value == $field->value) {
+    echo 'selected="selected"';
+}?> value="<?php echo $value;?>"><?php echo $key;?></option>
                             <?php endforeach;?>
                         </select>
                     </div>
@@ -110,40 +122,44 @@
             </div>
             <?php endif; ?>
 
-            <?php if($field->type=='hidden' || $field->type=='date' || $field->type=='file'): ?>
-               <input type='hidden' id='<?php echo $field->id;?>' name='<?php echo $field->id;?>' value='<?php echo $field->value?$field->value:'';?>'/>
+            <?php if ($field->type == 'hidden' || $field->type == 'date' || $field->type == 'file'): ?>
+               <input type='hidden' id='<?php echo $field->id;?>' name='<?php echo $field->id;?>' value='<?php echo $field->value ? $field->value : '';?>'/>
             <?php endif; ?>
 
-            <?php if($field->type=='date'): ?>
+            <?php if ($field->type == 'date'): ?>
             <div class="part" id="<?php echo $field->id;?>-wrapper">
                <div class="field"><?php echo $field->title;?></div>
                <div class="seperator"></div>
                <div class="value" style="width:<?php echo $form['value_width'];?>px;height:<?php echo $form['value_height'];?>px;">
-                  <input data-target='<?php echo $field->id;?>' type="text" autocomplete="off" <?php if(isset($field->genre) && $field->genre=='calculative')echo 'disabled'?> class="form-control date <?php if(isset($field->genre) && $field->genre=='calculative')echo 'disabled'?>" value="<?php echo $field->value?$field->value:'';?>"/>
+                  <input data-target='<?php echo $field->id;?>' type="text" autocomplete="off" <?php if (isset($field->genre) && $field->genre == 'calculative') {
+    echo 'disabled';
+}?> class="form-control date <?php if (isset($field->genre) && $field->genre == 'calculative') {
+    echo 'disabled';
+}?>" value="<?php echo $field->value ? $field->value : '';?>"/>
                   <div class="mini-status-after" id="msgholder-<?php echo $field->id;?>"></div>
                </div>
                <div class="end"></div>
             </div>
             <?php endif; ?>
 
-            <?php if($field->type=='file'): ?>
+            <?php if ($field->type == 'file'): ?>
             <div style="clear:both;margin:10px auto 20px;" id="<?php echo $field->id;?>-wrapper">
 
                <?php
 
-                  $upload_form =  uniqid().'_'.time();
+                  $upload_form = uniqid().'_'.time();
 
                   $this->load->vars(
                   array(
-                     'form_id'=>$upload_form,
-                     '_scope'=>$root,
-                     '_name'=>uniqid().'_'.time(),
-                     'destination_form_id'=>NULL,
-                     'destination_hook_id'=>$field->id,
-                     'DEFAULT_IMG'=>asset_url().'images/file-upload-2.png',
-                     'IMG'=>NULL,
-                     'VALUE'=>$field->value,
-                     'LABEL'=>$field->title
+                     'form_id' => $upload_form,
+                     '_scope' => $root,
+                     '_name' => uniqid().'_'.time(),
+                     'destination_form_id' => null,
+                     'destination_hook_id' => $field->id,
+                     'DEFAULT_IMG' => asset_url().'images/file-upload-2.png',
+                     'IMG' => null,
+                     'VALUE' => $field->value,
+                     'LABEL' => $field->title,
                   ));
                   $this->load->view('general/upload');
                ?>
@@ -151,8 +167,8 @@
             </div>
             <?php endif; ?>
 
-            <?php if(isset($field->conditional)):?>
-               <?php foreach($field->conditional as $condition=>$value): ?>
+            <?php if (isset($field->conditional)):?>
+               <?php foreach ($field->conditional as $condition => $value): ?>
                   <script type='text/javascript'>
                      $('#'+'<?php echo $condition;?>').change(function(){
                         console.log($(this).val());

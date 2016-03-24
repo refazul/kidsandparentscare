@@ -117,12 +117,10 @@
                             $('<thead/>',{}).appendTo('#projects-list');
                             $('<tr/>',{}).appendTo('#projects-list thead');
 
-                            <?php foreach ($fields as $key => $value):?>
-                            $('<th/>',{style:'width:<?php echo $value[1];?>%;text-align:<?php if (isset($value[2])) {
-    echo $value[2];
-} else {
-    echo 'left';
-}?>;'}).append(document.createTextNode("<?php echo $value[0];?>")).appendTo('#projects-list thead tr');
+                            <?php foreach ($fields as $key => $value): if ($key == 'project_id') {
+     continue;
+ }?>
+                            $('<th/>').append(document.createTextNode("<?php echo $value[0];?>")).appendTo('#projects-list thead tr');
                             <?php endforeach;?>
 
                             results=data.responseJSON.results;
@@ -140,6 +138,7 @@
                                 $('<td/>',{}).append(document.createTextNode(results[i].buyer)).appendTo('#project-'+results[i].project_id);
                                 $('<td/>',{}).append(document.createTextNode(results[i].supplier)).appendTo('#project-'+results[i].project_id);
                                 $('<td/>',{}).append(document.createTextNode(decodeURIComponent(results[i].contract_number))).appendTo('#project-'+results[i].project_id);
+                                $('<td/>',{}).append(document.createTextNode(decodeURIComponent(results[i].lc_number))).appendTo('#project-'+results[i].project_id);
                                 $('<td/>',{}).append(document.createTextNode(results[i].s_c_origin)).appendTo('#project-'+results[i].project_id);
                                 $('<td/>',{}).append(document.createTextNode(results[i].p_i_quantity)).appendTo('#project-'+results[i].project_id);
                                 //$('<td/>',{}).append(document.createTextNode(results[i].sales_confirmation)).appendTo('#project-'+results[i].project_id);

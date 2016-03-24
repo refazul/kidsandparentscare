@@ -201,7 +201,7 @@ class Project extends CI_Model
         $controller_landing_weight = $this->convert_to_lbs($controller_landing_weight_unit, $controller_landing_weight);
 
         // Return in lbs
-        return $controller_invoice_weight - $controller_landing_weight;
+        return round($controller_invoice_weight - $controller_landing_weight, 3);
     }
     public function calculate_short_gain_weight_claim_amount_usd($project)
     {

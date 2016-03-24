@@ -290,7 +290,7 @@ class Projects extends CI_Controller
 
             if (in_array($sort_by, $this->db->list_fields('projects'))) {
                 $data['fields'] = array(
-                    'project_id' => array('ID', 0),
+                    'project_id' => array('Time', 0),
                     'name' => array('Project ID', '5'),
                     'buyer' => array('Buyer', '10'),
                     'supplier' => array('Supplier', '10'),

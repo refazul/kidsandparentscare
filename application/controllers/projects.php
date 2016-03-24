@@ -199,14 +199,14 @@ class Projects extends CI_Controller
                                 }
                             }
                             $data['total'] = count($search_results);
-                            $data['results'] = array_slice($search_results, $page, $limit);
+                            $data['results'] = array_slice($search_results, ($page) * $limit, $limit);
 
                             echo json_encode($data);
                             die();
                         }
 
                         $data['total'] = count($results);
-                        $data['results'] = array_slice($results, $page, $limit);
+                        $data['results'] = array_slice($results, ($page) * $limit, $limit);
 
                         echo json_encode($data);
                         die();
@@ -266,7 +266,7 @@ class Projects extends CI_Controller
                     }
                 }
                 $data['total'] = count($results);
-                $data['results'] = array_slice($results, $page, $limit);
+                $data['results'] = array_slice($results, ($page) * $limit, $limit);
 
                 echo json_encode($data);
                 die();

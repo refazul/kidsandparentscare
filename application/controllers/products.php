@@ -30,12 +30,9 @@ class Products extends CI_Controller
                 $this->db->select('A.name as name', false);
                 $this->db->select('A.sku as sku', false);
                 $this->db->select('A.unit as unit', false);
-                $this->db->select('B.Q as stock', false);
-                $this->db->select('B.P as price', false);
-                $this->db->select('B.D as discount_amount', false);
-                $this->db->select('B.T as discount_type', false);
+                $this->db->select('B.Q as quantity', false);
                 $this->db->from('products as A');
-                $this->db->join('(select pid,sum(quantity)as Q,max(unit_sale) as P,max(discount_amount) as D,max(discount_type) as T from stocks group by pid having Q>0) as B', 'A.pid = B.pid');
+                $this->db->join('(select pid,sum(quantity)as Q from stocks group by pid having Q>0) as B', 'A.pid = B.pid');
                 $this->db->where('A.review', 1);
                 if (in_array($this->input->post('filter_by'), array('barcode', 'name', 'sku', 'unit'))) {
                     $this->db->like($this->input->post('filter_by'), $this->input->post('filter'), 'both');
@@ -50,12 +47,9 @@ class Products extends CI_Controller
                 $this->db->select('A.name as name', false);
                 $this->db->select('A.sku as sku', false);
                 $this->db->select('A.unit as unit', false);
-                $this->db->select('B.Q as stock', false);
-                $this->db->select('B.P as price', false);
-                $this->db->select('B.D as discount_amount', false);
-                $this->db->select('B.T as discount_type', false);
+                $this->db->select('B.Q as quantity', false);
                 $this->db->from('products as A');
-                $this->db->join('(select pid,sum(quantity)as Q,max(unit_sale) as P,max(discount_amount) as D,max(discount_type) as T from stocks group by pid having Q>0) as B', 'A.pid = B.pid');
+                $this->db->join('(select pid,sum(quantity)as Q from stocks group by pid having Q>0) as B', 'A.pid = B.pid');
                 $this->db->where('A.review', 1);
                 if (in_array($this->input->post('filter_by'), array('barcode', 'name', 'sku', 'unit'))) {
                     $this->db->like($this->input->post('filter_by'), $this->input->post('filter'), 'both');
@@ -69,91 +63,7 @@ class Products extends CI_Controller
                 $data['limit'] = $limit;
                 $data['status'] = 'ok';
 
-                    /*
-                    $this->db->where('review',1);
-                    $data['total']=$this->db->get('products')->num_rows();
-
-                    if(in_array($this->input->get_post('filter_by'),array('barcode','name','sku','unit')))
-                    {
-                        $this->db->order_by($sort_by, $order);
-                        $this->db->like($this->input->get_post('filter_by'),$this->input->get_post('filter'),'both');
-                        $this->db->where('review',1);
-                        $data['total']=$this->db->get('products')->num_rows();
-
-                        $this->db->like($this->input->get_post('filter_by'),$this->input->get_post('filter'),'both');
-                    }
-                    else if(in_array($this->input->get_post('filter_by'),array('review','category','department')))
-                    {
-                        $this->db->order_by($sort_by, $order);
-                        $this->db->where($this->input->get_post('filter_by'),$this->input->get_post('filter'));
-                        $this->db->where('review',1);
-                        $data['total']=$this->db->get('products')->num_rows();
-
-                        $this->db->where($this->input->get_post('filter_by'),$this->input->get_post('filter'));
-                    }
-
-                    $this->db->where('review',1);
-                    $this->db->order_by($sort_by, $order);
-                    $temp=$this->db->get('products',$limit,$limit*$page)->result_array();
-                    $data['page']=$page;
-                    $data['limit']=$limit;
-                    $data['status']='ok';
-
-                    $data['results']=array();
-
-                    foreach($temp as $key=>$value)
-                    {
-                        $cid=$temp[$key]['category'];
-                        $this->db->where('cid',$cid);
-                        $category=$this->db->get('categories')->row(0,'object')->name;
-
-                        $did=$temp[$key]['department'];
-                        $this->db->where('did',$did);
-                        $department=$this->db->get('departments')->row(0,'object')->name;
-
-                        $temp[$key]['category']=$category;
-                        $temp[$key]['department']=$department;
-
-                        $pid=$temp[$key]['pid'];
-                        $this->db->where('pid',$pid);
-                        $this->db->order_by('stocked_on','desc');
-
-                        if($this->db->get('stocks')->num_rows()>0)
-                        {
-                            $this->db->where('pid',$pid);
-                            $this->db->order_by('stocked_on','desc');
-                            $sample_stock=$this->db->get('stocks')->row(0,'object');
-
-                            $this->db->select_sum('quantity');
-                            $this->db->where('pid',$pid);
-                            $quantity=$this->db->get('stocks')->row()->quantity;
-
-                            $this->db->select_max('unit_sale');
-                            $this->db->where('pid',$pid);
-                            $unit_sale=$this->db->get('stocks')->row()->unit_sale;
-
-                            if($quantity>0)
-                            {
-                                $temp[$key]['stock']=$quantity;
-                                $temp[$key]['price']=$unit_sale;
-                                $temp[$key]['discount_amount']=$sample_stock->discount_amount;
-                                $temp[$key]['discount_type']=$sample_stock->discount_type;
-
-                                array_push($data['results'],$temp[$key]);
-                            }
-                            else
-                            {
-                                $data['total']--;
-                            }
-                        }
-                        else
-                        {
-                            $data['total']--;
-                        }
-                    }
-                     *
-                     */
-                    echo json_encode($data);
+                echo json_encode($data);
                 die();
             }
 
@@ -183,8 +93,7 @@ class Products extends CI_Controller
                         'unit' => array('Unit', '5', 'left'),
                         'department' => array('Department', '10', 'left'),
                         'category' => array('Category', '10', 'left'),
-                        'stock' => array('Stock', '4'),
-                        'price' => array('Price', '5'),
+                        'quantity' => array('Quantity', '4'),
                     );
                 $data['search_fields'] = array(
                         'sku' => 'SKU',
@@ -272,18 +181,6 @@ class Products extends CI_Controller
                 $this->db->where('pid', $pid);
                 $product = $this->db->get('products')->row_array();
 
-                /* Price */
-                $this->db->where('pid', $pid);
-                $this->db->order_by('stocked_on', 'desc');
-                if ($this->db->get('stocks')->num_rows() > 0) {
-                    $this->db->select_max('unit_sale');
-                    $this->db->where('pid', $pid);
-                    $unit_sale = $this->db->get('stocks')->row()->unit_sale;
-                    $product['price'] = $unit_sale;
-                } else {
-                    $product['price'] = '0.00';
-                }
-
                 $product['suppliers'] = array();
                 $product['departments'] = array();
                 $product['categories'] = array();
@@ -295,8 +192,8 @@ class Products extends CI_Controller
                     $product['suppliers'][$value['sid']] = $value['name'];
                 }
 
-                    /* Departments & Categories */
-                    unset($temp);
+                /* Departments & Categories */
+                unset($temp);
                 $this->db->where('active', 1);
                 $temp = $this->db->get('departments')->result_array();
                 foreach ($temp as $key => $value) {
@@ -309,22 +206,18 @@ class Products extends CI_Controller
                     $product['categories'][$value['cid']] = $value['name'];
                 }
 
-                    /* Review */
-                    $product['reviews'][0] = 'No';
+                /* Review */
+                $product['reviews'][0] = 'No';
                 $product['reviews'][1] = 'Yes';
 
-                    /* Preload Stocks*/
-                    unset($temp);
+                /* Preload Stocks*/
+                unset($temp);
                 $this->db->where('pid', $pid);
                 $preload = $this->db->get('stocks')->result_array();
                 foreach ($preload as $key => $value) {
                     $preload[$key]['stock_id'] = $value['stid'];
                     $preload[$key]['stock_buy'] = $value['unit_cost'];
-                    $preload[$key]['stock_sell'] = $value['unit_sale'];
                     $preload[$key]['stock_quantity'] = $value['quantity'];
-                    $preload[$key]['stock_store_quantity'] = $value['store_quantity'];
-                    $preload[$key]['stock_discount_type'] = $value['discount_type'];
-                    $preload[$key]['stock_discount_amount'] = $value['discount_amount'];
                     $preload[$key]['stock_stocked_on'] = $value['stocked_on'];
 
                     $preload[$key]['stock_supplier'] = $product['suppliers'][$value['sid']];
@@ -347,19 +240,6 @@ class Products extends CI_Controller
                 $pid = $this->uri->segment(3);
                 $this->db->where('pid', $pid);
                 $product = $this->db->get('products')->row_array();
-
-                $this->db->where('pid', $pid);
-                $this->db->order_by('stocked_on', 'desc');
-
-                if ($this->db->get('stocks')->num_rows() > 0) {
-                    $this->db->select_max('unit_sale');
-                    $this->db->where('pid', $pid);
-                    $unit_sale = $this->db->get('stocks')->row()->unit_sale;
-
-                    $product['price'] = $unit_sale;
-                } else {
-                    $product['price'] = '0.00';
-                }
 
                 unset($temp);
                 $temp = $this->db->get('suppliers')->result_array();
@@ -388,22 +268,18 @@ class Products extends CI_Controller
                 $preload = $this->db->get('stocks')->result_array();
                 foreach ($preload as $key => $value) {
                     //echo '<pre>';print_r($key);print_r($value);echo '</pre>';
-                        $preload[$key]['stock_id'] = $value['stid'];
+                    $preload[$key]['stock_id'] = $value['stid'];
                     $preload[$key]['stock_buy'] = $value['unit_cost'];
-                    $preload[$key]['stock_sell'] = $value['unit_sale'];
                     $preload[$key]['stock_quantity'] = $value['quantity'];
-                    $preload[$key]['stock_store_quantity'] = $value['store_quantity'];
-                    $preload[$key]['stock_discount_type'] = $value['discount_type'];
-                    $preload[$key]['stock_discount_amount'] = $value['discount_amount'];
                     $preload[$key]['stock_stocked_on'] = $value['stocked_on'];
 
                     $preload[$key]['stock_supplier'] = $product['suppliers'][$value['sid']];
                 }
-                    //echo '<pre>';print_r($preload);echo '</pre>';
+                //echo '<pre>';print_r($preload);echo '</pre>';
 
-                    if (isset($preload)) {
-                        $product['preload'] = $preload;
-                    }
+                if (isset($preload)) {
+                    $product['preload'] = $preload;
+                }
 
                 $this->load->view('header');
                 $this->load->view('products/edit', $product);

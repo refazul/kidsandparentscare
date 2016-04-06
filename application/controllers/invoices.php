@@ -370,11 +370,11 @@ class Invoices extends CI_Controller
         if (user_logged_in() && user_can('CREATE_INVOICE')) {
             if ($this->input->post('orders')):
 
-                    $this->db->where('key', 'VAT');
+            $this->db->where('key', 'VAT');
             $vat = $this->db->get('config')->row(0, 'object')->value;
 
-                    /* Create an Invoice */
-                    $invoice['billed_by'] = $this->session->userdata('uid');
+            /* Create an Invoice */
+            $invoice['billed_by'] = $this->session->userdata('uid');
             $this->load->model('customer');
             $customer = $this->customer->getBy('code', $this->input->post('customer'));
             if ($customer === 0 || $customer === false) {
@@ -387,7 +387,7 @@ class Invoices extends CI_Controller
             $invoice['vat'] = 0;
             $invoice['discount'] = 0;
             $invoice['generated_id'] = round(microtime(true) * 1000);//strtoupper(uniqid().'x'.$invoice['billed_by'].'y'.$invoice['customer_id']);
-                    date_default_timezone_set('Asia/Dhaka');
+            date_default_timezone_set('Asia/Dhaka');
             $invoice['bill_time'] = date('Y-m-d H:i:s');
 
             $this->db->insert('invoices', $invoice);
@@ -397,76 +397,65 @@ class Invoices extends CI_Controller
                 $pid = $order['pid'];
                 $barcode = $order['barcode'];
                 $quantity = $order['quantity'];
+                $price = $order['price'];
                 $generated_order_id = strtoupper(uniqid().'x'.$pid.'y'.$quantity);
 
-                        //echo '<pre>';print_r($order);echo '</pre>';die();
+                //echo '<pre>';print_r($order);echo '</pre>';die();
 
-                        while ($quantity > 0) {
-                            $stock = $this->get_next_stock($pid);
-                            if ($stock == false) {
-                                break;
-                            }
+                while ($quantity > 0) {
+                    $stock = $this->get_next_stock($pid);
+                    if ($stock == false) {
+                        break;
+                    }
 
-                            if ($stock['quantity'] >= $quantity) {
-                                $stock['quantity'] -= $quantity;
-                                $this->db->where('stid', $stock['stid']);
-                                $this->db->update('stocks', $stock);
+                    if ($stock['quantity'] >= $quantity) {
+                        $stock['quantity'] -= $quantity;
+                        $this->db->where('stid', $stock['stid']);
+                        $this->db->update('stocks', $stock);
 
-                                $this->db->where('stid', $stock['stid']);
-                                $sale = $this->db->get('stocks')->row_array();
+                        $this->db->where('stid', $stock['stid']);
+                        $sale = $this->db->get('stocks')->row_array();
 
-                                $data['invoice_id'] = $invoice_id;
-                                $data['stid'] = $stock['stid'];
-                                $data['quantity'] = $quantity;
+                        $data['invoice_id'] = $invoice_id;
+                        $data['stid'] = $stock['stid'];
+                        $data['quantity'] = $quantity;
 
-                                if ($sale['discount_type'] == 'percent') {
-                                    $sale['discount_amount'] = $sale['unit_sale'] * $sale['discount_amount'] / 100;
-                                }
+                        $data['unit_sale'] = $price;
+                        $data['total_sale'] = $price * $quantity;
+                        $data['generated_id'] = $generated_order_id;
 
-                                $data['unit_sale'] = $sale['unit_sale'];
-                                $data['total_sale'] = $sale['unit_sale'] * $quantity;
-                                $data['total_discount'] = $sale['discount_amount'] * $quantity;
-                                $data['generated_id'] = $generated_order_id;
+                        $this->db->insert('orders', $data);
 
-                                $this->db->insert('orders', $data);
+                        $invoice['subtotal'] += $data['total_sale'];
 
-                                $invoice['subtotal'] += $data['total_sale'];
-                                $invoice['discount'] += $data['total_discount'];
+                        break;
+                    } else {
+                        $remainder = $stock['quantity'];
+                        $quantity -= $stock['quantity'];
+                        $stock['quantity'] = 0;
+                        $this->db->where('stid', $stock['stid']);
+                        $this->db->update('stocks', $stock);
 
-                                break;
-                            } else {
-                                $remainder = $stock['quantity'];
-                                $quantity -= $stock['quantity'];
-                                $stock['quantity'] = 0;
-                                $this->db->where('stid', $stock['stid']);
-                                $this->db->update('stocks', $stock);
+                        $this->db->where('stid', $stock['stid']);
+                        $sale = $this->db->get('stocks')->row_array();
 
-                                $this->db->where('stid', $stock['stid']);
-                                $sale = $this->db->get('stocks')->row_array();
+                        $data['invoice_id'] = $invoice_id;
+                        $data['stid'] = $stock['stid'];
+                        $data['quantity'] = $remainder;
 
-                                $data['invoice_id'] = $invoice_id;
-                                $data['stid'] = $stock['stid'];
-                                $data['quantity'] = $remainder;
+                        $data['unit_sale'] = $price;
+                        $data['total_sale'] = $price * $remainder;
+                        $data['generated_id'] = $generated_order_id;
 
-                                if ($sale['discount_type'] == 'percent') {
-                                    $sale['discount_amount'] = $sale['unit_sale'] * $sale['discount_amount'] / 100;
-                                }
+                        $this->db->insert('orders', $data);
 
-                                $data['unit_sale'] = $sale['unit_sale'];
-                                $data['total_sale'] = $sale['unit_sale'] * $remainder;
-                                $data['total_discount'] = $sale['discount_amount'] * $remainder;
-                                $data['generated_id'] = $generated_order_id;
-
-                                $this->db->insert('orders', $data);
-
-                                $invoice['subtotal'] += $data['total_sale'];
-                                $invoice['discount'] += $data['total_discount'];
-                            }
-                        }
+                        $invoice['subtotal'] += $data['total_sale'];
+                    }
+                }
             }
             $invoice['vat'] = $invoice['subtotal'] * $vat / 100;
             $invoice['extra_discount'] = $this->input->post('extra_discount');
-            $invoice['total_bill'] = round($invoice['subtotal'] + $invoice['vat'] - $invoice['discount'] - $invoice['extra_discount']);
+            $invoice['total_bill'] = round($invoice['subtotal'] + $invoice['vat'] - $invoice['extra_discount']);
 
             $this->customer->addPoint($cuid, $invoice['total_bill'] * 0.02);
 
@@ -480,8 +469,8 @@ class Invoices extends CI_Controller
 
             $invoice['invoice'] = $invoice;
 
-                    //redirect(site_url().'invoices/copy/'.$invoice['generated_id'], 'refresh');
-                    $json['id'] = $invoice['generated_id'];
+            //redirect(site_url().'invoices/copy/'.$invoice['generated_id'], 'refresh');
+            $json['id'] = $invoice['generated_id'];
             $json['status'] = 'ok';
             echo json_encode($json);
             die();
@@ -490,6 +479,7 @@ class Invoices extends CI_Controller
     }
     public function edit()
     {
+        date_default_timezone_set('Asia/Dhaka');
         if (user_logged_in() && user_can('CREATE_INVOICE')) {
             if ($this->uri->segment(3)) {
                 $generated_id = $this->uri->segment(3);
@@ -510,7 +500,6 @@ class Invoices extends CI_Controller
                         $orders[$key]['pid'] = $product->pid;
                         $orders[$key]['barcode'] = $product->barcode;
                         $orders[$key]['name'] = $product->name;
-                        $orders[$key]['discount'] = $value['total_discount'];
                     }
                     $invoice['orders'] = $orders;
 
@@ -541,8 +530,7 @@ class Invoices extends CI_Controller
                                     'name' => array('Name', 15),
                                     'sku' => array('SKU', 5),
                                     'unit' => array('Unit', 5),
-                                    'stock' => array('Stock', 5),
-                                    'price' => array('Price', 10),
+                                    'quantity' => array('Quanity', 5),
                                 );
                             $data['orders'] = array(
                                     'asc' => 'Ascending',

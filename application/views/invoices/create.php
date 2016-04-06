@@ -310,9 +310,16 @@
                         name: 'orders['+data.barcode+'][quantity]'
                     }).appendTo('#holder-'+data.barcode);
 
+                    jQuery('<input/>',{
+                        id: 'price-'+data.barcode,
+                        type: 'hidden',
+                        name: 'orders['+data.barcode+'][price]'
+                    }).appendTo('#holder-'+data.barcode);
+
                     $('#pid-'+data.barcode).val(data.pid);
                     $('#barcode-'+data.barcode).val(data.barcode);
                     $('#quantity-'+data.barcode).val(data.quantity);
+                    $('#price-'+data.barcode).val(data.price);
 
                     jQuery('<tr/>',{
                         id: 'tr-'+data.barcode,

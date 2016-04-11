@@ -334,6 +334,7 @@
                     });
                 }
                 $('#quantity-'+data.barcode).val(data.quantity);
+                $('#price-'+data.barcode).val(data.price);
 
                 $('#product-price-'+data.barcode).html(data.price.toFixed(2));
                 $('#product-quantity-'+data.barcode).html(data.quantity);
@@ -406,7 +407,7 @@
             <input id="pid-<?php echo $order['barcode'];?>" type="hidden" name="orders[<?php echo $order['barcode'];?>][pid]" value="<?php echo $order['pid'];?>"/>
             <input id="barcode-<?php echo $order['barcode'];?>" type="hidden" name="orders[<?php echo $order['barcode'];?>][barcode]" value="<?php echo $order['barcode'];?>"/>
             <input id="quantity-<?php echo $order['barcode'];?>" type="hidden" name="orders[<?php echo $order['barcode'];?>][quantity]" value="<?php echo $order['quantity'];?>"/>
-            <input id="price-<?php echo $order['barcode'];?>" type="hidden" name="orders[<?php echo $order['barcode'];?>][unit_sale]" value="<?php echo $order['unit_sale'];?>"/>
+            <input id="price-<?php echo $order['barcode'];?>" type="hidden" name="orders[<?php echo $order['barcode'];?>][price]" value="<?php echo $order['price'];?>"/>
         </div>
         <?php endforeach;?>
     </div>
@@ -426,7 +427,7 @@
             <tr id="tr-<?php echo $order['barcode'];?>">
                 <td>1</td>
                 <td><?php echo $order['name'];?></td>
-                <td id="product-price-<?php echo $order['barcode'];?>"><?php echo $order['unit_sale'];?></td>
+                <td id="product-price-<?php echo $order['barcode'];?>"><?php echo $order['price'];?></td>
                 <td id="product-quantity-<?php echo $order['barcode'];?>" style="text-align:right;"><?php echo $order['quantity'];?></td>
                 <td id="product-subtotal-<?php echo $order['barcode'];?>" class="subtotal" style="text-align:right;"><?php echo $order['total_sale'];?></td>
                 <td id="product-remove-<?php echo $order['barcode'];?>"><div class="red-cross"></div></td>

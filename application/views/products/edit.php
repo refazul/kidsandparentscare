@@ -148,7 +148,7 @@
         <div style="width:45px;float:right;margin-top:10px;margin-right:18px;"><input style="height:26px;width:100%" type="number" min="1" max="50" id="Q" autocomplete="off" class="form-control" value="1"/></div>
 
         <?php
-        /*
+
         $price_offset = 320;
 
         if ($price <= 99) {
@@ -186,6 +186,18 @@
         } elseif (strlen($sku) == 12) {
             $sku_offset -= 30;
         }
+        $seed = str_split('ABCDEFGHIJKLMNPQRSTUVWXYZ');
+        $string = str_split(explode('.', $price)[0]);
+        $string = array_reverse($string);
+        $result = array();
+        for ($i = 0;$i < sizeof($string);++$i) {
+            shuffle($seed);
+            array_push($result, $seed[0]);
+            array_push($result, $string[$i]);
+        }
+        shuffle($seed);
+        array_push($result, $seed[0]);
+        $price = implode('', $result));
 
             $e = '{ESC}';
             $data = '';
@@ -205,10 +217,10 @@
             $data .= $e.'V0170';
             $data .= $e.'H0350';
             $data .= $e.'L0102';
-            $data .= $e.'XSMRP TK. '.$price;
+            $data .= $e.'XSPTC. '.$price;
             $data .= $e.'Q1';
             $data .= $e.'Z';
-        */
+
         $data = '';
 
         ?>

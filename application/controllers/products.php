@@ -222,6 +222,17 @@ class Products extends CI_Controller
 
                     $preload[$key]['stock_supplier'] = $product['suppliers'][$value['sid']];
                 }
+
+                $this->db->where('pid', $pid);
+                $this->db->order_by('stocked_on', 'desc');
+                if ($this->db->get('stocks')->num_rows() > 0) {
+                    $this->db->select_max('unit_cost');
+                    $this->db->where('pid', $pid);
+                    $unit_cost = $this->db->get('stocks')->row()->unit_cost;
+                    $product['price'] = $unit_cost;
+                } else {
+                    $product['price'] = '0.00';
+                }
                 $product['preload'] = $preload;
 
                 $this->load->view('header');
@@ -276,6 +287,17 @@ class Products extends CI_Controller
                     $preload[$key]['stock_supplier'] = $product['suppliers'][$value['sid']];
                 }
                 //echo '<pre>';print_r($preload);echo '</pre>';
+
+                $this->db->where('pid', $pid);
+                $this->db->order_by('stocked_on', 'desc');
+                if ($this->db->get('stocks')->num_rows() > 0) {
+                    $this->db->select_max('unit_cost');
+                    $this->db->where('pid', $pid);
+                    $unit_cost = $this->db->get('stocks')->row()->unit_cost;
+                    $product['price'] = $unit_cost;
+                } else {
+                    $product['price'] = '0.00';
+                }
 
                 if (isset($preload)) {
                     $product['preload'] = $preload;

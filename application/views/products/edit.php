@@ -197,7 +197,7 @@
         }
         shuffle($seed);
         array_push($result, $seed[0]);
-        $price = implode('', $result));
+        $price = implode('', $result);
 
             $e = '{ESC}';
             $data = '';

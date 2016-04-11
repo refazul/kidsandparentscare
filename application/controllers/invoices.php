@@ -50,17 +50,8 @@ class Invoices extends CI_Controller
             if ($this->input->post('to')) {
                 $this->db->where('bill_time <=', $this->input->post('to'));
             }
-            if ((int) $this->input->post('active_2') == 1) {
-                $terminal = $this->input->post('filter_2');
-                if ($terminal == 'knpc02') {
-                    $this->db->where('(billed_by=7 or billed_by=6)', null, false);//rony or masudur
-                } elseif ($terminal == 'knpc01') {
-                    $this->db->where('billed_by', 5);//rabeya
-                } elseif ($terminal == 'knpc03') {
-                    $this->db->where('billed_by', 8);//ripon
-                } elseif ($terminal == 'knpc04') {
-                    $this->db->where('billed_by', 12);//rumon
-                }
+            if ($this->input->post('filter_by') == 'generated_id' && strlen($this->input->post('filter')) > 0) {
+                $this->db->where('generated_id', $this->input->post('filter'));
             }
             $data['total'] = $this->db->get('invoices')->num_rows();
 
@@ -70,17 +61,8 @@ class Invoices extends CI_Controller
             if ($this->input->post('to')) {
                 $this->db->where('bill_time <=', $this->input->post('to'));
             }
-            if ((int) $this->input->post('active_2') == 1) {
-                $terminal = $this->input->post('filter_2');
-                if ($terminal == 'knpc02') {
-                    $this->db->where('(billed_by=7 or billed_by=6)', null, false);//rony or masudur
-                } elseif ($terminal == 'knpc01') {
-                    $this->db->where('billed_by', 5);//rabeya
-                } elseif ($terminal == 'knpc03') {
-                    $this->db->where('billed_by', 8);//ripon
-                } elseif ($terminal == 'knpc04') {
-                    $this->db->where('billed_by', 12);//rumon
-                }
+            if ($this->input->post('filter_by') == 'generated_id' && strlen($this->input->post('filter')) > 0) {
+                $this->db->where('generated_id', $this->input->post('filter'));
             }
             $this->db->order_by($sort_by, $order);
             $data['results'] = $this->db->get('invoices', $limit, $limit * $page)->result_array();
@@ -112,23 +94,15 @@ class Invoices extends CI_Controller
             /* Totals */
             $this->db->select('sum(total_bill) as sale,sum(extra_discount+discount) as discount, sum(subtotal) as subtotal');
             $this->db->from('invoices');
-            if ((int) $this->input->post('active_2') == 1) {
-                $terminal = $this->input->post('filter_2');
-                if ($terminal == 'knpc02') {
-                    $this->db->where('(billed_by=7 or billed_by=6)', null, false);//rony or masudur
-                } elseif ($terminal == 'knpc01') {
-                    $this->db->where('billed_by', 5);//rabeya
-                } elseif ($terminal == 'knpc03') {
-                    $this->db->where('billed_by', 8);//ripon
-                } elseif ($terminal == 'knpc04') {
-                    $this->db->where('billed_by', 12);//rumon
-                }
-            }
+
             if ($this->input->post('from')) {
                 $this->db->where('bill_time >=', $this->input->post('from'));
             }
             if ($this->input->post('to')) {
                 $this->db->where('bill_time <=', $this->input->post('to'));
+            }
+            if ($this->input->post('filter_by') == 'generated_id' && strlen($this->input->post('filter')) > 0) {
+                $this->db->where('generated_id', $this->input->post('filter'));
             }
             $total_total = $this->db->get()->row(0, 'object');
             $data['total_total_subtotal'] = $total_total->subtotal;
@@ -142,6 +116,9 @@ class Invoices extends CI_Controller
             }
             if ($this->input->post('to')) {
                 $this->db->where('bill_time <=', $this->input->post('to'));
+            }
+            if ($this->input->post('filter_by') == 'generated_id' && strlen($this->input->post('filter')) > 0) {
+                $this->db->where('invoices.generated_id', $this->input->post('filter'));
             }
             $this->db->join('orders', 'invoices.invoice_id = orders.invoice_id');
             $this->db->join('stocks', 'stocks.stid = orders.stid');
@@ -207,9 +184,9 @@ class Invoices extends CI_Controller
                 $data['limit'] = $limit;
                 $data['page'] = $page;
 
-                    //echo '<pre>';print_r($data);echo '</pre>';die();
+                //echo '<pre>';print_r($data);echo '</pre>';die();
 
-                    $this->load->view('header');
+                $this->load->view('header');
                 $this->load->view('menu');
                 $this->load->view('wrap_begin');
                 $this->load->view('invoices/all', $data);

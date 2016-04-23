@@ -186,17 +186,23 @@
         } elseif (strlen($sku) == 12) {
             $sku_offset -= 30;
         }
-        $seed = str_split('ABCDEFGHIJKLMNPQRSTUVWXYZ');
+        $map = array();
+        $map['1'] = 'I';
+        $map['2'] = 'Z';
+        $map['3'] = 'E';
+        $map['4'] = 'H';
+        $map['5'] = 'S';
+        $map['6'] = 'G';
+        $map['7'] = 'J';
+        $map['8'] = 'Q';
+        $map['9'] = 'Y';
+        $map['0'] = 'O';
+
         $string = str_split(explode('.', $price)[0]);
-        $string = array_reverse($string);
         $result = array();
         for ($i = 0;$i < sizeof($string);++$i) {
-            shuffle($seed);
-            array_push($result, $seed[0]);
-            array_push($result, $string[$i]);
+            array_push($result, $map[$string[$i]]);
         }
-        shuffle($seed);
-        array_push($result, $seed[0]);
         $price = implode('', $result);
 
             $e = '{ESC}';

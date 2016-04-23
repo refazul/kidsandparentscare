@@ -221,8 +221,6 @@
             $data .= $e.'Q1';
             $data .= $e.'Z';
 
-        $data = '';
-
         ?>
         <script type="text/javascript">
             $(document).ready(function()

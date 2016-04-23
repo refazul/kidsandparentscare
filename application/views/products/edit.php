@@ -236,7 +236,7 @@
                     data=data.replace('{ESC}Q1','{ESC}Q'+$('#Q').val());
                     console.log(data);
 
-                    window.location='zolo:'+data;
+                    window.location='zolo:<?php echo $data?>'+data;
                     e.preventDefault();
                 });
                 setTimeout(function () {

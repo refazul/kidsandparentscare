@@ -236,7 +236,16 @@
                     data=data.replace('{ESC}Q1','{ESC}Q'+$('#Q').val());
                     console.log(data);
 
-                    window.location='zolo:<?php echo $data?>'+data;
+                    var jqxhr = $.ajax({
+                        url : '<?php echo site_url();?>invoices/pos/',
+                        method: 'POST',
+                        data: {data:data}
+                    })
+                    .done(function(data){
+                        //console.log(data);
+                        window.location='zozo:<?php echo site_url();?>'+data;
+                    });
+
                     e.preventDefault();
                 });
                 setTimeout(function () {

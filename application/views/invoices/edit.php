@@ -7,32 +7,32 @@
 </div>
 
 <form style='width:60%;float:left;' action="<?php echo site_url();?>products/fetch" method="POST" id="products-fetch">
-    
+
     <input type='hidden' name='intent' value='search'/>
     <input type='hidden' name='invoice' value='1'/>
-    
+
     <div style="margin:0px 10px 0px 0px;font-weight:bold;">Search :</div>
     <input style="float:left;margin-right:5px;margin-top:10px;margin-left: -1px;margin-bottom: 10px;" class='form-control' autocomplete="off" type='text' id='filter' name='filter'/>
     <div id="filter_by_department" style="display:none;margin-right:5px;float:left;" class="filter-wrapper filter_select">
         <div class="select-wrap">
             <select class="filter_by_onchange">
-                <?php foreach($departments as $key=>$value):?>
+                <?php foreach ($departments as $key => $value):?>
                 <option value="<?php echo $key;?>"><?php echo $value;?></option>
                 <?php endforeach;?>
-            </select>        
+            </select>
         </div>
     </div>
-    
+
     <div style='float:left;width:100px;' class="filter-wrapper">
         <div class="select-wrap">
             <select name="filter_by" id="filter_by">
-                <?php foreach($search_fields as $key=>$value):?>
+                <?php foreach ($search_fields as $key => $value):?>
                 <option value="<?php echo $key;?>"><?php echo $value;?></option>
                 <?php endforeach;?>
-            </select>        
+            </select>
         </div>
     </div>
-    
+
     <script type="text/javascript">
         $(document).ready(function(){
             $('#filter_by').on('change', function() {
@@ -42,7 +42,7 @@
                     $('.filter_select').hide();
                     $('#filter').hide();
                     $('#filter').val('');
-                    
+
                     $('#filter_by_department').fadeIn('slow');
                     setTimeout(function(){$('#filter').val($('#filter_by_department option:first').val());},400);
                 }
@@ -58,21 +58,23 @@
             });
         });
     </script>
-        
-    <div class="sort_by-wrapper" style='margin-top:10px;width:100px;'>        
+
+    <div class="sort_by-wrapper" style='margin-top:10px;width:100px;'>
         <div class="select-wrap">
             <select name="sort_by" id="sort_by" onchange="$('#products-fetch').submit();">
-                <?php foreach($fields as $key=>$value):?>
-                <option <?php if($key==$sort_by)echo 'selected="selected"'?> value="<?php echo $key;?>"><?php echo $value[0];?></option>
+                <?php foreach ($fields as $key => $value):?>
+                <option <?php if ($key == $sort_by) {
+    echo 'selected="selected"';
+}?> value="<?php echo $key;?>"><?php echo $value[0];?></option>
                 <?php endforeach;?>
             </select>
-        </div>        
+        </div>
     </div>
     <div style="float:right;margin:15px 10px 0px 0px;font-weight:bold;">Sort By :</div>
-    
-    
 
-    <input type="hidden" id="limit" name="limit" value="<?php echo $limit;?>"/>    
+
+
+    <input type="hidden" id="limit" name="limit" value="<?php echo $limit;?>"/>
     <input type="hidden" id="page" name="page" value="0"/>
 
     <div class="slider-wrapper">
@@ -86,7 +88,7 @@
             max: 50,
             value: <?php echo $limit;?>,
             change: function( event, ui ) {
-                $("#limit").val( ui.value );            
+                $("#limit").val( ui.value );
                 $('#page').val(0);
                 $('#products-fetch').submit();
             },
@@ -105,14 +107,16 @@
             </thead>
             <tbody>
             </tbody>
-        </table>    
+        </table>
     </div>
     <div style="float:left;font-size: 12px;margin-top: 18px;">Entries per page : <div style="display:inline-block;" id="limit-view"><?php echo $limit;?></div></div>
-    
-    <div class="order-wrapper" style='float:right;margin-top:15px;'>        
-        <?php foreach($orders as $key=>$value):?>
+
+    <div class="order-wrapper" style='float:right;margin-top:15px;'>
+        <?php foreach ($orders as $key => $value):?>
         <div style="margin-right: 20px;float:left;">
-        <input type="radio" name="order" style="float:left;" id='order-<?php echo $key;?>' <?php if($key==$order)echo 'checked'?> value="<?php echo $key;?>"/>
+        <input type="radio" name="order" style="float:left;" id='order-<?php echo $key;?>' <?php if ($key == $order) {
+    echo 'checked';
+}?> value="<?php echo $key;?>"/>
         <label for="order-<?php echo $key;?>" style='float:left;font-size: 13px;margin-top:4px;padding-left:3px;'><?php echo $value;?></label>
         <div style="height:100%;"></div>
         </div>
@@ -120,44 +124,44 @@
         <div style="clear:both;"></div>
     </div>
     <div style="float:right;margin:15px 10px 0px 0px;font-weight:bold;">Order :</div>
-    
+
     <div id="pagination" class="middle"></div>
-    
+
 
     <script type="text/javascript">
-        
+
         $(document).ready(function()
-        {            
+        {
             $('#products-fetch').ajaxForm({
 
                 /* set data type json */
                 dataType:  'json',
 
                 /* reset before submitting */
-                beforeSend: function() {                                                                                
+                beforeSend: function() {
                 },
 
                 /* progress bar call back*/
-                uploadProgress: function(event, position, total, percentComplete) {                                        
+                uploadProgress: function(event, position, total, percentComplete) {
                 },
 
                 /* complete call back */
                 complete: function(data) {
-                    console.log(data);                
+                    console.log(data);
 
                     if(data.responseJSON.status=='ok')
                     {
                         $('#products-list thead').remove();
                         $('#products-list tbody').remove();
                         $('#pagination').empty();
-                        
+
                         if(data.responseJSON.results.length>0)
                         {
 
                             $('<thead/>',{}).appendTo('#products-list');
                             $('<tr/>',{}).appendTo('#products-list thead');
 
-                            <?php foreach($visible_fields as $key=>$value):?>
+                            <?php foreach ($visible_fields as $key => $value):?>
                             $('<th/>',{style:'width:<?php echo $value[1];?>%;'}).append(document.createTextNode("<?php echo $value[0];?>")).appendTo('#products-list thead tr');
                             <?php endforeach;?>
 
@@ -167,14 +171,14 @@
                             for(i=0;i<results.length;i++)
                             {
                                 $('<tr/>',{id:'product-'+results[i].barcode}).appendTo('#products-list tbody');
-                                
+
                                 $('<td/>',{}).append(document.createTextNode(results[i].barcode)).appendTo('#product-'+results[i].barcode);
                                 $('<td/>',{}).append(document.createTextNode(results[i].name)).appendTo('#product-'+results[i].barcode);
-                                $('<td/>',{}).append(document.createTextNode(results[i].sku)).appendTo('#product-'+results[i].barcode);                                
+                                $('<td/>',{}).append(document.createTextNode(results[i].sku)).appendTo('#product-'+results[i].barcode);
                                 $('<td/>',{}).append(document.createTextNode(results[i].unit)).appendTo('#product-'+results[i].barcode);
                                 $('<td/>',{}).append(document.createTextNode(results[i].stock)).appendTo('#product-'+results[i].barcode);
                                 $('<td/>',{}).append(document.createTextNode(results[i].price)).appendTo('#product-'+results[i].barcode);
-                                
+
                                 if(results.length==1)
                                 {
                                     var tdata={
@@ -186,11 +190,11 @@
                                         discount_amount     :results[0].discount_amount,
                                         discount_type       :results[0].discount_type,
                                     };
-                                    <?php if(user_can('CREATE_INVOICE')):?>
+                                    <?php if (user_can('CREATE_INVOICE')):?>
                                     addToCart(tdata);
                                     <?php endif;?>
                                 }
-                                
+
                                 $('#product-'+results[i].barcode).click(results[i],function(event){
                                     var data={
                                         pid     :event.data.pid,
@@ -201,15 +205,15 @@
                                         discount_amount     :event.data.discount_amount,
                                         discount_type       :event.data.discount_type,
                                     };
-                                    <?php if(user_can('CREATE_INVOICE')):?>
+                                    <?php if (user_can('CREATE_INVOICE')):?>
                                     addToCart(data);
                                     <?php endif;?>
                                 });
                             }
-                                                     
-                            $("#products-list").tablesorter({widgets: ['zebra']});                        
 
-                            /* Pagination */                            
+                            $("#products-list").tablesorter({widgets: ['zebra']});
+
+                            /* Pagination */
 
                             //console.log(data.responseJSON.total);
                             pages=Math.ceil(data.responseJSON.total/$('#limit').val());
@@ -217,9 +221,9 @@
                             for(i=0;i<pages;i++)
                             {
                                 $('<div/>',{class:'pages',id:'page-'+i,onclick:"$('#page').val("+i+");$('#products-fetch').submit();"}).append(document.createTextNode(i)).appendTo('#pagination');
-                            }                            
+                            }
                             scrollx=$('#page-'+data.responseJSON.page).offset().left - $('#pagination').offset().left - $('#pagination').width()/2;
-                            
+
                             $('#pagination').animate({scrollLeft:scrollx},200);
                             $('#page-'+data.responseJSON.page).addClass('active');
                             $('#limit-view').html(data.responseJSON.limit);
@@ -230,7 +234,7 @@
                     }
                 }
             });
-            
+
             $('#filter').bind("keydown keyup change", function(e) {
                 if($('#filter_by').val()=='barcode')
                 {
@@ -242,10 +246,10 @@
                     }
                 }
             });
-            
+
             $('#products-fetch').submit();
 
-            
+
             var lastValue = '';
             setInterval(function(){
                 var presentValue=$('#filter').val();
@@ -257,25 +261,25 @@
                 }
 
             },1000);
-            
+
             setInterval(function(){
                 $('#invoice-table > tbody > tr td:first-child').each(function(index){
                     $(this).html(index+1);
                 });
 
             },500);
-            
+
 
         });
         function isInt(n){
             return typeof n== "number" && isFinite(n) && n%1===0;
         }
-        <?php if(user_can('CREATE_INVOICE')): ?>
+        <?php if (user_can('CREATE_INVOICE')): ?>
 
         window.vat=<?php echo $vat;?>;
 
         function addToCart(data)
-        {            
+        {
             var quantity=parseInt(prompt('Quantity','1'),10);
             if(quantity!=null && isInt(quantity))
             {
@@ -305,7 +309,7 @@
                         type: 'hidden',
                         name: 'orders['+data.barcode+'][quantity]'
                     }).appendTo('#holder-'+data.barcode);
-                    
+
                     jQuery('<input/>',{
                         id: 'discount-'+data.barcode,
                         type: 'hidden',
@@ -336,18 +340,18 @@
 
                 $('#product-quantity-'+data.barcode).html(data.quantity);
                 $('#product-subtotal-'+data.barcode).html((data.quantity * data.price).toFixed(2));
-                
+
                 if(data.discount_type=='percent')
                     $('#discount-'+data.barcode).val((data.quantity * data.price * data.discount_amount/100));
                 else
                     $('#discount-'+data.barcode).val(data.quantity * data.discount_amount);
-                
+
                 console.log(window.total);
                 $('#filter').focus();
                 $('#filter').val('');
             }
         }
-        
+
         setInterval(function()
         {
             window.total=0;
@@ -362,33 +366,33 @@
                 window.discount += parseFloat($(this).val());
             });
             if($('#extra_discount').val().length>0)
-                window.discount += parseFloat($('#extra_discount').val());                
-            
-            window.vatamount=window.total*window.vat/100;            
+                window.discount += parseFloat($('#extra_discount').val());
+
+            window.vatamount=window.total*window.vat/100;
             window.payable=window.total + window.vatamount - window.discount;
             window.netpayable=Math.round(window.payable);
             window.rounding=Math.abs(window.payable-window.netpayable);
-            
+
 
             if(window.netpayable>window.payable)
                     $('#rounding').html('+'+(window.rounding).toFixed(2));
             else
                     $('#rounding').html('-'+(window.rounding).toFixed(2));
-			
+
             if($('#cash_paid').val().length>0)
                 window.change=parseFloat($('#cash_paid').val()) - (window.netpayable);
             else
                 window.change=parseFloat(0 - (window.netpayable));
-			
+
             $('#subtotal').html(window.total.toFixed(2));
             $('#vat').html((window.vatamount).toFixed(2));
-            $('#discount').html((window.discount).toFixed(2));            
+            $('#discount').html((window.discount).toFixed(2));
             $('#payable').html((window.netpayable).toFixed(2));
             $('#change').html((window.change).toFixed(2));
             $('#t').val(window.netpayable);
 
         },200);
-        
+
         <?php endif; ?>
     </script>
 </form>
@@ -400,14 +404,14 @@
     <div style='margin-top:10px;float:right;width:40%;'>
         <div style='float:left;font-size:12px;margin-right: 5px;'>Points :</div><div id='customer_points' style='float:right;font-size:12px;font-weight:bold;'>0</div>
         <div style='float:left;font-size:12px;margin-right: 5px;margin-top:3px;clear:right;'>Amount :</div><div id='equivalent_amount' style='float:right;font-size:12px;font-weight:bold;margin-top:3px;'>0</div>
-    </div>    
+    </div>
 </form>
 
 
 <form id="bill-form" action="<?php echo site_url();?>invoices/ajax" method="POST" style="width:35%;float:left;margin-left:5%;">
     <input type="hidden" name="intent" value="edit"/>
     <div id="bill" style="display:none;">
-        <?php foreach($invoice['orders'] as $order):?>
+        <?php foreach ($invoice['orders'] as $order):?>
         <div id="holder-<?php echo $order['barcode'];?>" title="Kid 123">
             <input id="pid-<?php echo $order['barcode'];?>" type="hidden" name="orders[<?php echo $order['barcode'];?>][pid]" value="<?php echo $order['pid'];?>"/>
             <input id="barcode-<?php echo $order['barcode'];?>" type="hidden" name="orders[<?php echo $order['barcode'];?>][barcode]" value="<?php echo $order['barcode'];?>"/>
@@ -428,7 +432,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach($invoice['orders'] as $order):?>
+            <?php foreach ($invoice['orders'] as $order):?>
             <tr id="tr-<?php echo $order['barcode'];?>">
                 <td>1</td>
                 <td><?php echo $order['name'];?></td>
@@ -451,29 +455,29 @@
     <div style='margin-bottom:10px;padding-top: 10px;border-top: 1px dotted #969696;'>
         <div style='float:left;font-size:12px;margin-top:6px;width:60%;'>Sub Total :</div>
         <div style='float:right;width:40%;'><div id='subtotal' name='subtotal' style='float:right;'>0.00</div></div>
-        <div style='clear:both;'></div>        
+        <div style='clear:both;'></div>
     </div>
     <div style='margin-bottom:10px;'>
         <div style='float:left;font-size:12px;margin-top:6px;width:60%;'>VAT (+) :</div>
         <div style='float:right;width:40%;'><div id='vat' name='vat' style='float:right;'>0.00</div></div>
-        <div style='clear:both;'></div>        
+        <div style='clear:both;'></div>
     </div>
     <div style='margin-bottom:10px;padding-bottom:10px;border-bottom: 1px dotted #969696;'>
         <div style='float:left;font-size:12px;margin-top:6px;width:60%;'>Discount (-) :</div>
         <div style='float:right;width:40%;'><div id='discount' name='discount' style='float:right;'>0.00</div></div>
-        <div style='clear:both;'></div>        
+        <div style='clear:both;'></div>
     </div>
 	<div style='margin-bottom:10px;'>
         <div style='float:left;font-size:12px;margin-top:6px;width:60%;'>Rounding :</div>
         <div style='float:right;width:40%;'><div id='rounding' name='rounding' style='float:right;'>0.00</div></div>
-        <div style='clear:both;'></div>        
+        <div style='clear:both;'></div>
     </div>
     <div style='margin-bottom:10px;padding-bottom:10px;border-bottom: 1px dotted #969696;'>
         <div style='float:left;font-size:12px;margin-top:6px;width:60%;'>Net Payable :</div>
         <div style='float:right;width:40%;'><div id='payable' name='payable' style='float:right;'>0.00</div></div>
-        <div style='clear:both;'></div>        
+        <div style='clear:both;'></div>
     </div>
-	
+
     <div style='margin-bottom:10px;'>
         <div style='float:left;font-size:12px;margin-top:6px;width:40%;'>Payment Method :</div>
         <div style='float:right;'>
@@ -484,9 +488,9 @@
         </div>
         <div style='clear:both;'></div>
     </div>
-    
+
     <div id='cash'>
-    
+
         <div style='margin-bottom:10px;'>
             <div style='float:left;font-size:12px;margin-top:6px;width:60%;'>Cash Paid :</div>
             <div style='float:right;width:40%;'><input type='text' value='0.00' id='cash_paid' name='cash_paid' autocomplete="off" class='form-control' style='float:right;width:70%;text-align: right;'/></div>
@@ -495,19 +499,19 @@
         <div style='margin-bottom:10px;padding-bottom:10px;border-bottom: 1px dotted #969696;'>
             <div style='float:left;font-size:12px;margin-top:6px;width:60%;'>Change :</div>
             <div style='float:right;width:40%;'><div type='text' id='change' name='change' style='float:right;'>0.00</div></div>
-            <div style='clear:both;'></div>        
+            <div style='clear:both;'></div>
         </div>
-        
+
     </div>
-    
+
     <div id='card' style='display:none;margin-bottom:10px;border-bottom: 1px dotted #969696'>
-    
+
         <div style='margin-bottom:10px;'>
             <div style='float:left;font-size:12px;margin-top:6px;width:60%;'>Bank :</div>
             <div style='float:right;width:102px;'>
                 <div class="select-wrap">
                     <select name="bank" id="bank">
-                        <?php foreach($banks as $key=>$value):?>
+                        <?php foreach ($banks as $key => $value):?>
                         <option value="<?php echo $key;?>"><?php echo $value;?></option>
                         <?php endforeach;?>
                     </select>
@@ -515,46 +519,46 @@
             </div>
             <div style='clear:both;'></div>
         </div>
-        
+
     </div>
-    
+
     <div style='margin-bottom:10px;'>
         <div style='float:left;font-size:12px;margin-top:6px;width:60%;'>Special Discount :</div>
         <div style='float:right;width:40%;'><input type='number' value='<?php echo $invoice['extra_discount'];?>' id='extra_discount' name='extra_discount' autocomplete="off" class='form-control' style='float:right;width:70%;text-align: right;'/></div>
         <div style='clear:both;'></div>
     </div>
-	
+
     <input type="hidden" id='t' name='t' value='0'/>
 
     <script type='text/javascript'>
         $(document).ready(function(){
-            
+
             $('input[name="payment_method"]').click(function(){
                 if($('#payment_method_cash').is(':checked'))
                 {
                     $('#card').hide();
                     $("#cash_paid").val(0);
-                    $('#cash').fadeIn('fast');                    
+                    $('#cash').fadeIn('fast');
                 }
                 else
                 {
                     $('#cash').hide();
                     $("#cash_paid").val(0);
-                    $('#card').fadeIn('fast');                    
+                    $('#card').fadeIn('fast');
                 }
             });
-            
+
             $('#bill-form').ajaxForm({
 
                 /* set data type json */
                 dataType:  'json',
 
                 /* reset before submitting */
-                beforeSend: function() {                                                                                
+                beforeSend: function() {
                 },
 
                 /* progress bar call back*/
-                uploadProgress: function(event, position, total, percentComplete) {                                        
+                uploadProgress: function(event, position, total, percentComplete) {
                 },
 
                 /* complete call back */
@@ -568,12 +572,12 @@
                     }
                 }
             });
-            
+
             $("#cash_paid").keydown(function (e) {
                 // Allow: backspace, delete, tab, escape, enter and .
                 if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
                      // Allow: Ctrl+A
-                    (e.keyCode == 65 && e.ctrlKey === true) || 
+                    (e.keyCode == 65 && e.ctrlKey === true) ||
                      // Allow: home, end, left, right
                     (e.keyCode >= 35 && e.keyCode <= 39)) {
                          // let it happen, don't do anything
@@ -589,47 +593,47 @@
             });
         });
     </script>
-    
+
     <button style="float:right;clear:both;width:22%;" class="btn btn-default" id="confirm_invoice">Confirm</button>
-    
+
     <button style="float:right;width:22%;margin-right:3%;" class="btn btn-default" id='remove_invoice'>Remove</button>
-    
+
     <button style="float:left;width:22%;margin-right:3%;" class="btn btn-default" id='print_invoice'>Print</button>
-    
+
     <?php
-    
-    $time=date_parse($invoice['bill_time']);
-        
-    $data='';
-    $data.='{ESC}@{LF}';
-    $data.='{FONTA}{SIZE17}';
-    $data.=' KIDS & PARENTS CARE{LF}';
-    $data.='{FONTB}{SIZE0}{LF}';
-    $data.='      Quality Family Mega Mall for Parents & Child{LF}';
-    $data.='     Kalponayton Market, Mohila College Road, Pabna{LF}{LF}';
-    $data.='{FONTA}{SIZE0}';
+
+    $time = date_parse($invoice['bill_time']);
+
+    $data = '';
+    $data .= '{ESC}@{LF}';
+    $data .= '{FONTA}{SIZE17}';
+    $data .= ' KIDS & PARENTS CARE{LF}';
+    $data .= '{FONTB}{SIZE0}{LF}';
+    $data .= '      Quality Family Mega Mall for Parents & Child{LF}';
+    $data .= '     Kalponayton Market, Mohila College Road, Pabna{LF}{LF}';
+    $data .= '{FONTA}{SIZE0}';
     //$data.='------------------------------------------{LF}{LF}';
     //$data.='VAT REG NO:{LF}';
     //$data.='VAT AREA CODE:{LF}{LF}';
-    $data.='------------- RETAIL INVOICE -------------{LF}{LF}';
-    $data.='Invoice ID: '.$invoice['generated_id'].'   Date: '.str_pad($time['day'], 2, "0", STR_PAD_LEFT).'/'.str_pad($time['month'], 2, "0", STR_PAD_LEFT).'/'.substr($time['year'],2).'{LF}';
-    $data.='Cashier: '.$this->session->userdata('name').'{LF}{LF}';
+    $data .= '------------- RETAIL INVOICE -------------{LF}{LF}';
+    $data .= 'Invoice ID: '.$invoice['generated_id'].'   Date: '.str_pad($time['day'], 2, '0', STR_PAD_LEFT).'/'.str_pad($time['month'], 2, '0', STR_PAD_LEFT).'/'.substr($time['year'], 2).'{LF}';
+    $data .= 'Cashier: '.$this->session->userdata('name').'{LF}{LF}';
     //$data.='{BARCODE}'.$invoice['generated_id'].'{LF}';
-    $data.='------------------------------------------{LF}';
-    $data.='{FONTB}{SIZE0}';
-    $data.='                To Enjoy Special Discount{LF}';
-    $data.='           Please Register as a Loyal Customer{LF}';
-    $data.='{FONTA}{SIZE0}';
-    $data.='------------------------------------------{LF}{LF}';
-    
+    $data .= '------------------------------------------{LF}';
+    $data .= '{FONTB}{SIZE0}';
+    $data .= '                To Enjoy Special Discount{LF}';
+    $data .= '           Please Register as a Loyal Customer{LF}';
+    $data .= '{FONTA}{SIZE0}';
+    $data .= '------------------------------------------{LF}{LF}';
+
     //$data='';
     //$data.='{ESC}@{LF}';
-    $data.='{FONTB}{SIZE0}';
-    $data.='{BEGIN}';
-    $data.='SL{HT}Item{HT}     MRP{HT} Qty{HT}     Total{LF}{LF}';
-    
+    $data .= '{FONTB}{SIZE0}';
+    $data .= '{BEGIN}';
+    $data .= 'SL{HT}Item{HT}     MRP{HT} Qty{HT}     Total{LF}{LF}';
+
     ?>
-    
+
     <script type='text/javascript'>
         $(document).ready(function(){
             $('#confirm_invoice').click(function(event){
@@ -659,19 +663,19 @@
             {
                 var data='<?php echo $data?>';
                 //console.log(data);
-                
+
                 $('#invoice-table tbody tr').each(function(){
                     var sl=$(':nth-child(1)',this).html();
                     var item=$(':nth-child(2)',this).html();
                     var mrp=$(':nth-child(3)',this).html();
                     var qty=$(':nth-child(4)',this).html();
                     var total=$(':nth-child(5)',this).html();
-                    
-                    
+
+
                     mrp=('        '+mrp).slice(-8);
                     qty=('    '+qty).slice(-4);
                     total=('          '+total).slice(-10);
-                    
+
                     if(item.length<19)
                         data+=sl+'{HT}'+item+'{HT}'+mrp+'{HT}'+qty+'{HT}'+total+'{LF}';
                     else
@@ -682,18 +686,18 @@
                         data+='{HT}'+second+'{HT}{HT}{HT}{LF}';
                     }
                 });
-                
+
                 data+='{END}';
                 data+='{FONTA}{SIZE0}';
                 data+='------------------------------------------{LF}';
-                
+
                 data+='{HT}'+('                '+'Sub Total:').slice(-16)+('             '+$('#subtotal').html()).slice(-13)+'{LF}';
                 //data+='{HT}'+('                '+'(+) VAT:').slice(-16)+('             '+$('#vat').html()).slice(-13)+'{LF}';
                 data+='{HT}'+('                '+'(-) Discount:').slice(-16)+('             '+$('#discount').html()).slice(-13)+'{LF}';
                 data+='{HT}'+('                '+'(+/-) Rouding:').slice(-16)+('             '+$('#rounding').html()).slice(-13)+'{LF}';
                 data+='              ----------------------------{LF}';
                 data+='{HT}'+('                '+'Net Payable:').slice(-16)+('             '+$('#payable').html()).slice(-13)+'{LF}';
-                
+
                 data+='{LF}';
                 data+='------------------------------------------{LF}{LF}';
                 data+='{FONTB}{SIZE0}';
@@ -703,11 +707,11 @@
                 data+='{LF}';
                 data+='Powered By: {FONTA}{SIZE0}AllSpark Inc.';
                 data+='{FONTB}{SIZE0}          www.all-spark.com{LF}{LF}{LF}{LF}{LF}{LF}';
-                
+
                 data+='{ESC}{CUT}';
                 //console.log(data);
                 //console.log(data.length);
-                
+
                 var jqxhr = $.ajax({
                     url : '<?php echo site_url();?>invoices/pos/',
                     method: 'POST',
@@ -715,21 +719,21 @@
                 })
                 .done(function(data){
                     //console.log(data);
-                    window.location='zozo:'+data;
+                    window.location='zozo:<?php echo site_url();?>'+data;
                 });
-                
+
                 event.preventDefault();
             });
         });
     </script>
-    
+
 </form>
 
 <div style='float:left;width:35%;margin-left:5%;'>
     <form action='<?php echo site_url();?>invoices/recall' method='POST' id='recall_invoice_form'>
         <input type='text' name='recall_invoice' id='recall_invoice' autocomplete="off" placeholder="Recall Invoice" value='' style='float:left;margin-top:10px;padding: 2%;width: 96%;' class='form-control'/>
     </form>
-    <?php if(isset($invoice['supplementary'])): ?>
+    <?php if (isset($invoice['supplementary'])): ?>
     <div style="margin-top:15px;font-size:14px;float:right;">
         <div style="float:right;margin-bottom:10px;">Supplementary Cash : <?php echo $invoice['supplementary']['cash'];?></div>
         <div style="float:right;">Update Time : <?php echo $invoice['supplementary']['time'];?></div>
@@ -738,19 +742,19 @@
 </div>
 
 
-<script type='text/javascript'>    
+<script type='text/javascript'>
     $(document).ready(function(){
-        
+
         $('#recall_invoice_form').ajaxForm({
             /* set data type json */
             dataType:  'json',
 
             /* reset before submitting */
-            beforeSend: function() {                                                                                
+            beforeSend: function() {
             },
 
             /* progress bar call back*/
-            uploadProgress: function(event, position, total, percentComplete) {                                        
+            uploadProgress: function(event, position, total, percentComplete) {
             },
 
             /* complete call back */

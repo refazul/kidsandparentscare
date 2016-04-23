@@ -716,7 +716,7 @@
                 data+='{FONTB}{SIZE0}          www.all-spark.com{LF}{LF}{LF}{LF}{LF}{LF}';
 
                 data+='{ESC}{CUT}';
-                //console.log(data);
+                console.log(data);
                 //console.log(data.length);
 
                 var jqxhr = $.ajax({
@@ -726,7 +726,7 @@
                 })
                 .done(function(data){
                     //console.log(data);
-                    window.location='zozo:'+data;
+                    window.location='zozo:<?php echo site_url();?>'+data;
                 });
 
                 event.preventDefault();

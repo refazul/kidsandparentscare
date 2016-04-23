@@ -250,6 +250,8 @@
                         //console.log(data);
                         window.location='zozo:<?php echo site_url();?>'+data;
                     });
+
+                    e.preventDefault();
                 });
                 setTimeout(function () {
                     $('#product_edit').focus();

@@ -248,7 +248,7 @@
                     })
                     .done(function(data){
                         //console.log(data);
-                        window.location='zozo:<?php echo site_url();?>'+data;
+                        window.location='zz:www.kidsandparentscare.com'+data;
                     });
 
                     e.preventDefault();

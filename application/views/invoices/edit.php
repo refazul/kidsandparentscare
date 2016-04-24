@@ -710,7 +710,7 @@
                 })
                 .done(function(data){
                     //console.log(data);
-                    window.location='zozo:<?php echo site_url();?>'+data;
+                    window.location='zz:newmarket.kidsandparentscare.com/'+data;
                 });
 
                 event.preventDefault();

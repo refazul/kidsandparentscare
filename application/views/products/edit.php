@@ -248,7 +248,7 @@
                     })
                     .done(function(data){
                         //console.log(data);
-                        window.location='zz:www.kidsandparentscare.com'+data;
+                        window.location='zz:www.kidsandparentscare.com/'+data;
                     });
 
                     e.preventDefault();

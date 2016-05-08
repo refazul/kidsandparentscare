@@ -371,6 +371,7 @@ class Projects extends CI_Controller
                         $data['debit_note'] = $this->input->post('debit_note');
                         $data['carrying_charge'] = $this->input->post('carrying_charge');
                         $data['lc_amendment_charge'] = $this->input->post('lc_amendment_charge');
+                        $data['remarks'] = $this->input->post('remarks');
 
                         $project_id = $this->project->create($data);
                         if ($project_id === false) {
@@ -420,6 +421,7 @@ class Projects extends CI_Controller
                         $data['debit_note'] = $this->input->post('debit_note');
                         $data['carrying_charge'] = $this->input->post('carrying_charge');
                         $data['lc_amendment_charge'] = $this->input->post('lc_amendment_charge');
+                        $data['remarks'] = $this->input->post('remarks');
 
                         $this->db->where('project_id', $project_id);
                         $this->db->update('projects', $data);

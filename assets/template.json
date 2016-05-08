@@ -1117,5 +1117,22 @@
 				"title": "PAYMENT MODE"
 			}
 		}
+	},
+	"remarks": {
+		"title": "Remarks",
+		"fields": {
+			"remarks_text": {
+				"id": "remarks_text",
+				"type": "textbox",
+				"value": "",
+				"title": "REMARKS"
+			},
+			"remarks_all_mail_attachment": {
+				"id": "remarks_all_mail_attachment",
+				"type": "file",
+				"value": "",
+				"title": "ALL MAIL ATTACHMENT"
+			}
+		}
 	}
 }

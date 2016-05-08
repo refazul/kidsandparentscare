@@ -106,7 +106,7 @@ class Project extends CI_Model
         $project['domains']->supplier->fields->project_supplier->values = $suppliers;
         $project['domains']->supplier->fields->project_supplier->value = $project['supplier_id'];
 
-        $fields = array('sales_confirmation', 'contract', 'performa_invoice', 'import_permit', 'lc', 'shipment', 'nn_documents', 'payment', 'controller', 'short_gain_weight_claim', 'quality_claim', 'debit_note', 'carrying_charge', 'lc_amendment_charge');
+        $fields = array('sales_confirmation', 'contract', 'performa_invoice', 'import_permit', 'lc', 'shipment', 'nn_documents', 'payment', 'controller', 'short_gain_weight_claim', 'quality_claim', 'debit_note', 'carrying_charge', 'lc_amendment_charge', 'remarks');
         foreach ($fields as $field) {
             if ($project[$field] != '' && $project[$field] != '0') {
                 $existing = explode('&', $project[$field]);

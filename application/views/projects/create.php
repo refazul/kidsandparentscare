@@ -237,6 +237,7 @@
             else
                final_string='intent=create'+final_string;
             final_string+='&project_name='+encodeURIComponent($('#project_name').val());
+            final_string+='&project_status='+encodeURIComponent($('#project_status').val());
             final_string+='&buyer_id='+encodeURIComponent($('#buyer_id').val());
             final_string+='&supplier_id='+encodeURIComponent($('#supplier_id').val());
             $.ajax({

@@ -34,6 +34,7 @@ class Project extends CI_Model
     public function create($param)
     {
         $this->db->insert($this->_table, array('name' => $param['name'],
+                                            'project_status' => $param['project_status'],
                                             'buyer_id' => $param['buyer_id'],
                                             'supplier_id' => $param['supplier_id'],
                                             'sales_confirmation' => $param['sales_confirmation'],
@@ -97,6 +98,7 @@ class Project extends CI_Model
 
         $project['domains']->project_id = $project['project_id'];
         $project['domains']->project->fields->project_name->value = $project['name'];
+        $project['domains']->project->fields->project_status->value = $project['project_status'];
 
         $project['domains']->buyer->fields->project_buyer->values = $buyers;
         $project['domains']->buyer->fields->project_buyer->value = $project['buyer_id'];

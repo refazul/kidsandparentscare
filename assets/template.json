@@ -8,8 +8,8 @@
 				"value": "",
 				"title": "FILE NUMBER"
 			},
-			"project_file_status": {
-				"id": "project_file_status",
+			"project_status": {
+				"id": "project_status",
 				"type": "select",
 				"values": {
 					"running": "RUNNING",
@@ -442,7 +442,10 @@
                     "36": "ANY PORT OF ASIA",
                     "37": "ANY PORT OF AFRICA",
 					"38": "ANY PORT OF INDIA",
-					"40": "ANY PORT OF GUJARAT"
+					"40": "ANY PORT OF GUJARAT",
+					"41": "COTONOU, BENIN",
+					"42": "KRISHNAPATNAM, INDIA",
+					"43": "ANY PORT OF USA"
 				},
 				"value": "",
 				"title": "PORT OF LOADING"
@@ -608,7 +611,10 @@
                     "36": "ANY PORT OF ASIA",
                     "37": "ANY PORT OF AFRICA",
 					"38": "ANY PORT OF INDIA",
-					"40": "ANY PORT OF GUJARAT"
+					"40": "ANY PORT OF GUJARAT",
+					"41": "COTONOU, BENIN",
+					"42": "KRISHNAPATNAM, INDIA",
+					"43": "ANY PORT OF USA"
 				},
 				"value": "",
 				"title": "PORT OF LOADING"

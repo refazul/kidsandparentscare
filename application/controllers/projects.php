@@ -351,6 +351,7 @@ class Projects extends CI_Controller
             if ($intent == 'create' && user_logged_in()) {
                 if ($this->input->post('project_name')) {
                     $data['name'] = $this->input->post('project_name');
+                    $data['project_status'] = $this->input->post('project_status');
 
                     $this->load->model('project');
                     if (!$this->project->getBy('name', $data['name'])) {
@@ -402,6 +403,7 @@ class Projects extends CI_Controller
                     if ($this->input->post('project_name')) {
                         $name = $this->input->post('project_name');
                         $data['name'] = $name;
+                        $data['project_status'] = $this->input->post('project_status');
                         $data['buyer_id'] = $this->input->post('buyer_id');
                         $data['supplier_id'] = $this->input->post('supplier_id');
                         $data['sales_confirmation'] = $this->input->post('sales_confirmation');

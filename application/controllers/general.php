@@ -20,7 +20,7 @@ class General extends CI_Controller
         $path = '';
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (@is_uploaded_file($_FILES[$name]['tmp_name'])) {
+            if (is_uploaded_file($_FILES[$name]['tmp_name'])) {
                 $ext = strtolower(pathinfo($_FILES[$name]['name'], PATHINFO_EXTENSION));         // get uploaded file extension
 
                 if (in_array($ext, $valid_exts) and $_FILES[$name]['size'] < $max_size) {

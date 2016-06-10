@@ -530,13 +530,6 @@ class Invoices extends CI_Controller
                             $data['page'] = $page;
                             $data['vat'] = $vat;
 
-                            $this->db->where('generated_id', $invoice['generated_id']);
-                            if ($this->db->get('supplementary_invoices')->num_rows() > 0) {
-                                $this->db->where('generated_id', $invoice['generated_id']);
-                                $supplementary = $this->db->get('supplementary_invoices')->row_array();
-                                $invoice['supplementary']['cash'] = $supplementary['mergeable_cash'];
-                                $invoice['supplementary']['time'] = date('jS F, Y @ h:i A', strtotime($supplementary['time']));
-                            }
                             $this->db->where('uid', $invoice['billed_by']);
                             $invoice['billed_by_name'] = $this->db->get('users')->row(0, 'object')->full_name;
 

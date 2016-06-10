@@ -17,6 +17,7 @@
       <script type="text/javascript" src="<?php echo asset_url();?>js/moment.min.js"></script>
       <script type="text/javascript" src="<?php echo asset_url();?>js/utility.js"></script>
       <script type="text/javascript" src="<?php echo asset_url();?>js/patterns.js"></script>
+      <script type="text/javascript" src="<?php echo asset_url();?>js/project.js"></script>
 
 
       <link rel="stylesheet" media="all" href="<?php echo asset_url();?>css/bootstrap.min.css">
@@ -32,6 +33,7 @@
       <link rel="stylesheet" media="all" href="<?php echo asset_url();?>css/project.css" />
       <link rel="stylesheet" media="all" href="<?php echo asset_url();?>css/fonts.css" />
       <link rel="stylesheet" media="all" href="<?php echo asset_url();?>css/theme.css" />
+      <link rel="stylesheet" media="all" href="<?php echo asset_url();?>css/table.css" />
 
       <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 

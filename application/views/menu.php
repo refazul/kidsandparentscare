@@ -91,10 +91,10 @@
 			<div class="menu-option-holder">
 				<?php menu_render('REPORTS', base_url().'reports/', true);?>
                                 <div class="sub-menu-holder">
-					<?php submenu_render('STOCK ENTRY', base_url().'reports/stockentry');?>
-					<?php submenu_render('SELL INFO', base_url().'reports/sellinfo');?>
-					<?php submenu_render('PROFIT', base_url().'reports/profit');?>
-					<?php submenu_render('CURRENT STOCK', base_url().'reports/currentstock');?>
+					<?php submenu_render('SALES REPORT', base_url().'reports/salesreport');?>
+					<?php submenu_render('LC STATUS', base_url().'reports/lcstatus');?>
+					<?php submenu_render('IP', base_url().'reports/ip');?>
+					<?php submenu_render('SHIPMENT', base_url().'reports/shipment');?>
 					<?php //submenu_render('LIST ALL',base_url().'orders/all');?>
 				</div>
 			</div>

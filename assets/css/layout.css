@@ -461,14 +461,6 @@ select::-ms-expand {
     height: 444px;
     overflow-y:auto;
 }
-.sort_by-wrapper
-{
-    margin-bottom: 10px;
-    float: right;
-    width: 150px;
-    font-size: 11px;
-    margin-right: 1px;
-}
 .filter-wrapper
 {
     margin-top: 10px;
@@ -502,11 +494,6 @@ select
 .ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr
 {
     border-top-right-radius: 0px;
-}
-.order-wrapper
-{
-    margin-bottom: 10px;
-    float:left;
 }
 .slider-wrapper
 {

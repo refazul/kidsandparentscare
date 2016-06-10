@@ -1,0 +1,112 @@
+<div id="report-fetch" data-endpoint="http://localhost/cotfield/reports/calc/salesreport">
+
+    <!-- Sort By -->
+    <div class="sort_by-wrapper cleafix">
+        <div class="sort_by-options">
+            <div class="select-wrap">
+                <select name="sort_by" id="sort_by" onchange="$('#users-fetch').submit();">
+                    <option selected="selected" value="uid">User ID</option>
+                    <option value="user">User</option>
+                    <option value="full_name">Name</option>
+                    <option value="contact">Contact</option>
+                    <option value="email">Email</option>
+                    <option value="address">Address</option>
+                </select>
+            </div>
+        </div>
+        <div class="sort_by-title">Sort By :</div>
+    </div>
+
+    <!-- Order -->
+    <div class="order-wrapper clearfix">
+        <div class="order-title">Order :</div>
+        <div class="order-options">
+            <div class="order-options-unit">
+                <input type="radio" name="order" id="order-asc" checked="" value="asc">
+                <label class="order-options-title" for="order-asc">Ascending</label>
+            </div>
+
+            <div class="order-options-unit">
+                <input type="radio" name="order" id="order-desc" value="desc">
+                <label class="order-options-title" for="order-desc">Descending</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slider -->
+    <div class="slider-wrapper">
+        <div id="slider"></div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrapper">
+        <table id="result" class="tablesorter">
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Summary -->
+    <div class="float_left summary_info">
+        <div class="summary_info_value" id="limit-view">20</div>
+        <div class="summary_info_title">Entries per page :</div>
+    </div>
+    <div class="float_right summary_info">
+        <div class="summary_info_value" id="total_quantity">39,814,611.28</div>
+        <div class="summary_info_title">TOTAL QUANTITY :</div>
+
+        <!--
+        <div class="summary_info_value" id="total_total_price">69,862,715.50</div>
+        <div class="summary_info_title">Total Price :</div>
+        -->
+    </div>
+
+    <!-- Buyer -->
+    <div class="filter-wrapper">
+        <div class="select-wrap float_right">
+            <div class="select-wrap">
+                <select name="buyer" id="buyer">
+                    <option selected="selected" value="-1">-SELECT-</option>
+                </select>
+            </div>
+        </div>
+        <div class="float_right font_bold filter_title">Buyer :</div>
+    </div>
+
+    <!-- Supplier -->
+    <div class="filter-wrapper">
+        <div class="select-wrap float_right">
+            <div class="select-wrap">
+                <select name="supplier" id="supplier">
+                    <option selected="selected" value="-1">-SELECT-</option>
+                </select>
+            </div>
+        </div>
+        <div class="float_right font_bold filter_title">Supplier :</div>
+    </div>
+
+    <!-- Time -->
+    <div class="filter-wrapper">
+        <div class="select-wrap float_right">
+            <select name="filter_by_3" id="filter_by_3">
+                <option value="contract_date">Contract Date</option>
+            </select>
+        </div>
+        <div style="margin-right:5px;" class="float_right">
+            <label for="_from" class="font_bold filter_title">From :</label>
+            <input type="text" id="_from" class="form-control date" data-target="from">
+            <input type="text" style="display:none;" value="" id="from" name="from" class="form-control">
+
+            <label for="_to" class="font_bold filter_title">Before :</label>
+            <input type="text" id="_to" class="form-control date" data-target="to">
+            <input type="text" style="display:none;" id="to" name="to" class="form-control">
+        </div>
+    </div>
+
+    <input type="hidden" id="limit" name="limit" value="20">
+    <input type="hidden" id="page" name="page" value="0">
+    <div id="pagination" class="middle" style="left: 50%; margin-left: -15px; overflow-x: hidden;"><div class="pages active" id="page-0" onclick="$('#page').val(0);$('#users-fetch').submit();">0</div></div>
+
+</form>

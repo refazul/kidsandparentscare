@@ -1,8 +1,18 @@
 if (typeof Report === 'undefined') Report = (function() {
 	var _private = {
-		report_build: function(report_type) {
+		report_build: function(base, report_type) {
 			$.get(BASE + 'assets/template/table.phtml', function(template) {
 				$('#module').append(template);
+				if (report_type == 'salesreport') {
+					Dom.dom_report_fetch_form_get().attr('data-endpoint', base + 'reports/calc/salesreport');
+				} else if (report_type == 'lcstatus') {
+					Dom.dom_report_fetch_form_get().attr('data-endpoint', base + 'reports/calc/lcstatus');
+				} else if (report_type == 'ip') {
+					Dom.dom_report_fetch_form_get().attr('data-endpoint', base + 'reports/calc/ip');
+				} else if (report_type == 'shipment') {
+					Dom.dom_report_fetch_form_get().attr('data-endpoint', base + 'reports/calc/shipment');
+				} else
+					return;
 
 				Dom.dom_report_fetch_form_get().on('submit', function() {
 					var endpoint = $(this).attr('data-endpoint');
@@ -24,7 +34,15 @@ if (typeof Report === 'undefined') Report = (function() {
 						success: function(response) {
 							if (typeof response !== 'object')
 								response = JSON.parse(response);
-							Report.report_update(response, {from:$('#from').val(),to:$('#to').val()}, {sort_by: $('#sort_by').val(), limit: $('#limit').val(), page: $('#page').val(), order: $('[name="order"]:checked').val()});
+							Report.report_update(response, {
+								from: $('#from').val(),
+								to: $('#to').val()
+							}, {
+								sort_by: $('#sort_by').val(),
+								limit: $('#limit').val(),
+								page: $('#page').val(),
+								order: $('[name="order"]:checked').val()
+							});
 						}
 					});
 				});
@@ -37,7 +55,15 @@ if (typeof Report === 'undefined') Report = (function() {
 					change: function(event, ui) {
 						$("#limit").val(ui.value);
 						$('#page').val(0);
-						Report.report_update(false, {from:$('#from').val(),to:$('#to').val()}, {sort_by: $('#sort_by').val(), limit: $('#limit').val(), page: $('#page').val(), order: $('[name="order"]:checked').val()});
+						Report.report_update(false, {
+							from: $('#from').val(),
+							to: $('#to').val()
+						}, {
+							sort_by: $('#sort_by').val(),
+							limit: $('#limit').val(),
+							page: $('#page').val(),
+							order: $('[name="order"]:checked').val()
+						});
 					},
 					slide: function(event, ui) {
 						$('#limit-view').html(ui.value);
@@ -53,7 +79,15 @@ if (typeof Report === 'undefined') Report = (function() {
 						$('#' + $(this).attr('data-target')).val(selectedDate);
 						var date = new moment(selectedDate);
 						$(this).val(date.format('Do MMM, YYYY'));
-						Report.report_update(false, {from:$('#from').val(),to:$('#to').val()}, {sort_by: $('#sort_by').val(), limit: $('#limit').val(), page: $('#page').val(), order: $('[name="order"]:checked').val()});
+						Report.report_update(false, {
+							from: $('#from').val(),
+							to: $('#to').val()
+						}, {
+							sort_by: $('#sort_by').val(),
+							limit: $('#limit').val(),
+							page: $('#page').val(),
+							order: $('[name="order"]:checked').val()
+						});
 					}
 				});
 
@@ -62,7 +96,15 @@ if (typeof Report === 'undefined') Report = (function() {
 				});
 
 				$('#sort_by').on('change', function() {
-					Report.report_update(false, {from:$('#from').val(),to:$('#to').val()}, {sort_by: $('#sort_by').val(), limit: $('#limit').val(), page: $('#page').val(), order: $('[name="order"]:checked').val()});
+					Report.report_update(false, {
+						from: $('#from').val(),
+						to: $('#to').val()
+					}, {
+						sort_by: $('#sort_by').val(),
+						limit: $('#limit').val(),
+						page: $('#page').val(),
+						order: $('[name="order"]:checked').val()
+					});
 				});
 
 				Dom.dom_report_fetch_form_get().submit();
@@ -70,6 +112,27 @@ if (typeof Report === 'undefined') Report = (function() {
 		},
 		report_update: function(data, filter, arrangement) {
 			this.data = data ? data : this.data;
+			// Columns
+			var columns = this.data.columns;
+			$('#result thead').empty();
+			$('#result thead').append($('<tr>'));
+			for (var i = 0; i < columns.length; i++) {
+				var th = $('<th>').text(columns[i].title);
+				th.appendTo($('#result thead tr'));
+			}
+
+			// Sort By
+			var sort_by = $('#sort_by').val();
+			$('#sort_by').empty();
+			for (var i = 0; i < columns.length; i++) {
+				var id = columns[i].fields.active ? columns[i].fields.active : (columns[i].fields.passive ? columns[i].fields.passive : columns[i].fields.extractable);
+				if (!id) continue;
+				var option = $('<option></option>').val(id).html(columns[i].title);
+				if (id == sort_by)
+					$(option).attr('selected', 'selected');
+				$('#sort_by').append(option);
+			}
+
 			// Buyer
 			var buyers = this.data.buyers;
 			var buyer = this.data.buyer;
@@ -104,13 +167,6 @@ if (typeof Report === 'undefined') Report = (function() {
 			var projects = Filter.filter_project(this.data.result, filter);
 			projects = Sort.sort_project(this.data.result, arrangement);
 			projects = Trim.trim_project(this.data.result, arrangement);
-			var columns = ["PROJECT ID", "BUYER", "SUPPLIER", "CONTRACT NUMBER", "CONTRACT DATE", "ORIGIN", "PRICE", "PAYMENT", "QTY"];
-			$('#result thead').empty();
-			$('#result thead').append($('<tr>'));
-			for (var i = 0; i < columns.length; i++) {
-				var th = $('<th>').text(columns[i]);
-				th.appendTo($('#result thead tr'));
-			}
 
 			Project.project_template_init(function() {
 				$('#result tbody').empty();
@@ -124,12 +180,19 @@ if (typeof Report === 'undefined') Report = (function() {
 					$('<td>').text(projects[i].name).appendTo(tr);
 					$('<td>').text(Buyer.buyer_name_resolve(buyers, projects[i].buyer_id)).appendTo(tr);
 					$('<td>').text(Supplier.supplier_name_resolve(suppliers, projects[i].supplier_id)).appendTo(tr);
-					$('<td>').text(Project.project_attribute_get(projects[i], 'contract_number')).appendTo(tr);
-					$('<td>').text(Project.project_attribute_get(projects[i], 'contract_date')).appendTo(tr);
-					$('<td>').text(Project.project_attribute_title_get(projects[i], 's_c_origin')).appendTo(tr);
-					$('<td>').text(Project.project_attribute_get(projects[i], 's_c_price') + ' ' + Project.project_attribute_title_get(projects[i], 's_c_price_unit')).appendTo(tr);
-					$('<td>').text(Project.project_attribute_title_get(projects[i], 's_c_payment')).appendTo(tr);
-					$('<td>').text(Project.project_attribute_get(projects[i], 's_c_quantity') + ' ' + Project.project_attribute_title_get(projects[i], 's_c_quantity_unit')).appendTo(tr);
+
+					for (var j = 0; j < columns.length; j++) {
+						if (columns[j].fields.passive) continue;
+						else if (columns[j].fields.active) {
+							var text = Project.project_attribute_get(projects[i], columns[j].fields.active);
+
+							if (columns[j].fields.extractable)
+								text = text + ' ' + Project.project_attribute_title_get(projects[i], columns[j].fields.extractable)
+							$('<td>').text(text).appendTo(tr);
+						} else if (columns[j].fields.extractable) {
+							$('<td>').text(Project.project_attribute_title_get(projects[i], columns[j].fields.extractable)).appendTo(tr);
+						}
+					}
 
 					tr.appendTo($('#result tbody'));
 
@@ -143,8 +206,8 @@ if (typeof Report === 'undefined') Report = (function() {
 		}
 	};
 	return {
-		report_build: function(report_type) {
-			_private.report_build(report_type);
+		report_build: function(base, report_type) {
+			_private.report_build(base, report_type);
 		},
 		report_update: function(data, filter, arrangement) {
 			_private.report_update(data, filter, arrangement);

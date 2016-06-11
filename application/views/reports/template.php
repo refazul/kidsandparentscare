@@ -4,5 +4,5 @@
 <script type="text/javascript" src="<?php echo asset_url();?>js/dom.js"></script>
 <script type="text/javascript" src="<?php echo asset_url();?>js/report.js"></script>
 <script type="text/javascript">
-    Report.report_build('<?php echo $report_type;?>');
+    Report.report_build(BASE, '<?php echo $report_type;?>');
 </script>

@@ -165,8 +165,8 @@ if (typeof Report === 'undefined') Report = (function() {
 
 			// Projects
 			var projects = Filter.filter_project(this.data.result, filter);
-			projects = Sort.sort_project(this.data.result, arrangement);
-			projects = Trim.trim_project(this.data.result, arrangement);
+			projects = Sort.sort_project(projects, arrangement);
+			projects = Trim.trim_project(projects, arrangement);
 
 			Project.project_template_init(function() {
 				$('#result tbody').empty();

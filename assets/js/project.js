@@ -119,10 +119,12 @@ if (typeof Filter === 'undefined') Filter = (function() {
 	var _private = {
 		filter_project: function(projects, filter) {
 			var filtered_projects = [];
+			console.log('--Filtering--', filter);
 			for (var i = 0; i < projects.length; i++) {
 				var contract_date = Project.project_attribute_get(projects[i], 'contract_date');
-				if (filter && filter.from && filter.from.length > 1 && contract_date < filter.from)
+				if (filter && filter.from && filter.from.length > 1 && contract_date < filter.from){
 					continue;
+				}
 				if (filter && filter.to && filter.to.length > 1 && contract_date > filter.to)
 					continue;
 				filtered_projects.push(projects[i]);

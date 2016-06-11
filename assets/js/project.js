@@ -122,7 +122,7 @@ if (typeof Filter === 'undefined') Filter = (function() {
 			console.log('--Filtering--', filter);
 			for (var i = 0; i < projects.length; i++) {
 				var contract_date = Project.project_attribute_get(projects[i], 'contract_date');
-				if (filter && filter.from && filter.from.length > 1 && contract_date < filter.from){
+				if (filter && filter.from && filter.from.length > 1 && contract_date < filter.from) {
 					continue;
 				}
 				if (filter && filter.to && filter.to.length > 1 && contract_date > filter.to)
@@ -160,11 +160,11 @@ if (typeof Trim === 'undefined') Trim = (function() {
 	var _private = {
 		trim_project: function(projects, arrangement) {
 			var trimmed_projects = projects;
-			if (arrangement && ((arrangement.limit && arrangement.limit>0) || arrangement.page)) {
+			if (arrangement && ((arrangement.limit && arrangement.limit > 0) || arrangement.page)) {
 				trimmed_projects = [];
 				console.log('--Trimming--', arrangement);
 				var page = 0;
-				for (var i = 0,j=1; i < projects.length; i++,j++) {
+				for (var i = 0, j = 1; i < projects.length; i++, j++) {
 					if (page == arrangement.page)
 						trimmed_projects.push(projects[i]);
 					if (j % arrangement.limit == 0)

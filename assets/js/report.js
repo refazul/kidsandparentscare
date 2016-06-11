@@ -1,6 +1,7 @@
 if (typeof Report === 'undefined') Report = (function() {
 	var _private = {
 		report_build: function(base, report_type) {
+			this.base = base;
 			$.get(BASE + 'assets/template/table.phtml', function(template) {
 				$('#module').append(template);
 				if (report_type == 'salesreport') {
@@ -111,6 +112,7 @@ if (typeof Report === 'undefined') Report = (function() {
 			});
 		},
 		report_update: function(data, filter, arrangement) {
+			var that = this;
 			this.data = data ? data : this.data;
 			// Columns
 			var columns = this.data.columns;
@@ -196,10 +198,18 @@ if (typeof Report === 'undefined') Report = (function() {
 
 					tr.appendTo($('#result tbody'));
 
+					tr.attr('title', projects[i].project_id);
+					tr.attr('data-project', projects[i].project_id);
+
 					var quantity = parseInt(Project.project_attribute_get(projects[i], 's_c_quantity'));
 					if (quantity > 0)
 						total_quantity += quantity;
 				}
+
+				$('tr').click(function(e) {
+					if ($(this).attr('data-project'))
+						window.open(that.base + 'projects/edit/' + $(this).attr('data-project'));
+				});
 
 				$('#total_quantity').text(total_quantity + ' MT');
 			});

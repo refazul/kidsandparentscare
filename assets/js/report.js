@@ -24,7 +24,7 @@ if (typeof Report === 'undefined') Report = (function() {
 						success: function(response) {
 							if (typeof response !== 'object')
 								response = JSON.parse(response);
-							Report.report_update(response);
+							Report.report_update(response, {from:$('#from').val(),to:$('#to').val()}, {sort_by: $('#sort_by').val(), limit: $('#limit').val(), page: $('#page').val(), order: $('[name="order"]:checked').val()});
 						}
 					});
 				});
@@ -37,7 +37,7 @@ if (typeof Report === 'undefined') Report = (function() {
 					change: function(event, ui) {
 						$("#limit").val(ui.value);
 						$('#page').val(0);
-						Dom.dom_report_fetch_form_get().submit();
+						Report.report_update(false, {from:$('#from').val(),to:$('#to').val()}, {sort_by: $('#sort_by').val(), limit: $('#limit').val(), page: $('#page').val(), order: $('[name="order"]:checked').val()});
 					},
 					slide: function(event, ui) {
 						$('#limit-view').html(ui.value);
@@ -53,21 +53,26 @@ if (typeof Report === 'undefined') Report = (function() {
 						$('#' + $(this).attr('data-target')).val(selectedDate);
 						var date = new moment(selectedDate);
 						$(this).val(date.format('Do MMM, YYYY'));
-						Dom.dom_report_fetch_form_get().submit();
+						Report.report_update(false, {from:$('#from').val(),to:$('#to').val()}, {sort_by: $('#sort_by').val(), limit: $('#limit').val(), page: $('#page').val(), order: $('[name="order"]:checked').val()});
 					}
 				});
 
-				$('select').on('change', function() {
+				$('#buyer,#supplier').on('change', function() {
 					Dom.dom_report_fetch_form_get().submit();
+				});
+
+				$('#sort_by').on('change', function() {
+					Report.report_update(false, {from:$('#from').val(),to:$('#to').val()}, {sort_by: $('#sort_by').val(), limit: $('#limit').val(), page: $('#page').val(), order: $('[name="order"]:checked').val()});
 				});
 
 				Dom.dom_report_fetch_form_get().submit();
 			});
 		},
-		report_update: function(data) {
+		report_update: function(data, filter, arrangement) {
+			this.data = data ? data : this.data;
 			// Buyer
-			var buyers = data.buyers;
-			var buyer = data.buyer;
+			var buyers = this.data.buyers;
+			var buyer = this.data.buyer;
 
 			$('#buyer').empty();
 			$('#buyer').append(
@@ -81,8 +86,8 @@ if (typeof Report === 'undefined') Report = (function() {
 			}
 
 			// Supplier
-			var suppliers = data.suppliers;
-			var supplier = data.supplier;
+			var suppliers = this.data.suppliers;
+			var supplier = this.data.supplier;
 
 			$('#supplier').empty();
 			$('#supplier').append(
@@ -96,6 +101,9 @@ if (typeof Report === 'undefined') Report = (function() {
 			}
 
 			// Projects
+			var projects = Filter.filter_project(this.data.result, filter);
+			projects = Sort.sort_project(this.data.result, arrangement);
+			projects = Trim.trim_project(this.data.result, arrangement);
 			var columns = ["PROJECT ID", "BUYER", "SUPPLIER", "CONTRACT NUMBER", "CONTRACT DATE", "ORIGIN", "PRICE", "PAYMENT", "QTY"];
 			$('#result thead').empty();
 			$('#result thead').append($('<tr>'));
@@ -104,7 +112,6 @@ if (typeof Report === 'undefined') Report = (function() {
 				th.appendTo($('#result thead tr'));
 			}
 
-			var projects = data.result;
 			Project.project_template_init(function() {
 				$('#result tbody').empty();
 				var total_quantity = 0;
@@ -131,7 +138,7 @@ if (typeof Report === 'undefined') Report = (function() {
 						total_quantity += quantity;
 				}
 
-				$('#total_quantity').text(total_quantity + 'MT');
+				$('#total_quantity').text(total_quantity + ' MT');
 			});
 		}
 	};
@@ -139,8 +146,8 @@ if (typeof Report === 'undefined') Report = (function() {
 		report_build: function(report_type) {
 			_private.report_build(report_type);
 		},
-		report_update: function(data) {
-			_private.report_update(data);
+		report_update: function(data, filter, arrangement) {
+			_private.report_update(data, filter, arrangement);
 		}
 	};
 })();

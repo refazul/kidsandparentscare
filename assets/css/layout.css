@@ -169,6 +169,9 @@ textarea.form-control{
     padding: 3px;
     font-size: 14px;
 }
+input.form-control[type="text"]{
+    width: 150px;
+}
 .mini-status-after
 {
     font-size: 11px;

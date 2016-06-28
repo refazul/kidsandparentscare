@@ -46,8 +46,8 @@ if (typeof Report === 'undefined') Report = (function() {
 				$("#slider").slider({
 					range: "max",
 					min: 1,
-					max: 1000,
-					value: 200,
+					max: 100000,
+					value: 500,
 					change: function(event, ui) {
 						$("#limit").val(ui.value);
 						$('#page').val(0);

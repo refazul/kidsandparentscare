@@ -53,6 +53,7 @@ class Reports extends CI_Controller
         $this->db->join('departments', 'products.department = departments.did');
         $result = $this->db->get()->result();
         $response['result'] = $result;
+        $response['total'] = count($result);
 
         // Columns
         $columns = array();

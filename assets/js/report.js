@@ -187,7 +187,7 @@ if (typeof Report === 'undefined') Report = (function() {
 
 				tr.attr('data-stock', results[i].stid);
 
-				var cost = parseFloat(results[i].unit_cost) * parseFloat(results[i].quantity);
+				var cost = parseFloat(parseFloat(results[i].unit_cost) * parseFloat(results[i].quantity)).toFixed(2);
 				if (cost > 0)
 					total_cost += cost;
 			}

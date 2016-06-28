@@ -78,14 +78,14 @@
                                 <?php endif;?>
 			</div>
                         <?php endif;?>
-                        <?php if (user_can('GENERATE_REPORTS')):?>
+                        <?php if (user_can('GENERATE_REPORT')):?>
 			<div class="menu-option-holder">
 				<?php menu_render('REPORTS', base_url().'reports/', true);?>
                                 <div class="sub-menu-holder">
 					<?php submenu_render('STOCK ENTRY', base_url().'reports/stockentry');?>
-					<?php submenu_render('SELL INFO', base_url().'reports/sellinfo');?>
-					<?php submenu_render('PROFIT', base_url().'reports/profit');?>
-					<?php submenu_render('CURRENT STOCK', base_url().'reports/currentstock');?>
+					<?php //submenu_render('SELL INFO', base_url().'reports/sellinfo');?>
+					<?php //submenu_render('PROFIT', base_url().'reports/profit');?>
+					<?php //submenu_render('CURRENT STOCK', base_url().'reports/currentstock');?>
 					<?php //submenu_render('LIST ALL',base_url().'orders/all');?>
 				</div>
 			</div>

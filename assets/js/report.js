@@ -180,14 +180,14 @@ if (typeof Report === 'undefined') Report = (function() {
                 $('<td>').text(Department.department_name_resolve(departments, results[i].did)).appendTo(tr);
                 $('<td>').text(results[i].unit_cost).appendTo(tr);
                 $('<td>').text(results[i].quantity).appendTo(tr);
-                $('<td>').text(results[i].unit_cost * results[i].quantity).appendTo(tr);
+                $('<td>').text((results[i].unit_cost * results[i].quantity).toFixed(2)).appendTo(tr);
                 $('<td>').text(results[i].stocked_on).appendTo(tr);
 
 				tr.appendTo($('#result tbody'));
 
 				tr.attr('data-stock', results[i].stid);
 
-				var cost = parseFloat(parseFloat(results[i].unit_cost) * parseFloat(results[i].quantity)).toFixed(2);
+				var cost = parseFloat(results[i].unit_cost) * parseFloat(results[i].quantity);
 				if (cost > 0)
 					total_cost += cost;
 			}
@@ -197,7 +197,7 @@ if (typeof Report === 'undefined') Report = (function() {
 					window.open(that.base + 'stocks/edit/' + $(this).attr('data-stock'));
 			});
 
-			$('#total_cost').text(total_cost);
+			$('#total_cost').text(total_cost.toFixed(2));
 		}
 	};
 	return {

@@ -2,11 +2,11 @@
 
 /*
  * must     -       invoice_id
- * optional -       
+ * optional -
  */
 
 class Invoices extends CI_Controller {
-	
+
 	public function index()
 	{
             $this->create();
@@ -35,14 +35,14 @@ class Invoices extends CI_Controller {
                 $page=$this->input->get_post('page') ? $this->input->get_post('page') : 0;
 
                 /*
-                 * SELECT invoice_id,U.full_name as billed_by,subtotal,vat,discount,extra_discount,total_bill,bill_time 
-                 * FROM invoices as I 
-                 * inner join users as U 
-                 * on I.billed_by=U.uid 
+                 * SELECT invoice_id,U.full_name as billed_by,subtotal,vat,discount,extra_discount,total_bill,bill_time
+                 * FROM invoices as I
+                 * inner join users as U
+                 * on I.billed_by=U.uid
                  * where bill_time>='2014-08-28' order by bill_time desc
                  */
-                
-                
+
+
                 if($this->input->post('from'))$this->db->where('bill_time >=',$this->input->post('from'));
                 if($this->input->post('to'))$this->db->where('bill_time <=',$this->input->post('to'));
                 if((int)$this->input->post('active_2')==1)
@@ -90,7 +90,7 @@ class Invoices extends CI_Controller {
                     }
                 }
                 $this->db->order_by($sort_by, $order);
-                $data['results']=$this->db->get('invoices',$limit,$limit*$page)->result_array();                    
+                $data['results']=$this->db->get('invoices',$limit,$limit*$page)->result_array();
                 $data['page']=$page;
                 $data['limit']=$limit;
                 $data['status']='ok';
@@ -103,10 +103,10 @@ class Invoices extends CI_Controller {
 
                     $data['results'][$key]['bill_time']=date('jS F, Y @ h:i A', strtotime($data['results'][$key]['bill_time']));
                     $data['results'][$key]['total_cost']=0;
-                    
+
                     $this->db->where('invoice_id',$data['results'][$key]['invoice_id']);
                     $orders=$this->db->get('orders')->result_array();
-                    
+
                     foreach($orders as $order)
                     {
                         $this->db->where('stid',$order['stid']);
@@ -115,7 +115,7 @@ class Invoices extends CI_Controller {
                         	$data['results'][$key]['total_cost']+=$stock->unit_cost * $order['quantity'];
                     }
                 }
-                
+
                 /* Totals */
                 $this->db->select('sum(total_bill) as sale,sum(extra_discount+discount) as discount, sum(subtotal) as subtotal');
                 $this->db->from('invoices');
@@ -145,7 +145,7 @@ class Invoices extends CI_Controller {
                 $data['total_total_subtotal'] = $total_total->subtotal;
                 $data['total_total_sale'] = $total_total->sale;
                 $data['total_total_discount'] = $total_total->discount;
-                
+
 
                 $this->db->select('sum(unit_cost * orders.quantity) as sum');
                 $this->db->from('invoices');
@@ -155,7 +155,7 @@ class Invoices extends CI_Controller {
                 $this->db->join('stocks', 'stocks.stid = orders.stid');
                 $data['total_total_cost'] = $this->db->get()->row(0,'object')->sum;
 
-                
+
                 echo json_encode($data);
                 die();
             }
@@ -166,7 +166,7 @@ class Invoices extends CI_Controller {
         public function all()
         {
             if(user_logged_in() && user_can('EDIT_INVOICE'))
-            {                
+            {
                 $sort_by=$this->input->get_post('sort_by') ? $this->input->get_post('sort_by') : 'bill_time';
                 $order=$this->input->get_post('order') ? $this->input->get_post('order') : 'desc';
                 $limit=$this->input->get_post('limit') ? $this->input->get_post('limit') : 50;
@@ -212,23 +212,23 @@ class Invoices extends CI_Controller {
                         'knpc03'=>'KNPC - 03',
                         'knpc04'=>'KNPC - 04'
                     );
-                    
+
                     $data['sort_by']=$sort_by;
                     $data['order']=$order;
                     $data['limit']=$limit;
-                    $data['page']=$page;                    
+                    $data['page']=$page;
 
-                    //echo '<pre>';print_r($data);echo '</pre>';die();          
+                    //echo '<pre>';print_r($data);echo '</pre>';die();
 
                     $this->load->view('header');
                     $this->load->view('menu');
                     $this->load->view('wrap_begin');
                     $this->load->view('invoices/all',$data);
                     $this->load->view('wrap_end');
-                    $this->load->view('footer');                    
+                    $this->load->view('footer');
                 }
             }
-            else            
+            else
                 echo '<h1>Bad Request</h1>';
         }
         public function create()
@@ -253,8 +253,8 @@ class Invoices extends CI_Controller {
                         'name'=>'Name',
                         'sku'=>'SKU',
                         'department'=>'Department'
-                    );                    
-                    $data['visible_fields']=array(                            
+                    );
+                    $data['visible_fields']=array(
                         'barcode'=>array('Barcode',10),
                         'name'=>array('Name',15),
                         'sku'=>array('SKU',5),
@@ -266,21 +266,21 @@ class Invoices extends CI_Controller {
                         'asc'=>'Ascending',
                         'desc'=>'Descending'
                     );
-                    
+
                     $data['banks']=array(
                         'DBBL'=>'DBBL',
                         'EBL'=>'EBL'
                         );
-                    
-                    $this->db->where('key','VAT');                    
+
+                    $this->db->where('key','VAT');
                     $vat=$this->db->get('config')->row(0,'object')->value;
-                    
+
                     $data['sort_by']=$sort_by;
                     $data['order']=$order;
                     $data['limit']=$limit;
                     $data['page']=$page;
                     $data['vat']=$vat;
-                    
+
                     unset($temp);
                     $this->db->where('active',1);
                     $temp=$this->db->get('departments')->result_array();
@@ -320,6 +320,7 @@ class Invoices extends CI_Controller {
                         {
                             $this->db->where('stid',$order['stid']);
                             $stock=$this->db->get('stocks')->row_array();
+							unset($stock['expiry_date']);
                             $stock['quantity'] += $order['quantity'];
 
                             $this->db->where('stid',$order['stid']);
@@ -341,7 +342,7 @@ class Invoices extends CI_Controller {
                         die();
                     }
                 }
-                
+
             }
         }
         public function recall()
@@ -355,13 +356,13 @@ class Invoices extends CI_Controller {
                     $this->db->where('generated_id',$generated_id);
                     if($this->db->get('invoices')->num_rows()>0)
                     {
-                        $this->db->where('generated_id',$generated_id);                        
+                        $this->db->where('generated_id',$generated_id);
                         $invoice=$this->db->get('invoices')->row_array();
-                        
+
                         $time1=date_parse($invoice['bill_time']);
                         $time2=date_parse(date("Y-m-d H:i:s"));
                         if(($time1['day']==$time2['day'] && $invoice['billed_by']==$this->session->userdata('uid'))|| user_can('EDIT_INVOICE'))
-                        {                        
+                        {
                             $json['id']=$generated_id;
                             $json['status']='ok';
                             echo json_encode($json);
@@ -370,7 +371,7 @@ class Invoices extends CI_Controller {
                     }
                     $json['status']='invalid';
                     echo json_encode($json);
-                    die();                    
+                    die();
                 }
             }
         }
@@ -384,7 +385,9 @@ class Invoices extends CI_Controller {
                 $this->db->where('pid',$pid);
                 $this->db->where('quantity >',0);
                 $this->db->order_by('stocked_on','asc');
-                return $this->db->get('stocks')->row_array();
+                $stock = $this->db->get('stocks')->row_array();
+				unset($stock['expiry_date']);
+				return $stock;
             }
             else {
                 return FALSE;
@@ -392,6 +395,8 @@ class Invoices extends CI_Controller {
         }
         public function commit()
         {
+			$invoice = array();
+			$data = array();
             if(user_logged_in() && user_can('CREATE_INVOICE'))
             {
                 if($this->input->post('orders')):
@@ -489,12 +494,12 @@ class Invoices extends CI_Controller {
                                 $invoice['subtotal'] += $data['total_sale'];
                                 $invoice['discount'] += $data['total_discount'];
                             }
-                        }                    
+                        }
                     }
                     $invoice['vat'] = $invoice['subtotal'] * $vat/100;
                     $invoice['extra_discount']=$this->input->post('extra_discount');
                     $invoice['total_bill'] = round($invoice['subtotal'] + $invoice['vat'] - $invoice['discount'] - $invoice['extra_discount']);
-                    
+
                     $this->customer->addPoint($cuid,$invoice['total_bill']*0.02);
 
                     $invoice['payment_method'] = $this->input->post('payment_method');
@@ -510,18 +515,20 @@ class Invoices extends CI_Controller {
                     $json['id']=$invoice['generated_id'];
                     $json['status']='ok';
                     echo json_encode($json);
-                    die();                
+                    die();
                 endif;
             }
         }
         public function edit()
         {
+			$invoice = array();
+			$data = array();
             if(user_logged_in() && user_can('CREATE_INVOICE'))
             {
                 if($this->uri->segment(3))
                 {
-                    $generated_id=$this->uri->segment(3);					
-                    $this->db->where('generated_id',$generated_id);										
+                    $generated_id=$this->uri->segment(3);
+                    $this->db->where('generated_id',$generated_id);
                     if($this->db->get('invoices')->num_rows()>0)
                     {
                         $this->db->where('generated_id',$generated_id);
@@ -533,20 +540,20 @@ class Invoices extends CI_Controller {
                         {
                             $this->db->where('stid',$value['stid']);
                             $pid=$this->db->get('stocks')->row(0,'object')->pid;
-                            
+
                             $this->db->where('pid',$pid);
                             $product=$this->db->get('products')->row(0,'object');
-                            
-                            $orders[$key]['pid']=$product->pid;                           
+
+                            $orders[$key]['pid']=$product->pid;
                             $orders[$key]['barcode']=$product->barcode;
                             $orders[$key]['name']=$product->name;
                             $orders[$key]['discount']=$value['total_discount'];
                         }
                         $invoice['orders']=$orders;
-                        
+
                         $time1=date_parse($invoice['bill_time']);
                         $time2=date_parse(date("Y-m-d H:i:s"));
-						
+
                         if(($time1['day']==$time2['day'] && $invoice['billed_by']==$this->session->userdata('uid')) || user_can('EDIT_INVOICE'))
                         {
                             $sort_by=$this->input->get_post('sort_by') ? $this->input->get_post('sort_by') : 'pid';
@@ -568,7 +575,7 @@ class Invoices extends CI_Controller {
                                     'sku'=>'SKU',
                                     'department'=>'Department'
                                 );
-                                $data['visible_fields']=array(                            
+                                $data['visible_fields']=array(
                                     'barcode'=>array('Barcode',10),
                                     'name'=>array('Name',15),
                                     'sku'=>array('SKU',5),
@@ -594,7 +601,7 @@ class Invoices extends CI_Controller {
                                 $data['limit']=$limit;
                                 $data['page']=$page;
                                 $data['vat']=$vat;
-                                
+
                                 $this->db->where('generated_id',$invoice['generated_id']);
                                 if($this->db->get('supplementary_invoices')->num_rows()>0)
                                 {
@@ -605,7 +612,7 @@ class Invoices extends CI_Controller {
                                 }
                                 $this->db->where('uid',$invoice['billed_by']);
                                 $invoice['billed_by_name']=$this->db->get('users')->row(0,'object')->full_name;
-                                
+
                                 $data['invoice']=$invoice;
 
                                 //echo '<pre>';print_r($data);echo '</pre>';die();
@@ -615,7 +622,7 @@ class Invoices extends CI_Controller {
                             $temp=$this->db->get('departments')->result_array();
                             foreach($temp as $key=>$value)
                                 $data['departments'][$value['did']]=$value['name'];
-                            
+
                             $this->load->view('header');
                             $this->load->view('menu');
                             $this->load->view('wrap_begin');
@@ -648,7 +655,7 @@ class Invoices extends CI_Controller {
                 }
             }
         }
-        
+
         public function ajax()
         {
             header('Content-type: application/json');
@@ -657,26 +664,26 @@ class Invoices extends CI_Controller {
                 $intent=$this->input->get_post('intent');
                 if($intent=='edit' && user_logged_in() && user_can('CREATE_INVOICE'))
                 {
-                    
-                    
-                    
+
+
+
                     /* Fetch Invoice ID */
                     $request_from=$_SERVER['HTTP_REFERER'];
                     $generated_id=end(explode('/',$request_from));
                     $this->db->where('generated_id',$generated_id);
                     $invoice=$this->db->get('invoices')->row_array();
                     $invoice_id=$invoice['invoice_id'];
-                    
-                    
-                    
+
+
+
                     /* Allow & Restrict */
                     $previous_total=$invoice['total_bill'];
                     $present_total=$this->input->post('t');
                     $time1=date_parse($invoice['bill_time']);
                     $time2=date_parse(date("Y-m-d H:i:s"));
-                    
-                    
-                    
+
+
+
                     /* Restrict Rule 1 */
                     if(($present_total < $previous_total) && ($time1['day'] != $time2['day']))
                     {
@@ -686,9 +693,9 @@ class Invoices extends CI_Controller {
                         echo json_encode($json);
                         die();
                     }
-                    
-                    
-                    
+
+
+
                     /* Restrict Rule 2 */
                     if( !(($time1['day']==$time1['day'] && $invoice['billed_by']==$this->session->userdata('uid')) || user_can('EDIT_INVOICE')) )
                     {
@@ -697,9 +704,9 @@ class Invoices extends CI_Controller {
                         echo json_encode($json);
                         die();
                     }
-                    
-                    
-                    
+
+
+
                     /* Reset */
                     $invoice['subtotal']=0;
                     $invoice['vat']=0;
@@ -708,17 +715,17 @@ class Invoices extends CI_Controller {
                     $invoice['extra_discount']=$this->input->post('extra_discount');
                     $invoice['payment_method'] = $this->input->post('payment_method');
                     if($invoice['payment_method']=='card')$invoice['bank']=$this->input->post('bank');
-                    
-                    
-                    
+
+
+
                     if($this->input->post('orders'))
                     {
                         /* VAT */
                         $this->db->where('key','VAT');
                         $vat=$this->db->get('config')->row(0,'object')->value;
-                        
-                        
-                        
+
+
+
                         /* Restore the Stocks */
                         $this->db->where('invoice_id',$invoice['invoice_id']);
                         $orders=$this->db->get('orders')->result_array();
@@ -726,17 +733,18 @@ class Invoices extends CI_Controller {
                         {
                             $this->db->where('stid',$order['stid']);
                             $stock=$this->db->get('stocks')->row_array();
+							unset($stock['expiry_date']);
                             $stock['quantity'] += $order['quantity'];
-                            
+
                             $this->db->where('stid',$order['stid']);
                             $this->db->update('stocks',$stock);
-                            
+
                             $this->db->delete('orders',array('order_id'=>$order['order_id']));
                         }
-                        
-                        
-                        
-                        /* Create new Bill */                        
+
+
+
+                        /* Create new Bill */
                         foreach($this->input->post('orders') as $order)
                         {
                             $pid=$order['pid'];
@@ -808,20 +816,20 @@ class Invoices extends CI_Controller {
                                     $invoice['subtotal'] += $data['total_sale'];
                                     $invoice['discount'] += $data['total_discount'];
                                 }
-                            }                    
+                            }
                         }
-                        $invoice['vat'] = $invoice['subtotal'] * $vat/100;                        
+                        $invoice['vat'] = $invoice['subtotal'] * $vat/100;
                         $invoice['total_bill'] = round($invoice['subtotal'] + $invoice['vat'] - $invoice['discount'] - $invoice['extra_discount']);
                         //$invoice['billed_by']=$this->session->userdata('uid');
-                        
+
                         $this->db->where('invoice_id',$invoice_id);
                         $this->db->update('invoices',$invoice);
-                        
+
                         if(($invoice['total_bill']-$previous_total)>0 && $time1['day']!=$time2['day'])
                         {
                             $supplementary['mergeable_cash']=$invoice['total_bill']-$previous_total;
                             $supplementary['generated_id']=$invoice['generated_id'];
-                            
+
                             $this->db->insert('supplementary_invoices',$supplementary);
                         }
 
@@ -831,7 +839,7 @@ class Invoices extends CI_Controller {
                         $json['id']=$invoice['generated_id'];
                         $json['status']='ok';
                         echo json_encode($json);
-                        die();                        
+                        die();
                     }
                     else
                     {
